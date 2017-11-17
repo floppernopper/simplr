@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :currently_kristin?,
-    :forrest_only_club?, :invited_to_forrest_only_club?, :page_turning, :testing_score?, :unique_element_token
+    :forrest_only_club?, :invited_to_forrest_only_club?, :page_turning,
+    :testing_score?, :unique_element_token
   
   include SimpleCaptcha::ControllerHelpers
   
@@ -15,6 +16,9 @@ class ApplicationController < ActionController::Base
   
   # redirects to proposals index for anrcho.com
   before_action :anrcho_to_proposals, except: [:index]
+  
+  # redirects to forrest_web_co
+  before_action :forrest_web_co_to_forrest_web_co, except: [:index]
   
   # bots go to 404 for all pages
   before_action :bots_to_404
