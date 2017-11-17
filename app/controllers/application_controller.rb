@@ -48,6 +48,8 @@ class ApplicationController < ActionController::Base
       'Anrcho'
     else
       case request.host
+      when 'forrestwebco.com'
+        'Forrest Web Co.'
       when 'forrestonlyclub.com'
         'Forrest Only Club'
       when 'forrestwilkins.com'
