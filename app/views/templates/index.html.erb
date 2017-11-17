@@ -18,8 +18,8 @@
   </p>
 </div>
 
-<% unless Rails.env.development? or false %>
-  <%= audio_tag "music/future_business.mp3", id: "business_music" %>
+<% unless Rails.env.development? %>
+  <%= audio_tag "music/progress.mp3", id: "business_music" %>
 
   <script>
     $("#business_music")[0].currentTime = 0;
