@@ -297,9 +297,9 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def forrest_club_to_forrest_club
-    if request.host.eql? 'forrestsonlyclub.com'
-      redirect_to resume_path
+  def forrest_web_co_to_forrest_web_co
+    if request.host.eql? 'forrestwebco.com'
+      redirect_to forrest_web_co_path
     end
   end
   
