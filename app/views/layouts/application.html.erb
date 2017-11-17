@@ -21,7 +21,7 @@
       <% end %>
     <% end %>
     
-    <%= render "app/meta_tags" unless @lil_c %>
+    <%= render "app/meta_tags" %>
     
 	  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	  
@@ -34,8 +34,8 @@
     
   </head>
   <body>
-    <%= render "app/header" if (invited? or anrcho?) and not (@cluster_flier_page or @lil_c) %>
+    <%= render "app/header" if (invited? or anrcho?) and not (@cluster_flier_page or @forrest_web_co) %>
     <%= yield %>
-    <%= render "app/footer" unless @cluster_flier_page or @lil_c %>
+    <%= render "app/footer" unless @cluster_flier_page %>
   </body>
 </html>

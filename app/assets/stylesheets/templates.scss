@@ -16,7 +16,6 @@
   @include section_part;
 }
 
-
 .edit_carousel_img_link {
   position: absolute;
   right: 20%;
@@ -31,41 +30,42 @@
   margin-top: 7.5px;
 }
 
-.lil_c_form {
+.faded_carousel {
   position: relative;
-  padding: 15px 7.5px;
+  padding: 7.5px 7.5px;
+  background: green;
   max-width: 550px;
+  min-height: 250px;
   margin: 0 auto;
-  margin-bottom: 12.5px;
   width: 94.5%;
 }
 
-#lil_c_header_card {
-  animation: lil_c_header_card_glow 7.5s infinite alternate;
+#forrest_web_co_card {
+  animation: forrest_web_co_header_card_glow 7.5s infinite alternate;
 }
 
-#lil_c_header {
-  animation: lil_c_header_shadow 7.5s infinite alternate;
+#forrest_web_co_header {
+  animation: forrest_web_co_header_shadow 7.5s infinite alternate;
 }
 
-@keyframes lil_c_header_card_glow {
+@keyframes forrest_web_co_header_card_glow {
   0% {
     background: black;
-    box-shadow: -7.5px -7.5px 7.5px purple;
+    box-shadow: -7.5px -7.5px 7.5px blue;
   }
   100% {
-    background: purple;
+    background: green;
     box-shadow: 7.5px 7.5px 7.5px black;
   }
 }
 
-@keyframes lil_c_header_shadow {
+@keyframes forrest_web_co_header_shadow {
   0% {
     color: white;
-    text-shadow: 1px 1px 1px purple;
+    text-shadow: 2px 2px 2px blue;
   }
   100% {
     color: black;
-    text-shadow: 1.25px 1.25px 1.25px purple;
+    text-shadow: 0.25px 0.25px 0.25px green;
   }
 }

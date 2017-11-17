@@ -199,6 +199,7 @@ Rails.application.routes.draw do
   
   # templates for clients
   get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
+  get 'co', to: 'templates#index', as: 'forrest_web_co'
   
   # online store/ecommerce
   get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
