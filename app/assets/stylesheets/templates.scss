@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@mixin template_card {
+  position: relative;
+  padding: 1.25px 7.5px;
+  background: white;
+  border: 0px solid white;
+  max-width: 550px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  width: 94.5%;
+}
+
+.template_card {
+  @include template_card;
+  background: rgb(10, 10, 10);
+  color: white;
+}
+
 @mixin section_part {
   width: 100%;
   min-height: 500px;
@@ -10,6 +27,14 @@
   text-align: center;
   position: relative;
   overflow: auto;
+}
+
+
+@mixin forrest_web_co_img {
+  width: 50%;
+  margin-top: 17.5px;
+  margin-right: 10px;
+  margin-bottom: 2.5px;
 }
 
 .section_part {
@@ -40,12 +65,20 @@
   width: 94.5%;
 }
 
+.web_co_bio_card {
+  clear: both;
+  overflow: auto;
+}
+
 .forrest_web_co_img {
+  @include forrest_web_co_img;
   float: left;
-  width: 50%;
-  margin-top: 17.5px;
-  margin-right: 10px;
-  margin-bottom: 2.5px;
+}
+
+.forrest_web_co_img_1 {
+  @include forrest_web_co_img;
+  width: 97.5%;
+  margin-top: 0px;
 }
 
 #forrest_web_co_card {
@@ -59,10 +92,10 @@
 @keyframes forrest_web_co_header_card_glow {
   0% {
     background: black;
-    box-shadow: -7.5px -7.5px 7.5px green;
+    box-shadow: -7.5px -7.5px 7.5px orange;
   }
   100% {
-    background: green;
+    background: rgb(70, 173, 212);
     box-shadow: 7.5px 7.5px 7.5px black;
   }
 }
@@ -70,10 +103,10 @@
 @keyframes forrest_web_co_header_shadow {
   0% {
     color: white;
-    text-shadow: 2px 2px 2px green;
+    text-shadow: 2.25px 2.25px 2.25px orange;
   }
   100% {
     color: black;
-    text-shadow: 0.25px 0.25px 0.25px green;
+    text-shadow: 0.1px 0.1px 0.1px rgb(70, 173, 212);
   }
 }
