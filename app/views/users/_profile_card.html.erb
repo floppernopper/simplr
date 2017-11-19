@@ -11,7 +11,7 @@
       <% if gatekeeper? user %>
         <i class="fa fa-fort-awesome"></i> Official Gatekeeper of Social Maya
       <% else %>
-        <%= user.title.html_safe %>
+        <%= user.title.html_safe %><%= '<i class="ai leo"></i>' if @kristin %>
       <% end %>
     </h2>
   </div>

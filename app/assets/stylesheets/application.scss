@@ -42,14 +42,12 @@ $x_left_gap: 5px;
 }
 
 html {
-	font-family: Helvetica;
-	
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.005);
+  font-family: Helvetica;	
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.005);
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
-	-webkit-text-stroke: .025em rgba(51,51,51,0.50);
-	
-	background: black;
+  -webkit-text-stroke: .025em rgba(51,51,51,0.50);
+  background: black;
 }
 
 a {
