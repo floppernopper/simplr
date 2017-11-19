@@ -183,6 +183,17 @@
   }
 }
 
+@keyframes kristins_leo_sign_pulse {
+  0% {
+    background: rgb(255,105,97);
+    text-shadow: 2px 2px 2px rgb(136,227,182);
+  }
+  100% {
+    background: rgb(119,158,203);
+    text-shadow: 5px 5px 5px rgb(119,221,119);
+  }
+}
+
 #crescent_moon {
   animation: crescent_pulse 7.5s infinite alternate;
   
@@ -202,7 +213,7 @@
 }
 
 #kristins_leo_sign {
-  animation: kristins_crescent_label_pulse 7.5s infinite alternate;
+  animation: kristins_leo_sign_pulse 7.5s infinite alternate;
 }
 
 #crescent_card {
