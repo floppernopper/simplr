@@ -10,7 +10,7 @@ class NotesController < ApplicationController
   end
   
   def show
-    @note = Note.find(params[:id])
+    @note = Note.find_by_id params[:id
   end
   
   def load_more_notes
