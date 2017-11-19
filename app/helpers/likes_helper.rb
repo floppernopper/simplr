@@ -37,6 +37,7 @@ module LikesHelper
     else
       post.likes.find_by_anon_token anon_token
     end
+    like = nil
     if like and like.likes.present?
       like = if note.sender_id
         like.likes.find_by_user_id note.sender_id
