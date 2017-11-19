@@ -11,7 +11,7 @@
       <% if gatekeeper? user %>
         <i class="fa fa-fort-awesome"></i> Official Gatekeeper of Social Maya
       <% else %>
-        <%= user.title.html_safe %> <%= '<i class="ai leo"></i>'.html_safe if @kristin %>
+        <%= user.title.html_safe %>
       <% end %>
     </h2>
   </div>
@@ -41,7 +41,7 @@
     <p>
       <%= link_to user.name, user, class: :user_name_link %>
       <% if user.body.present? %>
-        <%= render "app/body", item: user %>
+        <%= render "app/body", item: user %> <%= '<i class="ai leo"></i>'.html_safe if @kristin %>
       <% end %>
       <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_user_path(user) if this_user_current? \
         or (dev? and not user.dev) or god? %>
