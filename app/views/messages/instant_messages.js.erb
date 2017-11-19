@@ -13,7 +13,7 @@
     // refreshes messages
     container.remove();
     anchor.after("<%=j render 'messages/instant_messages' %>");
-    $("#instant_messages_anchor").scrollView();
+    $("#last_loaded_message_anchor").scrollView();
     
     // play audio for IM received
     $("#audio_play")[0].currentTime = 0;
