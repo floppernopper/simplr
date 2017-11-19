@@ -25,11 +25,9 @@
   </div>
 <% end %>
 
-<%= loader = case rand(2) when 0; 'load_wheel'; when 1; 'load_band'; when 2; 'load_circle'; end; \
-  render "pages/#{loader}", token: unique_element_token if Rails.env.development? %>
-
 <% unless god? or goddess? or Rails.env.development? %>
   <script>
+    // The all seeing Eye...
     <%= render "app/click_anywhere?.js" %>
   </script>
 <% end %>
