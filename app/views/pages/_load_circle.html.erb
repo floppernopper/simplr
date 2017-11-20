@@ -1,3 +1,7 @@
+<% if @you_are_home %>
+  </br>
+<% end %>
+
 <div class="<%= 'load_circle load_element' if defined?(token) %>" <%= 'hidden' if defined?(token) %>>
   <div class="load_circle_containor"
     id="load_circle_containor">
