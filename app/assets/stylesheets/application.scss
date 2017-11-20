@@ -247,9 +247,59 @@ textarea {
 
 .sparkles {
   position: absolute;
+  left: 40%;
+  width: 100px;
+  height: 100px;
 }
 
+.dot_sparkle {
+  position: absolute;
+  width: 1.5px;
+  height: 1.5px;
+  background: white;
+}
 
+.star_sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+
+.star_sparkle_top {
+  position: absolute;
+  width: 1px;
+  height: 3px;
+  top: 0px;
+  left: 4.5px;
+  background: white;
+}
+
+.star_sparkle_bottom {
+  position: absolute;
+  width: 1px;
+  height: 3px;
+  bottom: 0px;
+  left: 4.5px;
+  background: white;
+}
+
+.star_sparkle_left {
+  position: absolute;
+  width: 3px;
+  height: 1px;
+  top: 4.5px;
+  left: 0px;
+  background: white;
+}
+
+.star_sparkle_right {
+  position: absolute;
+  width: 3px;
+  height: 1px;
+  top: 4.5px;
+  right: 0px;
+  background: white;
+}
 
 // for mobile
 @media screen and (max-width: 975px) {

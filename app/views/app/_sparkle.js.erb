@@ -1,0 +1,45 @@
+var s = 1;
+var d = true;
+
+setInterval(function() {
+
+
+
+  $(".dot_sparkle").each(function() {
+    var r = Math.round(Math.random() * 255);
+    var g = Math.round(Math.random() * 255);
+    var b = Math.round(Math.random() * 255);
+    
+    $(this).css("background", "rgb(" + b + ", " + r + ", " + g + ")");
+  });
+
+  $(".twinkle_h").each(function() {
+    $(this).css("width", s);
+    
+    var r = Math.round(Math.random() * 255);
+    var g = Math.round(Math.random() * 255);
+    var b = Math.round(Math.random() * 255);
+    
+    $(this).css("background", "rgb(" + b + ", " + r + ", " + g + ")");
+  });
+  $(".twinkle_v").each(function() {
+    $(this).css("height", s);
+    
+    var r = Math.round(Math.random() * 255);
+    var g = Math.round(Math.random() * 255);
+    var b = Math.round(Math.random() * 255);
+    
+    $(this).css("background", "rgb(" + b + ", " + r + ", " + g + ")");
+  });
+  
+	if (d) {
+    s += 1;
+  } else {
+    s -= 1;
+  }
+  
+  if (s >= 5 || s <= 1) {
+	  d = !d;
+  }
+  
+}, 250);
