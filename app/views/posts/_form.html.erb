@@ -47,7 +47,7 @@
         </p>
       </div>
       
-      <% if god? or Rails.env.development? %>
+      <% if Rails.env.development? %>
         <div id="hidden_audio_field" hidden>
           <p>
             Audio <%= f.file_field :audio %>
