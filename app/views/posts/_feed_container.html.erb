@@ -3,6 +3,8 @@
 <div id="feed_container">
 	<%= render "#{parents}/feed" %>
 
-<%= loader = case rand(4) when 0; 'load_wheel'; when 1; 'load_circle'; when 2; 'load_bar'; when 3; 'buffer_wheel'; end; \
-  render "pages/#{loader}", items: @items, all_items: @all_items %>
+  <div align="center">
+    <%= loader = case rand(4) when 0; 'load_wheel'; when 1; 'load_circle'; when 2; 'load_bar'; when 3; 'buffer_wheel'; end; \
+      render "pages/#{loader}", items: @items, all_items: @all_items %>
+  </div>
 </div>
