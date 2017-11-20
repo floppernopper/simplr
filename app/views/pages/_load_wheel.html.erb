@@ -1,7 +1,3 @@
-<% if @you_are_home %>
-  </br>
-<% end %>
-
 <div class="load_wheel_container <%= 'load_wheel load_element' if defined?(token) %>"
   id="load_wheel" <%= 'hidden' if defined?(token) %>>
   <% 16.times do |num| %>
