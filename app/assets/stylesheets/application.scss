@@ -269,7 +269,7 @@ textarea {
   position: absolute;
   width: 1px;
   height: 3px;
-  top: 0px;
+  bottom: 7px;
   left: 4.5px;
   background: white;
 }
@@ -278,7 +278,7 @@ textarea {
   position: absolute;
   width: 1px;
   height: 3px;
-  bottom: 0px;
+  top: 7px;
   left: 4.5px;
   background: white;
 }
@@ -288,7 +288,7 @@ textarea {
   width: 3px;
   height: 1px;
   top: 4.5px;
-  left: 0px;
+  right: 7px;
   background: white;
 }
 
@@ -297,7 +297,7 @@ textarea {
   width: 3px;
   height: 1px;
   top: 4.5px;
-  right: 0px;
+  left: 7px;
   background: white;
 }
 
