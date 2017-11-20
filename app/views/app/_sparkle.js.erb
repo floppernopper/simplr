@@ -1,17 +1,33 @@
 var s = 1;
 var d = true;
+var dot_to_move = 0;
 
 setInterval(function() {
 
 
-
+  var dot_n = 0;
   $(".dot_sparkle").each(function() {
     var r = Math.round(Math.random() * 255);
     var g = Math.round(Math.random() * 255);
     var b = Math.round(Math.random() * 255);
     
     $(this).css("background", "rgb(" + b + ", " + r + ", " + g + ")");
+    
+    if (dot_n == dot_to_move) {
+      $(this).css("top", Math.round(Math.random() * 100) + "px");
+      $(this).css("left", Math.round(Math.random() * 100) + "px");
+    }
+    
+    dot_n += 1;
+    if (dot_n >= 10) {
+      dot_n = 0;
+    }
   });
+  
+  dot_to_move += 1;
+  if (dot_to_move >= 10) {
+    dot_to_move = 0;
+  }
 
   $(".twinkle_h").each(function() {
     $(this).css("width", s);
