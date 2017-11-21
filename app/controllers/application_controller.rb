@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
-    :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :currently_kristin?,
+    :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :goddess? :currently_kristin?,
     :forrest_only_club?, :invited_to_forrest_only_club?, :page_turning,
     :testing_score?, :unique_element_token
   
