@@ -54,8 +54,12 @@ setInterval(function() {
     s -= 1;
   }
   
-  if (s >= 5 || s <= 1) {
+  if (s >= 5 || s <= 0) {
 	  d = !d;
+	  if (s <= 0) {
+      $(this).css("top", Math.round(Math.random() * 100) + "px");
+      $(this).css("left", Math.round(Math.random() * 100) + "px");
+	  }
   }
   
 }, 230);

@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
     else
       case request.host
       when 'forrestwebco.com'
-        'Forrest Web Co.'
+        'Forrest Web Company'
       when 'forrestonlyclub.com'
         'Forrest Only Club'
       when 'forrestwilkins.com'
