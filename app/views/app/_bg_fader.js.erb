@@ -34,6 +34,8 @@ function background_fader() {
 	  var target4 = $("#scroll_to_top_link_container");
 	  var target5 = $(".card_corner_cut_out");
 	  var target6 = $(".group_card_corner_cut_out");
+	  var target7 = $(".load_bar_section");
+	  var target8 = $(".buffer_pixel");
 	  target1.css("background", color);
 	  target2.css("background", color);
 	  target3.css("background", color);
@@ -42,6 +44,12 @@ function background_fader() {
 	    $(this).css("background", color);
 	  });
 	  target6.each(function() {
+	    $(this).css("background", color);
+	  });
+	  target7.each(function() {
+	    $(this).css("background", color);
+	  });
+	  target8.each(function() {
 	    $(this).css("background", color);
 	  });
   }, change_speed);
