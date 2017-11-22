@@ -64,7 +64,8 @@
           <%= select_tag :group_id, options_for_select(my_group_options({editing: true})) %>
         </p>
       <% elsif current_user and current_user.my_groups.present? and not @group %>
-        <%= link_to add_post_group_id_path, remote: true, id: :add_group_id_icon_link, title: "Post to a group" do %>
+        <%= link_to add_post_group_id_path, remote: true, title: "Post to a group",
+          id: :"#{Rails.env.development? ? 'add_group_id_icon_link' : 'add_audio_icon_link'}" do %>
           <i class="fa fa-cubes fa-2x dark_link"></i>
         <% end %>
         <p id="hidden_group_id_field" hidden align="center">
