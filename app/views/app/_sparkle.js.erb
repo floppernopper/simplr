@@ -55,8 +55,10 @@ setInterval(function() {
   if (s >= 5 || s <= 0) {
 	  d = !d;
 	  if (s <= 0) {
-      $(this).css("top", Math.round(Math.random() * 100) + "px");
-      $(this).css("left", Math.round(Math.random() * 100) + "px");
+      $(".star_sparkle").each(function() {
+        $(this).css("top", Math.round(Math.random() * 100) + "px");
+        $(this).css("left", Math.round(Math.random() * 100) + "px");
+      });
 	  }
   }
   
