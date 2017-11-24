@@ -1,0 +1,65 @@
+var s = 1;
+var d = true;
+var dot_to_move = 0;
+
+setInterval(function() {
+  var dot_n = 0;
+  $(".dot_sparkle").each(function() {
+    var r = Math.round(Math.random() * 255);
+    var g = Math.round(Math.random() * 255);
+    var b = Math.round(Math.random() * 255);
+    
+    $(this).css("background", "rgb(" + b + ", " + r + ", " + g + ")");
+    
+    if (dot_n == dot_to_move) {
+      $(this).css("top", Math.round(Math.random() * 100) + "px");
+      $(this).css("left", Math.round(Math.random() * (50 - -50 + 1) + -50) + "px");
+    }
+    
+    dot_n += 1;
+    if (dot_n >= 10) {
+      dot_n = 0;
+    }
+  });
+  
+  dot_to_move += 1;
+  if (dot_to_move >= 10) {
+    dot_to_move = 0;
+  }
+
+  $(".twinkle_h").each(function() {
+    $(this).css("width", s);
+    
+    var r = Math.round(Math.random() * 255);
+    var g = Math.round(Math.random() * 255);
+    var b = Math.round(Math.random() * 255);
+    
+    $(this).css("background", "rgb(" + b + ", " + r + ", " + g + ")");
+  });
+  $(".twinkle_v").each(function() {
+    $(this).css("height", s);
+    
+    var r = Math.round(Math.random() * 255);
+    var g = Math.round(Math.random() * 255);
+    var b = Math.round(Math.random() * 255);
+    
+    $(this).css("background", "rgb(" + b + ", " + r + ", " + g + ")");
+  });
+  
+	if (d) {
+    s += 1;
+  } else {
+    s -= 1;
+  }
+  
+  if (s >= 5 || s <= 0) {
+	  d = !d;
+	  if (s <= 0) {
+      $(".star_sparkle").each(function() {
+        $(this).css("top", Math.round(Math.random() * 100) + "px");
+        $(this).css("left", Math.round(Math.random() * (50 - -50 + 1) + -50) + "px");
+      });
+	  }
+  }
+  
+}, 230);

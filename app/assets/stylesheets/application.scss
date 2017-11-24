@@ -246,21 +246,19 @@ textarea {
 }
 
 .sparkles {
-  position: absolute;
-  left: 40%;
   width: 100px;
   height: 100px;
 }
 
 .dot_sparkle {
-  position: absolute;
+  position: relative;
   width: 1.5px;
   height: 1.5px;
   background: white;
 }
 
 .star_sparkle {
-  position: absolute;
+  position: relative;
   width: 10px;
   height: 10px;
 }

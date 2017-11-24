@@ -1,21 +1,25 @@
-<div class="sparkles" align="center">
-  <% n_of_dot_sparkles = 10 %>
-  <% n_of_star_sparkles = 3 %>
-  
-  <% n_of_dot_sparkles.times do |n| %>
-    <div class="dot_sparkle" style="top:<%= rand 100 %>px;left:<%= rand 100 %>px;"></div>
-  <% end %>
-  
-  <% n_of_star_sparkles.times do |n| %>
-    <div class="star_sparkle" style="top:<%= rand 100 %>px;left:<%= rand 100 %>px;">
-      <div class="star_sparkle_top twinkle_v"></div>
-      <div class="star_sparkle_left twinkle_h"></div>
-      <div class="star_sparkle_right twinkle_h"></div>
-      <div class="star_sparkle_bottom twinkle_v"></div>
-    </div>
-  <% end %>
-</div>
+<%= "</br>" if @you_are_home %>
 
-<script>
-  <%= render "app/sparkle.js" %>
-</script>
+<div align="center">
+  <div class="sparkles">
+    <% n_of_dot_sparkles = 10 %>
+    <% n_of_star_sparkles = 3 %>
+    
+    <% n_of_dot_sparkles.times do |n| %>
+      <div class="dot_sparkle" style="top:<%= rand -50..50 %>px;left:<%= rand -50..50 %>px;"></div>
+    <% end %>
+    
+    <% n_of_star_sparkles.times do |n| %>
+      <div class="star_sparkle" style="top:<%= rand -50..50 %>px;left:<%= rand -50..50 %>px;">
+        <div class="star_sparkle_top twinkle_v"></div>
+        <div class="star_sparkle_left twinkle_h"></div>
+        <div class="star_sparkle_right twinkle_h"></div>
+        <div class="star_sparkle_bottom twinkle_v"></div>
+      </div>
+    <% end %>
+  </div>
+
+  <script>
+    <%= render "pages/sparkle.js" %>
+  </script>
+</div>
