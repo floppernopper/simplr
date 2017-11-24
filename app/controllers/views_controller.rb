@@ -7,7 +7,7 @@ class ViewsController < ApplicationController
       @click = View.new click: true,
         user_id: @user.id, ip_address: request.remote_ip
       for i in [:x_pos, :y_pos, :screen_width, :screen_height, :avail_screen_width, :avail_screen_height,
-        :device_pixel_ratio, :controller_name, :action_name]
+        :device_pixel_ratio, :current_url, :controller_name, :action_name]
         @click.write_attribute(i, params[i])
       end
       if @click.save

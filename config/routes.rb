@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :games
   resources :reviews
   # wikis
   get 'book', to: 'wikis#index', as: 'book'
@@ -203,6 +204,9 @@ Rails.application.routes.draw do
   
   # online store/ecommerce
   get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
+  
+  # games
+  get 'challenge/:token', to: 'games#challenge', as: 'challenger_user'
 
   resources :proposals do
     resources :comments

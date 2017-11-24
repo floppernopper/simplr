@@ -1,5 +1,6 @@
 class ProposalsController < ApplicationController
   before_filter :set_proposal, only: [:old_versions, :show, :destroy]
+  before_action :invite_only
   
   def add_form
     @group = Group.find_by_id params[:group_id]
@@ -136,6 +137,12 @@ class ProposalsController < ApplicationController
   end
   
   private
+
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
+    end
+  end
   
   def set_proposal
     @proposal = Proposal.find_by_unique_token(params[:token])

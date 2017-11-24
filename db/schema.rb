@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114233620) do
+ActiveRecord::Schema.define(version: 20171124205334) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -99,6 +99,23 @@ ActiveRecord::Schema.define(version: 20171114233620) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "game_piece_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "folder_id"
+    t.string   "title"
+    t.string   "name"
+    t.string   "body"
+    t.string   "description"
+    t.string   "ability"
+    t.string   "stats"
+    t.boolean  "active"
+    t.string   "item_type"
+    t.datetime "expires_at"
+    t.string   "unique_token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "groups", force: :cascade do |t|

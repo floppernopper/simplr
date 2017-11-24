@@ -35,6 +35,11 @@
     <div>
       Device pixel ratio: <%= view.device_pixel_ratio %>
     </div>
+    <% if view.current_url.present? %>
+      <div>
+        Current URL: <%= view.current_url %>
+      </div>
+    <% end %>
     <div>
       Controller name: <%= view.controller_name %>
     </div>
