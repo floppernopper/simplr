@@ -1,12 +1,11 @@
-<div class="load_band_containor <%= 'load_element load_wheel' if defined?(token) %>"
-  id="load_wheel" <%= 'hidden' if defined?(token) %>>
+<div class="load_band_containor" id="load_wheel">
   <% 50.times do |num| %>
-    <% id_append = num.to_s; id_append << ("_" + token) if defined?(token) and token.present? %>
+    <% id_append = num.to_s %>
     <div class="load_band_section" id="load_band_section_<%= id_append %>"
       style="background:black;"></div>
   <% end %>
 </div>
 
 <script>
-  <%= render "pages/load_band_fader.js", token: (token if defined?(token)) %>
+  <%= render "pages/load_band_fader.js" %>
 </script>

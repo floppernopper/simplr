@@ -1,4 +1,4 @@
-function load_band_fader<%= "_" + token if defined?(token) and token.present? %>() {
+function load_band_fader() {
   var rgb = [0, 0, 0]; // the targets color values
   var fat_rgb = [false, false, false]; // ensures pos/neg
   var color_min = [1, 1, 1]; // when it should go back up
@@ -15,7 +15,7 @@ function load_band_fader<%= "_" + token if defined?(token) and token.present? %>
   var direction = true;
 
   setInterval(function() {
-	  var section = $("#load_band_section_" + id + "<%= '_' + token if defined?(token) and token.present? %>");
+	  var section = $("#load_band_section_" + id);
 	  // morphs all of rgb back and forth
 	  for (var i=0; i < 3; i++) {
 		  // flips colors direction of change
@@ -47,4 +47,4 @@ function load_band_fader<%= "_" + token if defined?(token) and token.present? %>
   }, change_speed);
 }
 
-load_band_fader<%= "_" + token if defined?(token) and token.present? %>();
+load_band_fader();
