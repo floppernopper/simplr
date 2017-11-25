@@ -209,6 +209,7 @@ Rails.application.routes.draw do
   get 'challenge/:token', to: 'games#challenge', as: 'challenger_user'
   put 'confirm_class_selection', to: 'games#confirm_class_selection', as: 'confirm_class_selection'
   get 'class_select/:class_selection', to: 'games#class_select', as: 'class_select'
+  get 'meme_war_classes', to: 'games#meme_war_classes', as: 'meme_war_classes'
 
   resources :proposals do
     resources :comments

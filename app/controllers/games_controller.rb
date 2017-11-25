@@ -1,5 +1,9 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :invite_only, except [:meme_war_classes]
+  
+  def meme_war_classes
+  end
   
   def class_select
     @class_selection = params[:class_selection]
@@ -88,13 +92,20 @@ class GamesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game
-      @game = Game.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def game_params
-      params.fetch(:game, {})
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
     end
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game
+    @game = Game.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def game_params
+    params.fetch(:game, {})
+  end
 end
