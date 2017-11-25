@@ -1,0 +1,26 @@
+</br>
+
+<div class="dark_card" align="center">
+  <p>
+    You're entering dangerous area...
+  </p>
+</div>
+
+<div class="dark_card">
+  <div align="center">
+    <%= link_to "Log out of all other sessions", destroy_all_other_sessions_path, method: :delete,
+      title: "Log out of all browsers or devices except for this one", class: :white_link,
+      data: { confirm: "Are you sure? You'll have to log back in on any other devices or browsers." } %>
+  </div>
+</div>
+
+<% unless Rails.env.development? %>
+  <div class="danger_card" style="background:red;">
+    <div align="center">
+      <% @user = current_user unless @user %>
+      <%= link_to 'Delete account (Destroys all of your data)', @user, method: :delete, class: :caution_link,
+        title: "Deletes your account and permanently destroys all of your data",
+        data: { confirm: "Are you sure you want to delete your account and permanently destroy all of your data?" } %>
+    </div>
+  </div>
+<% end %>
