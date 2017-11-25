@@ -66,7 +66,7 @@ class SessionsController < ApplicationController
   end
   
   def god_only
-    unless god? or Rails.env.development?
+    unless god? or goddess? or Rails.env.development?
       redirect_to '/404'
     end
   end
