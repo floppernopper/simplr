@@ -29,10 +29,13 @@
   # warrior, ranger
 
 # homer bush hide
-  # rogue
+  # rogue, ranger
   
 # greek riot dog protecc
   # paladin
+  
+# wall of text
+  # warlock
 
 # press F
   # all
@@ -63,7 +66,7 @@ class GamePiece < ActiveRecord::Base
       mage: "Vaporwave Mage",
       priest: "Wholesome Healer",
       rogue: "Dat Boi Rogue",
-      warlock: "Blank Banshee Warlock",
+      warlock: "Social Justice Warlock",
       paladin: "Antifa Super-soldier"
     }
     return _classes

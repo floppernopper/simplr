@@ -11,8 +11,8 @@ class GamesController < ApplicationController
   end
   
   def confirm_class_selection
-    current_user.update meme_war_class: session[:class_selection]
-    redirect_to :back
+    @user = current_user.update meme_war_class: session[:class_selection]
+    redirect_to :back, notice: (@user ? "Class selection confirmed." : "Error selecting class.")
   end
   
   def challenge
