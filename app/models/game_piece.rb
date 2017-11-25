@@ -25,14 +25,11 @@
 
 # Meme war events/player reaccs/actions #
 
-# confused mr krabs
-  # all classes
+# doge protecc
+  # warrior, ranger
 
 # homer bush hide
   # rogue
-
-# doge protecc
-  # warrior, ranger
   
 # greek riot dog protecc
   # paladin
@@ -42,8 +39,8 @@
 
 # GTA wasted
   # all
-
-# cant wake up inside
+  
+# confused mr krabs
   # all
   
 class GamePiece < ActiveRecord::Base
