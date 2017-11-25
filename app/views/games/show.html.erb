@@ -1,1 +1,85 @@
 <%= render "card" %>
+
+<% unless Game.class_selected_yet? current_user %>
+  <%= link_to class_select_path("warrior"), remote: true do %>
+    <div class="dark_card meme_war_class_card" id="warrior" align="center">
+      <p>
+        <b><%= GamePiece.classes[:warrior] %></b> - Tank, damage
+      </p>
+        <%= image_tag "meme_wars/chad.png", class: :meme_war_class_img %>
+    </div>
+  <% end %>
+  
+  <%= link_to class_select_path("ranger"), remote: true do %>
+    <div class="dark_card meme_war_class_card" id="ranger" align="center">
+      <p>
+        <b><%= GamePiece.classes[:ranger] %></b> - Damage from afar
+      </p>
+      <%= image_tag "meme_wars/virgin.png", class: :meme_war_class_img %>
+    </div>
+  <% end %>
+  
+  <%= link_to class_select_path("mage"), remote: true do %>
+    <div class="dark_card meme_war_class_card" id="mage" align="center">
+      <p>
+        <b><%= GamePiece.classes[:mage] %></b> - Fast, elemental damage
+      </p>
+      <%= image_tag "meme_wars/vaporwave.jpg", class: :meme_war_class_img %>
+    </div>
+  <% end %>
+  
+  <%= link_to class_select_path("priest"), remote: true do %>
+    <div class="dark_card meme_war_class_card" id="priest" align="center">
+      <p>
+        <b><%= GamePiece.classes[:priest] %></b> - Healing
+      </p>
+      <%= image_tag "meme_wars/wholesome.jpg", class: :meme_war_class_img %>
+    </div>
+  <% end %>
+    
+  <%= link_to class_select_path("rogue"), remote: true do %>
+    <div class="dark_card meme_war_class_card" id="rogue" align="center">
+      <p>
+        <b><%= GamePiece.classes[:rogue] %></b> - Stealth and damage
+      </p>
+      <%= image_tag "meme_wars/dat_boi.png", class: :meme_war_class_img %>
+    </div>
+  <% end %>
+  
+  <%= link_to class_select_path("warlock"), remote: true do %>
+    <div class="dark_card meme_war_class_card" id="warlock" align="center">
+      <p>
+        <b><%= GamePiece.classes[:warlock] %></b> - Damage over time
+      </p>
+      <%= image_tag "meme_wars/blank_banshee.jpg", class: :meme_war_class_img %>
+    </div>
+  <% end %>
+  
+  <%= link_to class_select_path("paladin"), remote: true do %>
+    <div class="dark_card meme_war_class_card" id="paladin" align="center">
+      <p>
+        <b><%= GamePiece.classes[:paladin] %></b> - Damage and healing
+      </p>
+      <%= image_tag "meme_wars/antifa_super_soldier.png", class: :meme_war_class_img %>
+    </div>
+  <% end %>
+  
+  <div class="dark_card" align="center" id="confirm_class_selection_card">
+    <p>
+      <%= link_to "Confirm class...", confirm_class_selection_path, class: :white_link %>
+    </p>
+  </div>
+  
+  <script>
+    <% if session[:class_selection].present? %>
+      $(".meme_war_class_card").each(function() {
+        if ($(this).attr('id') == "<%= session[:class_selection] %>") {
+          $(this).css("background", "rgb(119,158,203)");
+        } else {
+          $(this).css("background", "rgb(10,10,10)");
+        }
+      });
+      $("#confirm_class_selection_card").css("background", "rgb(255,105,97)");
+    <% end %>
+  </script>
+<% end %>

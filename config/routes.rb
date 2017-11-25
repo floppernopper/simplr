@@ -207,6 +207,8 @@ Rails.application.routes.draw do
   
   # games
   get 'challenge/:token', to: 'games#challenge', as: 'challenger_user'
+  put 'confirm_class_selection', to: 'games#confirm_class_selection', as: 'confirm_class_selection'
+  get 'class_select/:class_selection', to: 'games#class_select', as: 'class_select'
 
   resources :proposals do
     resources :comments

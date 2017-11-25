@@ -1,6 +1,16 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   
+  def class_select
+    @class_selection = params[:class_selection]
+    session[:class_selection] = @class_selection
+  end
+  
+  def confirm_class_selection
+    current_user.update meme_war_class: session[:class_selection]
+    redirect_to :back
+  end
+  
   def challenge
     @user = User.find_by_unique_token params[:token]
     @game = Game.new

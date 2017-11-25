@@ -4,8 +4,10 @@ class Game < ApplicationRecord
   has_many :connections, dependent: :destroy
   has_many :game_pieces, dependent: :destroy
   
-  def class_selected_yet? user
-    true
+  def self.class_selected_yet? user
+    if user.meme_war_class.present?
+      return true
+    end
   end
   
   def players
