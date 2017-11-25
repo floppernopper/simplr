@@ -1,4 +1,4 @@
-<% if Rails.env.development? and current_user or god? %>
+<% if (Rails.env.development? and current_user) or (god? and current_user) %>
   <div class="right_pane">
     <% unless current_user.my_groups.empty? %>
       <div class="side_pane_label right_pane_label">Group activity</div>

@@ -1,9 +1,5 @@
 <%= render "users/profile_card", user: @user %>
 
-<% if Rails.env.development? %>
-  <%= render "treasures/crescent" %>
-<% end %>
-
 <% if this_user_current? %>
   <%= render "users/progress_bar", user: @user if @user.xp and Rails.env.development? %>
   <div class="dark_card" id="post_form_card">
