@@ -69,17 +69,17 @@
       <%= link_to "Confirm class...", confirm_class_selection_path, class: :white_link %>
     </p>
   </div>
-  
-  <script>
-    <% if session[:class_selection].present? %>
-      $(".meme_war_class_card").each(function() {
-        if ($(this).attr('id') == "<%= session[:class_selection] %>") {
-          $(this).css("background", "rgb(119,158,203)");
-        } else {
-          $(this).css("background", "rgb(10,10,10)");
-        }
-      });
-      $("#confirm_class_selection_card").css("background", "rgb(255,105,97)");
-    <% end %>
-  </script>
+
+  <% if session[:class_selection].present? %>  
+    <script>
+        $(".meme_war_class_card").each(function() {
+          if ($(this).attr('id') == "<%= session[:class_selection] %>") {
+            $(this).css("background", "rgb(119,158,203)");
+          } else {
+            $(this).css("background", "rgb(10,10,10)");
+          }
+        });
+        $("#confirm_class_selection_card").css("background", "rgb(255,105,97)");
+    </script>
+  <% end %>
 <% end %>
