@@ -3,6 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .meme_war_class_img {
+  position: absolute;
+  top: 10px;
+  left: 10px;
   width: 50px;
   margin-top: 1.5px;
   margin-right: 10px;
@@ -10,4 +13,9 @@
 }
 
 .meme_war_class_card {
+  min-height: 55.25px;
+}
+
+.meme_war_class_description {
+  width: 65%;
 }
