@@ -4,6 +4,10 @@ class Game < ApplicationRecord
   has_many :connections, dependent: :destroy
   has_many :game_pieces, dependent: :destroy
   
+  def class_selected_yet? user
+    true
+  end
+  
   def players
     _players = []
     for c in self.connections

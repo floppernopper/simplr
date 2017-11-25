@@ -61,14 +61,13 @@ class GamePiece < ActiveRecord::Base
       warrior: "Chad Warrior",
       ranger: "Virgin Ranger",
       mage: "Vaporwave Mage",
-      healer: "Wholesome Healer",
-      rogue: "Pepe Rogue",
+      priest: "Wholesome Healer",
+      rogue: "Dat Boi Rogue",
       warlock: "Blank Banshee Warlock",
       paladin: "Antifa Super-soldier"
     }
     return _classes
   end
-  
   
   private
   
