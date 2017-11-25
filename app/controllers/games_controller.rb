@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
-  before_action :invite_only, except [:meme_war_classes]
+  before_action :invite_only, except: [:meme_war_classes]
   
   def meme_war_classes
   end
