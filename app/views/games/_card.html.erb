@@ -1,0 +1,13 @@
+<div class="dark_card" align="center">
+  <p>
+    <b>Players:</b>
+    <% for player in @game.players %>
+      <span>
+        <%= link_to player do %>
+          <%= image_tag player.image, class: :avatar_container %>
+          <span style="color:white;"><%= player.name %></span>
+         <% end %><%= "," unless player.eql? @game.players.last %>
+      </span>
+    <% end %>
+  </p>
+</div>

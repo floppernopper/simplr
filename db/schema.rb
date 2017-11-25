@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171124205334) do
+ActiveRecord::Schema.define(version: 20171124231414) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20171124205334) do
     t.boolean  "mod"
     t.boolean  "admin"
     t.string   "title"
+    t.integer  "game_id"
   end
 
   create_table "game_pieces", force: :cascade do |t|
@@ -99,6 +100,7 @@ ActiveRecord::Schema.define(version: 20171124205334) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "game_piece_id"
+    t.integer  "game_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -425,6 +427,7 @@ ActiveRecord::Schema.define(version: 20171124205334) do
     t.integer  "device_pixel_ratio"
     t.string   "controller_name"
     t.string   "action_name"
+    t.string   "current_url"
   end
 
   create_table "votes", force: :cascade do |t|

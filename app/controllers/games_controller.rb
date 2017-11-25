@@ -1,9 +1,20 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   
-  def challenger
+  def challenge
     @user = User.find_by_unique_token params[:token]
+    @game = Game.new
     
+    if @game.save
+      @game.connections.create user_id: @user.id
+      @game.connections.create user_id: current_user.id
+    end
+    
+    if @game and @game.players.size > 1
+      redirect_to @game
+    else
+      redirect_to :back, notice: "Game could not be created. Error."
+    end
   end
 
   # GET /games
