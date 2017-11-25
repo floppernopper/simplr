@@ -22,11 +22,9 @@ class Game < ApplicationRecord
   private
   
   def gen_unique_token
-    self.unique_token = $name_generator.next_name[0..5].downcase
-    if self.cluster
-      self.unique_token << "_" + SecureRandom.urlsafe_base64
-    else
+    begin
+      self.unique_token = $name_generator.next_name[0..5].downcase
       self.unique_token << "_" + SecureRandom.urlsafe_base64.split('').sample(2).join.downcase.gsub("_", "").gsub("-", "")
-    end
+    end while Game.exists? unique_token: self.unique_token
   end
 end
