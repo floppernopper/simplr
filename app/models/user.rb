@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, length: { minimum: 4 }
   validates_confirmation_of :password
 
-  before_create :encrypt_password, :generate_token, :gen_unique_token
+  before_create :encrypt_password, :generate_token, :gen_unique_token, :gen_energy_points
   after_create :initialize_settings
 
   mount_uploader :image, ImageUploader
@@ -280,5 +280,9 @@ class User < ActiveRecord::Base
     begin
       self.unique_token = SecureRandom.urlsafe_base64
     end while User.exists? unique_token: self.unique_token
+  end
+  
+  def gen_energy_points
+    self.energy_points = rand 1000
   end
 end

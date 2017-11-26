@@ -50,13 +50,13 @@
   <% end %>
   
   <%= link_to fa_icon("users", "Anrcho"), proposals_path,
-    class: :standard_nav_menu_link, id: :power_nav_menu_link unless @anrcho %>
+    class: :standard_nav_menu_link, id: :power_nav_menu_link unless @anrcho or false %>
   
   <%= link_to fa_icon("globe", "Contributors"), contributors_path, class: :standard_nav_menu_link,
     title: "Click here to see who's contributed to Anrcho." %>
     
   <%= link_to fa_icon("question-circle", "How Anrcho Works"), tutorial_path, class: :standard_nav_menu_link,
-    title: "Click here to see how the site works." %>
+    title: "Click here to see how the site works." unless false %>
 	
 	<%= link_to fa_icon("book", "Book of Social Maya"), book_path, class: :standard_nav_menu_link,
 	  title: "Long term plans for the site..." if Rails.env.development? %>
