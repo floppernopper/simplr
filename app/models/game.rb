@@ -5,9 +5,17 @@ class Game < ApplicationRecord
   has_many :game_pieces, dependent: :destroy
   
   def self.class_selected_yet? user
-    if user.meme_war_class.present?
+    if Game.meme_war_class user
       return true
     end
+  end
+  
+  def self.meme_war_class user
+    whats_there = user.game_pieces.where.not meme_war_class: nil
+    _class = if whats_there.present?
+      whats_there.last.meme_war_class
+    end
+    _class
   end
   
   def players

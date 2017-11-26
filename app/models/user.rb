@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :views, dependent: :destroy
   has_many :carts, dependent: :destroy
   has_many :wish_lists, dependent: :destroy
+  has_many :game_pieces, dependent: :destroy
+  has_many :games, dependent: :destroy
   has_many :treasures
   has_many :portals
   has_many :groups

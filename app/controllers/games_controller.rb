@@ -11,8 +11,13 @@ class GamesController < ApplicationController
   end
   
   def confirm_class_selection
-    @user = current_user.update meme_war_class: session[:class_selection]
-    redirect_to :back, notice: (@user ? "Class selection confirmed." : "Error selecting class.")
+    @meme_war_class = current_user.game_pieces.new meme_war_class: session[:class_selection]
+    notice = if @meme_war_class.save
+      "Class selection confirmed."
+    else
+      "Error selecting class."
+    end
+    redirect_to :back, notice: notice
   end
   
   def challenge

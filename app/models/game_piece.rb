@@ -1,3 +1,39 @@
+class GamePiece < ActiveRecord::Base
+  belongs_to :game_piece
+  belongs_to :treasure
+  belongs_to :secret
+  belongs_to :user
+  belongs_to :game
+  
+  has_many :game_pieces
+  
+  before_create :gen_unique_token
+
+  mount_uploader :image, ImageUploader
+  
+  def self.classes
+    _classes = {
+      warrior: "Chad Warrior",
+      ranger: "Virgin Ranger",
+      mage: "Vaporwave Mage",
+      priest: "Wholesome Healer",
+      rogue: "Dat Boi Rogue",
+      warlock: "Social Justice Warlock",
+      paladin: "Antifa Super-soldier"
+    }
+    return _classes
+  end
+  
+  private
+  
+  def gen_unique_token
+    begin
+      self.unique_token = $name_generator.next_name[0..5].downcase
+      self.unique_token << "_" + SecureRandom.urlsafe_base64.split('').sample(2).join.downcase.gsub("_", "").gsub("-", "")
+    end while GamePiece.exists? unique_token: self.unique_token
+  end
+end
+
 # Meme war attaccs #
 
 # confused mr krabs
@@ -37,6 +73,9 @@
 # wall of text
   # warlock
 
+# oprah The Secret
+  # warlock
+
 # press F
   # all
 
@@ -45,39 +84,3 @@
   
 # confused mr krabs
   # all
-  
-class GamePiece < ActiveRecord::Base
-  belongs_to :game_piece
-  belongs_to :treasure
-  belongs_to :secret
-  belongs_to :user
-  belongs_to :game
-  
-  has_many :game_pieces
-  
-  before_create :gen_unique_token
-
-  mount_uploader :image, ImageUploader
-  
-  def self.classes
-    _classes = {
-      warrior: "Chad Warrior",
-      ranger: "Virgin Ranger",
-      mage: "Vaporwave Mage",
-      priest: "Wholesome Healer",
-      rogue: "Dat Boi Rogue",
-      warlock: "Social Justice Warlock",
-      paladin: "Antifa Super-soldier"
-    }
-    return _classes
-  end
-  
-  private
-  
-  def gen_unique_token
-    begin
-      self.unique_token = $name_generator.next_name[0..5].downcase
-      self.unique_token << "_" + SecureRandom.urlsafe_base64.split('').sample(2).join.downcase.gsub("_", "").gsub("-", "")
-    end while GamePiece.exists? unique_token: self.unique_token
-  end
-end
