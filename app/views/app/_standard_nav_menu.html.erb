@@ -50,16 +50,16 @@
   <% end %>
   
   <%= link_to fa_icon("users", "Anrcho"), proposals_path,
-    class: :standard_nav_menu_link, id: :power_nav_menu_link unless @anrcho or true %>
+    class: :standard_nav_menu_link, id: :power_nav_menu_link unless @anrcho or Rails.env.development? %>
   
   <%= link_to fa_icon("globe", "Contributors"), contributors_path, class: :standard_nav_menu_link,
-    title: "Click here to see who's contributed to Anrcho." %>
+    title: "Click here to see who's contributed to Anrcho." if @anrcho %>
     
   <%= link_to fa_icon("question-circle", "How Anrcho Works"), tutorial_path, class: :standard_nav_menu_link,
-    title: "Click here to see how the site works." unless true %>
+    title: "Click here to see how the site works." if @anrcho %>
 	
 	<%= link_to fa_icon("book", "Book of Social Maya"), book_path, class: :standard_nav_menu_link,
-	  title: "Long term plans for the site..." if Rails.env.development? %>
+	  title: "Long term plans for the site..." if @anrcho %>
 	  
   <%= audio_tag "effects/umbrella_1.wav", id: "nav_menu_sound" %>
 </div>
