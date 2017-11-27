@@ -20,7 +20,8 @@
 <div class="card" id="user_profile_card_<%= user.id %>">
   <%= render "users/tier", user: user %>
   
-  <%= link_to "Challenge...", challenger_user_path(user.unique_token), class: :top_left_link unless current_user.eql? user %>
+  <%= link_to "Challenge...", challenger_user_path(user.unique_token),
+    class: :top_left_link unless current_user.eql? user or Rails.env.development? %>
   
   <% if dev? and user.last_active_at.present? %>
     <%= render "app/time_ago", item: user, time: user.last_active_at,
