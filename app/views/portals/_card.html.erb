@@ -30,9 +30,10 @@
     </p>
     
     <b id="invite_link_label"><%= link_to "Portal link - Copy and share:",
-      copy_invite_link_path, remote: true, id: :copy_invite_link %></b>
+      copy_portal_link_path(portal.unique_token), remote: true, id: :copy_invite_link %></b>
     <div align="center">
-      <%= text_field_tag :invite_link, portal_link, id: :invite_link_field, class: :standard_text_field %>
+      <%= text_field_tag :invite_link, portal_link,
+        id: "portal_link_field_#{portal.unique_token}", class: :standard_text_field %>
     </div>
   </div>
 </div>

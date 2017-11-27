@@ -2,6 +2,10 @@ class PortalsController < ApplicationController
   before_action :invite_only, except: [:show, :enter]
   before_action :dev_only, only: [:index, :destroy, :destroy_all]
   
+  def copy_link
+    @portal = Portal.find_by_unique_token params[:token]
+  end
+  
   def cluster_flier
     @cluster_flier_page = true
     @cluster = Portal.find_by_unique_token params[:token]
