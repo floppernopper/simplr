@@ -11,29 +11,6 @@ class GamePiece < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
-  scope :items, -> { where.not item_type: nil }
-  scope :abilities, -> { where.not ability: nil }
-  scope :class_presets, -> { where.not meme_war_class_preset: nil }
-  
-  def attack target
-    
-    
-    
-  end
-  
-  def defend attacker
-    
-    
-    
-  end
-  
-  # for strengths/weaknesses against/to/from class to class
-  def combat_triangle attacker defender
-  
-    
-  
-  end
-  
   def self.classes
     _classes = {
       # main classes of combat triangle
