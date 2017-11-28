@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   put 'users/:id/update_password', to: 'users#update_password', as: 'update_password'
   get 'geo', to: 'users#geolocation', as: 'geolocation'
   get 'load_more_posts/:token', to: 'users#load_more_posts', as: 'load_more_posts'
+  get 'show_user/:token', to: 'users#show', as: 'show_user'
 
   # likes
   post 'like', to: 'likes#create', as: 'like'

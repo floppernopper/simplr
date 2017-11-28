@@ -1,0 +1,9 @@
+<script>
+  <%= render "app/fader.js", target: "notice_msg_txt", target_id: "", slow: true %>
+</script>
+
+<% if notice %>
+  <div class="dark_card">
+    <div align="center" id="notice_msg_txt"><%= notice %></div>
+  </div>
+<% end %>

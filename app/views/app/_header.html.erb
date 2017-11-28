@@ -19,11 +19,7 @@
 
 <div id="universal_anchor"></div>
 
-<% if notice %>
-  <div class="dark_card">
-    <div align="center"><%= notice %></div>
-  </div>
-<% end %>
+<%= render "app/notices" %>
 
 <% unless god? or goddess? or Rails.env.development? %>
   <script>

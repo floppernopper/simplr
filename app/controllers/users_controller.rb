@@ -96,13 +96,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        Tag.extract @user
-        format.html { redirect_to @user }
-      else
-        format.html { render :edit }
-      end
+    if @user.update(user_params)
+      Tag.extract @user
+      redirect_to show_user_path(@user.unique_token), notice: "Profile/account updated successfully."
+    else
+      redirect_to :back, notice: "Unable to update profile/account... Error."
     end
   end
   
@@ -111,9 +109,13 @@ class UsersController < ApplicationController
     if @auth_user or dev?
       @user.password = user_params[:password]
       @user.encrypt_password
-      @user.save
+      @notice = if @user.save
+        "Password updated successfully."
+      else
+        "Password update failed... Error."
+      end
     end
-    redirect_to :back
+    redirect_to :back, notice: @notice
   end
 
   def destroy
