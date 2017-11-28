@@ -12,6 +12,18 @@
           <%= render "app/body", item: group %>
 		    </p>
 		  <% end %>
+		  
+      <% if group.posts.present? %>
+        <p>
+          Posts: <%= group.posts.size %>
+        </p>
+      <% end %>
+
+      <% if group.proposals.present? %>
+        <p>
+          Motions: <%= group.proposals.size %>
+        </p>
+      <% end %>
 
       <% if @group_shown %>
         <% if group.active_chat? %>
