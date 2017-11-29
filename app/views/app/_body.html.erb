@@ -1,4 +1,7 @@
-<% for word in item.body.split(" ") %>
+<!-- replace any newline escapes with breakline -->
+<% item_body = item.body.gsub "\n", "<br/>" %>
+
+<% for word in item_body.split(" ") %>
 	<% unless word.include? "#" and word.size > 1 %>
 	  <!-- word is rendered as plain text -->
 		<%= render "app/embed", word: word %>
