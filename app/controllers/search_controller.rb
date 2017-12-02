@@ -98,7 +98,7 @@ class SearchController < ApplicationController
       # show all content of a group/user when searched by group/user name
       [:user, :group].each do |sym|
         if item.respond_to? sym and item.send(sym)
-          match = true scan item.send(sym).name, query
+          match = true if scan item.send(sym).name, query
         end
       end
       return match
