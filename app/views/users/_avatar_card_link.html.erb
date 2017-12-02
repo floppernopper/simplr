@@ -2,7 +2,7 @@
 
 <% if defined?(user) and user %>
   <% if user.image.url %>
-    <%= link_to user_path(user), class: :user_avatar_link,
+    <%= link_to show_user_path(user.unique_token), class: :user_avatar_link,
       title: "#{user.name}" + (last_locale(user).present? ? ", #{last_locale user}" : "") do %>
       <%= image_tag user.image, class: :user_avatar_image %>
     <% end %>

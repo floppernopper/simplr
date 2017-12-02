@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :goddess?, :currently_kristin?,
-    :forrest_only_club?, :invited_to_forrest_only_club?, :page_turning,
+    :forrest_only_club?, :invited_to_forrest_only_club?, :in_dev?, :page_turning,
     :testing_score?, :unique_element_token
   
   include SimpleCaptcha::ControllerHelpers
@@ -274,6 +274,10 @@ class ApplicationController < ActionController::Base
   
   def browser
     Browser.new(:ua => request.env['HTTP_USER_AGENT'].to_s, :accept_language => "en-us")
+  end
+  
+  def in_dev?
+    Rails.env.development?
   end
   
   private

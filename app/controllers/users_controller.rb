@@ -133,6 +133,9 @@ class UsersController < ApplicationController
   end
 
   def show_user_thingy_to_run
+    if @requested_by_integer_id
+      redirect_to show_user_path @user.unique_token
+    end
     reset_page
     # solves loading error
     session[:page] = 1
@@ -181,6 +184,7 @@ class UsersController < ApplicationController
   end
   
   # Use callbacks to share common setup or constraints between actions.
+  # set to recieve request by 64bit unique_token or regular integer ID
   def set_user
     if params[:token]
       @user = User.find_by_unique_token params[:token]
@@ -190,6 +194,8 @@ class UsersController < ApplicationController
       @user = User.find_by_unique_token params[:id]
       @user ||= User.find_by_name params[:id]
       @user ||= User.find_by_id params[:id]
+      # for redirection to the more secure path
+      @requested_by_integer_id = true if @user
     end
     redirect_to '/404' unless @user or params[:id].nil?
   end
