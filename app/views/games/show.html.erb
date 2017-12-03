@@ -21,9 +21,6 @@
         $("#confirm_class_selection_card").css("background", "rgb(255,105,97)");
     </script>
   <% end %>
-<% elsif Game.class_selected_yet? current_user and not Game.class_abilities_added? current_user %>
-  <% case Game.meme_war_class(current_user) %>
-    <% when "warrior" %>
-      
-  <% end %>
+<% else %>
+  <%= render "games/interface" %>
 <% end %>

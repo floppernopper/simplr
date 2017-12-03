@@ -1,5 +1,5 @@
 module PagesHelper
-  def fib_seq size
+  def fibo_seq size
     # returns fibonacci
     # sequence of desired length
     first = 0; second = 1

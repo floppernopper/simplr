@@ -4,6 +4,17 @@ class Game < ApplicationRecord
   has_many :connections, dependent: :destroy
   has_many :game_pieces, dependent: :destroy
   
+  before_create :gen_unique_token
+  
+  def your_turn? user
+    player = self.connections.find_by_id self.current_turn_of_id
+    if player and player.user and player.user.eql? user
+      player
+    else
+      nil
+    end
+  end
+  
   def self.class_selected_yet? user
     if Game.meme_war_class user
       return true

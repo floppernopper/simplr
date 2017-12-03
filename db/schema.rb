@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126072921) do
+ActiveRecord::Schema.define(version: 20171202230151) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -110,6 +110,9 @@ ActiveRecord::Schema.define(version: 20171126072921) do
     t.integer  "cost"
     t.datetime "expires_at"
     t.boolean  "meme_war_class_preset"
+    t.float    "health"
+    t.float    "stamina"
+    t.float    "mana"
   end
 
   create_table "games", force: :cascade do |t|
@@ -125,9 +128,10 @@ ActiveRecord::Schema.define(version: 20171126072921) do
     t.string   "item_type"
     t.datetime "expires_at"
     t.string   "unique_token"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "game_type"
+    t.integer  "current_turn_of_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -221,6 +225,7 @@ ActiveRecord::Schema.define(version: 20171126072921) do
     t.boolean  "admin"
     t.boolean  "goddess"
     t.boolean  "god"
+    t.boolean  "expired"
   end
 
   create_table "posts", force: :cascade do |t|

@@ -11,6 +11,24 @@ class GamePiece < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
+  # will take arg of target
+  def attack target
+    # check targets class relation to self class
+    # check if any armor, what type of armor
+    
+    # subtract stamina or mana from self
+    
+    # subtract health or stamina from target
+    
+    # rolls dice for damage
+    nums = fib_seq(2..7)
+    damage = nums[rand(nums.size)]
+    
+    target.update health: target.health - damage
+    
+    return damage
+  end
+  
   def self.classes
     _classes = {
       # main classes of combat triangle

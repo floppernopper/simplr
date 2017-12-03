@@ -2,6 +2,14 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_action :invite_only, except: [:meme_war_classes]
   
+  def confirm_turn_choice
+    @turn_choice = params[:choice]
+  end
+  
+  def select_turn_choice
+    @turn_choice = params[:choice]
+  end
+  
   def meme_war_classes
   end
   
@@ -12,6 +20,16 @@ class GamesController < ApplicationController
   
   def confirm_class_selection
     @meme_war_class = current_user.game_pieces.new meme_war_class: session[:class_selection]
+    @meme_war_class.health = case @meme_war_class.meme_war_class
+    when "warrior"
+      fib_num 12
+    when "ranger", "mage"
+      fib_num 11
+    end
+    
+    # remove choice from memory
+    session.delete :class_selection
+    
     notice = if @meme_war_class.save
       "Class selection confirmed."
     else
@@ -27,6 +45,9 @@ class GamesController < ApplicationController
     if @game.save
       @game.connections.create user_id: @user.id
       @game.connections.create user_id: current_user.id
+      
+      # challenger user gets first turn
+      @game.update current_turn_of_id: @game.connections.last.id
     end
     
     if @game and @game.players.size > 1

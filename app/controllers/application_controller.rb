@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :goddess?, :currently_kristin?,
-    :forrest_only_club?, :invited_to_forrest_only_club?, :in_dev?, :page_turning,
+    :forrest_only_club?, :invited_to_forrest_only_club?, :in_dev?, :page_turning, :fib_seq, :fib_num,
     :testing_score?, :unique_element_token
   
   include SimpleCaptcha::ControllerHelpers
@@ -126,6 +126,14 @@ class ApplicationController < ActionController::Base
     else
       return {}
     end
+  end
+  
+  def fib_seq range
+    Fibonacci.seq range
+  end
+  
+  def fib_num n
+    Fibonacci.fib n
   end
   
   def paginate items, _page_size=page_size

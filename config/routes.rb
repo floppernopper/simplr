@@ -212,6 +212,8 @@ Rails.application.routes.draw do
   put 'confirm_class_selection', to: 'games#confirm_class_selection', as: 'confirm_class_selection'
   get 'class_select/:class_selection', to: 'games#class_select', as: 'class_select'
   get 'meme_war_classes', to: 'games#meme_war_classes', as: 'meme_war_classes'
+  get 'select_turn_choice/:choice', to: 'games#select_turn_choice', as: 'select_turn_choice'
+  get 'confirm_turn_choice/:choice', to: 'games#confirm_turn_choice', as: 'confirm_turn_choice'
 
   resources :proposals do
     resources :comments
