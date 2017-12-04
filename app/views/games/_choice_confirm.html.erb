@@ -1,6 +1,6 @@
 <div id="confirm_choice_<%= turn_choice %>" hidden>
 
-  <%= link_to confirm_turn_choice_path(turn_choice), remote: true do %>
+  <%= link_to confirm_turn_choice_path(choice: turn_choice, token: @game.unique_token), remote: true do %>
   
     <div class="choice_confirm_btn">
       Confirm

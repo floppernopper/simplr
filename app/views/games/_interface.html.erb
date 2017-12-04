@@ -2,19 +2,20 @@
 
 
   <% if your_turn? %>
-    <div class="turn_choice_prompt">
-      <b>What do you want to do?</b>
-    </div>
-    
-    <%= link_to select_turn_choice_path(:attack), remote: true do %>
-      <div class="turn_choice" id="turn_choice_attack">
-        Attack
+    <div id="your_turn_stuff">
+      <div class="turn_choice_prompt">
+        <b>What do you want to do?</b>
       </div>
-    <% end %>
-    
-    <div class="turn_choice_dropdown" id="turn_choice_dropdown_attack">
+      
+      <%= link_to select_turn_choice_path(:attack), remote: true do %>
+        <div class="turn_choice" id="turn_choice_attack">
+          Attack
+        </div>
+      <% end %>
+      
+      <div class="turn_choice_dropdown" id="turn_choice_dropdown_attack">
+      </div>
     </div>
-    
   <% end %> 
 
 

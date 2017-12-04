@@ -3,10 +3,21 @@ class GamesController < ApplicationController
   before_action :invite_only, except: [:meme_war_classes]
   
   def confirm_turn_choice
+    @game = Game.find_by_unique_token params[:token]
     @turn_choice = params[:choice]
+    
+    if @game and @turn_choice
+      c = @game.connections.where.not(user_id: current_user.id).last
+      @target = c.user._class if c and c.user
+    end
+    
+    if @target
+      @damage = current_user._class.attack @target
+    end
   end
   
   def select_turn_choice
+    @game = Game.find_by_unique_token session[:game_token]
     @turn_choice = params[:choice]
   end
   
@@ -66,6 +77,7 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    session[:game_token] = @game.unique_token
   end
 
   # GET /games/new
