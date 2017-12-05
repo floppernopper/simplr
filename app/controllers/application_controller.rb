@@ -128,14 +128,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def fib_seq range
-    Fibonacci.seq range
-  end
-  
-  def fib_num n
-    Fibonacci.fib n
-  end
-  
   def paginate items, _page_size=page_size
     return items.
       # drops first several posts if :feed_page

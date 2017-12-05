@@ -1,0 +1,19 @@
+<h2 class="standard_page_header">My games <i class="fa fa-trophy"></i></h2>
+
+<% for game in @games %>
+  <%= link_to show_game_path(game.unique_token) do %>
+    <div class="dark_card game_card" align="center">
+      <p>
+        <b>Game of <%= game.unique_token.capitalize %></b>
+      </p>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @games.empty? %>
+  <div class="dark_card" align="center">
+    <p>
+      You aren't in any games right now.
+    </p>
+  </div>
+<% end %>

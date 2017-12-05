@@ -6,6 +6,18 @@ class Game < ApplicationRecord
   
   before_create :gen_unique_token
   
+  def self.my_games user  
+    games = []
+    Connection.where.not(game_id: nil).where(user_id: user.id).each do |c|
+      games << Game.find(c.game_id)
+    end
+    games
+  end
+  
+  def all_players_ready?
+    self.players.all? { |p| p._class }
+  end
+  
   def your_turn? user
     player = self.connections.find_by_id self.current_turn_of_id
     if player and player.user and player.user.eql? user
@@ -27,6 +39,10 @@ class Game < ApplicationRecord
       whats_there.last.meme_war_class
     end
     _class
+  end
+  
+  def other_players user
+    return players.delete_if { |p| p.eql? user }
   end
   
   def players

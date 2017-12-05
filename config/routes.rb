@@ -214,6 +214,9 @@ Rails.application.routes.draw do
   get 'meme_war_classes', to: 'games#meme_war_classes', as: 'meme_war_classes'
   get 'select_turn_choice/:choice', to: 'games#select_turn_choice', as: 'select_turn_choice'
   get 'confirm_turn_choice/:choice', to: 'games#confirm_turn_choice', as: 'confirm_turn_choice'
+  get 'reset_game_interface', to: 'games#reset_interface', as: 'reset_game_interface'
+  get 'show_game/:token', to: 'games#show', as: 'show_game'
+  get 'my_games', to: 'games#my_games', as: 'my_games'
 
   resources :proposals do
     resources :comments

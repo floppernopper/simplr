@@ -1,22 +1,38 @@
-<div class="dark_card" id="interface_card" align="center">
-
-
-  <% if your_turn? %>
-    <div id="your_turn_stuff">
-      <div class="turn_choice_prompt">
-        <b>What do you want to do?</b>
-      </div>
-      
-      <%= link_to select_turn_choice_path(:attack), remote: true do %>
-        <div class="turn_choice" id="turn_choice_attack">
-          Attack
+<div id="interface_main">
+  <div class="dark_card" id="interface_card" align="center">
+    <% if your_turn? and game.all_players_ready? %>
+      <div id="your_turn_stuff">
+        <div class="turn_choice_prompt">
+          <b>What do you want to do?</b>
         </div>
-      <% end %>
-      
-      <div class="turn_choice_dropdown" id="turn_choice_dropdown_attack">
+        
+        <%= link_to select_turn_choice_path(:attack), remote: true do %>
+          <div class="turn_choice" id="turn_choice_attack">
+            Attack
+          </div>
+        <% end %>
+        
+        <div class="turn_choice_dropdown" id="turn_choice_dropdown_attack">
+        </div>
       </div>
-    </div>
-  <% end %> 
+    <% else %>
+      <p>
+        Waiting for other player(s)...
+      </p>
+    <% end %>
+  </div>
 
-
+  <div class="dark_card" id="interface_stats_card" align="center">
+    <p>
+      You have <%= current_user._class.health.to_i %> health
+    </p>
+    
+    <% for player in game.other_players current_user %>
+      <p>
+        <%= player.name %>'s has <%= player._class.health.to_i %> health
+      </p>
+    <% end %>
+  </div>
 </div>
+
+<div id="interface_anchor"></div>

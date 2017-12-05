@@ -14,3 +14,11 @@ class Fibonacci
     fib(n - 1) + fib(n - 2)
   end
 end
+
+def fib_num n
+  Fibonacci.fib n
+end
+
+def fib_seq r
+  Fibonacci.seq r
+end

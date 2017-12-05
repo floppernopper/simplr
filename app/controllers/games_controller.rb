@@ -2,15 +2,27 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_action :invite_only, except: [:meme_war_classes]
   
+  def my_games
+    @games = Game.my_games current_user
+  end
+  
+  def reset_interface
+    @game = Game.find_by_unique_token session[:game_token]
+  end
+  
   def confirm_turn_choice
     @game = Game.find_by_unique_token params[:token]
     @turn_choice = params[:choice]
+    @other_player = @game.connections.where.not(user_id: current_user.id).last
     
     case @turn_choice
     when "attack"
-      @target = @game.connections.where.not(user_id: current_user.id).last.user._class
+      @target = @other_player.user._class
       @damage = current_user._class.attack @target
     end
+    
+    # changes turn to other player
+    @game.update current_turn_of_id: @other_player.id
   end
   
   def select_turn_choice
@@ -28,11 +40,16 @@ class GamesController < ApplicationController
   
   def confirm_class_selection
     @meme_war_class = current_user.game_pieces.new meme_war_class: session[:class_selection]
-    @meme_war_class.health = case @meme_war_class.meme_war_class
-    when "warrior"
+    @meme_war_class.health = \
+    case @meme_war_class.meme_war_class
+    when "warrior", "paladin"
       fib_num 12
-    when "ranger", "mage"
+    when "ranger", "warlock", "rogue"
       fib_num 11
+    when "mage", "priest"
+      fib_num 10
+    else
+      fib_num 9
     end
     
     # remove choice from memory
@@ -47,15 +64,18 @@ class GamesController < ApplicationController
   end
   
   def challenge
-    @user = User.find_by_unique_token params[:token]
+    @other_user = User.find_by_unique_token params[:token]
     @game = Game.new
     
     if @game.save
-      @game.connections.create user_id: @user.id
+      @game.connections.create user_id: @other_user.id
       @game.connections.create user_id: current_user.id
       
       # challenger user gets first turn
       @game.update current_turn_of_id: @game.connections.last.id
+      
+      # notify other player
+      Note.notify :game_challenge, @game.unique_token, @other_user, current_user
     end
     
     if @game and @game.players.size > 1
@@ -136,7 +156,14 @@ class GamesController < ApplicationController
   
   # Use callbacks to share common setup or constraints between actions.
   def set_game
-    @game = Game.find(params[:id])
+    if params[:token]
+      @game = Game.find_by_unique_token(params[:token])
+      @game ||= Game.find_by_id(params[:token])
+    else
+      @game = Game.find_by_unique_token(params[:id])
+      @game ||= Game.find_by_id(params[:id])
+    end
+    redirect_to '/404' unless @game
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

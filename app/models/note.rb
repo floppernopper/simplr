@@ -50,7 +50,9 @@ class Note < ActiveRecord::Base
       vote_verified: "Someone verified your vote.",
       vote_reversed: "Someone reversed your vote.",
       vote_comment: "Someone commented on your vote.",
-      vote_like: "Someone liked your vote." }
+      vote_like: "Someone liked your vote.",
+      # games
+      game_challenge: "Someone challenged you to a game." }
     return _actions[action.to_sym]
   end
   

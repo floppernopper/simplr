@@ -1,3 +1,11 @@
-<p class="game_damage_dealt">
-  <%= damage %>
-</p>
+<div id="damage_main">
+  <div class="game_damage_dealt">
+    <%= damage %> dealt!
+  </div>
+
+  <%= link_to reset_game_interface_path, remote: true do %>
+    <div class="game_okay">
+      Ok
+    </div>
+  <% end %>
+</div>

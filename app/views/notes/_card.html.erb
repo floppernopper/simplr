@@ -54,6 +54,9 @@
       <%= link_to note.message, show_proposal_path(token: note.item_token, revisions: true) %>
     <% when :vote_verified, :vote_like, :vote_comment, :vote_reversed %>
       <%= link_to note.message, show_vote_path(token: note.item_token) %>
+    <!-- Game notifications -->
+    <% when :game_challenge %>
+      <%= link_to note.message, show_game_path(token: note.item_token) %>
     <% end %>
     <!-- NOOICE gif -->
     <% if action.eql? :post_like or action.eql? :like_like or action.eql? :user_like or action.eql? :comment_like \
