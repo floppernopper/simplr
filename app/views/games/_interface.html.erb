@@ -19,6 +19,14 @@
       <p>
         Waiting for other player(s)...
       </p>
+      
+      <% if in_dev? %>
+        <% if current_user.eql? User.first %>
+          <%= link_to "h a c k other player", hijack_path(User.second.unique_token), class: :white_link %>
+        <% else %>
+          <%= link_to "h a c k other player", hijack_path(User.first.unique_token), class: :white_link %>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 
