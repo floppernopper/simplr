@@ -1,6 +1,6 @@
 var anchor = $("#interface_anchor");
 var interface_main = $("#interface_main");
 
-interface_main.fadeOut();
+interface_main.remove();
 anchor.after("<%=j render 'games/interface', game: @game %>");
 anchor.remove;
