@@ -1,3 +1,5 @@
 $("#your_turn_stuff").fadeOut();
 
 alert("<%= @damage %> damage dealt!");
+
+$("#interface_card").prepend("<%=j render 'games/damage', damage: @damage %>")

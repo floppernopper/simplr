@@ -21,7 +21,7 @@ class GamePiece < ActiveRecord::Base
     # subtract health or stamina from target
     
     # rolls dice for damage
-    nums = fib_seq(2..7)
+    nums = Fibonacci.seq(2..7)
     damage = nums[rand(nums.size)]
     
     target.update health: target.health - damage

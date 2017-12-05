@@ -6,12 +6,9 @@ class GamesController < ApplicationController
     @game = Game.find_by_unique_token params[:token]
     @turn_choice = params[:choice]
     
-    if @game and @turn_choice
-      c = @game.connections.where.not(user_id: current_user.id).last
-      @target = c.user._class if c and c.user
-    end
-    
-    if @target
+    case @turn_choice
+    when "attack"
+      @target = @game.connections.where.not(user_id: current_user.id).last.user._class
       @damage = current_user._class.attack @target
     end
   end
