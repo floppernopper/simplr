@@ -39,6 +39,7 @@ class GamesController < ApplicationController
   end
   
   def confirm_class_selection
+    @game = Game.find_by_unique_token session[:game_token]
     @meme_war_class = current_user.game_pieces.new meme_war_class: session[:class_selection]
     @meme_war_class.health = \
     case @meme_war_class.meme_war_class
@@ -60,7 +61,7 @@ class GamesController < ApplicationController
     else
       "Error selecting class."
     end
-    redirect_to :back, notice: notice
+    redirect_to show_game_path(@game.unique_token), notice: notice
   end
   
   def challenge

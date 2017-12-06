@@ -36,9 +36,11 @@
     </p>
     
     <% for player in game.other_players current_user %>
-      <p>
-        <%= player.name %>'s has <%= player._class.health.to_i %> health
-      </p>
+      <% if player._class %>
+        <p>
+          <%= player.name %>'s has <%= player._class.health.to_i %> health
+        </p>
+      <% end %>
     <% end %>
   </div>
 </div>
