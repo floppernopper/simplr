@@ -21,6 +21,12 @@ class GamesController < ApplicationController
     when "attack"
       @damage = current_user._class.attack @target
       @result[:damage] = @damage
+      
+      if @target.health <= 0
+        @result[:target_dead] = true
+        @result[:target_name] = @other_player.name
+      end
+    when "build"
     when "skip"
     end
     

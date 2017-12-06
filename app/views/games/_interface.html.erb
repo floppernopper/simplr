@@ -6,7 +6,7 @@
           <b>What do you want to do?</b>
         </div>
         
-        <% for choice in [:attack, :skip] %>
+        <% for choice in [:attack, :build, :skip] %>
           <%= link_to select_turn_choice_path(choice), remote: true do %>
             <div class="turn_choice" id="turn_choice_<%= choice.to_s %>">
               <%= choice.to_s.capitalize %>
@@ -36,13 +36,13 @@
 
   <div class="dark_card" id="interface_stats_card" align="center">
     <p>
-      You have <%= current_user._class.health.to_i %> health
+      You have <%= current_user._class.health.to_i %> health (<%= current_user._class.meme_war_class %>)
     </p>
     
     <% for player in game.other_players current_user %>
       <% if player._class %>
         <p>
-          <%= player.name %> has <%= player._class.health.to_i %> health
+          <%= player.name %> has <%= player._class.health.to_i %> health (<%= player._class.meme_war_class %>)
         </p>
       <% end %>
     <% end %>

@@ -3,6 +3,9 @@
   <div id="damage_main">
     <div class="game_damage_dealt">
       <%= result[:damage] %> dealt.
+      <% if result[:target_dead] %>
+        You killed <%= result[:target_name] %>. You are victorious!
+      <% end %>
     </div>
 
     <%= link_to reset_game_interface_path, remote: true do %>
@@ -11,6 +14,15 @@
       </div>
     <% end %>
   </div>
+<% when :build %>
+  <div class="game_build_main">
+    You've started building a fort.
+  </div>
+  <%= link_to reset_game_interface_path, remote: true do %>
+    <div class="game_okay">
+      Ok
+    </div>
+  <% end %>
 <% when :skip %>
   <%= link_to reset_game_interface_path, remote: true do %>
     <div class="game_okay">
