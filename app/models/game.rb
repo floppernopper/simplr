@@ -6,6 +6,18 @@ class Game < ApplicationRecord
   
   before_create :gen_unique_token
   
+  def self.between? user, other_user
+    user_c = Connection.where.not(game_id: nil).where user_id: user.id
+    other_user_c = Connection.where.not(game_id: nil).where user_id: other_user.id
+    
+    for x in [[user_c, other_user_c], [other_user_c, user_c]]
+      for c in x[0]
+        return true if x[1].any? { |i| i.game_id.eql? c.game_id }
+      end
+    end
+    nil
+  end
+  
   def self.my_games user  
     games = []
     Connection.where.not(game_id: nil).where(user_id: user.id).each do |c|

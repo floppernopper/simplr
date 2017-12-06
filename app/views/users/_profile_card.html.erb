@@ -2,8 +2,6 @@
   <script>
     <%= render "app/fader.js", target: "user_title", target_id: "" %>
     <%= render "app/fader.js", target: "user_title_card", background: true, target_id: "" %>
-    <%= render "app/padding_fader.js", target: "user_title_card", target_id: "", slow: true if false %>
-    <%= render "app/font_size_fader.js", target: "user_title", target_id: "", slow: true if false %>
   </script>
   
   <div class="dark_card" align="center" id="user_title_card">
@@ -20,8 +18,14 @@
 <div class="card" id="user_profile_card_<%= user.id %>">
   <%= render "users/tier", user: user %>
   
-  <%= link_to '<i class="fa fa-trophy"></i>'.html_safe, challenger_user_path(user.unique_token),
-    class: :bottom_left_link if (god? or goddess?) and not current_user.eql? user %>
+  <% if (god? or goddess?) and not (current_user.eql? user or Game.between? user, current_user) %>
+    <%= link_to '<i class="fa fa-trophy"></i>'.html_safe, challenger_user_path(user.unique_token),
+      class: :top_left_link, id: :game_challenge_link  %>
+      
+    <script>
+      <%= render "app/fader.js", target: "game_challenge_link", target_id: "", faster: true %>
+    </script>
+  <% end %>
   
   <% if dev? and user.last_active_at.present? %>
     <%= render "app/time_ago", item: user, time: user.last_active_at,
