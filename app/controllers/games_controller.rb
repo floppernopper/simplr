@@ -13,12 +13,15 @@ class GamesController < ApplicationController
   def confirm_turn_choice
     @game = Game.find_by_unique_token params[:token]
     @turn_choice = params[:choice]
+    @result = { choice: @turn_choice.to_sym }
     @other_player = @game.connections.where.not(user_id: current_user.id).last
+    @target = @other_player.user._class
     
     case @turn_choice
     when "attack"
-      @target = @other_player.user._class
       @damage = current_user._class.attack @target
+      @result[:damage] = @damage
+    when "skip"
     end
     
     # changes turn to other player

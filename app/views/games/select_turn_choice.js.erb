@@ -1,25 +1,25 @@
-var turn_choice = $("#turn_choice_<%= @turn_choice %>");
-var turn_choice_dropdown = $("#turn_choice_dropdown_<%= @turn_choice %>");
+$(".turn_choice").each(function() {
+  if ($(this).attr('id') == "turn_choice_<%= @turn_choice %>") {
+    $(this).css("color", "rgb(255,105,97)");
+  } else {
+    $(this).css("color", "rgb(175,175,175)");
+  }
+});
 
-turn_choice.css("background", "rgb(255,105,97)");
-turn_choice_dropdown.fadeIn();
+$(".turn_choice_dropdown").each(function() {
+  if ($(this).attr('id') == "turn_choice_dropdown_<%= @turn_choice %>") {
+    $(this).fadeIn();
+    $(this).prepend("<%=j render 'games/choice_confirm', turn_choice: @turn_choice %>");
+  } else {
+    $(this).fadeOut();
+  }
+});
 
-//var w = 0;
-//var increase_height = setInterval(function() {
+$(".choice_confirm_main").each(function() {
+  if ($(this).attr('id') == "confirm_choice_<%= @turn_choice %>") {
+    $(this).fadeIn();
+  } else {
+    $(this).remove();
+  }
+});
 
-//  turn_choice_dropdown.css("height", w + "px");
-//  w += 1;
-//  
-//  // exits from interval loop once expanded
-//  if (w >= 50) {
-//    turn_choice_dropdown.prepend("<%=j render 'games/choice_confirm', turn_choice: @turn_choice %>");
-
-//    $("#confirm_choice_<%= @turn_choice %>").fadeIn();
-//    
-//    clearInterval(increase_height);
-//  }
-//}, 10);
-
-
-turn_choice_dropdown.prepend("<%=j render 'games/choice_confirm', turn_choice: @turn_choice %>");
-$("#confirm_choice_<%= @turn_choice %>").fadeIn();

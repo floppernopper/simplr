@@ -1,11 +1,7 @@
-<div id="confirm_choice_<%= turn_choice %>" hidden>
-
-  <%= link_to confirm_turn_choice_path(choice: turn_choice, token: @game.unique_token), remote: true do %>
-  
+<div class="choice_confirm_main" id="confirm_choice_<%= turn_choice %>" hidden>
+  <%= link_to confirm_turn_choice_path(choice: turn_choice, token: @game.unique_token), remote: true, class: :white_link do %>
     <div class="choice_confirm_btn">
       Confirm
     </div>
-    
   <% end %>
-  
 </div>

@@ -16,7 +16,11 @@ class SessionsController < ApplicationController
       # logs you into their account, h4x0r3d
       cookies[:auth_token] = @user.auth_token
     end
-    redirect_to root_url
+    if params[:game_token]
+      redirect_to show_game_path params[:game_token]
+    else
+      redirect_to root_url
+    end
   end
   
   def new
