@@ -55,7 +55,7 @@
     <% when :vote_verified, :vote_like, :vote_comment, :vote_reversed %>
       <%= link_to note.message, show_vote_path(token: note.item_token) %>
     <!-- Game notifications -->
-    <% when :game_challenge %>
+    <% when :game_challenge, :your_turn_in_game %>
       <%= link_to note.message, show_game_path(token: note.item_token) %>
     <% end %>
     <!-- NOOICE gif -->

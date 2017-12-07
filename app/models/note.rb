@@ -52,7 +52,8 @@ class Note < ActiveRecord::Base
       vote_comment: "Someone commented on your vote.",
       vote_like: "Someone liked your vote.",
       # games
-      game_challenge: "Someone challenged you to a game." }
+      game_challenge: "Someone challenged you to a game.",
+      your_turn_in_game: "It's your turn!" }
     return _actions[action.to_sym]
   end
   

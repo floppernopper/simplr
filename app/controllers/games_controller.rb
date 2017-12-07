@@ -32,6 +32,7 @@ class GamesController < ApplicationController
     
     # changes turn to other player
     @game.update current_turn_of_id: @other_player.id
+    Note.notify :your_turn_in_game, @game.unique_token, @other_player.user, current_user
   end
   
   def select_turn_choice
