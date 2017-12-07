@@ -40,15 +40,15 @@ class Game < ApplicationRecord
   end
   
   def self.class_selected_yet? user
-    if Game.meme_war_class user
+    if Game._class user
       return true
     end
   end
   
-  def self.meme_war_class user
-    whats_there = user.game_pieces.where.not meme_war_class: nil
+  def self._class user
+    whats_there = user.game_pieces.where.not game_class: nil
     _class = if whats_there.present?
-      whats_there.last.meme_war_class
+      whats_there.last.game_class
     end
     _class
   end

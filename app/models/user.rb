@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   scope :forrest_only, -> { where forrest_only: true }
   
   def _class
-    self.game_pieces.where.not(meme_war_class: nil).first
+    self.game_pieces.where.not(game_class: nil).first
   end
   
   def kristin?

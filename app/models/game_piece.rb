@@ -11,7 +11,6 @@ class GamePiece < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
-  # will take arg of target
   def attack target
     # check targets class relation to self class
     # check if any armor, what type of armor
@@ -21,11 +20,17 @@ class GamePiece < ActiveRecord::Base
     # subtract health or stamina from target
     
     # rolls dice for damage
-    nums = Fibonacci.seq(2..7)
+    range = case self.meme_war_class.to_sym
+    when :warrior, :mage, :rogue, :paladin
+      2..9
+    when :ranger, :warlock
+      1..7
+    else # priest
+      0..6
+    end
+    nums = Fibonacci.seq(range)
     damage = nums[rand(nums.size)]
-    
     target.update health: target.health - damage
-    
     return damage
   end
   

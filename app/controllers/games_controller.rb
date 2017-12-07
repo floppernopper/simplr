@@ -49,9 +49,9 @@ class GamesController < ApplicationController
   
   def confirm_class_selection
     @game = Game.find_by_unique_token session[:game_token]
-    @meme_war_class = current_user.game_pieces.new meme_war_class: session[:class_selection]
-    @meme_war_class.health = \
-    case @meme_war_class.meme_war_class
+    @_class = current_user.game_pieces.new game_class: session[:class_selection]
+    @_class.health = \
+    case @_class.game_class
     when "warrior", "paladin"
       fib_num 12
     when "ranger", "warlock", "rogue"
@@ -65,7 +65,7 @@ class GamesController < ApplicationController
     # remove choice from memory
     session.delete :class_selection
     
-    notice = if @meme_war_class.save
+    notice = if @_class.save
       "Class selection confirmed."
     else
       "Error selecting class."

@@ -36,13 +36,13 @@
 
   <div class="dark_card" id="interface_stats_card" align="center">
     <p>
-      You have <%= current_user._class.health.to_i %> health (<%= current_user._class.meme_war_class %>)
+      You have <%= current_user._class.health.to_i %> health (<%= current_user._class.game_class %>)
     </p>
     
     <% for player in game.other_players current_user %>
       <% if player._class %>
         <p>
-          <%= player.name %> has <%= player._class.health.to_i %> health (<%= player._class.meme_war_class %>)
+          <%= player.name %> has <%= player._class.health.to_i %> health (<%= player._class.game_class %>)
         </p>
       <% end %>
     <% end %>
