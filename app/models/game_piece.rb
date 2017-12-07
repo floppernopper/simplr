@@ -11,6 +11,12 @@ class GamePiece < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
+  def dead?
+    if self.health and health <= 0.0
+      true
+    end
+  end
+  
   def attack target
     # check targets class relation to self class
     # check if any armor, what type of armor
@@ -20,7 +26,7 @@ class GamePiece < ActiveRecord::Base
     # subtract health or stamina from target
     
     # rolls dice for damage
-    range = case self.meme_war_class.to_sym
+    range = case self.game_class.to_sym
     when :warrior, :mage, :rogue, :paladin
       2..9
     when :ranger, :warlock

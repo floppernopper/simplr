@@ -15,7 +15,8 @@ class GamesController < ApplicationController
     @turn_choice = params[:choice]
     @result = { choice: @turn_choice.to_sym }
     @other_player = @game.connections.where.not(user_id: current_user.id).last
-    @target = @other_player.user._class
+    @other_user = @other_player.user
+    @target = @other_user._class
     
     case @turn_choice
     when "attack"
@@ -24,7 +25,7 @@ class GamesController < ApplicationController
       
       if @target.health <= 0
         @result[:target_dead] = true
-        @result[:target_name] = @other_player.name
+        @result[:target_name] = @other_user.name
       end
     when "build"
     when "skip"
@@ -32,7 +33,7 @@ class GamesController < ApplicationController
     
     # changes turn to other player
     @game.update current_turn_of_id: @other_player.id
-    Note.notify :your_turn_in_game, @game.unique_token, @other_player.user, current_user
+    Note.notify :your_turn_in_game, @game.unique_token, @other_user, current_user
   end
   
   def select_turn_choice

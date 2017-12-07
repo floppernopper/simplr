@@ -14,6 +14,14 @@ class Connection < ActiveRecord::Base
   scope :current, -> { where.not(invite: true).where.not request: true }
   scope :forrest_only_invites, -> { where invite: true, forrest_only: true }
   
+  def dead?
+    if self.game_id and self.game_piece and game_piece.health
+      if health <= 0.0
+        true
+      end
+    end
+  end
+  
   # finds message folder with specific list of users
   def self.folder_with users=[]
     for user in users
