@@ -5,3 +5,18 @@
     <% end %>
   <% end %>
 <% end %>
+
+<script>
+  var screen_width = window.screen.width;
+  var first_height = $(".floated_image:first").height();
+  alert(first_height);
+  
+  $(".floated_image").each(function() {
+    
+    var ratio = $(this).width() / $(this).height();
+    
+    $(this).height(first_height);
+    
+    $(this).width(ratio * first_height);
+  });
+</script>
