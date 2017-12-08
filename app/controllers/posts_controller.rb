@@ -6,6 +6,10 @@ class PostsController < ApplicationController
   before_action :invite_only, except: [:show, :create, :add_image, :add_video]
   before_action :invited_or_token_used, only: [:show]
   
+  def floating_images
+    @posts = Post.all.last(50).select { |p| p.pictures.present? }.reverse
+  end
+  
   def play_audio
     @post = Post.find_by_id params[:id]
   end

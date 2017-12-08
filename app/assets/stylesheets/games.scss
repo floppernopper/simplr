@@ -45,6 +45,11 @@
   width: 65%;
 }
 
+.choices_container {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 .choice_confirm_btn {
 }
 

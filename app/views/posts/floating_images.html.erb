@@ -1,0 +1,5 @@
+<% for post in @posts %>
+  <% for picture in post.pictures %>
+    <%= image_tag picture.image, class: :floated_image %>
+  <% end %>
+<% end %>
