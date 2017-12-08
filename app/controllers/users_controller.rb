@@ -134,7 +134,7 @@ class UsersController < ApplicationController
 
   def show_user_thingy_to_run
     if @requested_by_integer_id
-      redirect_to show_user_path @user.unique_token
+      redirect_to show_user_path @user.unique_token unless params[:id].to_i.eql? 34
     end
     reset_page
     # solves loading error

@@ -27,7 +27,10 @@ class GamesController < ApplicationController
         @result[:target_dead] = true
         @result[:target_name] = @other_user.name
       end
+    when "cast"
     when "build"
+    when "respawn"
+      current_user._class.update health: class_health(current_user._class.game_class)
     when "skip"
     end
     
@@ -52,26 +55,17 @@ class GamesController < ApplicationController
   def confirm_class_selection
     @game = Game.find_by_unique_token session[:game_token]
     @_class = current_user.game_pieces.new game_class: session[:class_selection]
-    @_class.health = \
-    case @_class.game_class
-    when "warrior", "paladin"
-      fib_num 12
-    when "ranger", "warlock", "rogue"
-      fib_num 11
-    when "mage", "priest"
-      fib_num 10
-    else
-      fib_num 9
-    end
-    
-    # remove choice from memory
-    session.delete :class_selection
+    @_class.health = class_health @_class.game_class
     
     notice = if @_class.save
       "Class selection confirmed."
     else
       "Error selecting class."
     end
+    
+    # remove choice from memory
+    session.delete :class_selection
+    
     redirect_to show_game_path(@game.unique_token), notice: notice
   end
   
@@ -159,6 +153,19 @@ class GamesController < ApplicationController
   end
 
   private
+  
+  def class_health _class
+    case _class
+    when "warrior", "paladin"
+      fib_num GamePiece.classes[:warrior][:health]
+    when "ranger", "warlock", "rogue"
+      fib_num GamePiece.classes[:ranger][:health]
+    when "mage", "priest"
+      fib_num GamePiece.classes[:mage][:health]
+    else
+      fib_num 9
+    end
+  end
 
   def invite_only
     unless invited?

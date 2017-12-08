@@ -34,7 +34,7 @@ class GamePiece < ActiveRecord::Base
     else # priest
       0..6
     end
-    nums = Fibonacci.seq(range)
+    nums = fib_seq range
     damage = nums[rand(nums.size)]
     target.update health: target.health - damage
     return damage
@@ -43,15 +43,15 @@ class GamePiece < ActiveRecord::Base
   def self.classes
     _classes = {
       # main classes of combat triangle
-      warrior: "Chad Warrior",
-      ranger: "Virgin Ranger",
-      mage: "Vaporwave Mage",
+      warrior: { name: "Chad Warrior", health: 12, melee: [:hack, :slash, :stab] },
+      ranger: { name: "Virgin Ranger", health: 11, melee: [:slash], ranged: [:bow_single_shot] },
+      mage: { name: "Vaporwave Mage", health: 10, melee: [:bludgeon], magic: [:fire, :frost, :shock, :invisibility] },
       
       # Additional classes
-      priest: "Wholesome Healer",
-      rogue: "Dat Boi Rogue",
-      warlock: "Social Justice Warlock",
-      paladin: "Antifa Super-soldier"
+      priest: { name: "Wholesome Healer", health: 10, melee: [:bludgeon], magic: [:fast_heal, :protect_other] },
+      rogue: { name: "Dat Boi Rogue", health: 11, melee: [:stab, :slash], special: [:sneak] },
+      warlock: { name: "Social Justice Warlock", health: 11, melee: [:stab], magic: [:conjure, :drain] },
+      paladin: { name: "Antifa Super-soldier", health: 12, melee: [:stab, :slash, :bludgeon], magic: [:area_heal] }
     }
     return _classes
   end

@@ -1,32 +1,22 @@
 <% case result[:choice] %>
 <% when :attack %>
-  <div id="damage_main">
-    <div class="game_damage_dealt">
-      <%= result[:damage] %> damage dealt.
-      <% if result[:target_dead] %>
-        You killed <%= result[:target_name] %>. You are victorious!
-      <% end %>
-    </div>
-
-    <%= link_to reset_game_interface_path, remote: true do %>
-      <div class="game_okay">
-        Ok
-      </div>
+  <div class="game_damage_dealt">
+    <%= result[:damage] %> damage dealt.
+    <% if result[:target_dead] %>
+      You killed <%= result[:target_name] %>. You are victorious!
     <% end %>
   </div>
 <% when :build %>
   <div class="game_build_main">
     You've started building a fort.
   </div>
-  <%= link_to reset_game_interface_path, remote: true do %>
-    <div class="game_okay">
-      Ok
-    </div>
-  <% end %>
+<% when :respawn %>
+  <div class="game_build_main" style="color:purple;">
+    You've come back from the dead.
+  </div>
 <% when :skip %>
-  <%= link_to reset_game_interface_path, remote: true do %>
-    <div class="game_okay">
-      Ok
-    </div>
-  <% end %>
+  <div class="game_build_main" style="color:white;">
+    Turn skipped...
+  </div>
 <% end %>
+<%= render "okay" %>

@@ -1,7 +1,7 @@
 <%= link_to class_select_path("warrior"), remote: true do %>
   <div class="dark_card meme_war_class_card" id="warrior" align="center">
     <p class="meme_war_class_description">
-      <b><%= GamePiece.classes[:warrior] %></b> - Tank, damage
+      <b><%= GamePiece.classes[:warrior][:name] %></b> - Tank, damage
     </p>
     <%= image_tag "meme_wars/chad.png", class: :meme_war_class_img %>
   </div>
@@ -10,7 +10,7 @@
 <%= link_to class_select_path("ranger"), remote: true do %>
   <div class="dark_card meme_war_class_card" id="ranger" align="center">
     <p class="meme_war_class_description">
-      <b><%= GamePiece.classes[:ranger] %></b> - Damage from afar
+      <b><%= GamePiece.classes[:ranger][:name] %></b> - Damage from afar
     </p>
     <%= image_tag "meme_wars/virgin.png", class: :meme_war_class_img %>
   </div>
@@ -19,7 +19,7 @@
 <%= link_to class_select_path("mage"), remote: true do %>
   <div class="dark_card meme_war_class_card" id="mage" align="center">
     <p class="meme_war_class_description">
-      <b><%= GamePiece.classes[:mage] %></b> - Fast, elemental damage
+      <b><%= GamePiece.classes[:mage][:name] %></b> - Fast, elemental damage
     </p>
     <%= image_tag "meme_wars/vaporwave.jpg", class: :meme_war_class_img %>
   </div>
@@ -28,7 +28,7 @@
 <%= link_to class_select_path("priest"), remote: true do %>
   <div class="dark_card meme_war_class_card" id="priest" align="center">
     <p class="meme_war_class_description">
-      <b><%= GamePiece.classes[:priest] %></b> - Healing
+      <b><%= GamePiece.classes[:priest][:name] %></b> - Healing
     </p>
     <%= image_tag "meme_wars/wholesome.jpg", class: :meme_war_class_img %>
   </div>
@@ -37,7 +37,7 @@
 <%= link_to class_select_path("rogue"), remote: true do %>
   <div class="dark_card meme_war_class_card" id="rogue" align="center">
     <p class="meme_war_class_description">
-      <b><%= GamePiece.classes[:rogue] %></b> - Stealth and damage
+      <b><%= GamePiece.classes[:rogue][:name] %></b> - Stealth and damage
     </p>
     <%= image_tag "meme_wars/dat_boi.png", class: :meme_war_class_img %>
   </div>
@@ -46,7 +46,7 @@
 <%= link_to class_select_path("warlock"), remote: true do %>
   <div class="dark_card meme_war_class_card" id="warlock" align="center">
     <p class="meme_war_class_description">
-      <b><%= GamePiece.classes[:warlock] %></b> - Damage over time
+      <b><%= GamePiece.classes[:warlock][:name] %></b> - Damage over time
     </p>
     <%= image_tag "meme_wars/are_you_serious.png", class: :meme_war_class_img %>
   </div>
@@ -55,7 +55,7 @@
 <%= link_to class_select_path("paladin"), remote: true do %>
   <div class="dark_card meme_war_class_card" id="paladin" align="center">
     <p class="meme_war_class_description">
-      <b><%= GamePiece.classes[:paladin] %></b> - Damage and healing
+      <b><%= GamePiece.classes[:paladin][:name] %></b> - Damage and healing
     </p>
     <%= image_tag "meme_wars/antifa_super_soldier.png", class: :meme_war_class_img %>
   </div>

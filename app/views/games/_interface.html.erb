@@ -2,30 +2,31 @@
   <div class="dark_card" id="interface_card" align="center">
     <% if your_turn? and game.all_players_ready? %>
       <div id="your_turn_stuff">
-        <% if you_are_dead? %>
-        <% else %>
-          <div class="turn_choice_prompt">
-            <b>What do you want to do?</b>
-          </div>
-          
-          <% for choice in [:attack, :build, :skip] %>
+        <div class="turn_choice_prompt" align="left">
+          <b>What do you want to do?</b>
+        </div>
+        
+        <div class="choices_container">
+          <% for choice in your_choices %>
             <%= link_to select_turn_choice_path(choice), remote: true do %>
               <div class="turn_choice" id="turn_choice_<%= choice.to_s %>">
                 <%= choice.to_s.capitalize %>
               </div>
             <% end %>
-            
-            <div class="turn_choice_dropdown" id="turn_choice_dropdown_<%= choice.to_s %>" hidden>
-            </div>
           <% end %>
-        <% end %>
+        </div>
+        
+        <div class="turn_choice_dropdown" id="turn_choice_dropdown" hidden>
+        </div>
       </div>
     <% else %>
       <p>
         Waiting for other player(s)...
       </p>
-      
-      <% if in_dev? %>
+    <% end %>
+  
+    <% if in_dev? %>
+      <p>
         <% if current_user.eql? User.first %>
           <%= link_to "h a c k other player",
             hijack_path(token: User.second.unique_token, game_token: game.unique_token), class: :white_link %>
@@ -33,9 +34,9 @@
           <%= link_to "h a c k other player",
             hijack_path(token: User.first.unique_token, game_token: game.unique_token), class: :white_link %>
         <% end %>
-      <% end %>
+      </p>
     <% end %>
-  
+    
     <p>
       You <%= "#{current_user._class.dead? ? 'are dead' \
         : 'have ' + current_user._class.health.to_i.to_s + ' health'}" %> (<%= current_user._class.game_class %>)
