@@ -13,3 +13,5 @@ $("#more_content_sound")[0].play();
 <% if @notes.empty? or @notes.size < page_size %>
   load_more_notes_link.remove();
 <% end %>
+
+window.navigator.vibrate(1);

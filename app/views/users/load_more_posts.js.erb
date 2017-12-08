@@ -13,3 +13,5 @@ $("#more_content_sound")[0].play();
 <% if @posts.empty? or @posts.size < page_size %>
   load_more_posts_link.remove();
 <% end %>
+
+window.navigator.vibrate(1);
