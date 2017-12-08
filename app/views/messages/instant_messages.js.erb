@@ -18,6 +18,8 @@
     // play audio for IM received
     $("#audio_play")[0].currentTime = 0;
     $("#audio_play")[0].play();
+
+    window.navigator.vibrate(100);
   }
   
   // updates last message views list
