@@ -18,6 +18,9 @@
 <div class="card" id="user_profile_card_<%= user.id %>">
   <%= render "users/tier", user: user %>
   
+  
+    <%= link_to '<i class="fa fa-archive"></i>'.html_safe, floating_images_path(user.unique_token), class: :bottom_left_link %>
+  
   <% if (god? or goddess?) and not (current_user.eql? user or Game.between? user, current_user) %>
     <%= link_to '<i class="fa fa-trophy"></i>'.html_safe, challenger_user_path(user.unique_token),
       class: :top_left_link, id: :game_challenge_link  %>

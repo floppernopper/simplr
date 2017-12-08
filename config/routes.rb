@@ -135,7 +135,7 @@ Rails.application.routes.draw do
   put 'posts/:id/hide', to: 'posts#hide', as: 'hide_post'
   get 'posts/:token', to: 'posts#show', as: 'show_post'
   delete 'destroy_post/:token', to: 'posts#destroy', as: 'destroy_post'
-  get 'floating_pictures', to: 'posts#floating_images', as: 'floating_images'
+  get 'floating_pictures/:token', to: 'posts#floating_images', as: 'floating_images'
 
   # pictures
   delete 'pictures/:picture_id/remove', to: 'posts#remove_picture', as: 'remove_post_picture'

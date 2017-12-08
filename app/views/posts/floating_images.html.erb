@@ -1,5 +1,7 @@
 <% for post in @posts %>
   <% for picture in post.pictures %>
-    <%= image_tag picture.image, class: :floated_image %>
+    <%= link_to show_post_path post.unique_token do %>
+      <%= image_tag picture.image, class: :floated_image %>
+    <% end %>
   <% end %>
 <% end %>

@@ -7,7 +7,8 @@ class PostsController < ApplicationController
   before_action :invited_or_token_used, only: [:show]
   
   def floating_images
-    @posts = Post.all.last(50).select { |p| p.pictures.present? }.reverse
+    @user = User.find_by_unique_token params[:token]
+    @posts = @user.posts.last(100).select { |p| p.pictures.present? }.reverse
   end
   
   def play_audio
