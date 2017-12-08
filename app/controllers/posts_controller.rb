@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   
   def floating_images
     @user = User.find_by_unique_token params[:token]
-    @posts = @user.posts.last(100).select { |p| p.pictures.present? }.reverse
+    @posts = @user.posts.first(100).select { |p| p.pictures.present? }
   end
   
   def play_audio
