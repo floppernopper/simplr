@@ -1,1 +1,7 @@
+var scrolling_avatar = $("#scrolling_avatar");
+
+if (scrolling_avatar.length) {
+  scrolling_avatar.remove();
+}
+
 $("#universal_anchor").after("<%=j render 'users/scrolling_avatar.html', user: @user %>");
