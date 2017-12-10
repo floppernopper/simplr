@@ -1,4 +1,4 @@
-<% if @home_shown %>
+<% if @home_shown or @preview_shown %>
 	<%= render "posts/feed" %>
 <% elsif @proposals %>
   <%= render "proposals/feed" %>

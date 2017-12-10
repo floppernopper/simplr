@@ -18,11 +18,16 @@ class UsersController < ApplicationController
   
   def new
     unless current_user
+      reset_page
       # to ignore infinite scroll
       @preview_items = true
       @user = User.new
       # gets preview items for invitee
-      @items = Post.preview_posts.last(10).reverse
+      @all_items = Post.preview_posts
+      # pagination for infinite_scroll
+      @items = paginate @all_items
+      @char_codes = char_codes @items
+      @char_bits = char_bits @items
       # records user viewing posts
       @items.each {|item| seent item}
       # records current time for last visit

@@ -3,7 +3,7 @@ function infinite_scroll() {
 	  if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
 		  if ($("#more_content_anchor").length) {
 			  var param = null;
-			  param = $.param({ posts: true });
+			  param = $.param({ <%= param %>: true });
 			  if (param) {
 				  $.ajax({
 					  type: "GET",

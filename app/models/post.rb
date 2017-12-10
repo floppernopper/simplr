@@ -59,7 +59,7 @@ class Post < ActiveRecord::Base
     posts.delete_if { |item| !item.forrest_only } if forrest_only
     # sorts posts chronologically
     posts.sort_by! { |item| item.created_at }
-    return posts
+    return posts.reverse
   end
   
   def commenters

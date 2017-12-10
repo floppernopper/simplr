@@ -9,7 +9,8 @@
 <% unless current_user %>
   <%= render "connections/invited_message" %>
   <%= render 'form' %>
-  <%= render "posts/feed" %>
+  <%= render "posts/main_feed_container" %>
+  <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
 <% else %>
   <div class="card">
     <p align="center">

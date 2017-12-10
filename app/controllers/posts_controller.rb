@@ -86,13 +86,9 @@ class PostsController < ApplicationController
     else
       @preview_items = true
       # gets preview items for invitee, accounting for when foc invitee
-      Post.preview_posts(invited_to_forrest_only_club?).last(10).reverse
+      Post.preview_posts invited_to_forrest_only_club?
     end
-    @items = if @preview_items
-      @all_items
-    else
-      paginate @all_items
-    end
+    @items = paginate @all_items
     # accessible for other controllers
     $all_items = @all_items # stays constant, only sorted once
     @char_codes = char_codes @items
