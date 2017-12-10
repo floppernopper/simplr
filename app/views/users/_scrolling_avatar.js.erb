@@ -2,7 +2,7 @@
   $(window).bindWithDelay("scroll", function() {
     $(".standard_post_card").each(function() {
       var from_top = Math.abs($(this).offset().top - $(window).scrollTop());
-      if (from_top <= 45) {
+      if (from_top <= 95) {
         // update avatar/user name
         var post_id = $(this).attr('id').split('_')[2];
 		    var param = null; param = $.param({ post_id: post_id });
@@ -13,5 +13,10 @@
 		    });
       }
     });
+    if ($(window).scrollTop() < 5) {
+      $(".scrolling_avatar").each(function() {
+        $(this).fadeOut();
+      });
+    }
   }, 200);
 </script>
