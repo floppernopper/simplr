@@ -102,8 +102,9 @@
 		    <% else %>
 	        <p class="standard_body justified_body_text" id="post_body_text_<%= post.id %>">
             <%= post.body[0..body_size] + "... " %>
-            <%= link_to "Read more", read_more_path(post.id), remote: true %>
+            <%= link_to "Read more", read_more_path(post.id), remote: true, id: :read_more_link %>
 		      </p>
+          <%= render "app/link_sound.js", link_id: :read_more_link, sound: :post_interface_sound %>
 		    <% end %>
 		  <% end %>
 		  

@@ -2,7 +2,4 @@ var old_body_text = $("#post_body_text_<%= @post.id %>");
 old_body_text.after("<%=j render 'posts/body_text', post: @post %>");
 old_body_text.remove();
 
-$("#post_interface_sound")[0].currentTime = 0;
-$("#post_interface_sound")[0].play();
-
 window.navigator.vibrate(10);
