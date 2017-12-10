@@ -1,8 +1,8 @@
 <script>
   $(window).bindWithDelay("scroll", function() {
     $(".standard_post_card").each(function() {
-      var from_top = $(this).offset().top;
-      if (from_top - $(window).scrollTop() <= 25) {
+      var from_top = Math.abs($(this).offset().top - $(window).scrollTop());
+      if (from_top <= 45) {
         // update avatar/user name
         var post_id = $(this).attr('id').split('_')[2];
 		    var param = null; param = $.param({ post_id: post_id });
