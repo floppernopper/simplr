@@ -10,3 +10,5 @@
 <% else %>
     <%= link_to share_text, "/#", onclick: "return false", class: :standard_post_link, id: link_id.to_sym %>
 <% end %>
+
+<%= render "app/link_sound.js", link_id: link_id, sound: :post_interface_sound %>

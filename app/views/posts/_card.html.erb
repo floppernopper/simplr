@@ -120,7 +120,9 @@
 	  <div id="post_comments_anchor_<%= post.id %>"></div>
     
     <%= link_to "Comments#{ ' ' + post.comments.size.to_s unless post.comments.size.zero? }",
-      (@post_shown ? @post : toggle_comments_path(post)), remote: true, class: :bottom_right_link %>
+      (@post_shown ? @post : toggle_comments_path(post)), remote: true,
+      class: :bottom_right_link, id: "show_comments_#{post.id}" %>
+    <%= render "app/link_sound.js", link_id: "show_comments_#{post.id}", sound: :post_interface_sound %>
     
     <table class="bottom_left_link">
       <tr>

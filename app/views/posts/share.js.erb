@@ -5,9 +5,6 @@
   link.remove();
   anchor.after("<%=j render "posts/share_link", post: @post %>");
 
-  $("#post_interface_sound")[0].currentTime = 0;
-  $("#post_interface_sound")[0].play();
-
   $("#universal_anchor").after("<%=j render 'notes/dialog', note: @note %>");
   var note_dialog = $("#note_dialog");
   note_dialog.fadeIn(1500);

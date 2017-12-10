@@ -2,7 +2,3 @@ if (!post_<%= @post.id %>_comments_shown) {
   $("#post_comments_anchor_<%= @post.id %>").after("<%=j render 'comments/mini_index' %>");
   var post_<%= @post.id %>_comments_shown = true;
 }
-  
-// interface sound plays
-$("#post_interface_sound")[0].currentTime = 0;
-$("#post_interface_sound")[0].play();
