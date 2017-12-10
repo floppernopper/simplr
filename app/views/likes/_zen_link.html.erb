@@ -11,3 +11,5 @@
   <%= link_to "Zen #{item.zens.size.to_s}", unzen_path,
     method: :delete, remote: true, class: link_class, id: link_id, style: "color:rgb(136,227,182);" %>
 <% end %>
+
+<%= render "app/link_sound.js", link_id: link_id, sound: :zen_sound %>

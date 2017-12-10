@@ -1,0 +1,6 @@
+<script>
+  $("#<%= link_id.to_s %>").click(function(){
+    $("#<%= sound.to_s %>")[0].currentTime = 0;
+    $("#<%= sound.to_s %>")[0].play();
+  })
+</script>

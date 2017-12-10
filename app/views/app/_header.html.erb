@@ -21,6 +21,8 @@
 
 <%= render "app/notices" %>
 
+<%= render "app/link_sound.js", link_id: :toggle_menu_link, sound: :nav_menu_sound %>
+
 <% unless god? or goddess? or Rails.env.development? %>
   <script>
     // The all seeing Eye...

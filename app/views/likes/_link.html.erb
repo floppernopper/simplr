@@ -9,3 +9,5 @@
   <%= link_to "Like #{item._likes.size.to_s}", unlike_path(param_id => item.id),
     method: :delete, remote: true, class: link_class, id: link_id, style: "color:rgb(119,158,203);" %>
 <% end %>
+
+<%= render "app/link_sound.js", link_id: link_id, sound: :post_interface_sound %>

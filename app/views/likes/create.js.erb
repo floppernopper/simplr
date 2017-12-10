@@ -5,12 +5,4 @@ link.remove();
 anchor.after("<%=j render "likes/#{get_like_type_str true}", item: @item,
   bottom_left: (!@item.is_a?(Post) and !@item.is_a?(Proposal)) %>");
 
-<% if @like and @like.zen %>
-  $("#zen_sound")[0].currentTime = 0;
-  $("#zen_sound")[0].play();
-<% else %>
-  $("#post_interface_sound")[0].currentTime = 0;
-  $("#post_interface_sound")[0].play();
-<% end %>
-
 window.navigator.vibrate(1);

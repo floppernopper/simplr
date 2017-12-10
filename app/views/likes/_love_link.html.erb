@@ -11,3 +11,5 @@
   <%= link_to "Love #{item.loves.size.to_s}", unlove_path,
     method: :delete, remote: true, class: link_class, id: link_id, style: "color:rgb(255,105,97);" %>
 <% end %>
+
+<%= render "app/link_sound.js", link_id: link_id, sound: :post_interface_sound %>

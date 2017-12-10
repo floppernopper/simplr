@@ -11,3 +11,5 @@
   <%= link_to "Whoa #{item.whoas.size.to_s}", unwhoa_path,
     method: :delete, remote: true, class: link_class, id: link_id, style: "color:rgb(119,221,119);" %>
 <% end %>
+
+<%= render "app/link_sound.js", link_id: link_id, sound: :post_interface_sound %>
