@@ -4,6 +4,11 @@ class UsersController < ApplicationController
   before_action :dev_only, only: [:index]
   before_action :invite_only
   
+  def update_scrolling_avatar
+    @post = Post.find_by_id params[:post_id]
+    @user = @post.user
+  end
+  
   def load_more_posts
     build_feed
     page_turning @posts

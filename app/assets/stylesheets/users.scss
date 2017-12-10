@@ -2,6 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.scrolling_avatar {
+  display: block;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 25px;
+  width: 100px;
+  z-index: 5;
+  color: white;
+  background: black;
+}
+
+.scrolling_avatar_img {
+  display: block;
+  float: left;
+  width: 25px;
+  height: 25px;
+}
+
+.scrolling_avatar_name {
+  float: left;
+  background: black;
+  color: white;
+  height: 100%;
+}
+
 .user_card_name_and_bio {
   width: 85%;
 }

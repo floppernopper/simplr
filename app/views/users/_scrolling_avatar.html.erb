@@ -1,0 +1,6 @@
+<%= link_to show_user_path(user.unique_token), class: :scrolling_avatar, id: :scrolling_avatar do %>
+  <%= image_tag user.image, class: :scrolling_avatar_img %>
+  <div class="scrolling_avatar_name">
+    <%= user.name %>
+  </div>
+<% end %>
