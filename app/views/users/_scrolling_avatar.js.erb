@@ -2,7 +2,7 @@
   $(window).bindWithDelay("scroll", function() {
     $(".standard_content_card").each(function() {
 
-      // gets height of screen and this post card
+      // gets height of screen and *this* post card
       var screen_height = $(window).height();
       var card_height = $(this).height();
 
@@ -13,12 +13,12 @@
       // how many px from top of card to top of screen
       var from_top = Math.abs($(this).offset().top - $(window).scrollTop());
       
+      // gets post card's distance from being vertically centered on page
       var dist_fr_center = Math.abs(margin - from_top);
-      
       
       if (dist_fr_center <= 25) {
         // update avatar/user name
-        var item_str = $(this).attr('id').split('_')
+        var item_str = $(this).attr('id').split('_');
         var item_id = item_str[2];
 		    var param = null; param = (item_str[0] == 'post') ? $.param({ post_id: item_id }) : $.param({ proposal_id: item_id });
 		    $.ajax({
@@ -33,5 +33,5 @@
         $(this).fadeOut();
       });
     }
-  }, 50);
+  }, 25);
 </script>
