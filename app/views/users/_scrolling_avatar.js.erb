@@ -1,8 +1,22 @@
 <script>
   $(window).bindWithDelay("scroll", function() {
     $(".standard_content_card").each(function() {
+
+      // gets height of screen and this post card
+      var screen_height = $(window).height();
+      var card_height = $(this).height();
+
+      // gets margins between post and vertical
+      var margins = screen_height - card_height;
+      var margin = margins / 2;
+
+      // how many px from top of card to top of screen
       var from_top = Math.abs($(this).offset().top - $(window).scrollTop());
-      if (from_top <= 95) {
+      
+      var dist_fr_center = Math.abs(margin - from_top);
+      
+      
+      if (dist_fr_center <= 25) {
         // update avatar/user name
         var item_str = $(this).attr('id').split('_')
         var item_id = item_str[2];
@@ -19,5 +33,5 @@
         $(this).fadeOut();
       });
     }
-  }, 200);
+  }, 50);
 </script>
