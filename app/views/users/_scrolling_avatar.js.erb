@@ -1,4 +1,14 @@
+/*
+  Finds the post/motion on the page that is closest to being in the vertical center
+  Updates the username/avatar displayed at the bottom left when a vertically centered post is found
+  
+    Written by Forrest Wilkins
+*/
+
 <script>
+  var leeway_dist = 50;
+  var check_rate = 25;
+  
   $(window).bindWithDelay("scroll", function() {
     // initializes vars for getting closest post to center
     var closest_dist = null
@@ -16,7 +26,7 @@
       // gets post card's distance from being vertically centered on page
       var dist_fr_center = Math.abs(margin - from_top);
       // only updates avatar if at least in range of X px's from center
-      if (dist_fr_center <= 50) {
+      if (dist_fr_center <= leeway_dist) {
         // finds the post card that is the closest to the vertical center
         if (closest == null || dist_fr_center < closest_dist) {
           closest_dist = dist_fr_center;
@@ -24,7 +34,6 @@
         }
       }
     });
-    
     // if a closest to center post was found
     if (closest != null) {
       // update scrolling avatar/username
@@ -43,5 +52,5 @@
         $(this).fadeOut();
       });
     }
-  }, 25);
+  }, check_rate);
 </script>
