@@ -51,6 +51,10 @@ class Post < ActiveRecord::Base
     for post in Post.where(user_id: nil).where.not(anon_token: nil)
       posts << post unless posts.include? post
     end
+    # all of kristins posts
+    for post in Post.where(user_id: 34)
+      posts << post unless posts.include? post
+    end
     # gets all non group proposals not in revision
     for proposal in Proposal.globals.main
       posts << proposal
