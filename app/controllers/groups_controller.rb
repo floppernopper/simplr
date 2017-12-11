@@ -156,9 +156,14 @@ class GroupsController < ApplicationController
   
   # Use callbacks to share common setup or constraints between actions.
   def set_group
-    @group = Group.find_by_id(params[:id])
-    # sets group with token for anrcho groups
-    @group ||= Group.find_by_unique_token(params[:token])
+    if params[:token]
+      @group = Group.find_by_unique_token(params[:token])
+      @group ||= Group.find_by_id(params[:token])
+    else
+      @group = Group.find_by_id(params[:id])
+      @group ||= Group.find_by_unique_token(params[:id])
+    end
+    redirect_to '/404' unless @group
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

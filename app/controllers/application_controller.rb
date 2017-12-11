@@ -315,7 +315,7 @@ class ApplicationController < ActionController::Base
   
   def forrest_to_resume
     if request.host.eql? 'forrestwilkins.com'
-      redirect_to resume_path
+      redirect_to forrest_web_co_path
     end
   end
   
