@@ -10,20 +10,20 @@
       <% if group.body.present? %>
 	      <p class="<%= 'justified_body_text' if group.body.size > 150 %>">
           <%= render "app/body", item: group %>
+          
+          <% if group.posts.present? %>
+            <span style="font-size: 11px; font-weight: bolder;">
+              Posts: <%= group.posts.size %>
+            </span>
+          <% end %>
+
+          <% if group.proposals.present? %>
+            <span style="font-size: 11px; font-weight: bolder;">
+              Motions: <%= group.proposals.size %>
+            </span>
+          <% end %>
 		    </p>
 		  <% end %>
-		  
-      <% if group.posts.present? %>
-        <p style="font-size: 11px; font-weight: bolder;">
-          Posts: <%= group.posts.size %>
-        </p>
-      <% end %>
-
-      <% if group.proposals.present? %>
-        <p style="font-size: 11px; font-weight: bolder;">
-          Motions: <%= group.proposals.size %>
-        </p>
-      <% end %>
 
       <% if @group_shown %>
         <% if group.active_chat? %>
