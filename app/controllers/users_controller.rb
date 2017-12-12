@@ -7,10 +7,11 @@ class UsersController < ApplicationController
   def update_scrolling_avatar
     @post = Post.find_by_id params[:post_id]
     @proposal = Proposal.find_by_id params[:proposal_id]
-    @user = if @post
-      @post.user
-    elsif @proposal
-      @proposal.user
+    @item = @post ? @post : @proposal
+    if @item.user
+      @user = @item.user
+    else
+      @anon_token = @item.anon_token
     end
   end
   

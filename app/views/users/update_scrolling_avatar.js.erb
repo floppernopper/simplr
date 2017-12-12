@@ -4,4 +4,4 @@ if (scrolling_avatar.length) {
   scrolling_avatar.remove();
 }
 
-$("#universal_anchor").after("<%=j render 'users/scrolling_avatar.html', user: @user %>");
+$("#universal_anchor").after("<%=j render 'users/scrolling_avatar.html', user: @user, anon_token: @anon_token %>");

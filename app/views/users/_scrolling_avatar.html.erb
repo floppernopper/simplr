@@ -1,5 +1,6 @@
-<%= link_to show_user_path(user.unique_token), class: :scrolling_avatar, id: :scrolling_avatar do %>
+<%= link_to (user ? show_user_path(user.unique_token) : search_path(query: anon_token)),
+  class: :scrolling_avatar, id: :scrolling_avatar do %>
   <div class="scrolling_avatar_name">
-    <%= user.name %>
+    <%= user ? user.name : anon_token[0..9] + "..." %>
   </div>
 <% end %>
