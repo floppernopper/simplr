@@ -1,6 +1,6 @@
 <h2 class="standard_page_header">Dev Panel <i class="fa fa-code"></i></h2>
 
-<div class="dark_card" align="center">
+<div class="dark_card" id="dev_card" align="center">
   <p>
     <%= link_to '<i class="fa fa-terminal fa-lg" aria-hidden="true"></i>'.html_safe,
       console_path, class: :white_link %> 
@@ -13,18 +13,7 @@
   </p>
   <p>
     <%= link_to fa_icon("lightbulb-o", "Sandbox"), sandbox_path, class: :white_link %>
-  </p>
-  
-  <script>
-  
-    $(window).on('swipedown', function() {
-      alert("swipedown..");
-    });
-    
-    $(window).on('swipeup', function() {
-      alert("swipeup..");
-    });
-  </script>
+  </p>  
 </div>
 
 <div class="card">
