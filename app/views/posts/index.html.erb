@@ -3,9 +3,13 @@
   <%= render "app/right_pane" %>
 </div>
 
-<%= render "posts/main_feed_container" %>
+<div id="main_feed_container_anchor" align="center">
+  <%= link_to load_index_path, remote: true do %>
+    <p style="color:white;">
+      Loading...
+    </p>
+  <% end %>
+</div>
 
 <%= audio_tag "effects/magic.wav", id: "zen_sound" %>
 <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
-
-<%= render "users/scrolling_avatar.js" %>

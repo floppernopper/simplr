@@ -77,6 +77,25 @@ class PostsController < ApplicationController
       end
     end
   end
+  
+  def load_index
+    @you_are_home = true
+    @all_items = if current_user
+      current_user.feed
+    else
+      @preview_items = true
+      Post.preview_posts
+    end
+    @items = paginate @all_items
+    # accessible for other controllers
+    $all_items = @all_items # stays constant, only sorted once
+    @char_codes = char_codes @items
+    @char_bits = char_bits @items
+    # records user viewing posts
+    @items.each {|item| seent item}
+    # records current time for last visit
+    record_last_visit
+  end
 
   def index
     @you_are_home = true

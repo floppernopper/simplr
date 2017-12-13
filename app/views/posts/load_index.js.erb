@@ -1,0 +1,4 @@
+var anchor = $("#main_feed_container_anchor");
+
+anchor.after("<%=j render 'posts/main_feed_container',
+  items: @items, all_items: @all_items, char_bits: @char_bits, char_codes: @char_codes, preview_items: @preview_items %>");

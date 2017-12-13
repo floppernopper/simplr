@@ -3,9 +3,11 @@
 </script>
 
 <div id="feed_container_anchor"></div>
-<%= render "posts/feed_container" %>
+<%= render "posts/feed_container", items: items, all_items: all_items %>
 
-<% if @items.empty? and not @preview_items %>
+<%= render "users/scrolling_avatar.js" %>
+
+<% if items.empty? and not preview_items %>
   <div class="card">
     <p align="center">
       <% if current_user and (current_user.following.size.zero? or current_user.my_groups.size.zero?) %>
