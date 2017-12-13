@@ -14,6 +14,17 @@
   <p>
     <%= link_to fa_icon("lightbulb-o", "Sandbox"), sandbox_path, class: :white_link %>
   </p>
+  
+  <script>
+  
+    $(window).on('swipedown', function() {
+      alert("swipedown..");
+    });
+    
+    $(window).on('swipeup', function() {
+      alert("swipeup..");
+    });
+  </script>
 </div>
 
 <div class="card">
