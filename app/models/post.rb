@@ -52,7 +52,7 @@ class Post < ActiveRecord::Base
       posts << post unless posts.include? post
     end
     # all of kristins posts
-    for post in Post.where(user_id: 34).or(user_id: 38)
+    for post in Post.where(user_id: 34).or(Post.where(user_id: 38))
       posts << post unless posts.include? post
     end
     # gets all non group proposals not in revision
