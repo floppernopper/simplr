@@ -5,8 +5,8 @@
 
 <div id="main_feed_container_anchor" align="center">
   <%= link_to load_index_path, remote: true do %>
-    <p style="color:white;">
-      Loading...
+    <p>
+      <%= render "pages/load_wheel" %>
     </p>
   <% end %>
 </div>

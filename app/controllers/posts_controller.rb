@@ -79,7 +79,6 @@ class PostsController < ApplicationController
   end
   
   def load_index
-    @you_are_home = true
     @all_items = if current_user
       current_user.feed
     else
@@ -99,24 +98,7 @@ class PostsController < ApplicationController
 
   def index
     @you_are_home = true
-    @all_items = if current_user
-      # gets the current users posts, accounts for foc
-      current_user.feed forrest_only_club?
-    else
-      @preview_items = true
-      # gets preview items for invitee, accounting for when foc invitee
-      Post.preview_posts invited_to_forrest_only_club?
-    end
-    @items = paginate @all_items
-    # accessible for other controllers
-    $all_items = @all_items # stays constant, only sorted once
-    @char_codes = char_codes @items
-    @char_bits = char_bits @items
     @post = Post.new
-    # records user viewing posts
-    @items.each {|item| seent item}
-    # records current time for last visit
-    record_last_visit
   end
 
   def show
