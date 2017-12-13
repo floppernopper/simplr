@@ -6,6 +6,11 @@
   Updates the username/avatar displayed at the bottom left when a vertically centered post is found
   
     Written by Forrest Wilkins
+    
+    
+  Could just find center of page and center of post and see if both match instead of dealing with margin
+  like oscar said
+  
 */
 
 <script>
@@ -41,6 +46,10 @@
         }
       }
     });
+    
+    
+    // output margin, from_top, dist_fr_center, next to name
+    
     
     // if a closest to center post was found
     if (closest != null) {
