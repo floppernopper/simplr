@@ -4,12 +4,21 @@
 </div>
 
 <div id="main_feed_container_anchor" align="center">
-  <%= link_to posts_load_index_path, remote: true do %>
+  <%= link_to load_index_path, remote: true do %>
     <p>
       <%= render "pages/load_wheel" %>
     </p>
   <% end %>
 </div>
+
+<script>
+  setTimeout(function() {
+    $.ajax({
+      type: "GET",
+      url: "/load_index"
+    });
+  }, 1000);
+</script>
 
 <%= audio_tag "effects/magic.wav", id: "zen_sound" %>
 <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
