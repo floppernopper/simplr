@@ -14,7 +14,7 @@
     <% elsif request.host.eql? "forrestwilkins.com" %>
       <%= favicon_link_tag "favicons/glitch_om.ico" %>
     <% else %>
-      <% if invited? or current_user and not Rails.env.development? %>
+      <% if current_user and not Rails.env.development? %>
         <%= favicon_link_tag "favicons/bust.ico" %>
       <% else %>
         <%= favicon_link_tag "favicons/social_maya.ico" %>
