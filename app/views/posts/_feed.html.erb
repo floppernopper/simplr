@@ -1,6 +1,6 @@
 <!-- posts -->
 
-<% @items.each do |item| %>
+<% items.each do |item| %>
   <% if item.is_a? Post %>
     <%= render "posts/card", post: item %>
   <% elsif item.is_a? Proposal %>
