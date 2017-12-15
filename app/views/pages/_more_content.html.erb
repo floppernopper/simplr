@@ -1,7 +1,7 @@
 <% if @home_shown or @preview_shown %>
-	<%= render "posts/feed" %>
+	<%= render "posts/feed", items: @items, all_items: @all_items %>
 <% elsif @proposals %>
-  <%= render "proposals/feed" %>
+  <%= render "proposals/feed", items: @items, all_items: @all_items %>
 <% elsif @group_shown %>
-	<%= render "groups/feed" %>
+	<%= render "groups/feed", items: @items, all_items: @all_items %>
 <% end %>
