@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.loading_gif {
+  width: 40%;
+  margin-top: 50px;
+}
+
 .right_pane {
   position: absolute;
   right: -262.5px;
@@ -149,6 +154,18 @@
   right: 15px
 }
 
+.fibonacci_loading {  
+  position: relative;
+  max-width: 565px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  width: 98.65%;
+}
+
+.fib_loading_label {
+  font-size: 40px;
+}
+
 #standard_nav_menu {
   position: fixed;
   top: 0px;
@@ -212,10 +229,6 @@
   color: white;
   font-size: 20px;
   display: none;
-}
-
-#vertical_load_screen {
-  position: relative;
 }
 
 // for mobile

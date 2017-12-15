@@ -4,11 +4,7 @@
 </div>
 
 <div id="main_feed_container_anchor" align="center">
-  <%= link_to load_index_path, remote: true do %>
-    <p>
-      <%= render "pages/load_wheel" %>
-    </p>
-  <% end %>
+  <%= render "pages/loading" %>
 </div>
 
 <script>
@@ -17,7 +13,7 @@
       type: "GET",
       url: "/load_index"
     });
-  }, 1000);
+  }, 250);
 </script>
 
 <%= audio_tag "effects/magic.wav", id: "zen_sound" %>
