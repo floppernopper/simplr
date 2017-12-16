@@ -58,6 +58,7 @@ module GroupsHelper
   end
   
   def group_auth group
+    return true if god? or goddess?
     if current_user
       return current_user.id.eql? group.user_id
     else
