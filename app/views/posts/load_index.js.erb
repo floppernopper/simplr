@@ -5,6 +5,8 @@ anchor.after("<%=j render 'posts/main_feed_container',
   
 anchor.remove();
 
+$(document).scrollTop(0);
+
 $("#more_content_sound")[0].currentTime = 0;
 $("#more_content_sound")[0].play();
 window.navigator.vibrate(1);
