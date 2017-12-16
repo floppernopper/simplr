@@ -1,6 +1,6 @@
 <div id="main_feed_container_anchor" align="center">
-  <div class="feed_loader_loading_label" id="loader_loading_label">
-    Loading...
+  <div class="feed_loader_loading_label" id="loader_loading_label" align="left">
+    Loading<span id="ellipsis"></span>
   </div>
   <script>
     <%= render "app/fader.js", target: "loader_loading_label", target_id: "", fast: true %>
@@ -13,5 +13,25 @@
       type: "GET",
       url: "/load_index"
     });
-  }, 250);
+    var text = $("#ellipsis"); var i = 0;
+    setInterval(function() {
+      switch(i) {
+        case 0:
+          text.text('');
+          break;
+        case 1:
+          text.text('.');
+          break;
+        case 2:
+          text.text('..');
+          break;
+        case 3:
+          text.text('...');
+      }
+      i += 1;
+      if (i > 3) {
+        i = 0;
+      }
+    }, 500);
+  }, 1);
 </script>
