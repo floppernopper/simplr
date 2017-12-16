@@ -1,0 +1,12 @@
+<div id="main_feed_container_anchor" align="center">
+  <%= render "pages/loading" %>
+</div>
+
+<script>
+  setTimeout(function() {
+    $.ajax({
+      type: "GET",
+      url: "/load_index"
+    });
+  }, 250);
+</script>

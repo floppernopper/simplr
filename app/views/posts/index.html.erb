@@ -3,18 +3,7 @@
   <%= render "app/right_pane" %>
 </div>
 
-<div id="main_feed_container_anchor" align="center">
-  <%= render "pages/loading" %>
-</div>
-
-<script>
-  setTimeout(function() {
-    $.ajax({
-      type: "GET",
-      url: "/load_index"
-    });
-  }, 250);
-</script>
+<%= render "posts/feed_loader" %>
 
 <%= audio_tag "effects/magic.wav", id: "zen_sound" %>
 <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
