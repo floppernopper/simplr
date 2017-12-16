@@ -1,5 +1,10 @@
 <div id="main_feed_container_anchor" align="center">
-  <%= render "pages/loading" %>
+  <div class="feed_loader_loading_label" id="loader_loading_label">
+    Loading...
+  </div>
+  <script>
+    <%= render "app/fader.js", target: "loader_loading_label", target_id: "", fast: true %>
+  </script>
 </div>
 
 <script>
