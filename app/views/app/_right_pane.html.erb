@@ -26,10 +26,12 @@
       <div class="side_pane_label right_pane_label">Notes</div>
       <% for note in current_notes.last(5).reverse %>
         <div class="notes_dropdown_message">
-          <%= render "notes/message", note: note %>
+          <%= render "notes/message", note: note, right_pane: true %>
         </div>
       <% end %>
-      <%= link_to "See all", notes_path, class: :dark_link %>
+      <div class="notes_dropdown_message">
+        <%= link_to "See all", notes_path, class: :dark_link %>
+      </div>
     </div>
   </div>
 <% end %>
