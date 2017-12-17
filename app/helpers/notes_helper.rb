@@ -23,10 +23,14 @@ module NotesHelper
   end
   
   def currently_unseen_notes
+    current_notes.unseen
+  end
+  
+  def current_notes
     if current_user
-      current_user.notes.unseen
+      current_user.notes
     else
-      Note.where(anon_token: anon_token).unseen
+      Note.where(anon_token: anon_token)
     end
   end
 end

@@ -153,6 +153,7 @@ Rails.application.routes.draw do
   get 'dev_notes', to: 'notes#dev_index', as: 'dev_notes'
   get 'notes/instant_notes', to: 'notes#instant_notes', as: 'instant_notes'
   get 'load_more_notes', to: 'notes#load_more_notes', as: 'load_more_notes'
+  get 'notes_dropdown', to: 'notes#dropdown', as: 'notes_dropdown'
 
   # search
   get 'search', to: 'search#index', as: 'search'

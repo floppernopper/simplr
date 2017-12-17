@@ -1,6 +1,8 @@
 <div class="notes_dropdown">
-  <% for note in @notes %>
-    
+  <% for note in notes %>
+    <div class="notes_dropdown_message">
+      <%= render "message", note: note %>
+    </div>
   <% end %>
-  <%= link_to "See all", notes_path %>
+  <%= link_to "See all", notes_path, class: :white_link %>
 </div>

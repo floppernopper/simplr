@@ -2,6 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.notes_dropdown {
+  position: absolute;
+  top: 50px;
+  right: 25px;
+  width: 250px;
+  background: rgb(10, 10, 10);
+  z-index: 5;
+}
+
+.notes_dropdown_message {
+  padding: 5px 5px;
+  color: white;
+}
+
 .notes_nav_link {
 	position: absolute;
 	right: 45px;

@@ -1,23 +1,35 @@
 <% if (Rails.env.development? and current_user) or (god? and current_user) %>
   <div class="right_pane">
-    <% unless current_user.my_groups.empty? %>
-      <div class="side_pane_label right_pane_label">Group activity</div>
-      <% for group in current_user.my_groups.select { |g| g.total_items_unseen(current_user).to_i > 0 } %>
+    <div class="right_pane_sub">
+      <% unless current_user.my_groups.empty? %>
+        <div class="side_pane_label right_pane_label">Group activity</div>
+        <% for group in current_user.my_groups.select { |g| g.total_items_unseen(current_user).to_i > 0 } %>
+          <div>
+            <%= link_to group, class: "dark_link group_activity" do %>
+              <% group_name = if group.name.size > 15 then group.name[0..9] + "..." else group.name end %>
+              <%= image_tag group.image, class: :user_avatar_image if group.image.url %>
+              <%= group_name + " +#{group.total_items_unseen(current_user)}" %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="side_pane_label right_pane_label side_pane_label_successive">Trending tags</div>
+      <% for tag in Tag.trending %>
         <div>
-          <%= link_to group, class: "dark_link group_activity" do %>
-            <% group_name = if group.name.size > 15 then group.name[0..9] + "..." else group.name end %>
-            <%= image_tag group.image, class: :user_avatar_image if group.image.url %>
-            <%= group_name + " +#{group.total_items_unseen(current_user)}" %>
-          <% end %>
+          <%= link_to tag.tag, search_path(query: tag.tag), class: "dark_link group_activity" %>
         </div>
       <% end %>
-    <% end %>
-    <div class="side_pane_label right_pane_label side_pane_label_successive">Trending tags</div>
-    <% for tag in Tag.trending %>
-      <div>
-        <%= link_to tag.tag, search_path(query: tag.tag), class: "dark_link group_activity" %>
-      </div>
-    <% end %>
-    </br>
+      </br>
+    </div>
+  
+    <div class="right_pane_sub">
+      <div class="side_pane_label right_pane_label">Notes</div>
+      <% for note in current_notes.last(5).reverse %>
+        <div class="notes_dropdown_message">
+          <%= render "notes/message", note: note %>
+        </div>
+      <% end %>
+      <%= link_to "See all", notes_path, class: :dark_link %>
+    </div>
   </div>
 <% end %>

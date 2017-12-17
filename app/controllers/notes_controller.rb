@@ -1,6 +1,10 @@
 class NotesController < ApplicationController
-  before_action :current_notes, only: [:index, :destroy, :load_more_notes]
+  before_action :current_notes, only: [:index, :destroy, :load_more_notes, :dropdown]
   before_action :dev_only, only: [:dev_index]
+  
+  def dropdown
+    @notes = @notes.last(5).reverse
+  end
   
   def instant_notes
   end
