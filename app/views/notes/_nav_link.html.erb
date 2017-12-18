@@ -1,16 +1,17 @@
-<% if currently_unseen_notes.present? %>
-  <%= link_to '<i class="fa fa-bell fa-lg"></i>'.html_safe, notes_path, id: :notes_nav_link, class: :notes_nav_link,
-    title: "Unseen notifications: #{currently_unseen_notes.size}" %>
-  <script>
-    <%= render "app/fader.js", target: "notes_nav_link", target_id: "" %>
-  </script>
+<% icon = if currently_unseen_notes.present? %>
+  <% '<i class="fa fa-bell fa-lg"></i>' %>
+<% else %>
+  <% '<i class="fa fa-bell-o fa-lg"></i>' %>
 <% end %>
 
-<% if current_user and current_user.inbox_unseen > 0 %>
-  <%= link_to '<i class="fa fa-envelope fa-lg"></i>'.html_safe, inbox_path, id: :inbox_nav_link,
-    class: "#{currently_unseen_notes.present? ? 'inbox_nav_link' : 'notes_nav_link'}",
-    title: "Unseen messages: #{current_user.inbox_unseen}" %>
-  <script>
-    <%= render "app/fader.js", target: "inbox_nav_link", target_id: "" %>
-  </script>
+<%= link_to icon.html_safe, notes_path, id: :notes_nav_link, class: "notes_nav_link dark_link",
+  title: "Unseen notifications: #{currently_unseen_notes.size}" %>
+
+<% icon = if current_user and current_user.inbox_unseen > 0 %>
+  <% '<i class="fa fa-envelope fa-lg"></i>' %>
+<% else %>
+  <% '<i class="fa fa-envelope-o fa-lg"></i>' %>
 <% end %>
+
+<%= link_to icon.html_safe, inbox_path,
+  id: :inbox_nav_link, class: "inbox_nav_link dark_link", title: "Unseen messages: #{current_user.inbox_unseen}" %>
