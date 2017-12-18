@@ -11,6 +11,8 @@
 	<%= link_to fa_icon("bell", "Notes#{': ' + currently_unseen_notes.size.to_s \
 	  unless currently_unseen_notes.size.zero?}"), notes_path, class: :standard_nav_menu_link,
     title: "See what's happening..." %>
+    
+    <%= link_to fa_icon("user", "Profile"), show_user_path(current_user.unique_token), class: :standard_nav_menu_link %>
 	  
   <%= link_to fa_icon("cubes", "Groups"), (anrcho? ? my_anon_groups_path : my_groups_path),
     class: :standard_nav_menu_link, title: "Click to see all of the groups you'#{anrcho? ? 've found' : 're in'}." %>
