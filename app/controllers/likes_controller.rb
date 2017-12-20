@@ -20,11 +20,11 @@ class LikesController < ApplicationController
           "#{@item.class.to_s.downcase}_#{@like.like_type}".to_sym,
           (@item.is_a?(Proposal) || @item.is_a?(Vote) ? @item.unique_token : @item),
           (@item.user ? @item.user : @item.anon_token), (current_user ? current_user : anon_token)
+        # unlocks power of whoa when loving another users post for first time
         if current_user and @like.love and not current_user.has_power? 'whoa'
           current_user.treasures.create power: 'whoa'
         end
       end
-      # some real crazy narcissistic shit right here
       if god? and @like.love and not @item.user.eql? current_user and not current_user.has_power? 'zen'
         current_user.treasures.create power: 'zen'
       end

@@ -1,1 +1,10 @@
-$("#universal_anchor").after("<%=j render "notes/dropdown", notes: @notes %>");
+var dropdown = $("#notes_dropdown");
+
+if (dropdown.length) {
+  dropdown.fadeOut();
+  dropdown.remove();
+} else {
+  $("#universal_anchor").after("<%=j render "notes/dropdown", notes: @notes %>");
+  $("#notes_dropdown").fadeIn();
+}
+window.navigator.vibrate(1);

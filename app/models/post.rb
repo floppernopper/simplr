@@ -23,6 +23,18 @@ class Post < ActiveRecord::Base
   scope :forrest_only, -> { where forrest_only: true }
   scope :un_invited, -> { where un_invited: true }
   
+  def self.train
+    for post in Post.all
+      if post.body.present?
+        if post.likes.present? or post.comments.present? or post.shares.present?
+          $classifier.train_cool post.body
+        else
+          $classifier.train_uncool post.body
+        end
+      end
+    end
+  end
+  
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
   end

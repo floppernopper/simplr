@@ -1,5 +1,5 @@
-<% @right_pane = defined?(right_pane); link_class = "dark_link" if @right_pane; message = namify_note_message(note); \
-action = note.action.to_sym; case action %>
+<% @dark = defined?(dark); link_class = "dark_link #{defined?(dropdown) ? 'notes_dropdown_message' : ''}" if @dark; %>
+<% message = namify_note_message(note); action = note.action.to_sym; case action %>
 <% when :post_comment, :also_commented, :post_like, :post_whoa, :post_love, :post_zen, :post_share %>
   <% post = Post.find_by_id note.item_id %>
   <% if post %>
@@ -7,7 +7,7 @@ action = note.action.to_sym; case action %>
     <% if action.eql? :post_like %>
       <% like = if note.sender_id then post._likes.find_by_user_id(note.sender_id) \
         else post._likes.find_by_anon_token(note.sender_token) end %>
-      <% if like and not @right_pane %>
+      <% if like and not @dark %>
         <span id="like_like_link_anchor_<%= like.id %>"></span>
         <%= render "likes/link", item: like, bottom_left: true %>
       <% end %>
@@ -29,7 +29,7 @@ action = note.action.to_sym; case action %>
     <% post = get_like_liked_post like %>
     <%= link_to message, show_post_path(post.unique_token), class: link_class if post %>
   <% end %>
-  <% if like and not @right_pane %>    
+  <% if like and not @dark %>    
     <span id="like_like_link_anchor_<%= like.id %>"></span>
     <%= render "likes/link", item: like, bottom_left: true %>
   <% end %>

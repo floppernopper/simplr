@@ -1,8 +1,17 @@
-<div class="notes_dropdown">
+<div class="notes_dropdown" id="notes_dropdown" hidden>
+  <%= link_to '<i class="fa fa-times"></i>'.html_safe, notes_dropdown_path,
+    remote: true, class: :standard_nav_menu_link, align: :right, title: "Exit menu" %>
+  
+  <div class="notes_dropdown_title">
+    <b>Notifications</b>
+  </div>
   <% for note in notes %>
-    <div class="notes_dropdown_message">
-      <%= render "message", note: note %>
+    <div class="standard_nav_menu_link">
+      <%= render "message", note: note, dark: true, dropdown: true %>
     </div>
   <% end %>
-  <%= link_to "See all", notes_path, class: :white_link %>
+  <div class="notes_dropdown_link standard_nav_menu_link">
+    <%= link_to "See all", notes_path, class: :dark_link %>
+  </div>
+  </br>
 </div>

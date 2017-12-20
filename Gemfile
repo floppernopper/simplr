@@ -67,6 +67,8 @@ gem 'chartkick'
 
 # machine learning
 # gem 'cabalist'
+gem 'classifier-reborn'
+gem 'fast-stemmer'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
