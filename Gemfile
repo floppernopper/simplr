@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
 # Ecommerce
+gem 'stripe'
+gem 'braintree'
 gem 'money-rails'
+gem 'activemerchant'
 
 # SEO
 gem 'meta-tags'
@@ -120,6 +123,7 @@ group :development do
   gem 'rails_best_practices'
   gem 'annotate'
   gem 'rails-erd'
+  gem 'rubycritic'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
