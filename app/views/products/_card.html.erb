@@ -1,0 +1,10 @@
+<div class="dark_card" align="center">
+  <p>
+    <%= product.name %>
+  </p>
+  <% if product.body.present? %>
+    <p class="<%= justified_body product %>">
+      <%= render "app/body", item: product %>
+    </p>
+  <% end %>
+</div>

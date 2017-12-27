@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207013952) do
+ActiveRecord::Schema.define(version: 20171224204003) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(version: 20171207013952) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "wiki_id"
+    t.integer  "product_id"
   end
 
   create_table "portals", force: :cascade do |t|
@@ -255,6 +256,7 @@ ActiveRecord::Schema.define(version: 20171207013952) do
     t.string   "description"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.text     "body"
   end
 
   create_table "proposals", force: :cascade do |t|

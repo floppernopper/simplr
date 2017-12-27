@@ -117,6 +117,11 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   #gem 'web-console', '~> 2.0'
   
+  # optimizing
+  gem 'ruby-prof'
+  gem 'rack-mini-profiler', require: false
+  
+  # debugging
   gem 'byebug'
   gem "better_errors"
   gem "binding_of_caller"
@@ -124,6 +129,7 @@ group :development do
   gem 'annotate'
   gem 'rails-erd'
   gem 'rubycritic'
+  gem 'rubocop'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

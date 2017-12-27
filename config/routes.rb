@@ -210,6 +210,7 @@ Rails.application.routes.draw do
   
   # online store/ecommerce
   get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
+  get 'store', to: 'products#index', as: 'store'
   
   # games
   get 'challenge/:token', to: 'games#challenge', as: 'challenger_user'
@@ -232,6 +233,7 @@ Rails.application.routes.draw do
   resources :settings
   resources :groups
   resources :wish_lists
+  resources :products
   resources :carts
   resources :users
   resources :posts

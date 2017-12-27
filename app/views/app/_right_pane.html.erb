@@ -25,7 +25,7 @@
     <div class="right_pane_sub">
       <div class="side_pane_label right_pane_label">Notes</div>
       <% for note in current_notes.last(5).reverse %>
-        <div class="notes_dropdown_message">
+        <div class="notes_side_pane_message">
           <%= render "notes/message", note: note, dark: true %>
         </div>
       <% end %>
