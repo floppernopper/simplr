@@ -1,19 +1,12 @@
 <%= form_for(product) do |f| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <p>
+    <%= f.text_field :name, placeholder: "Name", class: :dark_text_field %>
+    <%= f.text_area :body, placeholder: "Description", class: :dark_text_field %>
+  </p>
   
-  
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <p>
+    <button type="submit" name="commit" class="dark_form_button">
+      <b>Submit <i class="fa fa-pencil"></i></b>
+    </button>
+  </p>
 <% end %>

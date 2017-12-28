@@ -7,4 +7,11 @@
       <%= render "app/body", item: product %>
     </p>
   <% end %>
+  
+  <% unless in_my_cart? product %>
+    <%= link_to "Add to cart", add_to_cart_path(product.unique_token), method: :put, class: "bottom_right_link white_link" %>
+  <% else %>
+    <%= link_to "Remove cart", remove_from_cart_path(product.unique_token),
+      method: :put, class: "bottom_right_link white_link" %>
+  <% end %>
 </div>

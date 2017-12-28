@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 # Ecommerce
-gem 'stripe'
-gem 'braintree'
-gem 'money-rails'
-gem 'activemerchant'
+#gem 'stripe'
+#gem 'braintree'
+#gem 'money-rails'
+#gem 'activemerchant'
 
 # SEO
 gem 'meta-tags'

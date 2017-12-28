@@ -1,5 +1,14 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :invite_only
+  
+  def add_to_cart
+    
+  end
+  
+  def remove_from_cart
+    
+  end
   
   def my_cart
     @products = current_user.my_cart.products
@@ -66,13 +75,20 @@ class CartsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cart
-      @cart = Cart.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def cart_params
-      params.fetch(:cart, {})
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
     end
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_cart
+    @cart = Cart.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def cart_params
+    params.fetch(:cart, {})
+  end
 end

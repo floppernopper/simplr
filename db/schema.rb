@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171224204003) do
+ActiveRecord::Schema.define(version: 20171228014907) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -38,8 +38,9 @@ ActiveRecord::Schema.define(version: 20171224204003) do
 
   create_table "carts", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "product_token_list"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -257,6 +258,7 @@ ActiveRecord::Schema.define(version: 20171224204003) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.text     "body"
+    t.string   "unique_token"
   end
 
   create_table "proposals", force: :cascade do |t|
@@ -486,8 +488,9 @@ ActiveRecord::Schema.define(version: 20171224204003) do
 
   create_table "wish_lists", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "product_token_list"
   end
 
 end
