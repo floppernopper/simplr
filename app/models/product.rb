@@ -1,9 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :user
-  
   has_many :pictures, dependent: :destroy
   has_many :comments, dependent: :destroy
-  
   before_create :gen_unique_token
   
   private

@@ -1,13 +1,14 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:add_to_cart, :remove_from_cart]
   before_action :invite_only
   
   def add_to_cart
-    
+    current_user.my_cart.add @product if @product
   end
   
   def remove_from_cart
-    
+    current_user.my_cart.remove @product if @product
   end
   
   def my_cart
@@ -75,11 +76,15 @@ class CartsController < ApplicationController
   end
 
   private
-
+  
   def invite_only
     unless invited?
       redirect_to invite_only_path
     end
+  end
+  
+  def set_product
+    @product = Product.find_by_unique_token params[:token]
   end
   
   # Use callbacks to share common setup or constraints between actions.

@@ -1,0 +1,7 @@
+<% unless in_my_cart? product %>
+  <%= link_to "Add to cart", add_to_cart_path(product.unique_token),
+    method: :put, remote: true, class: "bottom_right_link white_link", id: :add_remove_link %>
+<% else %>
+  <%= link_to "Remove from cart", remove_from_cart_path(product.unique_token),
+    method: :put, remote: true, class: "bottom_right_link white_link", id: :add_remove_link %>
+<% end %>

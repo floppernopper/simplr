@@ -10,13 +10,16 @@ class User < ActiveRecord::Base
   has_many :proposals, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :views, dependent: :destroy
-  has_many :carts, dependent: :destroy
-  has_many :wish_lists, dependent: :destroy
   has_many :game_pieces, dependent: :destroy
   has_many :games, dependent: :destroy
   has_many :treasures
   has_many :portals
   has_many :groups
+  
+  # ecommerce associations
+  has_many :products, dependent: :destroy
+  has_one :wish_list, dependent: :destroy
+  has_one :cart, dependent: :destroy
 
   validates_uniqueness_of :name
   validates_presence_of :name, length: { minimum: 3 }
@@ -30,16 +33,22 @@ class User < ActiveRecord::Base
   
   scope :forrest_only, -> { where forrest_only: true }
   
+  def my_cart
+    Cart.initialize self if cart.nil? or not cart.product_token_list.present?
+    return cart
+  end
+  
+  def my_wish_list
+    WishList.initialize self if wish_list.nil? or not wish_list.product_token_list.present?
+    return wish_list
+  end
+  
   def _class
     self.game_pieces.where.not(game_class: nil).first
   end
   
   def kristin?
     self.id.eql? 34
-  end
-  
-  def my_cart
-    carts.last
   end
   
   # optional arg to check if power present AND not expired

@@ -210,8 +210,8 @@ Rails.application.routes.draw do
   
   # online store/ecommerce
   get 'show_product/:token', to: 'products#show', as: 'show_product'
-  put 'add_to_cart/:token', to: 'products#add_to_cart', as: 'add_to_cart'
-  put 'remove_from_cart/:token', to: 'products#remove_from_cart', as: 'remove_from_cart'
+  put 'add_to_cart/:token', to: 'carts#add_to_cart', as: 'add_to_cart'
+  put 'remove_from_cart/:token', to: 'carts#remove_from_cart', as: 'remove_from_cart'
   put 'add_to_wish_list/:token', to: 'wish_list#add_to_wish_list', as: 'add_to_wish_list'
   put 'remove_from_wish_list/:token', to: 'wish_list#remove_from_wish_list', as: 'remove_from_wish_list'
   get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
