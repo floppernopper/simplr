@@ -1,0 +1,5 @@
+var link = $("#add_remove_wish_list_link");
+var anchor = $("#add_remove_wish_list_link_anchor");
+
+link.remove();
+anchor.after("<%=j render 'wish_lists/add_remove_link', product: @product %>");

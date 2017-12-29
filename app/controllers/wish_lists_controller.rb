@@ -2,7 +2,6 @@ class WishListsController < ApplicationController
   before_action :set_wish_list, only: [:show, :edit, :update, :destroy]
   before_action :set_product, only: [:add_to_wish_list, :remove_from_wish_list]
   before_action :invite_only
-  after_action :go_back, only: [:add_to_wish_list, :remove_from_wish_list]
   
   def add_to_wish_list
     current_user.my_wish_list.add @product if @product
@@ -73,10 +72,6 @@ class WishListsController < ApplicationController
   end
 
   private
-  
-  def go_back
-    redirect_to :back
-  end
 
   def invite_only
     unless invited?

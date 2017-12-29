@@ -1,5 +1,5 @@
-var link = $("#add_remove_link");
-var anchor = $("#add_remove_link_anchor");
+var link = $("#add_remove_cart_link");
+var anchor = $("#add_remove_cart_link_anchor");
 
 link.remove();
 anchor.after("<%=j render 'carts/add_remove_link', product: @product %>");

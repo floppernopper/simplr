@@ -1,0 +1,7 @@
+<% unless in_my_wish_list? product %>
+  <%= link_to "Add to wish list", add_to_wish_list_path(product.unique_token),
+    method: :put, remote: true, class: "standard_post_link white_link", id: :add_remove_wish_list_link %>
+<% else %>
+  <%= link_to "Remove from wish list", remove_from_wish_list_path(product.unique_token),
+    method: :put, remote: true, class: "standard_post_link white_link", id: :add_remove_wish_list_link %>
+<% end %>

@@ -7,7 +7,19 @@
       <%= render "app/body", item: product %>
     </p>
   <% end %>
-  
-  <div id="add_remove_link_anchor"></div>
-  <%= render "carts/add_remove_link", product: product %>
+  <table class="bottom_right_link">
+    <tr>
+      <td>
+        <span id="add_remove_cart_link_anchor"></span>
+        <%= render "carts/add_remove_link", product: product %>
+      </td>
+      <td>
+        ·
+      </td>
+      <td>
+        <span id="add_remove_wish_list_link_anchor"></span>
+        <%= render "wish_lists/add_remove_link", product: product %>
+      </td>
+    </tr>
+  </table>
 </div>
