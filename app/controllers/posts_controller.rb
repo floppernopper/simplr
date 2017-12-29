@@ -79,26 +79,16 @@ class PostsController < ApplicationController
   end
   
   def load_index
-    @all_items = if current_user
-      current_user.feed
-    else
-      @preview_items = true
-      Post.preview_posts
-    end
-    @items = paginate @all_items
-    # accessible for other controllers
-    $all_items = @all_items # stays constant, only sorted once
-    @char_codes = char_codes @items
-    @char_bits = char_bits @items
-    # records user viewing posts
-    @items.each {|item| seent item}
-    # records current time for last visit
-    record_last_visit
+    run_for_main_feed
   end
 
   def index
     @you_are_home = true
     @post = Post.new
+    # gets everything for main feed
+    run_for_main_feed
+    # records current time for last visit
+    record_last_visit
   end
 
   def show
@@ -213,45 +203,63 @@ class PostsController < ApplicationController
   end
 
   private
-    def invited_or_token_used
-      unless invited? or (params[:token] and params[:token].size > 4)
-        redirect_to '/404'
-      end
+  
+  # everything required to render main feed
+  def run_for_main_feed
+    @all_items = if current_user
+      current_user.feed
+    else
+      @preview_items = true
+      Post.preview_posts
     end
+    @items = paginate @all_items
+    # accessible for other controllers
+    $all_items = @all_items # stays constant, only sorted once
+    @char_codes = char_codes @items
+    @char_bits = char_bits @items
+    # records user viewing posts
+    @items.each {|item| seent item}
+  end
+  
+  def invited_or_token_used
+    unless invited? or (params[:token] and params[:token].size > 4)
+      redirect_to '/404'
+    end
+  end
 
-    def invite_only
-      unless invited?
-        redirect_to invite_only_path
-      end
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
     end
+  end
 
-    def secure_post
-      set_post
-      params_size = if params[:token] then params[:token].to_s.size else params[:id].to_s.size end
-      unless current_user.eql? @post.user or (anon_token and anon_token.eql? @post.anon_token) or dev? or params_size >= 4
-        redirect_to '/404'
-      end
+  def secure_post
+    set_post
+    params_size = if params[:token] then params[:token].to_s.size else params[:id].to_s.size end
+    unless current_user.eql? @post.user or (anon_token and anon_token.eql? @post.anon_token) or dev? or params_size >= 4
+      redirect_to '/404'
     end
+  end
 
-    def reset_page_num
-      reset_page
-    end
+  def reset_page_num
+    reset_page
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      if params[:token]
-        @post = Post.find_by_unique_token(params[:token])
-        @post ||= Post.find_by_id(params[:token])
-      else
-        @post = Post.find_by_unique_token(params[:id])
-        @post ||= Post.find_by_id(params[:id])
-      end
-      redirect_to '/404' unless @post
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    if params[:token]
+      @post = Post.find_by_unique_token(params[:token])
+      @post ||= Post.find_by_id(params[:token])
+    else
+      @post = Post.find_by_unique_token(params[:id])
+      @post ||= Post.find_by_id(params[:id])
     end
+    redirect_to '/404' unless @post
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:user_id, :group_id, :body, :video, :image, :audio, :audio_name,
-        pictures_attributes: [:id, :post_id, :image])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:user_id, :group_id, :body, :video, :image, :audio, :audio_name,
+      pictures_attributes: [:id, :post_id, :image])
+  end
 end
