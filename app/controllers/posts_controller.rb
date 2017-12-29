@@ -79,14 +79,18 @@ class PostsController < ApplicationController
   end
   
   def load_index
+    # ensuring loader only shows once per session
+    session[:loading_loader_seen] = true
     run_for_main_feed
   end
 
   def index
     @you_are_home = true
     @post = Post.new
-    # gets everything for main feed
-    run_for_main_feed
+    if session[:loading_loader_seen]
+      # gets everything for main feed
+      run_for_main_feed
+    end
     # records current time for last visit
     record_last_visit
   end

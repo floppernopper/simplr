@@ -3,7 +3,11 @@
   <%= render "app/right_pane" %>
 </div>
 
-<%= render "posts/main_feed_container", items: @items, all_items: @all_items %>
+<% if session[:loading_loader_seen] %>
+  <%= render "posts/main_feed_container", items: @items, all_items: @all_items %>
+<% else %>
+  <%= render "posts/feed_loader" %>
+<% end %>
 
 <%= audio_tag "effects/magic.wav", id: "zen_sound" %>
 <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
