@@ -1,6 +1,6 @@
 <div class="dark_card" align="center">
   <p>
-    <%= product.name %>
+    <%= product.name + " " + product.price.format %>
   </p>
   
   <% if product.pictures.present? %>
@@ -14,6 +14,7 @@
       <%= render "app/body", item: product %>
     </p>
   <% end %>
+  
   <table class="bottom_right_link">
     <tr>
       <td>

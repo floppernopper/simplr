@@ -1,4 +1,5 @@
 <div id="side_pane_cart_list">
+  <div class="side_pane_label right_pane_label">My cart<%= ", "+my_cart_total if my_cart_total %></div>
   <% for product in current_user.my_cart.products %>
     <div>
       <%= link_to show_product_path(product.unique_token), class: "dark_link side_pane_activity" do %>
