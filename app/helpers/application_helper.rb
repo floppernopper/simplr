@@ -1,4 +1,22 @@
 module ApplicationHelper
+  def get_site_ico
+    if anrcho?
+      "anrcho"
+    elsif request.host.eql? "forrestonlyclub.com"
+      "foc"
+    elsif request.host.eql? "forrestwilkins.com"
+      "glitch_om"
+    elsif request.original_url.include? "/store"
+      "store_2"
+    else
+      if current_user and not Rails.env.development?
+        "bust"
+      else
+        "social_maya"
+      end
+    end
+  end
+  
   def justified_body item
     'justified_body_text' if (item.is_a?(Message) ? decrypt_message(item) : item.body).size > 125
   end

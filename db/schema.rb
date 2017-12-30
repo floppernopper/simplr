@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171230021938) do
+ActiveRecord::Schema.define(version: 20171230184245) do
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -202,6 +202,15 @@ ActiveRecord::Schema.define(version: 20171230021938) do
     t.string   "sender_token"
     t.integer  "item_id"
     t.string   "item_token"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "product_token_list"
+    t.integer  "total_cents"
+    t.string   "address"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "pictures", force: :cascade do |t|

@@ -46,6 +46,8 @@ class ApplicationController < ActionController::Base
   def get_site_title
     if anrcho?
       'Anrcho'
+    elsif request.original_url.include? '/store'
+      'Store'
     else
       case request.host
       when 'forrestwebco.com'

@@ -7,19 +7,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     
-    <% if anrcho? %>
-      <%= favicon_link_tag "favicons/anrcho.ico" %>
-    <% elsif request.host.eql? "forrestonlyclub.com" %>
-      <%= favicon_link_tag "favicons/foc.ico" %>
-    <% elsif request.host.eql? "forrestwilkins.com" %>
-      <%= favicon_link_tag "favicons/glitch_om.ico" %>
-    <% else %>
-      <% if current_user and not Rails.env.development? %>
-        <%= favicon_link_tag "favicons/bust.ico" %>
-      <% else %>
-        <%= favicon_link_tag "favicons/social_maya.ico" %>
-      <% end %>
-    <% end %>
+    <%= favicon_link_tag "favicons/#{get_site_ico}.ico" %>
     
     <%= render "app/meta_tags" %>
     

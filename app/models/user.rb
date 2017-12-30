@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :groups
   
   # ecommerce associations
+  has_many :orders
   has_many :products, dependent: :destroy
   has_one :wish_list, dependent: :destroy
   has_one :cart, dependent: :destroy
