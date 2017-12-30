@@ -4,4 +4,10 @@
     <%= render "carts/side_pane_list" %>
     <%= link_to "Show all", my_cart_path, class: "dark_link top_right_link" %>
   </div>
+  
+  <div class="right_pane_sub">
+    <span id="side_pane_wish_list_anchor"></span>
+    <%= render "wish_lists/side_pane_list" %>
+    <%= link_to "Show all", my_wish_list_path, class: "dark_link top_right_link" %>
+  </div>
 </div>

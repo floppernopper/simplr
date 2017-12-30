@@ -1,11 +1,10 @@
-<div id="side_pane_cart_list">
-  <div class="side_pane_label right_pane_label">My cart<%= ", totaling "+my_cart_total if my_cart_total %></div>
-  <% for product in current_user.my_cart.products %>
+<div id="side_pane_wish_list">
+  <div class="side_pane_label right_pane_label">My wish list</div>
+  <% for product in current_user.my_wish_list.products %>
     <div>
       <%= link_to show_product_path(product.unique_token), class: "dark_link side_pane_activity" do %>
         <%= image_tag product.pictures.first.image, class: :product_cart_list_img if product.pictures.present? %>
         <%= product_name = if product.name.size > 15 then product.name[0..9] + "..." else product.name end %>
-        <%= product.price.format %>
       <% end %>
     </div>
   <% end %>

@@ -5,7 +5,7 @@
   
   <% if product.pictures.present? %>
     <%= link_to show_product_path(product.unique_token) do %>
-      <%= image_tag product.pictures.first.image, class: :standard_post_image %>
+      <%= image_tag product.pictures.first.image, class: :product_img %>
     <% end %>
   <% end %>
   

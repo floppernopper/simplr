@@ -215,6 +215,7 @@ Rails.application.routes.draw do
   put 'add_to_wish_list/:token', to: 'wish_lists#add_to_wish_list', as: 'add_to_wish_list'
   put 'remove_from_wish_list/:token', to: 'wish_lists#remove_from_wish_list', as: 'remove_from_wish_list'
   get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
+  get 'my_wish_list', to: 'wish_lists#my_wish_list', as: 'my_wish_list'
   get 'store', to: 'products#index', as: 'store'
   get 'add_product_image', to: 'products#add_image', as: 'add_product_image'
   get 'check_out', to: 'carts#check_out', as: 'check_out'

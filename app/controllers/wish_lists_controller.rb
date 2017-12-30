@@ -3,6 +3,11 @@ class WishListsController < ApplicationController
   before_action :set_product, only: [:add_to_wish_list, :remove_from_wish_list]
   before_action :invite_only
   
+  def my_wish_list
+    @wish_list = current_user.my_wish_list
+    @products = @wish_list.products
+  end
+  
   def add_to_wish_list
     current_user.my_wish_list.add @product if @product
   end

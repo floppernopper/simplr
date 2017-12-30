@@ -1,0 +1,14 @@
+<h2 class="standard_page_header">My wish list <i class="fa fa-star"></i></h2>
+
+<% for product in @products %>
+  <%= render "products/card", product: product %>
+<% end %>
+
+
+<div class="dark_card" align="center">
+  <%= link_to my_cart_path, class: :white_link do %>
+    <p>
+      Go to cart
+    </p>
+  <% end %>
+</div>

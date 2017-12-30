@@ -3,3 +3,10 @@ var anchor = $("#add_remove_wish_list_link_anchor_<%= @product.id %>");
 
 link.remove();
 anchor.after("<%=j render 'wish_lists/add_remove_link', product: @product %>");
+
+
+// updates side panel showing wish list
+var list = $("#side_pane_wish_list");
+var anchor = $("#side_pane_wish_list_anchor");
+list.remove();
+anchor.after("<%=j render 'wish_lists/side_pane_list' %>");
