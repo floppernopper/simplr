@@ -1,7 +1,10 @@
 class Product < ApplicationRecord
   belongs_to :user
-  has_many :pictures, dependent: :destroy
   has_many :comments, dependent: :destroy
+  
+  has_many :pictures, dependent: :destroy
+  accepts_nested_attributes_for :pictures
+  
   before_create :gen_unique_token
   
   private

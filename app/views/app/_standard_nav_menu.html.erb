@@ -27,16 +27,16 @@
     
     <%= link_to fa_icon("cog", "Settings"), settings_path, class: :standard_nav_menu_link %>
     
-    <% if (god? or goddess? or in_dev?) and Game.my_games(current_user).present? %>
-      <%= link_to fa_icon("compass", "Games"), my_games_path, class: :standard_nav_menu_link %>
-    <% end %>
-    
     <% if current_user.active_powers.present? %>
       <script>
         <%= render "app/fader.js", target: "power_nav_menu_link", target_id: "" %>
       </script>
       <%= link_to fa_icon("bolt", "Powers"), powers_path(current_user.id),
         class: :standard_nav_menu_link, id: :power_nav_menu_link %>
+    <% end %>
+    
+    <% if god? or goddess? or in_dev? %>
+      <%= link_to fa_icon("shopping-basket", "Store"), store_path, class: :standard_nav_menu_link %>
     <% end %>
     
     <%= link_to fa_icon("cogs", "Bots"), my_bots_path(current_user), class: :standard_nav_menu_link,

@@ -1,12 +1,24 @@
-<%= form_for(product) do |f| %>
-  <p>
-    <%= f.text_field :name, placeholder: "Name", class: :dark_text_field %>
-    <%= f.text_area :body, placeholder: "Description", class: :dark_text_field %>
-  </p>
-  
-  <p>
-    <button type="submit" name="commit" class="dark_form_button">
-      <b>Submit <i class="fa fa-pencil"></i></b>
-    </button>
-  </p>
-<% end %>
+<div align="center">
+  <%= form_for(product) do |f| %>
+    <p>
+      <%= f.text_field :name, placeholder: "Name", class: :dark_text_field %>
+      <%= f.text_area :body, placeholder: "Description", class: :dark_text_field %>
+    </p>
+            
+    <%= link_to add_product_image_path, remote: true, id: :add_video_icon_link, title: "Attach an image" do %>
+      <i class="fa fa-picture-o fa-2x dark_link"></i>
+    <% end %>
+      
+    <div id="hidden_file_field" align="left" hidden>
+      <p>
+        <%= f.file_field :pictures, multiple: true, name: "pictures[image][]" %>
+      </p>
+    </div>
+
+    <p>
+      <button type="submit" name="commit" class="dark_form_button">
+        <b>Submit <i class="fa fa-pencil"></i></b>
+      </button>
+    </p>
+  <% end %>
+</div>

@@ -2,6 +2,13 @@
   <p>
     <%= product.name %>
   </p>
+  
+  <% if product.pictures.present? %>
+    <%= link_to show_product_path(product.unique_token) do %>
+      <%= image_tag product.pictures.first.image, class: :standard_post_image %>
+    <% end %>
+  <% end %>
+  
   <% if product.body.present? %>
     <p class="<%= justified_body product %>">
       <%= render "app/body", item: product %>

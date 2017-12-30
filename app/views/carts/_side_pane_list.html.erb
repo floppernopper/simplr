@@ -1,0 +1,7 @@
+<div id="side_pane_cart_list">
+  <% for product in current_user.my_cart.products %>
+    <%= link_to show_product_path(product.unique_token), class: "dark_link side_pane_activity" do %>
+      <%= product_name = if product.name.size > 15 then product.name[0..9] + "..." else product.name end %>
+    <% end %>
+  <% end %>
+</div>

@@ -3,3 +3,9 @@ var anchor = $("#add_remove_cart_link_anchor");
 
 link.remove();
 anchor.after("<%=j render 'carts/add_remove_link', product: @product %>");
+
+// updates side panel showing cart list
+var list = $("#side_pane_cart_list");
+var anchor = $("#side_pane_cart_list_anchor");
+list.remove();
+anchor.after("<%=j render 'carts/side_pane_list' %>");

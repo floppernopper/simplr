@@ -216,6 +216,7 @@ Rails.application.routes.draw do
   put 'remove_from_wish_list/:token', to: 'wish_lists#remove_from_wish_list', as: 'remove_from_wish_list'
   get 'my_cart', to: 'carts#my_cart', as: 'my_cart'
   get 'store', to: 'products#index', as: 'store'
+  get 'add_product_image', to: 'products#add_image', as: 'add_product_image'
   
   # games
   get 'challenge/:token', to: 'games#challenge', as: 'challenger_user'
