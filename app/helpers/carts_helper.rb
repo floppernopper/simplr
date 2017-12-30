@@ -1,12 +1,7 @@
 module CartsHelper
   def my_cart_total
-    products = current_user.my_cart.products
-    if products.present?
-      total = Money.new 0
-      for product in products
-        total += product.price
-      end
-      return total.format
+    if current_user.my_cart.products.present?
+      current_user.my_cart.total.format
     else
       nil
     end

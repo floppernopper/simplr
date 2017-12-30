@@ -219,8 +219,8 @@ Rails.application.routes.draw do
   get 'my_wish_list', to: 'wish_lists#my_wish_list', as: 'my_wish_list'
   get 'store', to: 'products#index', as: 'store'
   get 'add_product_image', to: 'products#add_image', as: 'add_product_image'
-  get 'check_out', to: 'carts#check_out', as: 'check_out'
-  post 'confirm_check_out', to: 'carts#confirm_check_out', as: 'confirm_check_out'
+  get 'check_out', to: 'orders#new', as: 'check_out'
+  post 'confirm_check_out', to: 'orders#create', as: 'confirm_check_out'
   
   # games
   get 'challenge/:token', to: 'games#challenge', as: 'challenger_user'

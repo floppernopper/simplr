@@ -15,7 +15,10 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new
+    @user = current_user
+    @cart = @user.my_cart
+    @products = @cart.products
+    @order = @user.orders.new
   end
 
   # GET /orders/1/edit
@@ -25,7 +28,11 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    @user = current_user
+    @cart = @user.my_cart
+    @order = @user.orders.new(order_params)
+    @order.product_token_list = @cart.product_token_list
+    @order.total = @cart.total
 
     respond_to do |format|
       if @order.save

@@ -12,6 +12,14 @@ class Cart < ApplicationRecord
     end
   end
   
+  def total
+    total = Money.new 0
+    for product in products
+      total += product.price
+    end
+    return total
+  end
+  
   def add product
     unless products.include? product
       new_list = (eval(product_token_list) << product.unique_token).to_s
