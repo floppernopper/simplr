@@ -3,8 +3,9 @@
     <p>
       <%= f.text_field :name, placeholder: "Name", class: :dark_text_field %>
       <%= f.text_area :body, placeholder: "Description", class: :dark_text_field %>
+      <%= f.text_field :price, placeholder: "Price", class: :dark_text_field %>
     </p>
-            
+    
     <%= link_to add_product_image_path, remote: true, id: :add_video_icon_link, title: "Attach an image" do %>
       <i class="fa fa-picture-o fa-2x dark_link"></i>
     <% end %>
