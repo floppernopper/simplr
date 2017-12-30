@@ -1,4 +1,4 @@
-<h2 class="standard_page_header">My cart <i class="fa fa-shopping-basket"></i></h2>
+<h2 class="standard_page_header">My cart (<%= my_cart_total %>) <i class="fa fa-shopping-cart"></i></h2>
 
 <% for product in current_user.my_cart.products %>
   <%= render "products/card", product: product %>

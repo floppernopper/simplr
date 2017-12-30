@@ -1,5 +1,5 @@
 <div id="side_pane_wish_list">
-  <div class="side_pane_label right_pane_label">My wish list</div>
+  <div class="side_pane_label right_pane_label"><i class="fa fa-star"></i> My wish list</div>
   <% for product in current_user.my_wish_list.products %>
     <div>
       <%= link_to show_product_path(product.unique_token), class: "dark_link side_pane_activity" do %>
