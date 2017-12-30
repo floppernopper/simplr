@@ -2,9 +2,11 @@ source 'https://rubygems.org'
 
 # Ecommerce
 #gem 'stripe'
-#gem 'braintree'
-#gem 'money-rails'
+#gem 'braintree' # paypal service
+gem 'money-rails'
 #gem 'activemerchant'
+# gem 'paypal-sdk-rest'
+# gem 'bitcoin_payable'
 
 # SEO
 gem 'meta-tags'
@@ -127,7 +129,7 @@ group :development do
   gem "binding_of_caller"
   gem 'rails_best_practices'
   gem 'annotate'
-  gem 'rails-erd'
+  #gem 'rails-erd'
   gem 'rubycritic'
   gem 'rubocop'
 
