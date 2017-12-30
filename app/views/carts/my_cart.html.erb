@@ -1,7 +1,13 @@
+<h2 class="standard_page_header">My cart <i class="fa fa-shopping-basket"></i></h2>
+
+<% for product in current_user.my_cart.products %>
+  <%= render "products/card", product: product %>
+<% end %>
+
 <div class="dark_card" align="center">
-  <% for product in @products %>
+  <%= link_to check_out_path, class: :white_link do %>
     <p>
-      <%= product.object_id %>
+      Check out
     </p>
   <% end %>
 </div>

@@ -1,0 +1,21 @@
+<h2 class="standard_page_header">Confirm check out <i class="fa fa-shopping-basket"></i></h2>
+
+<div class="dark_card" align="center">
+  <%= link_to confirm_check_out_path, method: :post, class: :white_link do %>
+    <p>
+      Confirm
+    </p>
+  <% end %>
+</div>
+
+<% for product in @cart.products %>
+  <%= render "products/card", product: product %>
+<% end %>
+
+<div class="dark_card" align="center">
+  <%= link_to confirm_check_out_path, method: :post, class: :white_link do %>
+    <p>
+      Confirm
+    </p>
+  <% end %>
+</div>

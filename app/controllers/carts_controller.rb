@@ -3,6 +3,14 @@ class CartsController < ApplicationController
   before_action :set_product, only: [:add_to_cart, :remove_from_cart]
   before_action :invite_only
   
+  def confirm_check_out
+    redirect_to :back
+  end
+  
+  def check_out
+    @cart = current_user.my_cart
+  end
+  
   def add_to_cart
     current_user.my_cart.add @product if @product
   end
