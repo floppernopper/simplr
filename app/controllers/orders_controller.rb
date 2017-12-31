@@ -36,6 +36,9 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+        # empty out cart after order
+        @cart.update product_token_list: "[]"
+        
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
