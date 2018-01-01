@@ -84,7 +84,14 @@ class ProductsController < ApplicationController
   
   # Use callbacks to share common setup or constraints between actions.
   def set_product
-    @product = Product.find(params[:id])
+    if params[:token]
+      @product = Product.find_by_unique_token(params[:token])
+      @product ||= Product.find_by_id(params[:token])
+    else
+      @product = Product.find_by_id(params[:id])
+      @product ||= Product.find_by_unique_token(params[:id])
+    end
+    redirect_to '/404' unless @product
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

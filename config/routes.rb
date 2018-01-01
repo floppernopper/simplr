@@ -221,7 +221,9 @@ Rails.application.routes.draw do
   get 'add_product_image', to: 'products#add_image', as: 'add_product_image'
   get 'check_out', to: 'orders#new', as: 'check_out'
   post 'confirm_check_out', to: 'orders#create', as: 'confirm_check_out'
-  
+  get 'show_order/:token', to: 'orders#show', as: 'show_order'
+  get 'my_orders', to: 'orders#my_orders', as: 'my_orders'
+    
   # games
   get 'challenge/:token', to: 'games#challenge', as: 'challenger_user'
   put 'confirm_class_selection', to: 'games#confirm_class_selection', as: 'confirm_class_selection'

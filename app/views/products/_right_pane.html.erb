@@ -1,13 +1,26 @@
 <div class="right_pane">
-  <div class="right_pane_sub">
-    <span id="side_pane_cart_list_anchor"></span>
+  <span id="side_pane_cart_list_anchor"></span>
+  <% if current_user.my_cart.products.present? %>
     <%= render "carts/side_pane_list" %>
-    <%= link_to "Show all", my_cart_path, class: "dark_link top_right_link" %>
-  </div>
-  
-  <div class="right_pane_sub">
-    <span id="side_pane_wish_list_anchor"></span>
+  <% end %>
+  <span id="side_pane_wish_list_anchor"></span>
+  <% if current_user.my_wish_list.products.present? %>
     <%= render "wish_lists/side_pane_list" %>
-    <%= link_to "Show all", my_wish_list_path, class: "dark_link top_right_link" %>
-  </div>
+  <% end %>
+  
+  <% if current_user.orders.present? %>
+    <div class="right_pane_sub">
+      <div class="side_pane_label right_pane_label"><i class="fa fa-truck"></i> Orders</div>
+      <% for order in current_user.orders %>
+        <div>
+          <%= link_to show_order_path(order.unique_token), class: "dark_link side_pane_activity" do %>
+            <%= image_tag order_img(order), class: :product_cart_list_img if order_img order %>
+            <%= order.products.size.to_s + " items" %>
+            <%= order.total.format %>
+          <% end %>
+        </div>
+      <% end %>
+      <%= link_to "Show all", my_orders_path, class: "dark_link top_right_link" %>
+    </div>
+  <% end %>
 </div>

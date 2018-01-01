@@ -1,11 +1,14 @@
 <div id="side_pane_wish_list">
-  <div class="side_pane_label right_pane_label"><i class="fa fa-star"></i> My wish list</div>
-  <% for product in current_user.my_wish_list.products %>
-    <div>
-      <%= link_to show_product_path(product.unique_token), class: "dark_link side_pane_activity" do %>
-        <%= image_tag product.pictures.first.image, class: :product_cart_list_img if product.pictures.present? %>
-        <%= product_name = if product.name.size > 15 then product.name[0..9] + "..." else product.name end %>
-      <% end %>
-    </div>
-  <% end %>
+  <div class="right_pane_sub">
+    <div class="side_pane_label right_pane_label"><i class="fa fa-star"></i> Wish list</div>
+    <% for product in current_user.my_wish_list.products %>
+      <div>
+        <%= link_to show_product_path(product.unique_token), class: "dark_link side_pane_activity" do %>
+          <%= image_tag product.pictures.first.image, class: :product_cart_list_img if product.pictures.present? %>
+          <%= product_name = if product.name.size > 15 then product.name[0..9] + "..." else product.name end %>
+        <% end %>
+      </div>
+    <% end %>
+    <%= link_to "Show all", my_wish_list_path, class: "dark_link top_right_link" %>
+  </div>
 </div>

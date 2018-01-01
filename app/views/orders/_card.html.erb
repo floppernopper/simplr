@@ -1,9 +1,12 @@
 <div class="dark_card" align="center">
   <p>
-    Thank you, <%= current_user.name %>
+    Thank you, <%= order.user.name %>
   </p>
   <p>
     Your confirmation code is <b><%= order.unique_token %></b>
+  </p>
+  <p>
+    <%= order.products.size %> item(s) in this order
   </p>
   <p>
     Total was <%= order.total.format %>

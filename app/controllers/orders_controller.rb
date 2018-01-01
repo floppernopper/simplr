@@ -1,6 +1,10 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :invite_only
+  
+  def my_orders
+    @orders = current_user.orders
+  end
 
   # GET /orders
   # GET /orders.json
@@ -82,7 +86,14 @@ class OrdersController < ApplicationController
   
   # Use callbacks to share common setup or constraints between actions.
   def set_order
-    @order = Order.find(params[:id])
+    if params[:token]
+      @order = Order.find_by_unique_token(params[:token])
+      @order ||= Order.find_by_id(params[:token])
+    else
+      @order = Order.find_by_id(params[:id])
+      @order ||= Order.find_by_unique_token(params[:id])
+    end
+    redirect_to '/404' unless @order
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
