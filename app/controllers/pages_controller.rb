@@ -54,7 +54,7 @@ class PagesController < ApplicationController
           return $all_items
         else
           # should only run if hasn't been sorted yet
-          return current_user.feed # turned off out of paranoia that it's still being used
+          return current_user.feed
         end
       else
         return Post.all.reverse
