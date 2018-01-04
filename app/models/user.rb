@@ -145,8 +145,7 @@ class User < ActiveRecord::Base
       end
     end
     # sorts posts/proposals chronologically or by score weight
-    #_feed.sort_by! { |item| Setting.settings(self)[:chrono_feed_on] ? item.created_at : item.score(self) } # off for testing
-    _feed.sort_by! { |item| item.created_at }
+    _feed.sort_by! { |item| Setting.settings(self)[:chrono_feed_on] ? item.created_at : item.score(self) }
     return _feed.reverse
   end
 
