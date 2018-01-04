@@ -28,5 +28,9 @@
 			  Remember me <%= check_box_tag :remember_me, 1, params[:remember_me] %>
 		  </div>
 	  <% end %>
+	  <p>
+	    <!-- test... -->
+	    <%= User.first.settings.first.name %>
+	  </p>
 	</div>
 <% end %>
