@@ -1,15 +1,11 @@
 <% if @down %>
   </br>
   <div class="vertical_spacer"></div>
-  <div class="dark_card" id="be_back_shortly_bg" align="center">
+  <div class="dark_card" id="forrest_title_card" align="center">
     <p>
-      <b id="be_back_shortly">Social Maya will be back shortly...</b>
+      <b id="forrest_title_txt">Social Maya will be back shortly...</b>
     </p>
   </div>
-  <script>
-    <%= render "app/fader.js", target: "be_back_shortly", target_id: "", fast: true %>
-    <%= render "app/fader.js", target: "be_back_shortly_bg", target_id: "", background: true, fast: true %>
-  </script>
 <% else %>
   <div class="dark_card" id="post_form_card">
     <%= render "posts/form" %>
