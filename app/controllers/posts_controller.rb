@@ -85,14 +85,17 @@ class PostsController < ApplicationController
   end
 
   def index
+    @down = true
     @you_are_home = true
-    @post = Post.new
-    if session[:loading_loader_seen]
-      # gets everything for main feed
-      run_for_main_feed
+    unless @down
+      @post = Post.new
+      if session[:loading_loader_seen]
+        # gets everything for main feed
+        run_for_main_feed
+      end
+      # records current time for last visit
+      record_last_visit
     end
-    # records current time for last visit
-    record_last_visit
   end
 
   def show

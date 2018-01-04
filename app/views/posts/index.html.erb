@@ -1,14 +1,22 @@
-<div class="dark_card" id="post_form_card">
-  <%= render "posts/form" %>
-  <%= render "app/right_pane" %>
-</div>
-
-<% if session[:loading_loader_seen] %>
-  <%= render "posts/main_feed_container", items: @items, all_items: @all_items %>
+<% if @down %>
+  <div class="dark_card" align="center">
+    <p>
+      <b>Social Maya is currently down...</b>
+    </p>
+  </div>
 <% else %>
-  <%= render "posts/feed_loader" %>
-<% end %>
+  <div class="dark_card" id="post_form_card">
+    <%= render "posts/form" %>
+    <%= render "app/right_pane" %>
+  </div>
 
-<%= audio_tag "effects/magic.wav", id: "zen_sound" %>
-<%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
-<%= audio_tag "interface/interface_9.mp3", id: "more_content_sound" %>
+  <% if session[:loading_loader_seen] %>
+    <%= render "posts/main_feed_container", items: @items, all_items: @all_items %>
+  <% else %>
+    <%= render "posts/feed_loader" %>
+  <% end %>
+
+  <%= audio_tag "effects/magic.wav", id: "zen_sound" %>
+  <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
+  <%= audio_tag "interface/interface_9.mp3", id: "more_content_sound" %>
+<% end %>
