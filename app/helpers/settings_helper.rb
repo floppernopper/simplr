@@ -1,8 +1,6 @@
 module SettingsHelper
   def setting_titles
-    { chrono_feed_on: "Chrono Feed",
-      post_txt_fader_on: "Post Text Fader",
-      bg_fader_on: "BG Fader", post_bg_fader_on: "Post BG Fader",
+    { bg_fader_on: "BG Fader", post_bg_fader_on: "Post BG Fader", post_txt_fader_on: "Post Text Fader",
       profile_card_bg_fader_on: "Profile Card BG Fader", profile_bg_fader_on: "Profile BG Fader",
       bg_color: "BG", post_bg_color: "Post BG", post_txt_color: "Post Text",
       profile_card_bg_color: "Profile Card BG", profile_bg_color: "Profile BG" }
