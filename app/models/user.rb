@@ -247,7 +247,7 @@ class User < ActiveRecord::Base
     else
       # renames settings based on names array
       i=0; for setting in self.settings
-        setting.update name: names[i] unless setting.name.eql? names[i]; i+=1
+        setting.update name: names[i]; i+=1
       end
     end
   end
