@@ -93,9 +93,9 @@ class PostsController < ApplicationController
         # gets everything for main feed
         run_for_main_feed
       end
-      # records current time for last visit
-      record_last_visit
     end
+    # records current time for last visit
+    record_last_visit
   end
 
   def show

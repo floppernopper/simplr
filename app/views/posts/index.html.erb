@@ -6,12 +6,10 @@
       <b id="be_back_shortly">Social Maya will be back shortly...</b>
     </p>
   </div>
-  
   <script>
     <%= render "app/fader.js", target: "be_back_shortly", target_id: "", fast: true %>
     <%= render "app/fader.js", target: "be_back_shortly_bg", target_id: "", background: true, fast: true %>
   </script>
-
 <% else %>
   <div class="dark_card" id="post_form_card">
     <%= render "posts/form" %>
