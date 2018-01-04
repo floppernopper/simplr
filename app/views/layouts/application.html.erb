@@ -22,8 +22,8 @@
     
   </head>
   <body>
-    <%= render "app/header" if (invited? or anrcho?) and not (@cluster_flier_page or @forrest_web_co) %>
+    <%= render "app/header" if false and (invited? or anrcho?) and not (@cluster_flier_page or @forrest_web_co) %>
     <%= yield %>
-    <%= render "app/footer" unless @cluster_flier_page %>
+    <%= render "app/footer" unless true or @cluster_flier_page %>
   </body>
 </html>
