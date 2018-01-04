@@ -211,9 +211,7 @@ class PostsController < ApplicationController
   
   # everything required to render main feed
   def run_for_main_feed
-    @all_items = if @down
-      [] # down for testing
-    elsif current_user
+    @all_items = if current_user
       current_user.feed
     else
       @preview_items = true
