@@ -117,17 +117,7 @@ class ApplicationController < ActionController::Base
   end
     
   def settings user=current_user
-    if user
-      setting = lambda { |name| user.settings.find_by_name name }
-      settings = {}; Setting.names.each do |category, names|
-        for name in names
-          settings[name.to_sym] = setting.call(name).send(category)
-        end
-      end
-      return settings
-    else
-      return {}
-    end
+    Setting.settings user
   end
   
   def paginate items, _page_size=page_size
