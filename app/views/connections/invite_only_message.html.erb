@@ -7,7 +7,7 @@
 <% if forrest_only_club? %>
   <div class="dark_card top_spacer" id="forrest_title_card" align="center">
     <h2 class="user_title" id="forrest_title_txt">
-      Forrest Only Club <%= User.first.name %>
+      Forrest Only Club <%= User.first.settings.first.name %>
     </h2>
   </div>
   
