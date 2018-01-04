@@ -90,7 +90,7 @@ class PostsController < ApplicationController
     @post = Post.new
     if session[:loading_loader_seen]
       # gets everything for main feed
-      run_for_main_feed unless @down
+      run_for_main_feed
     end
     # records current time for last visit
     record_last_visit
