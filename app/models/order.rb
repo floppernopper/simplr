@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user
   before_create :gen_unique_token
-  #monetize :total_cents
+  monetize :total_cents
   
   def products
     # gets tokens and replaces each with its product in array
