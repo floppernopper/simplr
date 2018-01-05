@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   
   before_create :gen_unique_token
   
-  monetize :price_cents
+  #monetize :price_cents
   
   private
   
