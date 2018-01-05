@@ -85,7 +85,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @down = true
+    @down = false
     @you_are_home = true
     @post = Post.new
     if session[:loading_loader_seen]
