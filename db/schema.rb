@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180106023731) do
+ActiveRecord::Schema.define(version: 20180107060550) do
+
+  create_table "arts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "unique_token"
+    t.string   "element_id"
+    t.integer  "art_id"
+    t.float    "x_pos"
+    t.float    "y_pos"
+    t.string   "shape"
+    t.string   "color"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "bot_tasks", force: :cascade do |t|
     t.integer  "user_id"

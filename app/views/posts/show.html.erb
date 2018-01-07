@@ -8,6 +8,9 @@
 
 <% if invited? or current_user %>
   <%= render "comments/index", comments: @comments %>
+  <% if god? or goddess? %>
+    <%= render "arts/card" %>
+  <% end %>
 <% else %>
   <div id="guest_prompt" class="dark_card" align="center">
     <p>

@@ -6,10 +6,14 @@ function toggle_scroll_to_top_link() {
     // show link when scrolled to the bottom and hide when scrolled back to top
     if (!link_shown && $(window).scrollTop() + $(window).height() > $(document).height() - 5) {
       $("#scroll_to_top_link").fadeIn();
+      window.navigator.vibrate(1);
       link_shown = true;
     } else if (link_shown && $(window).scrollTop() < 5) {
       $("#scroll_to_top_link").fadeOut();
       link_shown = false;
+      // haptic feedback for scrolling to top
+    } else if ($(window).scrollTop() < 5) {
+      window.navigator.vibrate(1);
     }
   }, 200);
 }
