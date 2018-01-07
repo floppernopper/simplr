@@ -1,0 +1,12 @@
+</br>
+<div class="vertical_spacing"></div>
+
+<div align="center">
+  <%= image_tag "leo/leo.png", style: "width:75%;" %>
+</div>
+
+<% unless settings[:bg_fader_on] or (@user_shown and settings(@user)[:profile_bg_fader_on]) %>
+  <script>
+    <%= render "app/bg_fader.js" %>
+  </script>
+<% end %>

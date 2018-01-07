@@ -44,7 +44,8 @@ Rails.application.routes.draw do
   get 'le_philosophizing', to: 'treasures#philosophy', as: 'philosophy'
   get 'kristins_crescent', to: 'treasures#kristins_crescent', as: 'kristins_crescent'
   get 'zodiac', to: 'treasures#zodiac', as: 'zodiac'
-  
+  get 'leo', to: 'treasures#leo', as: 'leo'
+
   # kopimi ritual
   get 'kopimi', to: 'treasures#kopimi', as: 'kopimi'
   get 'kopi', to: 'treasures#kopi', as: 'kopi'
@@ -102,7 +103,7 @@ Rails.application.routes.draw do
   put 'settings/update_all_user_settings', as: 'update_all_user_settings'
   get 'dev', to: 'settings#dev_panel', as: 'dev_panel'
   get 'connections/copy_invite_link', as: 'copy_invite_link'
-  
+
   # dev
   get 'dev_log', to: 'sessions#dev_login', as: 'dev_login'
 
@@ -159,7 +160,7 @@ Rails.application.routes.draw do
   # search
   get 'search', to: 'search#index', as: 'search'
   get 'search/toggle_dropdown', as: 'toggle_search_dropdown'
-  
+
   # views
   get 'user_views_index/:token', to: 'views#user_index', as: 'user_views_index'
   get 'user_click_index/:token', to: 'views#click_index', as: 'user_click_index'
@@ -204,11 +205,11 @@ Rails.application.routes.draw do
   post 'reverse/:token', to: 'votes#reverse', as: 'reverse_vote'
   get 'verify/:token', to: 'votes#verify', as: 'verify_vote'
   post 'votes/confirm_humanity', as: 'confirm_humanity'
-  
+
   # templates for clients
   get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
   get 'co', to: 'templates#index', as: 'forrest_web_co'
-  
+
   # online store/ecommerce
   get 'show_product/:token', to: 'products#show', as: 'show_product'
   put 'add_to_cart/:token', to: 'carts#add_to_cart', as: 'add_to_cart'
@@ -223,7 +224,7 @@ Rails.application.routes.draw do
   post 'confirm_check_out', to: 'orders#create', as: 'confirm_check_out'
   get 'show_order/:token', to: 'orders#show', as: 'show_order'
   get 'my_orders', to: 'orders#my_orders', as: 'my_orders'
-    
+
   # games
   get 'challenge/:token', to: 'games#challenge', as: 'challenger_user'
   put 'confirm_class_selection', to: 'games#confirm_class_selection', as: 'confirm_class_selection'
