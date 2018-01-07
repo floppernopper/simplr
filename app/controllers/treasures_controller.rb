@@ -1,25 +1,24 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi, :show, :sandbox, :templates,
                                            :zodiac, :philosophy, :kristins_crescent]
-  
-  # turned off just for now...                                         
-  #before_action :kristin_and_forrest_only, only: [:kristins_crescent]
-  
+
+  before_action :kristin_and_forrest_only, only: [:kristins_crescent]
+
   def kristins_crescent
   end
   
   def templates
   end
-  
+
   def philosophy
   end
-  
+
   def sandbox
     @sandbox = true
     @char_bits = char_bits Post.last 10
     @char_codes = char_codes Post.last 10
   end
-  
+
   def tweet
     @message = params[:tweet]
     twitter = generate_twitter
@@ -35,37 +34,37 @@ class TreasuresController < ApplicationController
       redirect_to :back, notice: "Fail."
     end
   end
-  
+
   def consoles
   end
-  
+
   def play_audio
     @audio = params[:audio]
   end
-  
+
   def forrests_only
   end
-  
+
   def zodiac
   end
-  
+
   def poem
-  
+
   end
-  
+
   # sacred kopimist ritual
   def kopimi
     @kopi = sacred_text
   end
-  
+
   # sacred copying
   def kopi
   end
-  
+
   # sacred pasting
   def pasta
   end
-  
+
   # sacred remixing of information
   def remix
     @unremixed_text = params[:unremixed_text].to_s; @remixed_text = ""
@@ -85,23 +84,23 @@ class TreasuresController < ApplicationController
       @remixed_text << " " unless i.eql? words.size-1
     end
   end
-  
+
   # sacred sharing of info
   def kopi_share
   end
-  
+
   # new form for kopi_share
   def new_kopi_share
   end
-  
+
   def refresh_kopi
     @kopi = sacred_text
   end
-  
+
   # kanye quotes
   def kanye
   end
-  
+
   # hype other users
   def hype
     @user = User.find_by_id params[:user_id]
@@ -112,7 +111,7 @@ class TreasuresController < ApplicationController
     end
     redirect_to :back
   end
-  
+
   def powers
     @powers = current_user.active_powers.reverse
   end
@@ -150,7 +149,7 @@ class TreasuresController < ApplicationController
       current_user.loot @treasure if @overcome
     end
   end
-  
+
   def create
     @treasure = Treasure.new(treasure_params)
     # builds hash of options from params, initializes with correct answer
@@ -170,17 +169,17 @@ class TreasuresController < ApplicationController
       redirect_to :back
     end
   end
-  
+
   def update
   end
-  
+
   def show
     @treasure = Treasure.find_by_unique_token(params[:token])
     redirect_to '/404' if @treasure.nil?
   end
-  
+
   private
-  
+
   def sacred_text
     kopi = ""
     for i in 1..3
@@ -190,19 +189,19 @@ class TreasuresController < ApplicationController
     end
     return kopi
   end
-  
+
   def kristin_and_forrest_only
     unless currently_kristin? or god?
       redirect_to '/404' unless Rails.env.development?
     end
   end
-  
+
   def hidden_treasure
     unless current_user and current_user.has_power? 'discover'
       redirect_to '/404' unless dev?
     end
   end
-  
+
   # shuffles answer options so correct one isn't always first
   def shuffle options
     vals = options.values.shuffle
@@ -211,7 +210,7 @@ class TreasuresController < ApplicationController
     end
     return options
   end
-  
+
   def generate_twitter
     gen_sec = Treasure.where.not(secret_message: nil).last
     gen_sec = if gen_sec and gen_sec.secret_message.present?
@@ -231,7 +230,7 @@ class TreasuresController < ApplicationController
       nil
     end
   end
-  
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def treasure_params
     params.require(:treasure).permit(:name, :xp, :power, :treasure_type, :chance, :image, :body, :answer, :tweet)

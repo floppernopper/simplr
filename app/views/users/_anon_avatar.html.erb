@@ -1,5 +1,5 @@
 <% if defined?(user) and user.present? %>
-  <% link_path = user_path(user); token = user.unique_token; user = user %>
+  <% link_path = show_user_path(user.unique_token); token = user.unique_token; user = user %>
 <% else %>
   <% link_path = search_path(query: token) %>
 <% end %>

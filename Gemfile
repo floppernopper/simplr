@@ -75,6 +75,13 @@ gem 'chartkick'
 gem 'classifier-reborn'
 gem 'fast-stemmer'
 
+# timed tasks/cron jobs
+gem 'crono'
+
+# web scraping
+gem 'mechanize'
+gem 'nokogiri'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 # Use sqlite3 as the database for Active Record

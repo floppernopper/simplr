@@ -47,7 +47,7 @@ class SettingsController < ApplicationController
         end
       end
     end
-    redirect_to :back
+    redirect_to :back, notice: "Settings updated successfully..."
   end
   
   private

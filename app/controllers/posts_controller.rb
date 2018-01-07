@@ -85,9 +85,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @down = false
-    @you_are_home = true
     @post = Post.new
+    @you_are_home = true
+    @down = false # turn on for testing/maintence
     if session[:loading_loader_seen]
       # gets everything for main feed
       run_for_main_feed
