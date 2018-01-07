@@ -4,25 +4,18 @@
   <script>
     <%= render "proposals/infinite_scroll.js" %>
   </script>
-  
+
   <div class="dark_card" align="center">
     <p class="justified_body_text">
       Every post on Anrcho is in the form of a motion or proposal. Each motion can be voted for or against. It only takes one vote against the motion to be verified by a peer and effectively block the motion, moving it to a section for revision until a new version is agreed upon, where it can then return to the voting stage. This is called model of consensus voting, which ensures that all voices involved in a decision are heard and accounted for.
     </p>
     <%= link_to fa_icon("question-circle", "More on how the site works"), tutorial_path, class: :white_link %>
   </div>
-  
-  <div class="dark_card" align="center">
-    <p>
-      <%= link_to fa_icon("github", "This is free and open source software"),
-        "https://github.com/ethanwilkins/simplr", class: :white_link %>
-    </p>
-  </div>
-  
+
   <div class="dark_card">
     <%= render "proposals/new" %>
   </div>
-  
+
   <% if @all_items.empty? %>
     <div class="dark_card">
       <p align="center">There aren't any motions yet.</p>
@@ -34,4 +27,11 @@
 
   <div id="feed_container_anchor"></div>
   <%= render "proposals/feed_container" %>
+</div>
+
+<div class="dark_card" align="center">
+  <p>
+    <%= link_to fa_icon("github", "This is free and open source software"),
+      "https://github.com/ethanwilkins/simplr", class: :white_link %>
+  </p>
 </div>
