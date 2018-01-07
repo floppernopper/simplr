@@ -1,8 +1,8 @@
 class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi, :show, :sandbox, :templates,
-                                           :zodiac, :philosophy, :kristins_crescent]
+                                           :zodiac, :philosophy, :kristins_crescent, :leo]
 
-  before_action :kristin_and_forrest_only, only: [:kristins_crescent]
+  before_action :kristin_and_forrest_only, only: [:kristins_crescent, :leo]
 
   def leo
   end
