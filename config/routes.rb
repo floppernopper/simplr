@@ -68,6 +68,10 @@ Rails.application.routes.draw do
   get 'cluster_flier/:token', to: 'portals#cluster_flier', as: 'cluster_flier'
   post 'redeem_portal', to: 'portals#enter', as: 'redeem_portal'
   get 'copy_portal_link/:token', to: 'portals#copy_link', as: 'copy_portal_link'
+  put 'update_portal', to: 'portals#update', as: 'update_portal'
+  get 'edit_portal/:token', to: 'portals#edit', as: 'edit_portal'
+  # alias route for enter_portal_path, shorter url
+  get 'i/:token', to: 'portals#enter', as: 'inter_portal'
 
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'

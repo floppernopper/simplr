@@ -1,0 +1,13 @@
+<div class="dark_card" align="center">
+  <%= form_for@portal, url: update_portal_path, method: :put do |f| %>
+    <%= hidden_field_tag :token, @portal.unique_token %>
+    <p>
+      <%= f.text_field :unique_token, placeholder: "Change portal token...", class: :dark_text_area %>
+    </p>
+    <p>
+      <button type="submit" name="commit" class="dark_form_button">
+        <b>Update <i class="fa fa-opera"></i></b>
+      </button>
+    </p>
+  <% end %>
+</div>

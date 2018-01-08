@@ -1,17 +1,29 @@
 class PortalsController < ApplicationController
   before_action :invite_only, except: [:show, :enter]
-  before_action :dev_only, only: [:index, :destroy, :destroy_all]
-  
-  def copy_link
-    @portal = Portal.find_by_unique_token params[:token]
+  before_action :dev_only, only: [:index, :destroy, :destroy_all, :update]
+  before_action :set_portal, only: [:copy_link, :edit, :show, :enter, :update, :destroy]
+
+  def edit
   end
-  
+
+  def update
+    if @portal.update(portal_params)
+      notice = "Portal updated successfully..."
+    else
+      notice = "Portal update failed..."
+    end
+    redirect_to show_portal_path(@portal.unique_token), notice: notice
+  end
+
+  def copy_link
+  end
+
   def cluster_flier
     @cluster_flier_page = true
     @cluster = Portal.find_by_unique_token params[:token]
     @portals = @cluster.portals
   end
-  
+
   def clusters
     @clusters = Portal.clusters.reverse
     for cluster in @clusters
@@ -20,7 +32,7 @@ class PortalsController < ApplicationController
       end
     end
   end
-  
+
   def index
     @portals_index = true
     @portals = Portal.loners.reverse
@@ -30,21 +42,19 @@ class PortalsController < ApplicationController
       end
     end
   end
-  
+
   def show_cluster
     @showing_cluster = true
     @cluster = Portal.find_by_unique_token params[:token]
     @portals = @cluster.portals
   end
-  
+
   # page that actually shows the portal
   def show
-    @portal = Portal.find_by_unique_token params[:token]
   end
-  
+
   # A digital portal to a digital dimension
   def enter # enables users to enter site without invite
-    @portal = Portal.find_by_unique_token params[:token]
     # goes back home if users already invited, saving portal space
     if invited?
       redirect_to root_url
@@ -65,7 +75,7 @@ class PortalsController < ApplicationController
       redirect_to '/404'
     end
   end
-  
+
   def create
     @portal = Portal.new
     @portal.user_id = current_user.id
@@ -103,9 +113,8 @@ class PortalsController < ApplicationController
       end
     end
   end
-  
+
   def destroy
-    @portal = Portal.find_by_unique_token params[:token]
     @was_a_cluster = @portal.cluster
     if @portal
       @portal.destroy
@@ -116,24 +125,41 @@ class PortalsController < ApplicationController
       redirect_to :back
     end
   end
-  
+
   def destroy_all
     Portal.loners.each do |portal|
       portal.destroy
     end
     redirect_to :back
   end
-  
+
   private
-    def dev_only
-      unless dev?
-        redirect_to '/404'
-      end
+
+  def set_portal
+    if params[:token]
+      @portal = Portal.find_by_unique_token(params[:token])
+      @portal ||= Portal.find_by_id(params[:token])
+    else
+      @portal = Portal.find_by_id(params[:id])
+      @portal ||= Portal.find_by_unique_token(params[:id])
     end
-    
-    def invite_only
-      unless invited?
-        redirect_to invite_only_path
-      end
+    redirect_to '/404' unless @portal
+  end
+
+  def dev_only
+    unless dev?
+      redirect_to '/404'
     end
+  end
+
+  def invite_only
+    unless invited?
+      redirect_to invite_only_path
+    end
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def portal_params
+    params.require(:portal).permit(:unique_token)
+  end
 end

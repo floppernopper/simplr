@@ -1,19 +1,24 @@
 <% portal_link = root_url; portal_link.slice!(-1);
-  portal_link +=enter_portal_path(portal.unique_token) %>
+  portal_link +=inter_portal_path(portal.unique_token) %>
 
 <div class="card" id="portal_card_<%= portal.id %>">
   <%= render "app/time_ago", item: portal %>
-  <%= link_to "Close", close_portal_path(portal.unique_token), method: :delete,
-    data: { confirm: "Are you sure you want to close this portal?" }, class: :top_left_link if dev? %>
+
+  <% if dev? %>
+    <%= link_to "Close", close_portal_path(portal.unique_token), method: :delete,
+      data: { confirm: "Are you sure you want to close this portal?" }, class: :top_left_link %>
+    <%= link_to "Edit", edit_portal_path(portal.unique_token), class: :bottom_right_link %>
+  <% end %>
+
   <div align="center">
     <%= link_to show_portal_path(portal.unique_token) do %>
       <p>
         Portal <%= portal.unique_token %>
       </p>
     <% end %>
-    
+
     <%= render "portals/qr_code", portal: portal %>
-    
+
     <% if portal._cluster %>
       <%= link_to show_cluster_path(portal._cluster.unique_token) do %>
         <p>
@@ -21,14 +26,14 @@
         </p>
       <% end %>
     <% end %>
-    
+
     <p>
       <%= portal.remaining_uses %> remaining uses
     </p>
     <p>
       Expires in <%= time_ago_in_words portal.expires_at %>
     </p>
-    
+
     <b id="invite_link_label"><%= link_to "Portal link - Copy and share:",
       copy_portal_link_path(portal.unique_token), remote: true, id: :copy_invite_link %></b>
     <div align="center">
