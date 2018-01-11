@@ -11,11 +11,13 @@
 @keyframes shape_morph {
   0% {
     border-radius: 0px;
+    background: blue;
   }
   100% {
   	-moz-border-radius: 50px;
   	-webkit-border-radius: 50px;
   	border-radius: 50px;
+  	background: red;
   }
 }
 
