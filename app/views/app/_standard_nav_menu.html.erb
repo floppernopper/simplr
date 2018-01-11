@@ -1,6 +1,6 @@
 <div id="standard_nav_menu" hidden>
   <%= link_to '<i class="fa fa-times"></i>'.html_safe, toggle_menu_path,
-    remote: true, class: :standard_nav_menu_link, align: :right, title: "Exit menu" %>
+    remote: true, class: "standard_nav_menu_link toggle_menu_link", align: :right, title: "Exit menu" %>
   
   <%= link_to fa_icon("home", "Home"), (anrcho? ? proposals_path : root_url), class: :standard_nav_menu_link,
     title: "Home consists of posts and groups, in reverse chronological order." %>

@@ -2,7 +2,7 @@
 
 <div id="menu_link_container"></div>
 
-<%= link_to '<i class="fa fa-bars fa-2x"></i>'.html_safe, toggle_menu_path,
+<%= link_to '<i class="fa fa-bars fa-2x"></i>'.html_safe, toggle_menu_path, class: :toggle_menu_link,
   id: :toggle_menu_link, remote: true, title: "Main menu" %>
   
 <%= link_to '<i class="fa fa-home fa-lg"></i>'.html_safe, root_url,
@@ -21,11 +21,24 @@
 
 <%= render "app/notices" %>
 
-<%= render "app/link_sound.js", link_id: :toggle_menu_link, sound: :nav_menu_sound %>
-
 <% unless god? or goddess? or Rails.env.development? %>
   <script>
     // The all seeing Eye...
     <%= render "app/click_anywhere?.js" %>
   </script>
 <% end %>
+
+<script>
+  var toggle_menu_links = $(".toggle_menu_link");
+  toggle_menu_links.click(function(){
+    var nav_menu = $("#standard_nav_menu");
+    if (nav_menu.is(':hidden')) {  
+      nav_menu.fadeIn();
+      $("#nav_menu_sound")[0].currentTime = 0;
+      $("#nav_menu_sound")[0].play();
+    } else {
+      nav_menu.fadeOut();
+    }
+    window.navigator.vibrate(1);
+  });
+</script>
