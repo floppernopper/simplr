@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# offline, off the grid
+gem 'actionpack-action_caching'
+#gem 'rack-offline'
+
 # Ecommerce
 #gem 'stripe'
 #gem 'braintree' # paypal service

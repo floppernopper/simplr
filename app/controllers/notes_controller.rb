@@ -3,7 +3,7 @@ class NotesController < ApplicationController
   before_action :dev_only, only: [:dev_index]
   
   def dropdown
-    @notes = @notes.last(5).reverse
+    #@notes = @notes.last(5).reverse
   end
   
   def instant_notes

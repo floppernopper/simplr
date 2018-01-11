@@ -1,13 +1,13 @@
 <div class="notes_dropdown" id="notes_dropdown" hidden>
   <%= link_to '<i class="fa fa-times"></i>'.html_safe, notes_dropdown_path,
-    remote: true, class: :standard_nav_menu_link, align: :right, title: "Exit menu" %>
+    remote: true, class: "standard_nav_menu_link toggle_notes_dropdown", align: :right, title: "Exit menu" %>
   
   <div class="notes_dropdown_title">
     <b>Notifications</b>
   </div>
   <% for note in notes %>
     <div class="standard_nav_menu_link">
-      <%= render "message", note: note, dark: true, dropdown: true %>
+      <%= render "notes/message", note: note, dark: true, dropdown: true %>
     </div>
   <% end %>
   <div class="notes_dropdown_link standard_nav_menu_link">
@@ -15,3 +15,18 @@
   </div>
   </br>
 </div>
+
+<script>
+  var notes_nav_link = $(".toggle_notes_dropdown");
+  notes_nav_link.click(function(){
+    var dropdown = $("#notes_dropdown");
+    if (dropdown.is(':hidden')) {
+      dropdown.fadeIn();
+      $("#nav_menu_sound")[0].currentTime = 0;
+      $("#nav_menu_sound")[0].play();
+    } else {
+      dropdown.fadeOut();
+    }
+    window.navigator.vibrate(1);
+  });
+</script>

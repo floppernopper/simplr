@@ -15,7 +15,9 @@
   title: "Unseen messages: #{current_user.inbox_unseen}" if current_user %>
 
 <%= link_to notes_icon.html_safe, notes_dropdown_path, remote: true,
-  id: :notes_nav_link, class: "notes_nav_link dark_link",
+  id: :notes_nav_link, class: "notes_nav_link toggle_notes_dropdown dark_link",
   title: "Unseen notifications: #{currently_unseen_notes.size}" %>
   
 <%= render "app/link_sound.js", link_id: :notes_nav_link, sound: :nav_menu_sound %>
+
+<%= render "notes/dropdown", notes: current_notes.last(5).reverse %>
