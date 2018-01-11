@@ -1,6 +1,7 @@
 class ProposalsController < ApplicationController
   before_filter :set_proposal, only: [:old_versions, :show, :destroy]
   # turn off invite only for anrcho before_action :invite_only
+  before_filter :bots_to_404
 
   def add_form
     @group = Group.find_by_id params[:group_id]
@@ -137,6 +138,10 @@ class ProposalsController < ApplicationController
   end
 
   private
+  
+  def bots_to_404
+    redirect_to '/404' if request.bot?
+  end
 
   def invite_only
     unless invited?
