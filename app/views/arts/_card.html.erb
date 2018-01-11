@@ -1,5 +1,5 @@
-<div class="dark_card">
-  <% for element in art_elements %>
-    <div class="art_element_<%= element %>"></div>
+<div class="dark_card" align="center">
+  <% for element in art_elements.sample 1 %>
+    <div class="art_element art_element_<%= element %>"></div>
   <% end %>
 </div>

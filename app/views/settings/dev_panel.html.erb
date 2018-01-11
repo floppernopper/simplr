@@ -49,12 +49,20 @@
 
 <%= render "treasures/tweet_form" %>
 
-<%= render "bots/form" %>
-
-<div class="card">
-  <div align="center">
-    <%= render "treasures/form" %>
-  </div>
+<div class="dark_card" align="center">
+  <p id="check_internet_connection">
+    <b>Click to check internet connection...</b>
+  </p>
+  
+  <script>
+    $("#check_internet_connection").click(function() {
+      if (navigator.onLine) {
+        alert("You are online.");
+      } else {
+        alert("You are offline.");
+      }
+    });
+  </script>
 </div>
 
 <div class="dark_card" align="center">

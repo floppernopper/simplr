@@ -4,6 +4,24 @@
 
 .art_element_square {
   background: white;
-  width: 25px;
-  height: 25px;
+	width: 100px;
+	height: 100px;
+}
+
+@keyframes shape_morph {
+  0% {
+    border-radius: 0px;
+  }
+  100% {
+  	-moz-border-radius: 50px;
+  	-webkit-border-radius: 50px;
+  	border-radius: 50px;
+  }
+}
+
+.art_element {
+  animation: shape_morph 7.5s infinite alternate;
+    background: white;
+  	width: 100px;
+  	height: 100px;
 }

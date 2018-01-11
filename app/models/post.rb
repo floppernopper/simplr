@@ -23,6 +23,16 @@ class Post < ActiveRecord::Base
   scope :forrest_only, -> { where forrest_only: true }
   scope :un_invited, -> { where un_invited: true }
   
+  def self.clusters parent=nil
+    if parent.is_a? User
+      
+    elsif parent.is_a? Group
+      
+    else
+      
+    end
+  end
+  
   def self.train
     for post in Post.all
       if post.body.present?
