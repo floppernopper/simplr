@@ -12,6 +12,9 @@ $("#new_proposal_form").change(function(e) {
 			case 'meetup':
 				anchor.after("<%=j render 'proposals/action_fields', f_builder: f_builder, field: 'meetup' %>");
 				break;
+			case 'grant_title':
+        anchor.after("<%=j render 'proposals/action_fields', f_builder: f_builder, field: 'grant_title' %>");
+			  break;
 		}
 	}
 });

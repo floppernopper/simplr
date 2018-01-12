@@ -68,6 +68,8 @@ class Proposal < ActiveRecord::Base
         self.group.update ratification_threshold: 25
       when :limit_views
         self.group.update view_limit: 3
+      when :grant_title
+        
       end
     # global proposals
     else

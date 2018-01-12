@@ -10,5 +10,9 @@
 		<p>
 			<%= f_builder.text_area :misc_data, placeholder: "Date and location..." %>
 		</p>
+	<% when 'grant_title' %>
+	  <p>
+	    <%= text_field_tag :title, placeholder: "Title to grant..." %>
+	  </p>
 	<% end %>
 </div>

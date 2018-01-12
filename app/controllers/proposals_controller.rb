@@ -59,6 +59,11 @@ class ProposalsController < ApplicationController
     @proposal.user_id = current_user.id if current_user
     @proposal.group_id = params[:group_id]
     @proposal.anon_token = anon_token
+    
+    if @proposal.action.eql? "grant_title" and params[:title]
+      
+    end
+    
     build_action
     if @proposal.save
       Tag.extract @proposal
