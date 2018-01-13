@@ -19,6 +19,9 @@
 # Ignore all local image uploads
 /public/uploads/*
 
+# Ignore all classified temp imgs
+/downloads_folder/*
+
 # Ignore bundle installs
 /Gemfile.lock
 
