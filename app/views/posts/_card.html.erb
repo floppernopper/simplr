@@ -108,6 +108,12 @@
 		    <% end %>
 		  <% end %>
 		  
+		  <% if post.pictures.present? and post.pictures.first.classifier_name.present? %>
+		    <p>
+		      <b>Classified: <%= post.pictures.first.classifier_name %></b>
+		    </p>
+		  <% end %>
+		  
 		  <% if testing_score? %>
 		    <p>Score = <%= post.score current_user %><p>
 		    <p>

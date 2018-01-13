@@ -148,6 +148,7 @@ Rails.application.routes.draw do
 
   # pictures
   delete 'pictures/:picture_id/remove', to: 'posts#remove_picture', as: 'remove_post_picture'
+  get 'classify_picture/:token', to: 'posts#classify', as: 'classify_picture'
 
   # comments
   get 'comments/add_image', as: 'add_comment_image'

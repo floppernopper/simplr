@@ -1,10 +1,20 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :share,
-    :hide, :open_menu, :close_menu, :add_photoset]
+    :hide, :open_menu, :close_menu, :add_photoset, :classify]
   before_action :secure_post, only: [:edit, :update, :destroy]
   before_action :reset_page_num, only: [:index, :show]
   before_action :invite_only, except: [:show, :create, :add_image, :add_video]
   before_action :invited_or_token_used, only: [:show]
+  
+  def classify
+    @picture = @post.pictures.first    
+    @picture.classify
+    notice = if @picture.classifier_name.present?
+      "Picture classification successful."
+    else
+      "Picture classification failed."
+    end
+  end
   
   def floating_images
     @user = User.find_by_unique_token params[:token]
