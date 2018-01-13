@@ -5,12 +5,12 @@ class Picture < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   
   def classify
-    name = if Rails.env.development?
+    if Rails.env.development?
       url = "http://localhost:3000" + self.image_url.to_s
       name = p `classify "#{url}"`
     else
       # when path is not set up
-      url = "http://socialmaya.com" + self.image_url.to_s
+      url = "/home/rails/simplr" + self.image_url.to_s
       name = p `/usr/local/bin/classify "#{url}"`
     end
     # parses output to get name
