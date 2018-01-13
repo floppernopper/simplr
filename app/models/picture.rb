@@ -10,7 +10,7 @@ class Picture < ActiveRecord::Base
       name = p `classify "#{url}"`
     else
       # when path is not set up
-      url = "/home/rails/simplr" + self.image_url.to_s
+      url = "http://socialmaya.com" + self.image_url.to_s
       name = p `/usr/local/bin/classify "#{url}"`
     end
     # parses output to get name
