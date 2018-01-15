@@ -130,6 +130,9 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   #gem 'web-console', '~> 2.0'
   
+  # image recognition
+  #gem 'tensorflow'
+  
   # optimizing
   gem 'ruby-prof'
   gem 'rack-mini-profiler', require: false

@@ -6,10 +6,11 @@ class PostsController < ApplicationController
   before_action :invite_only, except: [:show, :create, :add_image, :add_video]
   before_action :invited_or_token_used, only: [:show]
   
+  before_action :dev_only, only: [:classify]
+  
   def classify
-    @picture = @post.pictures.first    
-    @picture.classify
-    notice = if @picture.classifier_name.present?
+    @picture = @post.pictures.first
+    notice = if @picture.classify
       "Picture classification successful."
     else
       "Picture classification failed."
@@ -218,6 +219,12 @@ class PostsController < ApplicationController
   end
 
   private
+  
+  def dev_only
+    unless dev?
+      redirect_to '/404'
+    end
+  end
   
   # everything required to render main feed
   def run_for_main_feed
