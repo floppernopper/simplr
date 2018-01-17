@@ -91,6 +91,9 @@ gem 'google-search'
 gem 'google-api-client'
 gem 'google_custom_search_api'
 
+# for scraping wikipedia
+gem 'wikipedia-client'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 # Use sqlite3 as the database for Active Record
