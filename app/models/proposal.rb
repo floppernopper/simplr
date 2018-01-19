@@ -243,16 +243,16 @@ class Proposal < ActiveRecord::Base
     end
   end
   
+  def is_spam?
+    self.body.include? "business" or self.body.include? "capital" or self.body.include? "fund"
+  end
+  
   private
   
   def spam_filter
     if self.is_spam?
       errors.add(:post, "cannot be vile fucking spam!")
     end
-  end
-  
-  def is_spam?
-    self.body.include? "business" or self.body.include? "capital" or self.body.include? "fund"
   end
   
   def gen_unique_token
