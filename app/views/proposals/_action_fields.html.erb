@@ -12,7 +12,10 @@
 		</p>
 	<% when 'grant_title' %>
 	  <p>
-	    <%= text_field_tag :title, placeholder: "Title to grant..." %>
+	    <%= text_field_tag :title, nil, placeholder: "Write a title to grant..." %>
+	  </p>
+	  <p>
+	    <%= text_field_tag :days_alive, nil, placeholder: "How many days should it last?" %>
 	  </p>
 	<% end %>
 </div>

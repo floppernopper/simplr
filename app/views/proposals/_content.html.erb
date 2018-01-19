@@ -21,6 +21,12 @@
 <p class="standard_body <%= 'justified_body_text' if proposal.body.size > 150 %>">
   <%= render "app/body", item: proposal %>
 </p>
+
+<% if proposal.action.eql? 'grant_title' %>
+  <p>
+    <b>Title to grant:</b> <%= eval(proposal.misc_data)[:title] %>
+  </p>
+<% end %>
 		  
 <% if testing_score? %>
   <p>Score = <%= proposal.score %><p>

@@ -244,14 +244,19 @@ class Proposal < ActiveRecord::Base
   end
   
   def is_spam?
-    self.body.include? "business" or self.body.include? "capital" or self.body.include? "fund"
+    for i in [self.title.to_s, self.body.to_s]
+      if i.include? "business" or i.include? "capital" or i.include? "fund"
+        return true
+      end
+    end
+    nil
   end
   
   private
   
   def spam_filter
     if self.is_spam?
-      errors.add(:post, "cannot be vile fucking spam!")
+      errors.add(:post, "cannot be spam")
     end
   end
   

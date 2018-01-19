@@ -60,7 +60,7 @@ class ProposalsController < ApplicationController
     @proposal.group_id = params[:group_id]
     @proposal.anon_token = anon_token
     
-    if @proposal.action.eql? "grant_title" and params[:title]
+    if @proposal.action.eql? "grant_title"
       
     end
     
@@ -173,6 +173,11 @@ class ProposalsController < ApplicationController
       @proposal.proposal_id = params[:proposal_id]
       @proposal.revised_action = params[:revised_action]
       @proposal.version = Proposal.find(params[:proposal_id]).version.to_i + 1
+    when :grant_title
+      grant = {title: nil, days_alive: nil}
+      grant[:title] = params[:title]
+      grant[:days_alive] = params[:days_alive]
+      @proposal.misc_data = grant.to_s
     end
   end
 
