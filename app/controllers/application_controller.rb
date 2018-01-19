@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   before_action :bots_to_404
   
   def build_proposal_feed section, group=nil
+    Proposal.filter_spam # for recent anrcho spam
     reset_page; session[:current_proposal_section] = section.to_s
     proposals = if group then group.proposals else Proposal.globals end
     @all_items = proposals.send(section.to_sym) + (group ? group.posts : [])

@@ -2,7 +2,7 @@ require 'wikipedia'
 
 def revolutions
   puts "\nCreating classifier for Revolutions in Technology\n"
-  train_on_wiki ['Neolithic Revolution', 'Industrial Revolution', 'Information revolution']
+  train_on_wiki ['Neolithic Revolution', 'Industrial Revolution', 'Information revolution'], branch: true
 end
 
 def phenomenology
@@ -10,18 +10,25 @@ def phenomenology
   train_on_wiki ['Philosophy', 'Phenomenology (philosophy)']
 end
 
-def train_on_wiki topics
+def animals
+  puts "\nCreating classifier for Animals\n"
+  train_on_wiki ['Dog', 'Cat', 'Bird']
+end
+
+def train_on_wiki topics, branch=nil
   classifier = ClassifierReborn::Bayes.new topics
   for i in topics
     page = Wikipedia.find i
     # trains on each main page
-    puts "\nTraining on #{i} and all it's related pages...\n"
+    puts "\nTraining on #{i}...\n"
     classifier.train i, clean_wiki_text(page.text)
-    for link in page.links
-      link_page = Wikipedia.find link
-      # trains on each link of each main page
-      puts "Training on #{link} \n"
-      classifier.train i, clean_wiki_text(link_page.text)
+    if branch
+      for link in page.links
+        link_page = Wikipedia.find link
+        # trains on each link of each main page
+        puts "Training on #{link} \n"
+        classifier.train i, clean_wiki_text(link_page.text)
+      end
     end
   end
   return classifier

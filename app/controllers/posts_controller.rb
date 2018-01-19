@@ -228,6 +228,8 @@ class PostsController < ApplicationController
   
   # everything required to render main feed
   def run_for_main_feed
+    # for recent anrcho spam
+    Proposal.filter_spam
     @all_items = if current_user
       current_user.feed
     else

@@ -10,7 +10,8 @@ class Proposal < ActiveRecord::Base
   has_many :views, dependent: :destroy
   has_many :likes, dependent: :destroy
   
-  before_create :gen_unique_token, :spam_filter
+  before_create :gen_unique_token
+  before_save :spam_filter
   validates_presence_of :body
   
   scope :main, -> { where requires_revision: [nil, false] }
@@ -234,12 +235,24 @@ class Proposal < ActiveRecord::Base
     end
   end
   
+  def self.filter_spam
+    for proposal in self.all
+      if proposal.is_spam?
+        proposal.destroy
+      end
+    end
+  end
+  
   private
   
   def spam_filter
-    if self.body.include? "business" or self.body.include? "capital" or self.body.include? "fund"
+    if self.is_spam?
       errors.add(:post, "cannot be vile fucking spam!")
     end
+  end
+  
+  def is_spam?
+    self.body.include? "business" or self.body.include? "capital" or self.body.include? "fund"
   end
   
   def gen_unique_token
