@@ -1,5 +1,13 @@
-<div class="dark_card" align="center">
-  <% for element in art_elements.sample 1 %>
-    <div class="art_element art_element_<%= element %>"></div>
-  <% end %>
-</div>
+<% if god? or goddess? %>
+  <div class="dark_card" align="center">
+    <p class="plus_sign">
+      +
+    </p>
+  </div>
+
+  <script>
+    $(".plus_sign").click(function() {
+      $(".plus_sign").toggleClass("rotate");
+    });
+  </script>
+<% end %>

@@ -2,6 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.plus_sign {
+  transition: all .4s ease-in-out;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.rotate {
+  -webkit-transform: rotate(45deg) !important;
+  -moz-transform: rotate(45deg) !important;
+  -o-transform: rotate(45deg) !important;
+  -ms-transform: rotate(45deg) !important;
+  transform: rotate(45deg) !important;
+}
+
 .art_element_square {
   background: white;
 	width: 100px;

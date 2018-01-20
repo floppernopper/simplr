@@ -17,7 +17,7 @@ class Group < ActiveRecord::Base
   scope :global, -> { where.not(name: nil).where anon_token: nil }
   scope :anrcho, -> { where.not(anon_token: nil).where name: nil }
   
-  def granted_titles
+  def titles
     titles = []
     for prop in self.proposals.where(action: 'grant_title', ratified: true)
       titles << eval(prop.misc_data)[:title]
