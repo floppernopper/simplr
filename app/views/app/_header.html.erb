@@ -33,7 +33,7 @@
   toggle_menu_links.click(function(){
     var nav_menu = $("#standard_nav_menu");
     if (nav_menu.is(':hidden')) {
-      <% unless god? %>
+      <% unless god? or goddess? %>
         $("#nav_menu_sound")[0].currentTime = 0;
         $("#nav_menu_sound")[0].play();
       <% end %>
