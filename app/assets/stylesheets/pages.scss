@@ -185,14 +185,9 @@
   top: 0px;
   left: 0px;
   width: 100%;
-  background: lightblue;
+  background: rgb(10, 10, 10);
   margin-bottom: 15px;
   z-index: 5;
-  transition: all .4s ease-in-out;
-}
-
-.standard_nav_menu_open {
-  background: rgb(10, 10, 10);
 }
 
 .standard_nav_menu_link {
@@ -215,11 +210,10 @@
 
 #toggle_menu_link {
 	position: relative;
-	top: 1px;
+	top: 7.5px;
 	left: 12.5px;
+	font-size: 13px;
 	color: rgb(175, 175, 175);
-	font-size: 35px;
-	font-weight: bold;
 }
 
 .return_home_link {

@@ -1,7 +1,7 @@
 <%= render "app/standard_nav_menu" %>
 
 <div id="menu_link_container">
-  <%= link_to '+', toggle_menu_path, class: :toggle_menu_link,
+  <%= link_to '<i class="fa fa-bars fa-2x"></i>'.html_safe, toggle_menu_path, class: :toggle_menu_link,
     id: :toggle_menu_link, remote: true, title: "Main menu" %>
 </div>
   
@@ -32,14 +32,15 @@
   var toggle_menu_links = $(".toggle_menu_link");
   toggle_menu_links.click(function(){
     var nav_menu = $("#standard_nav_menu");
-    if (nav_menu.is(':hidden')) {  
+    if (nav_menu.is(':hidden')) {
+      <% unless god? %>
+        $("#nav_menu_sound")[0].currentTime = 0;
+        $("#nav_menu_sound")[0].play();
+      <% end %>
       nav_menu.fadeIn();
-      $("#nav_menu_sound")[0].currentTime = 0;
-      $("#nav_menu_sound")[0].play();
     } else {
       nav_menu.fadeOut();
     }
-    nav_menu.toggleClass("standard_nav_menu_open");
     window.navigator.vibrate(1);
   });
 </script>
