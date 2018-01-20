@@ -17,6 +17,14 @@ class Group < ActiveRecord::Base
   scope :global, -> { where.not(name: nil).where anon_token: nil }
   scope :anrcho, -> { where.not(anon_token: nil).where name: nil }
   
+  def granted_titles
+    titles = []
+    for prop in self.proposals.where(action: 'grant_title', ratified: true)
+      titles << eval(prop.misc_data)[:title]
+    end
+    titles
+  end
+  
   def total_items_unseen user
     member = self.members.find_by_user_id user.id
     # group object itself acts member object if user is creator

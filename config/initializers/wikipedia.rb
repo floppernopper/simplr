@@ -10,9 +10,9 @@ def phenomenology
   train_on_wiki ['Philosophy', 'Phenomenology (philosophy)']
 end
 
-def animals
-  puts "\nCreating classifier for Animals\n"
-  train_on_wiki ['Dog', 'Cat', 'Bird']
+def ancom
+  puts "\nCreating classifier for Anarcho-Communism\n"
+  train_on_wiki ['Anarchism', 'Anarcho-communism', 'Communist society'], branch: true
 end
 
 def train_on_wiki topics, branch=nil
