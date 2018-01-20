@@ -1,8 +1,9 @@
 <%= render "app/standard_nav_menu" %>
 
-<div id="menu_link_container"></div>
-<%= link_to '<i class="fa fa-bars fa-2x"></i>'.html_safe, toggle_menu_path, class: :toggle_menu_link,
-  id: :toggle_menu_link, remote: true, title: "Main menu" %>
+<div id="menu_link_container">
+  <%= link_to '+', toggle_menu_path, class: :toggle_menu_link,
+    id: :toggle_menu_link, remote: true, title: "Main menu" %>
+</div>
   
 <%= link_to '<i class="fa fa-home fa-lg"></i>'.html_safe, root_url,
   class: :return_home_link, title: "Return home" unless @you_are_home %>
@@ -38,6 +39,7 @@
     } else {
       nav_menu.fadeOut();
     }
+    nav_menu.toggleClass("standard_nav_menu_open");
     window.navigator.vibrate(1);
   });
 </script>

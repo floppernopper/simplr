@@ -143,7 +143,7 @@ group :development do
   
   # optimizing
   gem 'ruby-prof'
-  gem 'rack-mini-profiler', require: false
+  #gem 'rack-mini-profiler', require: false
   
   # debugging
   gem 'byebug'
