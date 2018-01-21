@@ -1,0 +1,17 @@
+<div class="slide_menu_container">
+  <%= link_to 'javascript:;', class: :slide_menu_toggle_link do %>
+    <div class="plus_sign" align="center">
+      +
+    </div>
+  <% end %>
+</div>
+
+<script>
+  var slide_menu = $(".slide_menu_container");
+  var toggle_link = $(".slide_menu_toggle_link");
+  toggle_link.click(function(){
+    slide_menu.toggleClass("slide_menu_open");
+    $(".plus_sign").toggleClass("plus_fade");
+    $(".plus_sign").toggleClass("rotate");
+  });
+</script>
