@@ -12,12 +12,14 @@
 }
 
 .rotate {
-  transform-origin: 22.5px 22.5px;
+  transform-origin: 20px 20px;
   transform: rotate(45deg);
 }
 
 .plus_fade {
   text-shadow: 1.25px 1.25px 1.25px pink;
+  color: lightblue;
+  font-size: 40px;
 }
 
 .art_element_square {

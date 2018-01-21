@@ -8,7 +8,6 @@
 
 <% if invited? or current_user %>
   <%= render "comments/index", comments: @comments %>
-  <%= render "arts/card" %>
 <% else %>
   <div id="guest_prompt" class="dark_card" align="center">
     <p>
