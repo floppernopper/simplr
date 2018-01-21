@@ -1,0 +1,66 @@
+<%= link_to fa_icon("home", "Home"), (anrcho? ? proposals_path : root_url), class: :standard_nav_menu_link,
+  title: "Home consists of posts and groups, in reverse chronological order." %>
+  
+<%= link_to fa_icon("envelope", "Inbox#{': ' + current_user.inbox_unseen.to_s \
+  unless current_user.inbox_unseen.zero?}"), inbox_path, class: :standard_nav_menu_link if current_user %>
+
+<%= link_to fa_icon("bell", "Notes#{': ' + currently_unseen_notes.size.to_s \
+  unless currently_unseen_notes.size.zero?}"), notes_path, class: :standard_nav_menu_link,
+  title: "See what's happening..." %>
+  
+  <%= link_to fa_icon("user", "Profile"), show_user_path(current_user.unique_token),
+    class: :standard_nav_menu_link if current_user %>
+  
+<%= link_to fa_icon("cubes", "Groups"), (anrcho? ? my_anon_groups_path : my_groups_path),
+  class: :standard_nav_menu_link, title: "Click to see all of the groups you'#{anrcho? ? 've found' : 're in'}." %>
+
+<% unless current_user %>
+	<%= link_to fa_icon("user-plus", "Sign up"), new_user_path, class: :standard_nav_menu_link,
+	  title: "Click here to sign up and see way less ads." %>
+	  
+	<%= link_to fa_icon("sign-in", "Log in"), sessions_new_path, class: :standard_nav_menu_link %>
+<% else %>
+  <%= link_to fa_icon("users", "Following"), following_path(current_user.id), class: :standard_nav_menu_link %>
+  
+  <%= link_to fa_icon("cog", "Settings"), settings_path, class: :standard_nav_menu_link %>
+  
+  <% if current_user.active_powers.present? %>
+    <script>
+      <%= render "app/fader.js", target: "power_nav_menu_link", target_id: "" %>
+    </script>
+    <%= link_to fa_icon("bolt", "Powers"), powers_path(current_user.id),
+      class: :standard_nav_menu_link, id: :power_nav_menu_link %>
+  <% end %>
+  
+  <% if god? or goddess? or in_dev? %>
+    <%= link_to fa_icon("shopping-bag", "Store"), store_path, class: :standard_nav_menu_link %>
+  <% end %>
+  
+  <%= link_to fa_icon("cogs", "Bots"), my_bots_path(current_user), class: :standard_nav_menu_link,
+    title: "My bots - Click here to manage all of the bots you've created." \
+    if (dev? or current_user.has_power?('create_bots')) and current_user.bots.present? and Rails.env.development? %>
+    
+  <%= link_to fa_icon("fort-awesome", "Gatekeeper"), invite_someone_path,
+    class: :standard_nav_menu_link, title: "Invite someone to the site." \
+    if (current_user.has_power?('invite_someone', :not_expired) or current_user.gatekeeper) and not dev? %>
+  
+  <%= link_to fa_icon("code", "Dev"), dev_panel_path, class: :standard_nav_menu_link,
+    title: "Dpanel (Dev panel) - Click here to manage all major site functions and data." if dev? %>
+    
+	<%= link_to fa_icon("sign-out", "Log out"), sessions_destroy_path, method: :delete,
+	  class: :standard_nav_menu_link, title: "Click here to destroy your cookie.",
+	  data: { confirm: "Are you sure?" } %>
+<% end %>
+
+<%= link_to fa_icon("users", "Anrcho"), proposals_path,
+  class: :standard_nav_menu_link, id: :power_nav_menu_link unless @anrcho or Rails.env.development? %>
+
+<%= link_to fa_icon("globe", "Contributors"), contributors_path, class: :standard_nav_menu_link,
+  title: "Click here to see who's contributed to Anrcho." if @anrcho %>
+  
+<%= link_to fa_icon("question-circle", "How Anrcho Works"), tutorial_path, class: :standard_nav_menu_link,
+  title: "Click here to see how the site works." if @anrcho %>
+
+<%= link_to fa_icon("book", "Book of Social Maya"), book_path, class: :standard_nav_menu_link,
+  title: "Long term plans for the site..." if @anrcho %>
+

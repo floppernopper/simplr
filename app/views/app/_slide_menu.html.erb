@@ -4,14 +4,26 @@
       +
     </div>
   <% end %>
+  <div id="nav_links" hidden>
+    <%= render "app/nav_links" %>
+  </div>
 </div>
 
 <script>
   var slide_menu = $(".slide_menu_container");
   var toggle_link = $(".slide_menu_toggle_link");
+  var nav_links = $("#nav_links");
   toggle_link.click(function(){
     slide_menu.toggleClass("slide_menu_open");
     $(".plus_sign").toggleClass("plus_fade");
     $(".plus_sign").toggleClass("rotate");
+    if (nav_links.is(':hidden')) {
+      setTimeout(toggle_nav_links, 400);
+    } else {
+      nav_links.fadeOut();
+    } 
   });
+  function toggle_nav_links() {
+    nav_links.fadeIn();
+  }
 </script>

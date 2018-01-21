@@ -1,8 +1,4 @@
-<% unless @sandbox %>
-  <%= render "app/standard_nav_menu" %>
-<% else %>
-  <%= render "app/slide_menu" %>
-<% end %>
+<%= render "app/slide_menu" %>
   
 <%= link_to '<i class="fa fa-home fa-lg"></i>'.html_safe, root_url,
   class: :return_home_link, title: "Return home" unless @you_are_home %>
