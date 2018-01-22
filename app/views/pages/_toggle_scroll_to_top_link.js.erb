@@ -15,8 +15,14 @@ function toggle_scroll_to_top_link() {
       // haptic feedback for scrolling to top
     } else if ($(window).scrollTop() < 10) {
       window.navigator.vibrate(1);
+      toggle_top_line_faded();
+      setTimeout(toggle_top_line_faded, 400);
     }
   }, 200);
+  
+  function toggle_top_line_faded() {
+    $(".top_line_fader").toggleClass("top_line_faded");
+  }
 }
 
 toggle_scroll_to_top_link();

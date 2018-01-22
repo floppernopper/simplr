@@ -302,9 +302,27 @@ textarea {
 }
 
 .top_line_fader {
-  width: 100%;
+  transition: all .4s ease-in-out;
   background: black;
+  width: 100%;
   height: 0px;
+}
+
+.top_line_faded {
+//  transform-origin: 0% 50%;
+//  transform: rotate(360deg);
+  box-shadow: 1.5px 1.5px 1.5px pink;
+  background: lightblue;
+  height: 5px;
+}
+
+@keyframes top_line_fade {
+  0% {
+    
+  }
+  100% {
+    
+  }
 }
 
 // for mobile
