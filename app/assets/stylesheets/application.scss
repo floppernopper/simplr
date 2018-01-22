@@ -301,6 +301,12 @@ textarea {
   background: white;
 }
 
+.top_line_fader {
+  width: 100%;
+  background: black;
+  height: 0px;
+}
+
 // for mobile
 @media screen and (max-width: 975px) {
   .standard_page_header {
