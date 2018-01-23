@@ -11,11 +11,15 @@
   float: left;
   height: 100%;
   transition: all .4s ease-in-out;
+  cursor: pointer;
 }
 
 .palette_color:hover {
   transform: rotatey(360deg);
-  
+}
+
+.palette_color:focus {
+  transform: rotatey(360deg);
 }
 
 .color_palette {
