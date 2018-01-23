@@ -15,11 +15,13 @@
 }
 
 .palette_color:hover {
-  transform: rotatey(360deg);
+  transform-origin: 5% 5%;
+  transform: rotatey(135deg);
 }
 
 .palette_color:focus {
-  transform: rotatey(360deg);
+  transform-origin: 5% 5%;
+  transform: rotatey(135deg);
 }
 
 .color_palette {
