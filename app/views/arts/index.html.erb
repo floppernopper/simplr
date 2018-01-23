@@ -1,25 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Arts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @arts.each do |art| %>
-      <tr>
-        <td><%= link_to 'Show', art %></td>
-        <td><%= link_to 'Edit', edit_art_path(art) %></td>
-        <td><%= link_to 'Destroy', art, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="art_card" align="center">
+  <div class="color_palette">
+    <% for color in color_palette.values %>
+      <div class="palette_color"
+        style="background:<%= color %>;width:<%= 100.0 / color_palette.size.to_f %>%;"></div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Art', new_art_path %>
+  </div>
+</div>

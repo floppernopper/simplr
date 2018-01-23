@@ -1,6 +1,42 @@
-// Place all the styles related to the arts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+//2017 Greenery. Hex #88B04B. RGB(136, 176, 75) ...
+//2016 Rose Quartz. Hex #F7CAC9. RGB(247, 202, 201) ...
+//2016 Serenity. Hex #92A8D1. RGB(146, 168, 209) ...
+//2015 Marsala. Hex #955251. RGB(149, 82, 81) ...
+//2014 Radiand Orchid. Hex #B565A7. RGB(181, 101, 167) ...
+//2013 Emerald. Hex #009B77. ...
+//2012 Tangerine Tango. Hex #DD4124. ...
+//2011 Honeysucle. Hex #D65076.
+
+.palette_color {
+  float: left;
+  height: 100%;
+  transition: all .4s ease-in-out;
+}
+
+.palette_color:hover {
+  transform: rotatey(360deg);
+  
+}
+
+.color_palette {
+  width: 75%;
+  margin-top: 25px;
+  height: 350px;
+}
+
+.art_card {
+  position: relative;
+  background: pink;
+  border: 0px solid white;
+  max-width: 550px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  margin-top: 15px;
+  width: 94.5%;
+  min-height: 400px;
+  // to stop margins from collapsing
+  overflow: auto;
+}
 
 .plus_sign {
   transition: all .4s ease-in-out;
@@ -14,6 +50,14 @@
 .rotate {
   transform-origin: 20px 20px;
   transform: rotate(225deg);
+}
+
+.rotatex {
+  transform: rotatex(180deg);
+}
+
+.rotatey {
+  
 }
 
 .plus_fade {
