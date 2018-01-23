@@ -16,7 +16,7 @@ function toggle_scroll_to_top_link() {
     } else if ($(window).scrollTop() < 10) {
       window.navigator.vibrate(1);
       toggle_top_line_faded();
-      setTimeout(toggle_top_line_faded, 400);
+      setTimeout(toggle_top_line_faded, 500);
     }
   }, 200);
   
