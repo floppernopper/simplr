@@ -16,6 +16,12 @@
   </div>
 </div>
 
+<div class="color_bands">
+  <% for color in color_palette.values %>
+    <div class="color_band" style="background:<%= color %>;height:<%= 100.0 / color_palette.size.to_f %>%;"></div>
+  <% end %>
+</div>
+
 <div class="color_block_container">
   <div class="color_block">
     <div class="color_block_fan_right">
