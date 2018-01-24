@@ -1,5 +1,17 @@
 module ArtsHelper
   def color_palette
+    { 
+      tint: '#72FE95',
+      tealish: '#ade6d8',
+      serenity: '#008080',
+      emerald: '#009B77',
+      tangerine_tango: '#FF5353',
+      honeysucle: '#b1ffb1',
+      radiand_orchid: '#ffc0cb',
+    }
+  end
+  
+  def color_palette_2
     { greenery: '#88B04B',
       serenity: '#92A8D1',
       marsala: '#955251',

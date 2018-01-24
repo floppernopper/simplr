@@ -1,3 +1,12 @@
+<div class="art_card" align="center" style="background:pink;">
+  <div class="color_palette">
+    <% for color in color_palette_2.values %>
+      <div class="palette_color"
+        style="background:<%= color %>;width:<%= 100.0 / color_palette_2.size.to_f %>%;"></div>
+    <% end %>
+  </div>
+</div>
+
 <div class="art_card" align="center">
   <div class="color_palette">
     <% for color in color_palette.values %>
@@ -6,3 +15,19 @@
     <% end %>
   </div>
 </div>
+
+<div class="color_block_container">
+  <div class="color_block">
+    <div class="color_block_fan_right">
+      <div class="color_block_spinner"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var block_fan_right = $(".color_block_fan_right");
+  block_fan_right.click(function(){
+    block_fan_right.toggleClass("color_block_fan_right_out");
+    window.navigator.vibrate(1);
+  });
+</script>

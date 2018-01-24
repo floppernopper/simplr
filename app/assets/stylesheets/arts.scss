@@ -7,39 +7,92 @@
 //2012 Tangerine Tango. Hex #DD4124. ...
 //2011 Honeysucle. Hex #D65076.
 
+@keyframes spin_morph {
+  0% {
+    transform: rotatey(0deg);
+  }
+  50% {
+    transform: rotatey(180deg);
+    background: pink;
+  }
+  100% {
+    transform: rotatey(-360deg);
+    background: #72FE95;
+  }
+}
+
+.color_block_spinner {
+  animation: spin_morph 7.5s infinite alternate;
+  background: pink;
+  width: 25%;
+  height: 25%;
+  margin: 5px;
+}
+
+.color_block_fan_right {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: #72FE95;
+  transition: all .4s ease-in-out;
+  // to stop margins from collapsing
+  overflow: auto;
+}
+
+.color_block_fan_right_out {
+  transform-origin: 100% 100%;
+  transform: rotatey(180deg);
+}
+
+.color_block {
+  position: relative;
+  background: #ade6d8;
+  width: 50%;
+  height: 150px;
+  float: left;
+}
+
+.color_block_container {
+  position: relative;
+  max-width: 550px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  margin-top: 15px;
+  width: 94.5%;
+}
+
 .palette_color {
   float: left;
   height: 100%;
   transition: all .4s ease-in-out;
-  cursor: pointer;
 }
 
 .palette_color:hover {
-  transform-origin: 5% 5%;
-  transform: rotatey(135deg);
+  transform: rotatey(360deg);
 }
 
-.palette_color:focus {
-  transform-origin: 5% 5%;
-  transform: rotatey(135deg);
+.palette_color:active {
+  transform: rotatey(360deg);
 }
 
 .color_palette {
-  width: 75%;
+  width: 85%;
   margin-top: 25px;
-  height: 350px;
+  margin-bottom: 25px;
+  height: 35px;
 }
 
 .art_card {
   position: relative;
-  background: pink;
+  background: #CEFFFD;
   border: 0px solid white;
   max-width: 550px;
   margin: 0 auto;
   margin-bottom: 12.5px;
   margin-top: 15px;
   width: 94.5%;
-  min-height: 400px;
   // to stop margins from collapsing
   overflow: auto;
 }
@@ -58,41 +111,7 @@
   transform: rotate(225deg);
 }
 
-.rotatex {
-  transform: rotatex(180deg);
-}
-
-.rotatey {
-  
-}
-
 .plus_fade {
   text-shadow: 1.25px 1.25px 1.25px pink;
   color: lightblue;
-}
-
-.art_element_square {
-  background: white;
-	width: 100px;
-	height: 100px;
-}
-
-@keyframes shape_morph {
-  0% {
-    border-radius: 0px;
-    background: blue;
-  }
-  100% {
-  	-moz-border-radius: 50px;
-  	-webkit-border-radius: 50px;
-  	border-radius: 50px;
-  	background: red;
-  }
-}
-
-.art_element {
-  animation: shape_morph 7.5s infinite alternate;
-    background: white;
-  	width: 100px;
-  	height: 100px;
 }
