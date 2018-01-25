@@ -1,0 +1,9 @@
+<% inbox_icon = if current_user and current_user.inbox_unseen > 0 %>
+  <% '<i class="fa fa-envelope fa-lg"></i>' %>
+<% else %>
+  <% '<i class="fa fa-envelope-o fa-lg"></i>' %>
+<% end %>
+
+<%= link_to inbox_icon.html_safe, inbox_path,
+  id: :inbox_nav_link, class: "inbox_nav_link dark_link",
+  title: "Unseen messages: #{current_user.inbox_unseen}" if current_user %>

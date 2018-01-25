@@ -33,7 +33,7 @@
   <% end %>
   
   <% if god? or goddess? or in_dev? %>
-    <%= link_to fa_icon("shopping-bag", "Store"), store_path, class: :standard_nav_menu_link %>
+    <%= link_to fa_icon("paint-brush", "Arts"), arts_path, class: :standard_nav_menu_link %>
   <% end %>
   
   <%= link_to fa_icon("cogs", "Bots"), my_bots_path(current_user), class: :standard_nav_menu_link,

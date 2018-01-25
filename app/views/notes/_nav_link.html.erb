@@ -4,24 +4,11 @@
   <% '<i class="fa fa-bell-o fa-lg"></i>' %>
 <% end %>
 
-<% inbox_icon = if current_user and current_user.inbox_unseen > 0 %>
-  <% '<i class="fa fa-envelope fa-lg"></i>' %>
-<% else %>
-  <% '<i class="fa fa-envelope-o fa-lg"></i>' %>
-<% end %>
-
-<%= link_to inbox_icon.html_safe, inbox_path,
-  id: :inbox_nav_link, class: "inbox_nav_link dark_link",
-  title: "Unseen messages: #{current_user.inbox_unseen}" if current_user %>
-
 <%= link_to notes_dropdown_path, remote: true,
   id: :notes_nav_link, class: "notes_nav_link toggle_notes_dropdown dark_link",
   title: "Unseen notifications: #{currently_unseen_notes.size}" do %>
-  
   <span id="notifications_link_icon"><%= notes_icon.html_safe %></span>
-  
 <% end %>
-  
-<%= render "app/link_sound.js", link_id: :notes_nav_link, sound: :nav_menu_sound %>
 
 <%= render "notes/dropdown", notes: current_notes.last(5).reverse %>
+<%= render "app/link_sound.js", link_id: :notes_nav_link, sound: :nav_menu_sound %>

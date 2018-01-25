@@ -119,6 +119,10 @@
 	height: 25px;
 }
 
+.avatar_spins {
+  animation: avatar_spin 10s infinite alternate;
+}
+
 .avatar_pixel {
 	width: 5.5px;
 	height: 5.5px;
@@ -137,6 +141,18 @@
 
 .user_title {
   font-size: 25px;
+}
+
+@keyframes avatar_spin {
+  0% {
+    transform: rotatey(0deg);
+  }
+  50% {
+    transform: rotatey(180deg);
+  }
+  100% {
+    transform: rotatey(-360deg);
+  }
 }
 
 // for mobile
