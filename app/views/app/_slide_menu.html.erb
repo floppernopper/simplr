@@ -12,11 +12,13 @@
 <script>
   var slide_menu = $(".slide_menu_container");
   var toggle_link = $(".slide_menu_toggle_link");
+  var plus_sign = $(".plus_sign");
   var nav_links = $("#nav_links");
   toggle_link.click(function(){
+    //toggle_link.toggleClass("slide_menu_toggle_link_span");
     slide_menu.toggleClass("slide_menu_open");
-    $(".plus_sign").toggleClass("plus_fade");
-    $(".plus_sign").toggleClass("rotate");
+    plus_sign.toggleClass("plus_rotate");
+    plus_sign.toggleClass("plus_fade");
     if (nav_links.is(':hidden')) {
       setTimeout(toggle_nav_links, 400);
     } else {

@@ -8,6 +8,7 @@ module ArtsHelper
       tangerine_tango: '#FF5353',
       honeysucle: '#b1ffb1',
       radiand_orchid: '#ffc0cb',
+      tang_milde: '#ffc04d',
     }
   end
   

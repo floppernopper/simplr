@@ -235,6 +235,30 @@
   height: 100%;
 }
 
+.slide_menu_toggle_link_span {
+  transform: translateX(320px);
+}
+
+.plus_sign {
+  transition: all .4s ease-in-out;
+  font-weight: bolder;
+  font-size: 35px;
+  width: 100%;
+  height: 100%;
+	color: rgb(175, 175, 175);
+	position: relative;
+}
+
+.plus_rotate {
+  transform-origin: 20px 20px;
+  transform: rotate(225deg);
+}
+
+.plus_fade {
+  text-shadow: 1.25px 1.25px 1.25px pink;
+  color: lightblue;
+}
+
 #toggle_menu_link {
 	position: relative;
 	top: 7.5px;
