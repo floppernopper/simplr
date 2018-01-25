@@ -1,7 +1,7 @@
 <% notes_icon = if currently_unseen_notes.present? %>
-  <% '<i class="fa fa-bell fa-lg"></i>' %>
+  <% '<i class="fa fa-bell fa-lg" id="notes_slide_icon"></i>' %>
 <% else %>
-  <% '<i class="fa fa-bell-o fa-lg"></i>' %>
+  <% '<i class="fa fa-bell-o fa-lg" id="notes_slide_icon"></i>' %>
 <% end %>
 
 <div class="notes_slide_menu_container">
@@ -16,10 +16,13 @@
   function notes_dropdown_side_on_out() {
     var slide_menu = $(".notes_slide_menu_container");
     var toggle_link = $(".notes_slide_menu_toggle_link");
-    var link_icon = $("#notifications_link_icon");
+    var icon_link = $(".notes_slide_menu_toggle_link");
+    var link_icon = $("#notes_slide_icon");
     var dropdown = $("#notes_dropdown");
     toggle_link.click(function(){
       slide_menu.toggleClass("slide_menu_open");
+      icon_link.toggleClass("notes_icon_spins");
+      link_icon.toggleClass("plus_fade");
       if (dropdown.is(':hidden')) {
         setTimeout(toggle_dropdown, 400);
       } else {

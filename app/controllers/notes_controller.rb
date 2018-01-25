@@ -4,7 +4,8 @@ class NotesController < ApplicationController
   
   def dropdown
     #@notes = @notes.last(5).reverse
-    current_notes.unseen.update_all seen: true
+    @unseen = current_notes.unseen
+    @unseen.update_all seen: true
   end
   
   def instant_notes

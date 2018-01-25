@@ -28,7 +28,8 @@
 }
 
 .notes_icon_spins {
-  transform: rotatey(360deg);
+  transform-origin: -1.25px 20px;
+  transform: rotatey(540deg);
 }
 
 .notes_side_pane_message {
