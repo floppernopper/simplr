@@ -2,6 +2,33 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.notes_slide_menu_container {
+  transition: all .4s ease-in-out;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 50px;
+  height: 50px;
+  background: black;
+  z-index: 10;
+}
+
+.notes_slide_menu_toggle_link {
+  transition: all .4s ease-in-out;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  color: rgb(175,175,175);
+  padding-top: 10px;
+}
+
+.notes_icon_spins {
+  transform: rotatey(180deg);
+}
+
 .notes_side_pane_message {
   margin-left: 5px;
 	font-size: 20px;
@@ -61,4 +88,16 @@
 
 .note_dialog_text {
   font-size: 12px;
+}
+
+@keyframes icon_spin {
+  0% {
+    transform: rotatey(0deg);
+  }
+  50% {
+    transform: rotatey(180deg);
+  }
+  100% {
+    transform: rotatey(-360deg);
+  }
 }

@@ -1,33 +1,36 @@
+<% notes_icon = if currently_unseen_notes.present? %>
+  <% '<i class="fa fa-bell fa-lg"></i>' %>
+<% else %>
+  <% '<i class="fa fa-bell-o fa-lg"></i>' %>
+<% end %>
+
 <div class="notes_slide_menu_container">
-  <%= link_to 'javascript:;', class: :notes_slide_menu_toggle_link do %>
-    <% notes_icon = if currently_unseen_notes.present? %>
-      <% '<i class="fa fa-bell fa-lg"></i>' %>
-    <% else %>
-      <% '<i class="fa fa-bell-o fa-lg"></i>' %>
-    <% end %>
+  <%= link_to notes_dropdown_path, remote: true, class: :notes_slide_menu_toggle_link do %>
+    <span id="notifications_link_icon"><%= notes_icon.html_safe %></span>
   <% end %>
-  <div id="nav_notes_dropdown" hidden>
-    <%= render "notes/dropdown", notes: current_notes.last(5).reverse %>
-  </div>
+  
+  <%= render "notes/slide_dropdown", notes: current_notes.last(5).reverse %>
 </div>
 
 <script>
-  var slide_menu = $(".slide_menu_container");
-  var toggle_link = $(".slide_menu_toggle_link");
-  var plus_sign = $(".plus_sign");
-  var nav_links = $("#nav_links");
-  toggle_link.click(function(){
-    slide_menu.toggleClass("slide_menu_open");
-    plus_sign.toggleClass("plus_rotate");
-    plus_sign.toggleClass("plus_fade");
-    if (nav_links.is(':hidden')) {
-      setTimeout(toggle_nav_links, 400);
-    } else {
-      nav_links.fadeOut();
+  function notes_dropdown_side_on_out() {
+    var slide_menu = $(".notes_slide_menu_container");
+    var toggle_link = $(".notes_slide_menu_toggle_link");
+    var link_icon = $("#notifications_link_icon");
+    var dropdown = $("#notes_dropdown");
+    toggle_link.click(function(){
+      slide_menu.toggleClass("slide_menu_open");
+      link_icon.toggleClass("notes_icon_spins");
+      if (dropdown.is(':hidden')) {
+        setTimeout(toggle_dropdown, 400);
+      } else {
+        dropdown.fadeOut();
+      }
+      window.navigator.vibrate(1);
+    });
+    function toggle_dropdown() {
+      dropdown.fadeIn();
     }
-    window.navigator.vibrate(1);
-  });
-  function toggle_nav_links() {
-    nav_links.fadeIn();
   }
+  notes_dropdown_side_on_out();
 </script>

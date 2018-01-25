@@ -1,0 +1,14 @@
+<div class="notes_dropdown" id="notes_dropdown" hidden>
+  <div class="notes_dropdown_title">
+    <b>Notifications</b>
+  </div>
+  <% for note in notes %>
+    <div class="standard_nav_menu_link">
+      <%= render "notes/message", note: note, dark: true, dropdown: true %>
+    </div>
+  <% end %>
+  <div class="notes_dropdown_link standard_nav_menu_link">
+    <%= link_to "See all", notes_path, class: :dark_link %>
+  </div>
+  </br>
+</div>
