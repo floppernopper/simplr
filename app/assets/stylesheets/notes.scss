@@ -4,7 +4,7 @@
 
 .notes_slide_menu_container {
   transition: all .4s ease-in-out;
-  position: fixed;
+  position: absolute;
   top: 0px;
   right: 0px;
   width: 40px;
@@ -22,13 +22,12 @@
   width: 40px;
   height: 40px;
   color: rgb(175,175,175);
-  padding-top: 12.5px;
-  margin-left: 12.5px;
-  padding-right: 5px;
+  padding-top: 15px;
+  padding-right: 24.25px;
 }
 
 .notes_icon_spins {
-  transform: rotatey(180deg);
+  transform: rotatey(360deg);
 }
 
 .notes_side_pane_message {
