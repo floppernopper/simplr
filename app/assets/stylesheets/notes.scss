@@ -14,7 +14,7 @@
 }
 
 .notes_slide_menu_toggle_link {
-  transition: all .4s ease-in-out;
+  transition: all .75s ease-out;
   position: absolute;
   top: 0px;
   right: 0px;
@@ -29,7 +29,7 @@
 
 .notes_icon_spins {
   transform-origin: 0px 20px;
-  transform: rotatey(720deg);
+  transform: rotatey(360deg);
 }
 
 .notes_side_pane_message {
