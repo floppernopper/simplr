@@ -71,7 +71,7 @@ Rails.application.routes.draw do
   put 'update_portal', to: 'portals#update', as: 'update_portal'
   get 'edit_portal/:token', to: 'portals#edit', as: 'edit_portal'
   # alias route for enter_portal_path, shorter url
-  get 'i/:token', to: 'portals#enter', as: 'inter_portal'
+  get 'e/:token', to: 'portals#enter', as: 'inter_portal'
 
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'
