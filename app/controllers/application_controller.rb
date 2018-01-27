@@ -11,9 +11,6 @@ class ApplicationController < ActionController::Base
   
   include SimpleCaptcha::ControllerHelpers
   
-  # redirects to resume for I, Forrest Wilkins, the creator of this website
-  before_action :forrest_to_resume, except: [:resume]
-  
   # redirects to proposals index for anrcho.com
   before_action :anrcho_to_proposals, except: [:index]
   
@@ -301,13 +298,7 @@ class ApplicationController < ActionController::Base
   end
   
   def forrest_web_co_to_forrest_web_co
-    if request.host.eql? 'forrestwebco.com'
-      redirect_to forrest_web_co_path
-    end
-  end
-  
-  def forrest_to_resume
-    if request.host.eql? 'forrestwilkins.com'
+    if request.host.eql? 'forrestwebco.com' or request.host.eql? 'forrestwilkins.com'
       redirect_to forrest_web_co_path
     end
   end
