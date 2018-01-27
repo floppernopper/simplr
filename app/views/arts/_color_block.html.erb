@@ -1,0 +1,18 @@
+<div class="color_block_container">
+  <div class="color_block">
+    <div class="color_block_fan_right">
+      <div class="color_block_spinner"></div>
+    </div>
+  </div>
+  <div class="interact_label" align="center">
+    Interact
+  </div>
+</div>
+
+<script>
+  var block_fan_right = $(".color_block_fan_right");
+  block_fan_right.click(function(){
+    block_fan_right.toggleClass("color_block_fan_right_out");
+    window.navigator.vibrate(1);
+  });
+</script>

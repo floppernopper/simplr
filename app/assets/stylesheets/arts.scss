@@ -59,6 +59,7 @@
 .color_block_fan_right_out {
   transform-origin: 100% 100%;
   transform: rotatey(180deg);
+  z-index: 5;
 }
 
 .color_block {
@@ -67,6 +68,17 @@
   width: 50%;
   height: 150px;
   float: left;
+}
+
+.interact_label {
+  position: relative;
+  width: 50%;
+  height: 50px;
+  padding-top: 60px;
+  float: left;
+  color: #ade6d8;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .color_block_container {
