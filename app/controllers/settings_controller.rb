@@ -20,7 +20,7 @@ class SettingsController < ApplicationController
     elsif params[:portal_token]
       @portal = Portal.find_by_unique_token params[:portal_token]
       if @portal
-        @portal_link = root_url.gsub('http', 'https'); @portal_link.slice!(-1)
+        @portal_link = root_url.gsub('http', "http#{in_dev? ? '' : 's'}"); @portal_link.slice!(-1)
         @portal_link +=inter_portal_path(@portal.unique_token)
       end
     end

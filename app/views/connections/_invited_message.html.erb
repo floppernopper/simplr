@@ -2,7 +2,6 @@
   <%= render "app/fader.js", target: "invited_message_header", target_id: "" %>
   <%= render "app/fader.js", target: "invited_message_text", target_id: "" %>
   <%= render "app/fader.js", target: "invited_message_link", target_id: "" %>
-  <%= render "app/fader.js", target: "book_link", target_id: "" %>
 </script>
 
 <h2 id="invited_message_header" align="center">Social Maya</h2>
@@ -10,12 +9,7 @@
 <div class="dark_card" id="invited_message_card">
   <div align="center">
     <p class="justified_body_text" id="invited_message_text">
-      You've stumbled upon a portal to Social Maya, a social network for artists and philosophers, with multiple hidden layers, each with it's own social structure. Feel free to <%= link_to "browse or post to the site anonymously", root_url, id: :invited_message_link %> from this browser or sign up below to ensure continued access and identity. Keep an eye out for treasures or powers to unlock along the way.
-    </p>
-    <p>
-      <%= link_to book_path, class: :white_link, id: :book_link do %>
-        Book of Social Maya <i class="fa fa-book" aria-hidden="true"></i>
-      <% end %>
+      Welcome to Social Maya, a free and open source social network for artists and philosophers. Feel free to <%= link_to "browse or post to the site anonymously", root_url, id: :invited_message_link %> from this browser or sign up below to ensure continued access and identity across devices. Keep an eye out for treasures or powers to unlock along the way.
     </p>
   </div>
 </div>
