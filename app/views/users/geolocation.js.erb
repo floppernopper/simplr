@@ -1,9 +1,9 @@
 window.navigator.vibrate(1);
 
-//if (navigator.geolocation) {
-//  navigator.geolocation.getCurrentPosition(function(position) {
-//    alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
-//  });
-//} else {
-//  alert("Geolocation is not supported by this browser.");
-//}
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    alert("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
+  });
+} else {
+  alert("Geolocation is not supported by this browser.");
+}
