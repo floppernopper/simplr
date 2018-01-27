@@ -1,4 +1,4 @@
-<% portal_link = root_url; portal_link.slice!(-1);
+<% portal_link = root_url.gsub("http", "https"); portal_link.slice!(-1);
   portal_link +=inter_portal_path(portal.unique_token) %>
 
 <div class="card" id="portal_card_<%= portal.id %>">
