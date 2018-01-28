@@ -15,11 +15,11 @@
     // vars for color_bands Dance of Light!
     var height = 0, y_pos = 0; // vars for color_band animation
     var fat_height = false, fat_y_pos = false;
-    var height_min = 10, height_max = 20, y_pos_min = 0, y_pos_max = 80;
+    var height_min = 10, height_max = 25, y_pos_min = 0, y_pos_max = 100;
     
     // rates of change and speed of animation over time and between cycles
-    var change_rate = 0.5, change_speed = 15;    
-    var a_change_rate = 0.5, h_change_rate = 0.045, y_change_rate = 0.025;
+    var change_rate = 0.75, change_speed = 12.5;    
+    var a_change_rate = 0.1, h_change_rate = 0.1, y_change_rate = 0.1;
 
     // initialises color values randomly
     for (var i=0; i < rgb.length; i++) {
@@ -91,11 +91,11 @@
 		    y_pos += y_change_rate;
 	    }
 	    // constraints
-	    if (y_pos < 0) {
-	      y_pos = 1;
-	    } else if (y_pos > 100) {
-	      y_pos = 99;
-	    }
+//	    if (y_pos < 0) {
+//	      y_pos = 1;
+//	    } else if (y_pos > 100) {
+//	      y_pos = 99;
+//	    }
     
 	    // actually applies change
 	    var target = $("#<%= target + (target_id.present? ? '_' + target_id.to_s : '') %>");
