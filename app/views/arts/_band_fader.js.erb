@@ -1,11 +1,16 @@
 <script>
   function bands_fader_<%= target + "_" + target_id.to_s %>() {
     // vars for color morphing
-    var rgba = [0, 0, 0, 0]; // the targets color values
-    var fat_rgba = [false, false, false, false]; // ensures pos/neg
-    var color_min = [100, 100, 100, 0.5]; // when it should go back up
-    var color_max = [255, 255, <%= defined?(love) ? 20 : 255 %>, 1.0]; // when color should go back down
-    var a_change_rate = 0.1;
+    var rgb = [0, 0, 0]; // the targets color values
+    var fat_rgb = [false, false, false]; // ensures pos/neg
+    var color_min = [100, 100, 100]; // when it should go back up
+    var color_max = [255, 255, 255]; // when color should go back down
+    
+    // vars for opacity
+    var opacity = 0.5;
+    var fat_opacity = false
+    opacity_min = 0.5;
+    opacity_max = 1;
     
     // vars for color_bands Dance of Light!
     var height = 0, y_pos = 0; // vars for color_band animation
@@ -15,13 +20,14 @@
     // rates of change and speed of animation over time and between cycles
     var change_rate = <%= defined?(slow) ? 0.25 : (defined?(fast) ? 1 : 0.5) %>; // added/subbed each round
     var change_speed = <%= defined?(slow) ? 15 : (defined?(fast) ? 5 : 2.5) %>; // interval speed, higher == slower
+    var a_change_rate = 0.01;
 
     // initialises color values randomly
-    for (var i=0; i < rgba.length; i++) {
+    for (var i=0; i < rgb.length; i++) {
       if (i < 3) {
-  	    rgba[i] = Math.round(Math.random() * color_max[i]);
+  	    rgb[i] = Math.round(Math.random() * color_max[i]);
       } else {
-  	    rgba[i] = (Math.random() * color_max[3]).toFixed(2);
+  	    rgb[i] = (Math.random() * color_max[3]).toFixed(2);
       }
     }
     
@@ -29,21 +35,33 @@
     y_pos = Math.round(Math.random() * y_pos_max);
     
     setInterval(function() {
-	    // morphs all of rgba back and forth
-	    for (var i=0; i < rgba.length; i++) {
+	    // morphs all of rgb back and forth
+	    for (var i=0; i < rgb.length; i++) {
 		    // flips colors direction of change
-		    if (rgba[i] <= color_min[i]) {
-			    fat_rgba[i] = false;
-		    } else if (rgba[i] >= color_max[i]) {
-			    fat_rgba[i] = true;
+		    if (rgb[i] <= color_min[i]) {
+			    fat_rgb[i] = false;
+		    } else if (rgb[i] >= color_max[i]) {
+			    fat_rgb[i] = true;
 		    }
 		    // fattens or shrinks primaries
-		    if (fat_rgba[i]) {
-		      if (fat_rgba[i] )
-			    rgba[i] -= (i < 3 ? change_rate : a_change_rate);
+		    if (fat_rgb[i]) {
+			    rgb[i] -= change_rate;
 		    } else {
-			    rgba[i] += (i < 3 ? change_rate : a_change_rate);
+			    rgb[i] += change_rate;
 		    }
+	    }
+	    
+	    // morphs opacity
+	    if (opacity <= opacity_min) {
+		    fat_opacity = false;
+	    } else if (opacity >= opacity_max) {
+		    fat_opacity = true;
+	    }
+	    // fattens or shrinks opacity
+	    if (fat_opacity) {
+		    opacity -= a_change_rate;
+	    } else {
+		    opacity += a_change_rate;
 	    }
 
 	    // morphs height
@@ -74,9 +92,9 @@
     
 	    // actually applies change
 	    var target = $("#<%= target + (target_id.present? ? '_' + target_id.to_s : '') %>");
-	    target.css("<%= defined?(background) ? 'background' : 'color' %>",
-	      "rgba(" + rgba[0] + ", " + <%= defined?(love) ? 0 : 'rgba[1]' %> + ", " + rgba[2] + ", " + rgba[3] + ")");
+	    target.css("background", "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")");
       target.css({
+        'opacity' : opacity,
         'height' : height,
         'y_pos' : y_pos
       });
