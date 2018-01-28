@@ -29,7 +29,8 @@
         function(errorCode) { console.log('Error code: ' + errorCode); });
       var player = new cast.framework.RemotePlayer();
       var playerController = new cast.framework.RemotePlayerController(player);
-      document.createElement('button', 'google-cast-button')
+      document.createElement('button', 'google-cast-button');
+      window.castReceiverManager.setApplicationState("Hello World");
     </script>
     
     <%= favicon_link_tag "favicons/#{get_site_ico}.ico" %>
