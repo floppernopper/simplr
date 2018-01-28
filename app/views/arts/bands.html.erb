@@ -4,3 +4,10 @@
     <%= render "arts/band_fader.js", target: "color_band", target_id: i %>
   <% end %>
 </div>
+
+<script>
+  var color_bands = $(".color_bands");
+  $(".color_bands").click(function() {
+    color_bands.toggleClass("color_band_flip");
+  });
+</script>

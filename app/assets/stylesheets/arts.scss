@@ -15,6 +15,7 @@
 }
 
 .color_bands {
+  transition: all .4s ease-out;
   position: fixed;
   top: 0px;
   left: 0px;
@@ -24,7 +25,11 @@
 }
 
 .color_band_flipping {
-  animation: band_flip_morph 7.5s infinite alternate;
+  animation: band_flip_morph 5s ease-in-out infinite alternate;
+}
+
+.color_band_flip {
+  transform: rotatex(180deg);
 }
 
 @keyframes band_flip_morph {
