@@ -33,9 +33,9 @@
       }
     }
     // to prevent issue of nav_links staying open from licking successively
-    if (!slide_menu.hasClass("slide_menu_open") && !nav_links.is(':hidden')) {
-      nav_links.fadeIn();
-    }
+    //if (!slide_menu.hasClass("slide_menu_open") && !nav_links.is(':hidden')) {
+      // not working turned off nav_links.toggle();
+    //}
     window.navigator.vibrate(1);
   });
   function toggle_nav_links() {
