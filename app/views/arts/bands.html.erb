@@ -7,7 +7,12 @@
 
 <script>
   var color_bands = $(".color_bands");
+  var bands = $(".color_band");
   $(".color_bands").click(function() {
     color_bands.toggleClass("color_band_flip");
+    bands.each(function() {
+      //$(this).toggleClass("color_band_flipping");
+    })
+    window.navigator.vibrate(1);
   });
 </script>

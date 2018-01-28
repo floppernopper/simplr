@@ -15,13 +15,13 @@
 }
 
 .color_bands {
-  transition: all .4s ease-out;
+  transition: all 1s ease-out;
   position: fixed;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100%;
-  background: white;
+  background: black;
 }
 
 .color_band_flipping {
@@ -30,17 +30,21 @@
 
 .color_band_flip {
   transform: rotatex(180deg);
+  background: white;
 }
 
 @keyframes band_flip_morph {
   0% {
     transform: rotatex(0deg);
+    opacity: 0.5;
   }
   50% {
     transform: rotatex(180deg);
+    opacity: 1;
   }
   100% {
     transform: rotatex(-360deg);
+    opacity: 0;
   }
 }
 
