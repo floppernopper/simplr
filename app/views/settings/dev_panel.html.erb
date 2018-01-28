@@ -15,9 +15,10 @@
     <%= link_to fa_icon("lightbulb-o", "Sandbox"), sandbox_path, class: :white_link %>
   </p>
   <p>
-    <button id="playPauseButton" class="playerButton" is="google-cast-button">
-      
-    </button>
+    <button id="playPauseButton" class="playerButton" is="google-cast-button"></button>
+  </p>
+  <p id="cast_hello_world">
+    <b>Hello world text for Chromecast</b>
   </p>
 </div>
 
@@ -97,3 +98,19 @@
     <%= link_to "Magic wand", play_audio_path("magic"), remote: true, class: :white_link %>
   </p>
 </div>
+
+<script>
+  // none of this is working...
+  $("#cast_hello_world").click(function() {
+    var frenchSubtitle = new chrome.cast.media.Track(2, // track ID
+    chrome.cast.media.TrackType.TEXT);
+    frenchSubtitle.trackContentType = 'text/vtt';
+    frenchSubtitle.subtype = chrome.cast.media.TextTrackType.SUBTITLES;
+    frenchSubtitle.name = 'Hello World';
+    frenchSubtitle.language = 'fr';
+    frenchSubtitle.customData = null;
+
+    var textTrackStyle = new chrome.cast.media.TextTrackStyle();
+    textTrackStyle.foregroundColor = '#80FF0000';
+  });
+</script>
