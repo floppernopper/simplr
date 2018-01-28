@@ -1,0 +1,23 @@
+<%= link_to 'javascript:;', class: :circle_menu_link do %>
+  <i></i>
+<% end %>
+
+<div id="slide_menu_hider" hidden>
+  <%= render "app/slide_menu" %>
+</div>
+
+<script>
+  var circle_menu = $(".circle_menu_link");
+  var slide_menu_hider = $("#slide_menu_hider");
+  var slide_toggle_link = $(".slide_menu_toggle_link");
+  var slide_menu = $(".slide_menu_container")
+  circle_menu.click(function() {
+    if (slide_menu_hider.is(':hidden')) {
+      slide_menu_hider.toggle();
+      slide_toggle_link.trigger("click");
+      if (slide_menu.hasClass("hiding_circle")) {
+        slide_menu.removeClass("hiding_circle");
+      }
+    }
+  });
+</script>
