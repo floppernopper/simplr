@@ -2,10 +2,10 @@
   function bands_fader_<%= target + "_" + target_id.to_s %>() {
     var target = $("#<%= target + (target_id.present? ? '_' + target_id.to_s : '') %>");
     
-//    target.click(function() {
-//      target.toggleClass("color_band_flipping");
-//      window.navigator.vibrate(1);
-//    });
+    target.click(function() {
+      target.toggleClass("color_band_flipping");
+      window.navigator.vibrate(1);
+    });
     
     // vars for color morphing
     var rgb = [0, 0, 0]; // the targets color values
