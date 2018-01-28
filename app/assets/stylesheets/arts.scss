@@ -23,6 +23,22 @@
   background: black;
 }
 
+.color_band_flipping {
+  animation: band_flip_morph 7.5s infinite alternate;
+}
+
+@keyframes band_flip_morph {
+  0% {
+    transform: rotatex(0deg);
+  }
+  50% {
+    transform: rotatex(180deg);
+  }
+  100% {
+    transform: rotatex(-360deg);
+  }
+}
+
 @keyframes spin_morph {
   0% {
     transform: rotatey(0deg);
