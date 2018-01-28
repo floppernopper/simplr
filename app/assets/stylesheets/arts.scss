@@ -7,6 +7,38 @@
 //2012 Tangerine Tango. Hex #DD4124. ...
 //2011 Honeysucle. Hex #D65076.
 
+@mixin circle_menu_section {
+  display: block;
+  width: 50%;
+  height: 50%;
+  float: left;
+}
+
+.circle_menu_section_top_left {
+  @include circle_menu_section;
+  border-top-left-radius: 100%;
+  background: pink;
+  
+}
+
+.circle_menu_section_top_right {
+  @include circle_menu_section;
+  border-top-right-radius: 100%;
+  background: lightblue;
+}
+
+.circle_menu_section_bottom_left {
+  @include circle_menu_section;
+  border-bottom-left-radius: 100%;
+  background: lightblue;
+}
+
+.circle_menu_section_bottom_right {
+  @include circle_menu_section;
+  border-bottom-right-radius: 100%;
+  background: pink;
+}
+
 .hiding_circle {
   border-radius: 50%;
   width: 0px;
