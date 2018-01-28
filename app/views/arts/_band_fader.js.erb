@@ -1,0 +1,41 @@
+<script>
+  function bands_fader_<%= target + "_" + target_id.to_s %>() {
+    var rgb = [0, 0, 0]; // the targets color values
+    var fat_rgb = [false, false, false]; // ensures pos/neg
+    var color_min = [<%= defined?(love) ? 200 : 1 %>, 1, 1]; // when it should go back up
+    var color_max = [255, 255, <%= defined?(love) ? 20 : 255 %>]; // when color should go back down
+    var change_rate = <%= defined?(slow) ? 0.25 : (defined?(fast) ? 1 : 0.5) %>; // added/subbed each round
+    var change_speed = <%= defined?(slow) ? 15 : (defined?(fast) ? 5 : 2.5) %>; // interval speed, higher == slower
+
+    for (var i=0; i < rgb.length; i++) {
+	    rgb[i] = Math.round(Math.random() * 255);
+    }
+    
+    setInterval(function() {
+	    // morphs all of rgb back and forth
+	    for (var i=0; i < 3; i++) {
+		    // flips colors direction of change
+		    if (rgb[i] <= color_min[i]) {
+			    fat_rgb[i] = false;
+		    } else if (rgb[i] >= color_max[i]) {
+			    fat_rgb[i] = true;
+		    }
+		    // fattens or shrinks primaries
+		    if (fat_rgb[i]) {
+			    rgb[i] -= change_rate;
+		    } else {
+			    rgb[i] += change_rate;
+		    }
+	    }
+	    // actually applies change
+	    var target = $("#<%= target + (target_id.present? ? '_' + target_id.to_s : '') %>");
+	    target.css("<%= defined?(background) ? 'background' : 'color' %>",
+	      "rgb(" + rgb[0] + ", " + <%= defined?(love) ? 0 : 'rgb[1]' %> + ", " + rgb[2] + ")");
+    }, change_speed);
+  }
+
+  if (!bands_fader_<%= target + "_" + target_id.to_s %>_started) {
+    bands_fader_<%= target + "_" + target_id.to_s %>();
+    var bands_fader_<%= target + "_" + target_id.to_s %>_started = true;
+  }
+</script>

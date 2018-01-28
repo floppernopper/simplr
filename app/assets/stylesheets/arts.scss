@@ -8,18 +8,19 @@
 //2011 Honeysucle. Hex #D65076.
 
 .color_band {
-  transition: all .4s ease-in-out;
+  position: relative;
   width: 100%;
+  height: 10%;
+  background: white;
 }
 
 .color_bands {
-  position: relative;
-  max-width: 550px;
-  margin: 0 auto;
-  margin-bottom: 12.5px;
-  margin-top: 15px;
-  width: 94.5%;
-  height: 50px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: white;
 }
 
 @keyframes spin_morph {

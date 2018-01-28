@@ -1,5 +1,13 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: [:show, :edit, :update, :destroy]
+  
+  def bands
+    @bands = @arts = true
+  end
+  
+  def love
+    @love = true
+  end
 
   # GET /arts
   # GET /arts.json
