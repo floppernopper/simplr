@@ -3,8 +3,9 @@
     // vars for color morphing
     var rgba = [0, 0, 0, 0]; // the targets color values
     var fat_rgba = [false, false, false, false]; // ensures pos/neg
-    var color_min = [<%= defined?(love) ? 200 : 1 %>, 1, 1, 0.0]; // when it should go back up
-    var color_max = [255, 255, <%= defined?(love) ? 20 : 255 %>, 1]; // when color should go back down
+    var color_min = [100, 100, 100, 0.5]; // when it should go back up
+    var color_max = [255, 255, <%= defined?(love) ? 20 : 255 %>, 1.0]; // when color should go back down
+    var a_change_rate = 0.1;
     
     // vars for color_bands Dance of Light!
     var height = 0, y_pos = 0; // vars for color_band animation
@@ -18,18 +19,18 @@
     // initialises color values randomly
     for (var i=0; i < rgba.length; i++) {
       if (i < 3) {
-  	    rgba[i] = Math.round(Math.random() * 255);
+  	    rgba[i] = Math.round(Math.random() * color_max[i]);
       } else {
   	    rgba[i] = (Math.random() * color_max[3]).toFixed(2);
       }
     }
     
-    height = Math.round(Math.random() * 100);
-    y_pos = Math.round(Math.random() * 100);
+    height = Math.round(Math.random() * height_max);
+    y_pos = Math.round(Math.random() * y_pos_max);
     
     setInterval(function() {
 	    // morphs all of rgba back and forth
-	    for (var i=0; i < 3; i++) {
+	    for (var i=0; i < rgba.length; i++) {
 		    // flips colors direction of change
 		    if (rgba[i] <= color_min[i]) {
 			    fat_rgba[i] = false;
@@ -38,9 +39,10 @@
 		    }
 		    // fattens or shrinks primaries
 		    if (fat_rgba[i]) {
-			    rgba[i] -= change_rate;
+		      if (fat_rgba[i] )
+			    rgba[i] -= (i < 3 ? change_rate : a_change_rate);
 		    } else {
-			    rgba[i] += change_rate;
+			    rgba[i] += (i < 3 ? change_rate : a_change_rate);
 		    }
 	    }
 
