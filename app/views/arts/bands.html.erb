@@ -1,6 +1,6 @@
 <div class="color_bands">
   <% 10.times do |i| %>
     <div class="color_band" id="color_band_<%= i %>"></div>
-    <%= render "arts/band_fader.js", target: "color_band", target_id: i, background: true, slow: true %>
+    <%= render "arts/band_fader.js", target: "color_band", target_id: i %>
   <% end %>
 </div>

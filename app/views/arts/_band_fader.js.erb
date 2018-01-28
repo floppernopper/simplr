@@ -3,36 +3,37 @@
     // vars for color morphing
     var rgb = [0, 0, 0]; // the targets color values
     var fat_rgb = [false, false, false]; // ensures pos/neg
-    var color_min = [100, 100, 100]; // when it should go back up
+    var color_min = [50, 50, 50]; // when it should go back up
     var color_max = [255, 255, 255]; // when color should go back down
     
     // vars for opacity
     var opacity = 0.5;
     var fat_opacity = false
-    opacity_min = 0.5;
+    opacity_min = 0.1;
     opacity_max = 1;
     
     // vars for color_bands Dance of Light!
     var height = 0, y_pos = 0; // vars for color_band animation
     var fat_height = false, fat_y_pos = false;
-    var height_min = 0, height_max = 100, y_pos_min = 0, y_pos_max = 100;
+    var height_min = 0, height_max = 10, y_pos_min = 0, y_pos_max = 100;
     
     // rates of change and speed of animation over time and between cycles
-    var change_rate = <%= defined?(slow) ? 0.25 : (defined?(fast) ? 1 : 0.5) %>; // added/subbed each round
-    var change_speed = <%= defined?(slow) ? 15 : (defined?(fast) ? 5 : 2.5) %>; // interval speed, higher == slower
-    var a_change_rate = 0.01;
+    var change_rate = 0.25, change_speed = 15;    
+    var a_change_rate = 0.05, h_change_rate = 0.075, y_change_rate = 0.05;
 
     // initialises color values randomly
     for (var i=0; i < rgb.length; i++) {
       if (i < 3) {
   	    rgb[i] = Math.round(Math.random() * color_max[i]);
-      } else {
-  	    rgb[i] = (Math.random() * color_max[3]).toFixed(2);
       }
-    }
+    } opacity = (Math.random() * opacity_max).toFixed(2) + opacity_min;
     
     height = Math.round(Math.random() * height_max);
     y_pos = Math.round(Math.random() * y_pos_max);
+    
+    fat_opacity = Math.random() >= 0.5;
+    fat_height = Math.random() >= 0.5;
+    fat_y_pos = Math.random() >= 0.5;
     
     setInterval(function() {
 	    // morphs all of rgb back and forth
@@ -72,9 +73,9 @@
 	    }
 	    // fattens or shrinks y_pos
 	    if (fat_height) {
-		    height -= change_rate;
+		    height -= h_change_rate;
 	    } else {
-		    height += change_rate;
+		    height += h_change_rate;
 	    }
   
 	    // morphs y_pos
@@ -85,18 +86,18 @@
 	    }
 	    // fattens or shrinks y_pos
 	    if (fat_y_pos) {
-		    y_pos -= change_rate;
+		    y_pos -= y_change_rate;
 	    } else {
-		    y_pos += change_rate;
+		    y_pos += y_change_rate;
 	    }
     
 	    // actually applies change
 	    var target = $("#<%= target + (target_id.present? ? '_' + target_id.to_s : '') %>");
-	    target.css("background", "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")");
       target.css({
+        'background' : "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")",
         'opacity' : opacity,
-        'height' : height,
-        'y_pos' : y_pos
+        'height' : height + "%",
+        'y_pos' : y_pos + "%"
       });
     }, change_speed);
   }
