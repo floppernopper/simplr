@@ -17,26 +17,26 @@
 .circle_menu_section_top_left {
   @include circle_menu_section;
   border-top-left-radius: 100%;
-  background: pink;
+  background: lightblue;
   
 }
 
 .circle_menu_section_top_right {
   @include circle_menu_section;
   border-top-right-radius: 100%;
-  background: lightblue;
+  background: pink;
 }
 
 .circle_menu_section_bottom_left {
   @include circle_menu_section;
   border-bottom-left-radius: 100%;
-  background: lightblue;
+  background: pink;
 }
 
 .circle_menu_section_bottom_right {
   @include circle_menu_section;
   border-bottom-right-radius: 100%;
-  background: pink;
+  background: lightblue;
 }
 
 .hiding_circle {
