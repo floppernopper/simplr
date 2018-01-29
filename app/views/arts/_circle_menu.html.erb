@@ -1,0 +1,31 @@
+<div class="circle_menu_container">
+  <%= link_to 'javascript:;', class: :circle_menu_link do %>
+    <i class="circle_menu_section_top_left"></i>
+    <i class="circle_menu_section_top_right"></i>
+    <i class="circle_menu_section_bottom_left"></i>
+    <i class="circle_menu_section_bottom_right"></i>
+  <% end %>
+  <div id="nav_links" hidden>
+    <%= render "app/nav_links" %>
+  </div>
+</div>
+
+<script>
+  var circle_menu = $(".circle_menu_link");
+  var nav_links = $("#nav_links");
+  circle_menu.click(function() {
+    circle_menu.toggleClass("circle_menu_rotate");
+    
+    
+    if (nav_links.is(':hidden')) {
+      //setTimeout(toggle_nav_links, 400);
+    } else {
+      //nav_links.fadeOut();
+    }
+    
+    window.navigator.vibrate(1);
+  });
+  function toggle_nav_links() {
+    nav_links.fadeIn();
+  }
+</script>
