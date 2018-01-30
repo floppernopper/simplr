@@ -1,8 +1,9 @@
 <div class="top_line_fader"></div>
 <div id="spacing_header"></div>
 
+<%= render "arts/circle_menu" %>
+
 <% unless @arts %>
-  <%= render "app/slide_menu" %>  
   <%= link_to '<i class="fa fa-home fa-lg"></i>'.html_safe, root_url,
     class: :return_home_link, title: "Return home" unless @you_are_home %>
 
@@ -13,8 +14,6 @@
   <%= render "messages/nav_link" %>
 
   <%= render "users/current_avatar" %>
-<% else %>
-  <%= render "arts/circle_menu" %>
 <% end %>
 
 <div id="universal_anchor"></div>
