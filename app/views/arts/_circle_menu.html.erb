@@ -21,7 +21,12 @@
   
   var nav_links = $("#nav_links");
   
+  // fix for nav_links  
+  var toggle = false;
+  
   circle_link.click(function() {
+    toggle = !toggle;
+    
     circle_menu.toggleClass("circle_menu_open");
     circle_link.toggleClass("circle_menu_rotate");
     
@@ -42,6 +47,8 @@
     circle_section_br.toggleClass("circle_bottom_right_shift");
   }
   function toggle_nav_links() {
-    nav_links.fadeIn();
+    if (toggle) {
+      nav_links.fadeIn();
+    }
   }
 </script>

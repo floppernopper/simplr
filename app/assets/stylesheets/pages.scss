@@ -2,6 +2,95 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.circle_top_left_shift {
+  transform: translate(-2.5px, -2.5px);
+}
+
+.circle_top_right_shift {
+  transform: translate(2.5px, -2.5px);
+}
+
+.circle_bottom_left_shift {
+  transform: translate(2.5px, 2.5px);
+}
+
+.circle_bottom_right_shift {
+  transform: translate(-2.5px, 2.5px);
+}
+
+.circle_menu_nav_links {
+  padding-top: 17.5px;
+  padding-left: 7.5px;
+}
+
+.circle_menu_container {
+  transition: all .4s ease-in-out;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+}
+
+.circle_menu_open {
+	background: rgb(10, 10, 10);
+  width: 100%;
+  height: 100%;
+}
+
+.circle_menu_link {
+  transition: all .4s ease-out;
+  position: relative;
+  top: 10px;
+  left: 10px;
+  display: block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: lightblue;
+}
+
+.circle_menu_rotate {
+  transform-origin: 10px 10px;
+  transform: rotate(225deg);
+  //box-shadow: -1.25px -1.25px 1.25px rgb(255,192,203);
+  background: #72FE95;
+}
+
+@mixin circle_menu_section {
+  transition: all .4s ease-in-out;
+  display: block;
+  width: 50%;
+  height: 50%;
+  float: left;
+}
+
+.circle_menu_section_top_left {
+  @include circle_menu_section;
+  border-top-left-radius: 100%;
+  background: lightblue;
+  
+}
+
+.circle_menu_section_top_right {
+  @include circle_menu_section;
+  border-top-right-radius: 100%;
+  background: pink;
+}
+
+.circle_menu_section_bottom_left {
+  @include circle_menu_section;
+  border-bottom-left-radius: 100%;
+  background: pink;
+}
+
+.circle_menu_section_bottom_right {
+  @include circle_menu_section;
+  border-bottom-right-radius: 100%;
+  background: lightblue;
+}
+
 .loading_gif {
   width: 40%;
   margin-top: 50px;
