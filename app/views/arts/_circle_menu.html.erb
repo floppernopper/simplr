@@ -5,22 +5,24 @@
     <i class="circle_menu_section_bottom_left"></i>
     <i class="circle_menu_section_bottom_right"></i>
   <% end %>
-  <div id="nav_links" hidden>
+  <div id="nav_links" class="circle_menu_nav_links" hidden>
     <%= render "app/nav_links" %>
   </div>
 </div>
 
 <script>
-  var circle_menu = $(".circle_menu_link");
+  var circle_menu = $(".circle_menu_container");
+  var circle_link = $(".circle_menu_link");
   var nav_links = $("#nav_links");
-  circle_menu.click(function() {
-    circle_menu.toggleClass("circle_menu_rotate");
+  circle_link.click(function() {
+    circle_menu.toggleClass("circle_menu_open");
+    circle_link.toggleClass("circle_menu_rotate");
     
     
     if (nav_links.is(':hidden')) {
-      //setTimeout(toggle_nav_links, 400);
+      setTimeout(toggle_nav_links, 400);
     } else {
-      //nav_links.fadeOut();
+      nav_links.fadeOut();
     }
     
     window.navigator.vibrate(1);
