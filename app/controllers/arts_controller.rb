@@ -6,7 +6,7 @@ class ArtsController < ApplicationController
   end
   
   def love
-    @love = true
+    @love = @arts = true
   end
 
   # GET /arts
