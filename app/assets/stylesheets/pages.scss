@@ -77,18 +77,22 @@
 }
 .circle_top_left_shift {
   transform: translate(-2.5px, -2.5px);
+  background: pink;
 }
 
 .circle_top_right_shift {
   transform: translate(2.5px, -2.5px);
+  background: lightblue;
 }
 
 .circle_bottom_left_shift {
   transform: translate(2.5px, 2.5px);
+  background: pink;
 }
 
 .circle_bottom_right_shift {
   transform: translate(-2.5px, 2.5px);
+  background: lightblue;
 }
 
 .loading_gif {
