@@ -14,32 +14,28 @@
   function circle_menu() {
     var circle_menu = $(".circle_menu_container");
     var circle_link = $(".circle_menu_link");
-    
+    // sections inside of circle_menu_link
     var circle_section_tl = $(".circle_menu_section_top_left");
     var circle_section_tr = $(".circle_menu_section_top_right");
     var circle_section_br = $(".circle_menu_section_bottom_left");
     var circle_section_bl = $(".circle_menu_section_bottom_right");
-    
+    // padding for nav_links, positioning
     var nav_links = $("#nav_links");
-    
     // fix for nav_links  
     var toggle = false;
-    
     circle_link.click(function() {
       toggle = !toggle;
-      
       circle_menu.toggleClass("circle_menu_open");
-      
       circle_link.toggleClass("circle_menu_rotate");
-      
+      // circle_menu sections all slide outward
       toggle_section_shift();
-      
+      // nav_links render on delay
       if (nav_links.is(':hidden')) {
         setTimeout(toggle_nav_links, 400);
       } else {
         nav_links.fadeOut();
       }
-      
+      // haptic
       window.navigator.vibrate(1);
     });
     function toggle_nav_links() {
