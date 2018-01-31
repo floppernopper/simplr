@@ -18,7 +18,13 @@
     var toggle_link = $(".notes_slide_menu_toggle_link");
     var link_icon = $("#notes_slide_icon");
     var dropdown = $("#notes_dropdown");
+    
+    // fix for nav_links  
+    var toggle = false;
+    
     toggle_link.click(function(){
+      toggle = !toggle;
+
       slide_menu.toggleClass("slide_menu_open");
       toggle_link.toggleClass("notes_icon_spins");
       link_icon.toggleClass("plus_fade");
@@ -30,7 +36,9 @@
       window.navigator.vibrate(1);
     });
     function toggle_dropdown() {
-      dropdown.fadeIn();
+      if (toggle) {
+        dropdown.fadeIn();
+      }
     }
   }
   notes_dropdown_side_on_out();
