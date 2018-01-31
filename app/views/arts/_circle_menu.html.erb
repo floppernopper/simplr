@@ -11,44 +11,47 @@
 </div>
 
 <script>
-  var circle_menu = $(".circle_menu_container");
-  var circle_link = $(".circle_menu_link");
-  
-  var circle_section_tl = $(".circle_menu_section_top_left");
-  var circle_section_tr = $(".circle_menu_section_top_right");
-  var circle_section_br = $(".circle_menu_section_bottom_left");
-  var circle_section_bl = $(".circle_menu_section_bottom_right");
-  
-  var nav_links = $("#nav_links");
-  
-  // fix for nav_links  
-  var toggle = false;
-  
-  circle_link.click(function() {
-    toggle = !toggle;
+  function circle_menu() {
+    var circle_menu = $(".circle_menu_container");
+    var circle_link = $(".circle_menu_link");
     
-    circle_menu.toggleClass("circle_menu_open");
-    circle_link.toggleClass("circle_menu_rotate");
+    var circle_section_tl = $(".circle_menu_section_top_left");
+    var circle_section_tr = $(".circle_menu_section_top_right");
+    var circle_section_br = $(".circle_menu_section_bottom_left");
+    var circle_section_bl = $(".circle_menu_section_bottom_right");
     
-    setTimeout(toggle_section_shift, 400);
+    var nav_links = $("#nav_links");
     
-    if (nav_links.is(':hidden')) {
-      setTimeout(toggle_nav_links, 400);
-    } else {
-      nav_links.fadeOut();
+    // fix for nav_links  
+    var toggle = false;
+    
+    circle_link.click(function() {
+      toggle = !toggle;
+      
+      circle_menu.toggleClass("circle_menu_open");
+      
+      circle_link.toggleClass("circle_menu_rotate");
+      
+      toggle_section_shift();
+      
+      if (nav_links.is(':hidden')) {
+        setTimeout(toggle_nav_links, 400);
+      } else {
+        nav_links.fadeOut();
+      }
+      
+      window.navigator.vibrate(1);
+    });
+    function toggle_nav_links() {
+      if (toggle) {
+        nav_links.fadeIn();
+      }
     }
-    
-    window.navigator.vibrate(1);
-  });
-  function toggle_section_shift() {
-    circle_section_tl.toggleClass("circle_top_left_shift");
-    circle_section_tr.toggleClass("circle_top_right_shift");
-    circle_section_bl.toggleClass("circle_bottom_left_shift");
-    circle_section_br.toggleClass("circle_bottom_right_shift");
-  }
-  function toggle_nav_links() {
-    if (toggle) {
-      nav_links.fadeIn();
+    function toggle_section_shift() {
+      circle_section_tl.toggleClass("circle_top_left_shift");
+      circle_section_tr.toggleClass("circle_top_right_shift");
+      circle_section_bl.toggleClass("circle_bottom_left_shift");
+      circle_section_br.toggleClass("circle_bottom_right_shift");
     }
-  }
+  } circle_menu();
 </script>
