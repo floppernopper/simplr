@@ -22,7 +22,7 @@
     
   </head>
   <body>
-    <%= render "app/header" if (invited? or anrcho?) and not (@cluster_flier_page or @forrest_web_co or @down) %>
+    <%= render "app/header" if (invited? or anrcho? or @arts) and not (@cluster_flier_page or @forrest_web_co or @down) %>
     <%= yield %>
     <%= render "app/footer" unless @down or @cluster_flier_page %>
   </body>
