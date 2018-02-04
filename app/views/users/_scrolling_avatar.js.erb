@@ -1,74 +1,76 @@
-<script>
-  /*
+<% if dev? %>
+  <script>
+    /*
 
-    Scrolling Avatar
-    
-    Finds the post/motion on the page that is closest to being in the vertical center
-    Updates the username/avatar displayed at the bottom left when a vertically centered post is found
-    
-      Written by Forrest Wilkins
+      Scrolling Avatar
       
+      Finds the post/motion on the page that is closest to being in the vertical center
+      Updates the username/avatar displayed at the bottom left when a vertically centered post is found
       
-    Could just find center of page and center of post and see if both match instead of dealing with margin
-    like oscar said
-    
-  */
+        Written by Forrest Wilkins
+        
+        
+      Could just find center of page and center of post and see if both match instead of dealing with margin
+      like oscar said
+      
+    */
 
-  var leeway_dist = 150;
-  var check_rate = 15;
-  
-  $(window).bindWithDelay("scroll", function() {
-    // initializes vars for getting closest post to center
-    var closest_dist = null
-    var closest = null;
+    var leeway_dist = 150;
+    var check_rate = 15;
     
-    // loops through every post/motion on the page
-    $(".standard_content_card").each(function() {
-      // gets height of screen and *this* post card
-      var screen_height = $(window).height();
-      var card_height = $(this).height();
+    $(window).bindWithDelay("scroll", function() {
+      // initializes vars for getting closest post to center
+      var closest_dist = null
+      var closest = null;
       
-      // gets margins between post and vertical
-      var margins = Math.abs(screen_height - card_height);
-      var margin = margins / 2;
-      
-      // how many px from top of card to top of screen
-      var from_top = Math.abs($(this).offset().top - $(window).scrollTop());
-      // gets post card's distance from being vertically centered on page
-      var dist_fr_center = Math.abs(margin - from_top);
-      
-      // only updates avatar if at least in range of X px's from center
-      if (dist_fr_center <= leeway_dist) {
-        // finds the post card that is the closest to the vertical center
-        if (closest == null || dist_fr_center < closest_dist) {
-          closest_dist = dist_fr_center;
-          closest = $(this);
+      // loops through every post/motion on the page
+      $(".standard_content_card").each(function() {
+        // gets height of screen and *this* post card
+        var screen_height = $(window).height();
+        var card_height = $(this).height();
+        
+        // gets margins between post and vertical
+        var margins = Math.abs(screen_height - card_height);
+        var margin = margins / 2;
+        
+        // how many px from top of card to top of screen
+        var from_top = Math.abs($(this).offset().top - $(window).scrollTop());
+        // gets post card's distance from being vertically centered on page
+        var dist_fr_center = Math.abs(margin - from_top);
+        
+        // only updates avatar if at least in range of X px's from center
+        if (dist_fr_center <= leeway_dist) {
+          // finds the post card that is the closest to the vertical center
+          if (closest == null || dist_fr_center < closest_dist) {
+            closest_dist = dist_fr_center;
+            closest = $(this);
+          }
         }
+      });
+      
+      
+      // output margin, from_top, dist_fr_center, next to name
+      
+      
+      // if a closest to center post was found
+      if (closest != null) {
+        // update scrolling avatar/username
+        var item_str = closest.attr('id').split('_');
+        var item_id = item_str[2];
+        var param = null; param = (item_str[0] == 'post') ? $.param({ post_id: item_id }) : $.param({ proposal_id: item_id });
+        $.ajax({
+	        type: "GET",
+	        url: "/users/update_scrolling_avatar",
+	        data: param
+        });
       }
-    });
-    
-    
-    // output margin, from_top, dist_fr_center, next to name
-    
-    
-    // if a closest to center post was found
-    if (closest != null) {
-      // update scrolling avatar/username
-      var item_str = closest.attr('id').split('_');
-      var item_id = item_str[2];
-      var param = null; param = (item_str[0] == 'post') ? $.param({ post_id: item_id }) : $.param({ proposal_id: item_id });
-      $.ajax({
-	      type: "GET",
-	      url: "/users/update_scrolling_avatar",
-	      data: param
-      });
-    }
-    
-    // scrolling_avatar fades away if scrolled back to the top
-    if ($(window).scrollTop() < 5) {
-      $(".scrolling_avatar").each(function() {
-        $(this).fadeOut();
-      });
-    }
-  }, check_rate);
-</script>
+      
+      // scrolling_avatar fades away if scrolled back to the top
+      if ($(window).scrollTop() < 5) {
+        $(".scrolling_avatar").each(function() {
+          $(this).fadeOut();
+        });
+      }
+    }, check_rate);
+  </script>
+<% end %>
