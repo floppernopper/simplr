@@ -1,6 +1,6 @@
 <% if item.user and item.user.image %>
   <div class="<%= defined?(position) ? position.to_s : 'left_mini_avatar' %>">
-    <%= link_to show_user_path(user.unique_token),
+    <%= link_to show_user_path(item.user.unique_token),
       title: "#{item.user.name}" + (last_locale(item.user).present? ? ", #{last_locale item.user}" : "") do %>
       <%= image_tag item.user.image, class: :user_avatar_image %>
     <% end %>
