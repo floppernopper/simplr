@@ -43,7 +43,7 @@
 }
 
 @mixin circle_menu_section {
-  transition: all .6s ease-in .4s;
+  transition: all .6s ease-in-out .4s;
   display: block;
   width: 50%;
   height: 50%;
