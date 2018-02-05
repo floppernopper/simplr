@@ -25,7 +25,7 @@
 }
 
 .circle_menu_link {
-  transition: all .4s ease-in;
+  transition: all .4s ease-out;
   position: relative;
   top: 10px;
   left: 10px;
@@ -43,7 +43,7 @@
 }
 
 @mixin circle_menu_section {
-  transition: all .6s ease-out .4s;
+  transition: all .6s ease-in .4s;
   display: block;
   width: 50%;
   height: 50%;
