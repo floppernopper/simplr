@@ -25,7 +25,7 @@
 }
 
 .circle_menu_link {
-  transition: all .4s ease-out;
+  transition: all .4s ease-in;
   position: relative;
   top: 10px;
   left: 10px;
@@ -43,7 +43,7 @@
 }
 
 @mixin circle_menu_section {
-  transition: all .4s ease-in-out .4s;
+  transition: all .6s ease-out .4s;
   display: block;
   width: 50%;
   height: 50%;
@@ -74,24 +74,29 @@
   border-bottom-right-radius: 100%;
   background: lightblue;
 }
+
 .circle_top_left_shift {
   transform: translate(-2.5px, -2.5px);
   background: pink;
+  box-shadow: -1.5px -1.5px 1.5px lightblue;
 }
 
 .circle_top_right_shift {
   transform: translate(2.5px, -2.5px);
   background: lightblue;
+  box-shadow: 1.5px -1.5px 1.5px pink;
 }
 
 .circle_bottom_left_shift {
   transform: translate(2.5px, 2.5px);
   background: pink;
+  box-shadow: 1.5px 1.5px 1.5px lightblue;
 }
 
 .circle_bottom_right_shift {
   transform: translate(-2.5px, 2.5px);
   background: lightblue;
+  box-shadow: -1.5px 1.5px 1.5px pink;
 }
 
 .loading_gif {
