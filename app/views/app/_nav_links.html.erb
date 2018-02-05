@@ -24,7 +24,7 @@
   
   <%= link_to fa_icon("cog", "Settings"), settings_path, class: :standard_nav_menu_link %>
   
-  <% if current_user.active_powers.present? %>
+  <% if current_user.active_powers.present? and current_user.treasures.find_by_power 'discover' %>
     <script>
       <%= render "app/fader.js", target: "power_nav_menu_link", target_id: "" %>
     </script>
