@@ -15,10 +15,19 @@
     </p>
   </div>
   
+  <div class="love_message_card" id="check_back" align="center" hidden>
+    <p>
+      Check back on
+      </br>
+      February 14...
+    </p>
+  </div>
+  
   <script>
     var love_kristin = $("#love_kristin_card");
     var anniversary = $("#anniversary_card");
     var heart = $("#heart_container");
+    var check_back = $("#check_back");
     
     heart.click(function() {
       love_kristin.fadeIn();
@@ -33,10 +42,19 @@
     });
     
     anniversary.click(function() {
-      love_kristin.fadeOut();
-      anniversary.fadeOut();
+      check_back.fadeIn();
       // haptic
       window.navigator.vibrate(1);
     });
+    
+    check_back.click(function() {
+      love_kristin.fadeOut();
+      anniversary.fadeOut();
+      check_back.fadeOut();
+      // haptic
+      window.navigator.vibrate(1);
+    });
+    
+    
   </script>
 </div>
