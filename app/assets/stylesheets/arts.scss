@@ -7,6 +7,48 @@
 //2012 Tangerine Tango. Hex #DD4124. ...
 //2011 Honeysucle. Hex #D65076.
 
+@keyframes love_card_glow {
+  0% {
+    box-shadow: -7.5px -7.5px 7.5px red;
+  }
+  100% {
+    box-shadow: 7.5px 7.5px 7.5px red;
+  }
+}
+
+.love_message_card {
+  position: relative;
+  max-width: 550px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 54.5%;
+  background: white;
+  color: red;
+  font-weight: bold;
+  animation: love_card_glow 7.5s infinite alternate;
+}
+
+.love_message_button {
+  
+}
+
+.love_message_field {
+  display: block;
+  margin-top: 15px;
+}
+
+.love_message_form_card {
+  position: relative;
+  max-width: 550px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  width: 54.5%;
+  background: white;
+  animation: love_card_glow 7.5s infinite alternate;
+}
+
 .heart_container {
   position: relative;
   max-width: 550px;
@@ -17,6 +59,7 @@
   padding-bottom: 40px;
   width: 54.5%;
   background: white;
+  animation: love_card_glow 7.5s infinite alternate;
 }
 
 .heart {

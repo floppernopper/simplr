@@ -1,9 +1,36 @@
 <div class="love_modal" align="center">
-  <div class="heart_container">
+  <div class="heart_container" id="heart_container">
     <div class="heart" id="heart"></div>
   </div>
+  
+  <div class="love_message_card" align="center" id="love_kristin_card" hidden>
+    <p>
+      I love you, Kristin ♥
+    </p>
+  </div>
+  
+  <div class="love_message_card" id="anniversary_card" align="center" hidden>
+    <p>
+      Happy Anniversary!
+    </p>
+  </div>
+  
+  <script>
+    var love_kristin = $("#love_kristin_card");
+    var anniversary = $("#anniversary_card");
+    var heart = $("#heart_container");
+    
+    
+    heart.click(function() {
+      love_kristin.fadeIn();
+      // haptic
+      window.navigator.vibrate(1);
+    });
+    
+    love_kristin.click(function() {
+      anniversary.fadeIn();
+      // haptic
+      window.navigator.vibrate(1);
+    });
+  </script>
 </div>
-
-<script>
-  //$("#heart").css({ transform: 'scale(1.5)' });
-</script>

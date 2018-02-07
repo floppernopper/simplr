@@ -1,5 +1,9 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: [:show, :edit, :update, :destroy]
+  before_action :kristin_and_forrest_only, only: [:love, :create_love_message]
+  
+  def create_love_message
+  end
   
   def bands
     @bands = @arts = true
@@ -7,6 +11,7 @@ class ArtsController < ApplicationController
   
   def love
     @love = @arts = true
+    @message = Message.new
   end
 
   # GET /arts
@@ -70,13 +75,20 @@ class ArtsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_art
-      @art = Art.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def art_params
-      params.fetch(:art, {})
+  def kristin_and_forrest_only
+    unless currently_kristin? or god?
+      redirect_to '/404' unless Rails.env.development?
     end
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_art
+    @art = Art.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def art_params
+    params.fetch(:art, {})
+  end
 end

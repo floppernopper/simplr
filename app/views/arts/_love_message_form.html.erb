@@ -1,0 +1,10 @@
+<div class="love_message_form_card">
+  <%= form_for @message, url: love_messages_path, method: :post, remote: true do |f| %>
+  
+		<%= f.text_area :body, placeholder: "Send a message...", class: :love_message_field %>
+  
+    <button type="submit" name="commit" class="love_message_button">
+      Send <i class="fa fa-heart"></i>
+    </button>
+  <% end %>
+</div>
