@@ -5,7 +5,7 @@ module ArtsHelper
       tealish: '#ade6d8',
       serenity: '#008080',
       emerald: '#009B77',
-      tangerine_tango: '#FF5353',
+      love: '#FF5353',
       honeysucle: '#b1ffb1',
       radiand_orchid: '#ffc0cb',
       tang_milde: '#ffc04d',

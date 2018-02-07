@@ -16,6 +16,14 @@
   }
 }
 
+.love_art_card {
+  margin-top: 12.5px;
+  width: 50%;
+  background: red;
+  // to stop margins from collapsing
+  overflow: auto;
+}
+
 .love_message_card {
   position: relative;
   max-width: 550px;
