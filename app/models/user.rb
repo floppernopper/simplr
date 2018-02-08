@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :portals
   has_many :groups
   
-  # ecommerce associations
+  # ecommerce associations 
   has_many :orders
   has_many :products, dependent: :destroy
   has_one :wish_list, dependent: :destroy
