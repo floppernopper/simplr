@@ -3,58 +3,52 @@
     <div class="heart" id="heart"></div>
   </div>
   
-  <div class="love_message_card" align="center" id="love_kristin_card" hidden>
-    <p>
-      I love you, Kristin ♥
-    </p>
-  </div>
+  <% if in_dev? or god?; img_size = 2 %>
+    <div class="love_message_carousel_card" id="carousel_card" hidden>
+      <% img_size.times do |i| %>
+        <%= image_tag "love/#{i}.jpg",
+          class: :love_message_carousel_img, id: "love_message_carousel_img_#{i}", hidden: !i.zero? %>
+      <% end %>
+    </div>
+    
+    <div class="love_message_card" id="happy_valentines" align="center" hidden>
+      <p>
+        Happy Valentines Day!
+      </p>
+    </div>
   
-  <div class="love_message_card" id="anniversary_card" align="center" hidden>
-    <p>
-      XOXOXOXO
-    </p>
-  </div>
-  
-  <div class="love_message_card" id="check_back" align="center" hidden>
-    <p>
-      Check back on
-      </br>
-      February 14...
-    </p>
-  </div>
-  
-  <script>
-    var love_kristin = $("#love_kristin_card");
-    var anniversary = $("#anniversary_card");
-    var heart = $("#heart_container");
-    var check_back = $("#check_back");
     
-    heart.click(function() {
-      love_kristin.fadeIn();
-      // haptic
-      window.navigator.vibrate(1);
-    });
-    
-    love_kristin.click(function() {
-      anniversary.fadeIn();
-      // haptic
-      window.navigator.vibrate(1);
-    });
-    
-    anniversary.click(function() {
-      check_back.fadeIn();
-      // haptic
-      window.navigator.vibrate(1);
-    });
-    
-    check_back.click(function() {
-      love_kristin.fadeOut();
-      anniversary.fadeOut();
-      check_back.fadeOut();
-      // haptic
-      window.navigator.vibrate(1);
-    });
-    
-    
-  </script>
+    <script>
+      var heart = $("#heart_container");
+      var valentines = $("#happy_valentines");
+      var carousel = $("#carousel_card");
+      var img_id = 0;
+      
+      carousel.click(function() {
+        var current_img = $("#love_message_carousel_img_" + img_id);
+        current_img.toggle();
+      
+        if (img_id < <%= img_size %>-1) {
+          img_id++;
+        } else {
+          img_id = 0;
+          valentines.fadeIn();
+        }
+        
+        current_img = $("#love_message_carousel_img_" + img_id);
+        current_img.toggle();
+        // haptic
+        window.navigator.vibrate(1);
+      });
+      
+      heart.click(function() {
+        carousel.fadeIn();
+      });
+      
+      valentines.click(function() {
+        valentines.fadeOut();
+        carousel.fadeOut();
+      });
+    </script>
+  <% end %>
 </div>
