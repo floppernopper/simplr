@@ -9,6 +9,7 @@
         <%= image_tag "love/#{i}.jpg",
           class: :love_message_carousel_img, id: "love_message_carousel_img_#{i}", hidden: !i.zero? %>
       <% end %>
+      </br>
     </div>
     
     <div class="love_message_card" id="happy_valentines" align="center" hidden>
@@ -32,7 +33,8 @@
           img_id++;
         } else {
           img_id = 0;
-          valentines.fadeIn();
+          valentines.toggle();
+          $("html, body").animate({ scrollTop: $(document).height() }, 500);
         }
         
         current_img = $("#love_message_carousel_img_" + img_id);
@@ -42,12 +44,12 @@
       });
       
       heart.click(function() {
-        carousel.fadeIn();
+        carousel.toggle();
       });
       
       valentines.click(function() {
-        valentines.fadeOut();
-        carousel.fadeOut();
+        valentines.toggle();
+        carousel.toggle();
       });
     </script>
   <% end %>
