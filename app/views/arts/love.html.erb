@@ -44,11 +44,15 @@
       
       heart.click(function() {
         carousel.toggle();
+        // haptic
+        window.navigator.vibrate(1);
       });
       
       valentines.click(function() {
         valentines.toggle();
         carousel.toggle();
+        // haptic
+        window.navigator.vibrate(1);
       });
     </script>
   <% end %>
