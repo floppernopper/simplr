@@ -1,4 +1,4 @@
-<div class="love_modal" align="center">
+<div class="love_modal" id="love_modal" align="center">
   <div class="heart_container" id="heart_container">
     <div class="heart" id="heart"></div>
   </div>
@@ -9,7 +9,6 @@
         <%= image_tag "love/#{i}.jpg",
           class: :love_message_carousel_img, id: "love_message_carousel_img_#{i}", hidden: !i.zero? %>
       <% end %>
-      </br>
     </div>
     
     <div class="love_message_card" id="happy_valentines" align="center" hidden>
@@ -34,7 +33,7 @@
         } else {
           img_id = 0;
           valentines.toggle();
-          $("html, body").animate({ scrollTop: $(document).height() }, 500);
+          $("#love_modal").animate({ scrollTop: $(document).height() }, 500);
         }
         
         current_img = $("#love_message_carousel_img_" + img_id);
