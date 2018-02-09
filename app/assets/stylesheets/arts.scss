@@ -27,7 +27,7 @@
 
 /* Animation */
 .anim_typewriter {
-  animation: typewriter 4s steps(44) 1s 1 normal both,
+  animation: typewriter 4s steps(30) 1s 1 normal both,
              blink_text_cursor 500ms steps(44) infinite normal;
 }
 
@@ -45,7 +45,7 @@
     width: 0;
   }
   to {
-    width: 16em;
+    width: 8em;
   }
 }
 
@@ -62,6 +62,7 @@
   font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
   //font-weight: bold;
   font-size: 20px;
+  color: #cd5c5c;
   width: 50%;
   margin-top: 5%;
   -webkit-user-select: none; /* Safari */
