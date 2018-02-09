@@ -241,12 +241,13 @@ Rails.application.routes.draw do
   get 'reset_game_interface', to: 'games#reset_interface', as: 'reset_game_interface'
   get 'show_game/:token', to: 'games#show', as: 'show_game'
   get 'my_games', to: 'games#my_games', as: 'my_games'
-  
+
   # arts
   get 'love', to: 'arts#love', as: 'love'
   get 'bands', to: 'arts#bands', as: 'bands'
   post 'love_message', to: 'arts#create_love_message', as: 'love_messages'
   get 'paper', to: 'arts#paper', as: 'paper'
+  get 'my_favorite_color', to: 'arts#my_favorite_color', as: 'my_favorite_color'
 
   resources :proposals do
     resources :comments

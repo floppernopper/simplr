@@ -10,7 +10,7 @@
 <div class="art_card" align="center">
   <div class="color_palette">
     <%  i=0; for color in color_palette.values %>
-      <%= link_to (i==4 ? love_path : 'javascript:;') do %>
+      <%= link_to (i==4 ? love_path : (i==0 ? my_favorite_color_path : 'javascript:;')) do %>
       <div class="palette_color"
         style="background:<%= color %>;width:<%= 100.0 / color_palette.size.to_f %>%;"></div>
       <% end; i+=1 %>
@@ -19,5 +19,13 @@
 </div>
 
 <%= render "arts/color_block" %>
+
+<div class="art_card art_spacer"></div>
+
+<div class="art_card surreal_card" align="center">
+  <p class="surreal_txt">
+    surreal
+  </p>
+</div>
 
 </br>
