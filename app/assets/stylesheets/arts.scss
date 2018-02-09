@@ -7,13 +7,71 @@
 //2012 Tangerine Tango. Hex #DD4124. ...
 //2011 Honeysucle. Hex #D65076.
 
+.paper_spin {
+  transform: rotateX(180deg);
+  animation: quick_color_morph 1s normal both,
+}
+
+.line_1 {
+    position: relative;
+    top: 50%;
+    width: 241;
+    margin: 0 auto;
+    border-right: 2px solid rgba(255,255,255,.75);
+    font-size: 180%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);
+}
+
+/* Animation */
+.anim_typewriter {
+  animation: typewriter 4s steps(44) 1s 1 normal both,
+             blink_text_cursor 500ms steps(44) infinite normal;
+}
+
+@keyframes quick_color_morph {
+  from {
+    background: #d7fada;
+  }
+  to {
+    background: #faebd7;
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 16em;
+  }
+}
+
+@keyframes blink_text_cursor {
+  from {
+    border-right-color: #dad7fa;
+  }
+  to {
+    border-right-color: transparent;
+  }
+}
+
 .paper_txt {
   font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  //font-weight: bold;
+  font-size: 20px;
   width: 50%;
-  padding-top: 47.5%;
+  margin-top: 5%;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 .art_card {
+  transition: all 1s ease-in-out;
   position: relative;
   background: #CEFFFD;
   border: 0px solid white;
@@ -29,7 +87,6 @@
 .paper_card {
   height: 80%;
   background: #faebd7;
-  font-size: 20px;
 }
 
 .paper_modal {

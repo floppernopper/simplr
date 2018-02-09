@@ -1,7 +1,21 @@
 <div class="paper_modal" id="paper_modal">
-  <div class="art_card paper_card" align="center" style="margin-top:60px;">
-    <div class="paper_txt">
+  <div class="art_card paper_card" id="therefore" align="center" style="margin-top:50px;">
+    <div class="paper_txt line_1 anim_typewriter">
       We think, therefore we are
     </div>
   </div>
 </div>
+
+<script>
+  var therefore = $("#therefore");
+
+  therefore.click(function() {
+    paper_spin();
+    setTimeout(paper_spin, 500);
+    // haptic
+    window.navigator.vibrate(1);
+  });
+  function paper_spin() {
+    therefore.toggleClass("paper_spin");
+  }
+</script>
