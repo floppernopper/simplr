@@ -246,6 +246,7 @@ Rails.application.routes.draw do
   get 'love', to: 'arts#love', as: 'love'
   get 'bands', to: 'arts#bands', as: 'bands'
   post 'love_message', to: 'arts#create_love_message', as: 'love_messages'
+  get 'paper', to: 'arts#paper', as: 'paper'
 
   resources :proposals do
     resources :comments

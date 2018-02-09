@@ -1,16 +1,21 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: [:show, :edit, :update, :destroy]
   before_action :kristin_and_forrest_only, only: [:love, :create_love_message]
+  before_action :arts, only: [:paper, :bands, :love]
+  
+  def paper
+    @paper = true
+  end
   
   def create_love_message
   end
   
   def bands
-    @bands = @arts = true
+    @bands = true
   end
   
   def love
-    @love = @arts = true
+    @love = true
     @message = Message.new
   end
 
@@ -75,6 +80,10 @@ class ArtsController < ApplicationController
   end
 
   private
+  
+  def arts
+    @arts = true
+  end
 
   def kristin_and_forrest_only
     unless currently_kristin? or god?
