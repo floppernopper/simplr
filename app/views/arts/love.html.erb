@@ -32,7 +32,7 @@
           img_id++;
         } else {
           img_id = 0;
-          valentines.toggle();
+          valentines.fadeIn();
           $("#love_modal").animate({ scrollTop: $(document).height() }, 500);
         }
         
@@ -43,14 +43,14 @@
       });
       
       heart.click(function() {
-        carousel.toggle();
+        carousel.fadeIn();
         // haptic
         window.navigator.vibrate(1);
       });
       
       valentines.click(function() {
-        valentines.toggle();
-        carousel.toggle();
+        valentines.fadeOut();
+        carousel.fadeOut();
         // haptic
         window.navigator.vibrate(1);
       });
