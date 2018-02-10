@@ -108,6 +108,7 @@ Rails.application.routes.draw do
   put 'settings/update_all_user_settings', as: 'update_all_user_settings'
   get 'dev', to: 'settings#dev_panel', as: 'dev_panel'
   get 'connections/copy_invite_link', as: 'copy_invite_link'
+  get 'set_location', to: 'settings#set_location'
 
   # dev
   get 'dev_log', to: 'sessions#dev_login', as: 'dev_login'
