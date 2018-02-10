@@ -2,24 +2,36 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  
+
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :goddess?, :currently_kristin?,
     :forrest_only_club?, :invited_to_forrest_only_club?, :in_dev?, :is_gatekeeper?, :page_turning,
     :testing_score?, :unique_element_token
-  
+
   include SimpleCaptcha::ControllerHelpers
-  
+
   # redirects to proposals index for anrcho.com
   before_action :anrcho_to_proposals, except: [:index]
-  
+
   # redirects to forrest_web_co
   before_action :forrest_web_co_to_forrest_web_co, except: [:index]
-  
+
   # bots go to 404 for all pages
   before_action :bots_to_404
-  
+
+  def get_location
+    if current_user.geo_coordinates.present?
+      coords = eval current_user.geo_coordinates
+      geocoder = Geocoder.search("#{coords[0]}, #{coords[1]}").first
+      if geocoder and geocoder.formatted_address
+        location = geocoder.formatted_address
+        current_user.update location: location
+      end
+    end
+    return (location ? location : nil)
+  end
+
   def build_proposal_feed section, group=nil
     Proposal.filter_spam # for recent anrcho spam
     reset_page; session[:current_proposal_section] = section.to_s
@@ -33,14 +45,14 @@ class ApplicationController < ActionController::Base
       seent item
     end
   end
-  
+
   def record_last_visit
     if current_user and (cookies[:last_active_at].nil? or cookies[:last_active_at].to_datetime < 1.hour.ago)
       current_user.update last_active_at: DateTime.current
       cookies[:last_active_at] = DateTime.current
     end
   end
-  
+
   def get_site_title
     if anrcho?
       'Anrcho'
@@ -59,7 +71,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-    
+
   def seent item
     # initial update for group activity
     if item.is_a? Group and current_user
@@ -99,7 +111,7 @@ class ApplicationController < ActionController::Base
       view.update score_count: view.score_count.to_i + 1
     end
   end
-  
+
   def seen? item
     # accounts for profile views
     views = if item.is_a? User
@@ -113,11 +125,11 @@ class ApplicationController < ActionController::Base
       true if views.where(anon_token: anon_token).present?
     end
   end
-    
+
   def settings user=current_user
     Setting.settings user
   end
-  
+
   def paginate items, _page_size=page_size
     return items.
       # drops first several posts if :feed_page
@@ -129,7 +141,7 @@ class ApplicationController < ActionController::Base
   def page_size
     @page_size = 10
   end
-  
+
   def page_turning relevant_items=nil
     if session[:page].nil? or session[:page] * page_size <= relevant_items.size
       if session[:page]
@@ -139,14 +151,14 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
+
   def reset_page
     # resets back to top
     unless session[:more]
       session[:page] = nil
     end
   end
-  
+
   def char_bits items
     bits = [];
     for item in items
@@ -159,7 +171,7 @@ class ApplicationController < ActionController::Base
     end
     return bits
   end
-  
+
   def char_codes items
     codes = [];
     for item in items
@@ -170,7 +182,7 @@ class ApplicationController < ActionController::Base
     end
     return codes
   end
-  
+
   # returns anon_token or current_user
   def current_identity
     if current_user
@@ -179,8 +191,8 @@ class ApplicationController < ActionController::Base
       return anon_token
     end
   end
-  
-  
+
+
   def unique_element_token
     token = if cookies[:element_token].nil?
       cookies.permanent[:element_token] = SecureRandom.urlsafe_base64.gsub(/[^0-9a-z]/i, '')
@@ -189,7 +201,7 @@ class ApplicationController < ActionController::Base
     end
     return token
   end
-  
+
   def anon_token
     unless current_user # signed up and and logged in
       if cookies[:token_timestamp].nil? or \
@@ -204,7 +216,7 @@ class ApplicationController < ActionController::Base
     end
     return token
   end
-  
+
   # ensures only humans are counted for views
   # mainly used for the first proposals in main feed
   def probably_human
@@ -212,48 +224,48 @@ class ApplicationController < ActionController::Base
     # a way to see if the user is probably a human
     cookies[:human]
   end
-  
+
   def testing_score?
     current_user and (ENV['RAILS_ENV'].eql? 'development' or dev?) and current_user.id.eql?(1) and false
   end
-  
+
   def anrcho?
     request.host.eql? "anrcho.com" or cookies[:at_anrcho].present?
   end
-  
+
   def forrest_only_club?
     request.host.eql? "forrestonlyclub.com" or cookies[:at_forrest_only_club].present?
   end
-    
+
   def invited_to_forrest_only_club?
     (cookies[:forrest_only_invite_token].present? and Connection.find_by_unique_token(cookies[:forrest_only_invite_token])) \
       or current_user
   end
-  
+
   def invited?
     (cookies[:invite_token].present? and Connection.find_by_unique_token(cookies[:invite_token]) \
       and not invited_to_forrest_only_club?) \
       or current_user or User.all.size.zero? or cookies[:zen].present?
   end
-  
+
   def is_gatekeeper?
     current_user and current_user.gatekeeper and User.where(gatekeeper: true).last.eql? current_user
   end
-  
+
   def dev?
     current_user and current_user.dev
   end
-  
+
   def goddess?
     if dev? and current_user.goddess and current_user.kristin?
       return true
     end
   end
-  
+
   def god?
     (dev? and current_user.god and current_user.eql? User.first) or Rails.env.development?
   end
-  
+
   def currently_kristin?
     current_user and current_user.id.eql? 34
   end
@@ -261,21 +273,21 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by_auth_token(cookies[:auth_token]) if cookies[:auth_token]
   end
-  
+
   def mobile?
     browser.mobile? or browser.tablet?
   end
-  
+
   def browser
     Browser.new(:ua => request.env['HTTP_USER_AGENT'].to_s, :accept_language => "en-us")
   end
-  
+
   def in_dev?
     Rails.env.development?
   end
-  
+
   private
-  
+
   def get_correct_char_str item
     # gets correct string to push to glimmer
     item_string = if item.is_a? Note
@@ -293,20 +305,20 @@ class ApplicationController < ActionController::Base
     end
     return item_string
   end
-  
+
   def anrcho_to_proposals
     if request.host.eql? 'anrcho.com' and not cookies[:at_anrcho].present?
       cookies.permanent[:at_anrcho] = true.to_s
       redirect_to proposals_path
     end
   end
-  
+
   def forrest_web_co_to_forrest_web_co
     if request.host.eql? 'forrestwebco.com' or request.host.eql? 'forrestwilkins.com'
       redirect_to forrest_web_co_path
     end
   end
-  
+
   def bots_to_404
     redirect_to '/404' if request.bot? and anrcho? # turned on only for anrcho
   end

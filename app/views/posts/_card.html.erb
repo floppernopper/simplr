@@ -1,8 +1,8 @@
 <% if (visible_to_anons? post.group or post.group.nil? or group_auth post.group or group_member_auth post.group \
   or (current_user and post.user and current_user.following? post.user)) \
   and not ((post.hidden or (post.user and post.user.hidden)) and not own_item? post) %>
-  
-  <div class="card standard_content_card <%= post.hidden ? ' blur' : '' %>"
+
+  <div class="card standard_content_card <%= (post.hidden and (!own_item?(post) or god?)) ? ' blur' : '' %>"
     id="post_card_<%= post.id %>">
 
     <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>

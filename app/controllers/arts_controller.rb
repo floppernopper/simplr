@@ -4,7 +4,14 @@ class ArtsController < ApplicationController
   before_action :arts, only: [:paper, :bands, :love]
 
   def get_distance
-    #GeoDistance.distance(content.latitude, content.longitude, self.latitude, self.longitude)
+    @coords = if currently_kristin?
+      eval User.first.geo_coordinates
+    elsif god?
+      eval User.find(34).geo_coordinates
+    end
+
+    # user1s lat and long, user2s lat and long
+    GeoDistance.distance(content.latitude, content.longitude, params[:lat], params[:long])
   end
 
   def paper

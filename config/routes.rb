@@ -249,6 +249,7 @@ Rails.application.routes.draw do
   post 'love_message', to: 'arts#create_love_message', as: 'love_messages'
   get 'paper', to: 'arts#paper', as: 'paper'
   get 'my_favorite_color', to: 'arts#my_favorite_color', as: 'my_favorite_color'
+  get 'get_distance', to: 'arts#get_distance'
 
   resources :proposals do
     resources :comments

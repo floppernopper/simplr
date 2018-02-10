@@ -8,14 +8,7 @@ class SettingsController < ApplicationController
     @geo = [latitude, longitude].to_s
     current_user.update geo_coordinates: @geo
     # sets location/address if gps successful
-    if current_user.geo_coordinates.present?
-      coords = eval current_user.geo_coordinates
-      geocoder = Geocoder.search("#{coords[0]}, #{coords[1]}").first
-      if geocoder and geocoder.formatted_address
-        @location = geocoder.formatted_address
-        current_user.update location: @location
-      end
-    end
+    @location = get_location
   end
 
   def update_all_user_settings

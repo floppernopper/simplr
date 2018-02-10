@@ -289,16 +289,6 @@ class User < ActiveRecord::Base
 
   private
 
-  def set_location
-    if self.geo_coordinates.present?
-      coords = eval self.geo_coordinates
-      geocoder = Geocoder.search("#{coords[0]}, #{coords[1]}").first
-      if geocoder and geocoder.formatted_address
-        self.location = geocoder.formatted_address
-      end
-    end
-  end
-
   def gen_unique_token
     begin
       self.unique_token = SecureRandom.urlsafe_base64
