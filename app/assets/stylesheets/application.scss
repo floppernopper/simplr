@@ -23,6 +23,7 @@ $x_right_gap: 5px;
 $x_left_gap: 5px;
 
 @mixin card {
+  transition: all .4s ease-in-out;
   position: relative;
   padding: 15px 7.5px;
   background: white;
