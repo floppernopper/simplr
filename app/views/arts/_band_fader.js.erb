@@ -1,5 +1,5 @@
 <script>
-  function bands_fader_<%= target + "_" + target_id.to_s + (defined?(reds) and reds ? '_reds' : '') %>() {
+  function bands_fader_<%= target + "_" + target_id.to_s + ((defined?(reds) and reds) ? '_reds' : '') %>() {
     var target = $("#<%= target + (target_id.present? ? '_' + target_id.to_s : '') %>");
 
     target.click(function() {
@@ -107,8 +107,8 @@
     }, change_speed);
   }
 
-  if (!bands_fader_<%= target + "_" + target_id.to_s  + (defined?(reds) and reds ? '_reds' : '')%>_started) {
-    bands_fader_<%= target + "_" + target_id.to_s  + (defined?(reds) and reds ? '_reds' : '')%>();
-    var bands_fader_<%= target + "_" + target_id.to_s  + (defined?(reds) and reds ? '_reds' : '')%>_started = true;
+  if (!bands_fader_<%= target + "_" + target_id.to_s  + ((defined?(reds) and reds) ? '_reds' : '')%>_started) {
+    bands_fader_<%= target + "_" + target_id.to_s  + ((defined?(reds) and reds) ? '_reds' : '')%>();
+    var bands_fader_<%= target + "_" + target_id.to_s  + ((defined?(reds) and reds) ? '_reds' : '')%>_started = true;
   }
 </script>
