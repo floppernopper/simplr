@@ -1,7 +1,10 @@
 <% if (visible_to_anons? post.group or post.group.nil? or group_auth post.group or group_member_auth post.group \
   or (current_user and post.user and current_user.following? post.user)) \
   and not ((post.hidden or (post.user and post.user.hidden)) and not own_item? post) %>
-  <div class="card standard_content_card" id="post_card_<%= post.id %>">
+  
+  <div class="card standard_content_card <%= post.hidden ? ' blur' : '' %>"
+    id="post_card_<%= post.id %>">
+
     <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
     <% if post.original and post.original.user %>
       <!-- reuses group classes because they fit -->
@@ -25,7 +28,7 @@
           title: "Group (#{post.group.name})" %>
       </span>
     <% end %>
-    
+
     <table class="top_right_link">
       <tr>
         <td>
@@ -38,7 +41,7 @@
         <% end %>
       </tr>
     </table>
-    
+
     <div align="center">
       <% if post.image.url %>
         <p>
@@ -76,19 +79,19 @@
           <% end %>
         </p>
       <% end %>
-      
+
       <% if post.video_url %>
         <p>
           <%= video_tag post.video_url.to_s, autoplay: true, loop: true, class: :standard_post_video %>
         </p>
       <% end %>
-      
+
       <% if post.audio_url %>
         <%= audio_tag post.audio_url.to_s, id: "post_sound_#{post.id}" %>
         <p>
           <%= link_to play_post_audio_path(post.id), remote: true do %>
             <%= post.audio_name.present? ? post.audio_name : post.audio_url.to_s %>
-            <i class="fa fa-music" aria-hidden="true"></i>  
+            <i class="fa fa-music" aria-hidden="true"></i>
           <% end %>
         </p>
       <% end %>
@@ -107,13 +110,13 @@
           <%= render "app/link_sound.js", link_id: :read_more_link, sound: :post_interface_sound %>
 		    <% end %>
 		  <% end %>
-		  
+
 		  <% if post.pictures.present? and post.pictures.first.classifier_name.present? %>
 		    <p>
 		      <b>Classified: <%= post.pictures.first.classifier_name %></b>
 		    </p>
 		  <% end %>
-		  
+
 		  <% if testing_score? %>
 		    <p>Score = <%= post.score current_user %><p>
 		    <p>
@@ -122,14 +125,14 @@
 		    </p>
 		  <% end %>
     </div>
-		
+
 	  <div id="post_comments_anchor_<%= post.id %>"></div>
-    
+
     <%= link_to "Comments#{ ' ' + post.comments.size.to_s unless post.comments.size.zero? }",
       (@post_shown ? @post : toggle_comments_path(post)), remote: true,
       class: :bottom_right_link, id: "show_comments_#{post.id}" %>
     <%= render "app/link_sound.js", link_id: "show_comments_#{post.id}", sound: :post_interface_sound %>
-    
+
     <table class="bottom_left_link">
       <tr>
         <td>
@@ -139,7 +142,7 @@
         <td>
           ·
         </td>
-        
+
         <% if current_user and (current_user.has_power? 'love' or post.loves.present?) %>
           <td>
             <span id="love_post_link_anchor_<%= post.id %>"></span>
@@ -149,7 +152,7 @@
             ·
           </td>
         <% end %>
-        
+
         <% if current_user and (current_user.has_power? 'zen' or post.zens.present?) %>
           <td>
             <span id="zen_post_link_anchor_<%= post.id %>"></span>
@@ -159,7 +162,7 @@
             ·
           </td>
         <% end %>
-        
+
         <% if current_user and (current_user.has_power? 'whoa' or post.whoas.present?) %>
           <td>
             <span id="whoa_post_link_anchor_<%= post.id %>"></span>
@@ -169,7 +172,7 @@
             ·
           </td>
         <% end %>
-        
+
         <td>
           <span id="share_post_link_anchor_<%= post.id %>"></span>
           <%= render "posts/share_link", post: post %>
