@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :treasures
   has_many :portals
   has_many :groups
-  
+
   # ecommerce associations
   has_many :orders
   has_many :products, dependent: :destroy
@@ -31,27 +31,27 @@ class User < ActiveRecord::Base
   after_create :initialize_settings
 
   mount_uploader :image, ImageUploader
-  
+
   scope :forrest_only, -> { where forrest_only: true }
-  
+
   def my_cart
     Cart.initialize self if cart.nil? or not cart.product_token_list.present?
     return cart
   end
-  
+
   def my_wish_list
     WishList.initialize self if wish_list.nil? or not wish_list.product_token_list.present?
     return wish_list
   end
-  
+
   def _class
     self.game_pieces.where.not(game_class: nil).first
   end
-  
+
   def kristin?
     self.id.eql? 34
   end
-  
+
   # optional arg to check if power present AND not expired
   def has_power? power, not_expired=nil
     treasure = self.treasures.find_by_power power
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
       return treasure
     end
   end
-  
+
   def active_powers
     powers = []
     self.treasures.where.not(power: nil).where(expired: [nil, false]).each do |power|
@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
     end
     return powers
   end
-  
+
   def loot treasure
     # duplicates treasure and assigns duplicate to user
     dup_treasure = treasure.dup; dup_treasure.user_id = self.id
@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
       return dup_treasure
     end
   end
-  
+
   def level
     xp_to_nxt_lvl = 0; progress = 0.0; lvl = 0
     # leveling scales based on fibonacci, initialized with 0
@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
     # returns current level, current progress, or XP left until next level
     return { xp_left: xp_to_nxt_lvl, progress: progress, lvl: lvl }
   end
-  
+
   def feed
     _feed = []
     # all posts from users followed
@@ -183,7 +183,7 @@ class User < ActiveRecord::Base
   def request_to_join group
     self.connections.create group_id: group.id, request: true
   end
-  
+
   def my_groups
     _my_groups = []
     self.groups.each { |group| _my_groups << group }
@@ -203,16 +203,16 @@ class User < ActiveRecord::Base
   def requests
     self.connections.requests
   end
-  
+
   def inbox_unseen
     unseen = 0
     for folder in self.message_folders
-      unseen_msgs = folder.unseen_messages(self) 
+      unseen_msgs = folder.unseen_messages(self)
       unseen += unseen_msgs if unseen_msgs > 0
     end
     return unseen
   end
-  
+
   def folder_between user
     for folder in self.message_folders
       if folder.connections.size.eql? 2 and folder.connections.where(user_id: user.id).present?
@@ -221,7 +221,7 @@ class User < ActiveRecord::Base
     end
     return _folder
   end
-  
+
   def message_folders
     folders = []
     self.connections.where.not(connection_id: nil).each do |connection|
@@ -231,11 +231,11 @@ class User < ActiveRecord::Base
     end
     return folders
   end
-  
+
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
   end
-  
+
   def initialize_settings
     _settings = Setting.names
     # puts names from both categories into one array
@@ -288,13 +288,23 @@ class User < ActiveRecord::Base
   end
 
   private
-  
+
+  def set_location
+    if self.geo_coordinates.present?
+      coords = eval self.geo_coordinates
+      geocoder = Geocoder.search("#{coords[0]}, #{coords[1]}").first
+      if geocoder and geocoder.formatted_address
+        self.location = geocoder.formatted_address
+      end
+    end
+  end
+
   def gen_unique_token
     begin
       self.unique_token = SecureRandom.urlsafe_base64
     end while User.exists? unique_token: self.unique_token
   end
-  
+
   def gen_energy_points
     self.energy_points = rand 1000
   end

@@ -1,11 +1,28 @@
 class SettingsController < ApplicationController
   before_action :dev_only, only: [:dev_panel]
-  
+
+  def set_location
+    # sets coords
+    latitude = params[:lat]
+    longitude = params[:long]
+    @geo = [latitude, longitude].to_s
+    current_user.update geo_coordinates: @geo
+    # sets location/address if gps successful
+    if current_user.geo_coordinates.present?
+      coords = eval current_user.geo_coordinates
+      geocoder = Geocoder.search("#{coords[0]}, #{coords[1]}").first
+      if geocoder and geocoder.formatted_address
+        @location = geocoder.formatted_address
+        current_user.update location: @location
+      end
+    end
+  end
+
   def update_all_user_settings
     Setting.initialize_all_settings
     redirect_to :back
   end
-  
+
   def dev_panel
     @dev_panel_shown = true
     @char_bits = char_bits Post.last 10
@@ -25,7 +42,7 @@ class SettingsController < ApplicationController
       end
     end
   end
-  
+
   def index
   end
 
@@ -49,9 +66,9 @@ class SettingsController < ApplicationController
     end
     redirect_to :back, notice: "Settings updated successfully..."
   end
-  
+
   private
-  
+
   def dev_only
     dev?
   end

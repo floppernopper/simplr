@@ -1,0 +1,40 @@
+<div class="dark_card" align="center">
+
+  <% if current_user.location %>
+    <%= render "settings/user_location" %>
+  <% end %>
+  <div id="user_location_anchor"></div>
+
+  <%= link_to 'javascript:;', class: :white_link, id: :set_location_link do %>
+    <p>
+      Click to reset location...
+    </p>
+  <% end %>
+</div>
+
+<script>
+  var set_location = $("#set_location_link");
+  set_location.click(function() {
+    var latitude, longitude;
+    // checks for gps support
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        // sets lat and long for user
+        $.ajax({
+          type: "PUT",
+          url: "/set_location",
+          data: $.param({
+            lat: latitude,
+            long: longitude,
+          })
+        });
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+    // haptic
+    window.navigator.vibrate(1);
+  });
+</script>

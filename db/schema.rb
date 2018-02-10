@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112235400) do
+ActiveRecord::Schema.define(version: 20180210035856) do
 
   create_table "arts", force: :cascade do |t|
     t.integer  "user_id"
@@ -459,6 +459,8 @@ ActiveRecord::Schema.define(version: 20180112235400) do
     t.string   "meme_war_class"
     t.string   "zodiac"
     t.integer  "energy_points"
+    t.string   "geo_coordinates"
+    t.string   "location"
   end
 
   create_table "views", force: :cascade do |t|

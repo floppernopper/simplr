@@ -2,18 +2,22 @@ class ArtsController < ApplicationController
   before_action :set_art, only: [:show, :edit, :update, :destroy]
   before_action :kristin_and_forrest_only, only: [:love, :create_love_message]
   before_action :arts, only: [:paper, :bands, :love]
-  
+
+  def get_distance
+    #GeoDistance.distance(content.latitude, content.longitude, self.latitude, self.longitude)
+  end
+
   def paper
     @paper = true
   end
-  
+
   def create_love_message
   end
-  
+
   def bands
     @bands = true
   end
-  
+
   def love
     @love = true
     @message = Message.new
@@ -80,7 +84,7 @@ class ArtsController < ApplicationController
   end
 
   private
-  
+
   def arts
     @arts = true
   end
@@ -90,7 +94,7 @@ class ArtsController < ApplicationController
       redirect_to '/404' unless Rails.env.development?
     end
   end
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_art
     @art = Art.find(params[:id])
