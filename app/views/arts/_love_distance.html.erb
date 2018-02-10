@@ -1,13 +1,21 @@
 <div class="love_message_card" id="love_distance" align="center">
   <p class="love_txt">
-    <%= love_distance %> miles
+    <%= love_distance %> miles! ♥
   </p>
 </div>
 
 <script>
   var static_ellipsis = $("#static_ellipsis");
   var ellipsis = $("#ellipsis");
+  var distance = $("#love_distance");
 
   ellipsis.toggle();
   static_ellipsis.fadeIn();
+
+  distance.click(function() {
+    distance.fadeOut();
+    valentines.fadeOut();
+    carousel.fadeOut();
+    get_distance.fadeOut();
+  });
 </script>

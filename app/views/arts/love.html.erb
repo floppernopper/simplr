@@ -18,9 +18,11 @@
     </div>
 
     <div class="love_message_card" id="get_distance" align="center" hidden>
-      <p class="love_txt">
-        Click to see how far you are from <%= goddess? ? 'Kristin' \
-          : 'Forrest' %><span id="static_ellipsis">...</span><%= render "app/ellipsis", hidden: true %>
+      <p class="love_txt" align="left">
+        Click to see how close you are to
+        </br>
+        <%= goddess? ? 'Forrest' \
+          : 'Kristin' %><span id="static_ellipsis">...</span><%= render "app/ellipsis", hidden: true %>
       </p>
     </div>
 
