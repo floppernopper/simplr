@@ -5,10 +5,14 @@
       method: :delete, remote: true, class: :post_mini_menu_link,
       data: { confirm: "Are you sure you want to permanently delete this post?" } %>
   <% end %>
-  
-  <%= link_to 'Classify', classify_picture_path(post.unique_token), remote: true, class: :post_mini_menu_link,
-      data: { confirm: "Are you sure you want to classify this image?" } if dev? and @post.pictures.present? %>
-      
-  <%= link_to 'Hide', hide_post_path(post), method: :put, class: :post_mini_menu_link,
-      data: { confirm: "Are you sure you want to hide this post?" } if dev? and not post.hidden %>
+
+  <%= link_to 'Classify',
+    classify_picture_path(post.unique_token),
+    remote: true, class: :post_mini_menu_link,
+    data: { confirm: "Are you sure you want to classify this image?" } \
+    if in_dev? and dev? and @post.pictures.present? %>
+
+  <%= link_to 'Hide', hide_post_path(post),
+    method: :put, remote: true, class: :post_mini_menu_link,
+    data: { confirm: "Are you sure you want to hide this post?" } if dev? and not post.hidden %>
 </div>

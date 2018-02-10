@@ -5,9 +5,9 @@ class PostsController < ApplicationController
   before_action :reset_page_num, only: [:index, :show]
   before_action :invite_only, except: [:show, :create, :add_image, :add_video]
   before_action :invited_or_token_used, only: [:show]
-  
+
   before_action :dev_only, only: [:classify]
-  
+
   def classify
     @picture = @post.pictures.first
     notice = if @picture.classify
@@ -16,16 +16,16 @@ class PostsController < ApplicationController
       "Picture classification failed."
     end
   end
-  
+
   def floating_images
     @user = User.find_by_unique_token params[:token]
     @posts = @user.posts.first(100).select { |p| p.pictures.present? }
   end
-  
+
   def play_audio
     @post = Post.find_by_id params[:id]
   end
-  
+
   def read_more
     @post = Post.find_by_id params[:post_id]
   end
@@ -59,7 +59,6 @@ class PostsController < ApplicationController
 
   def hide
     @post.update hidden: true
-    redirect_to root_url
   end
 
   def share
@@ -88,7 +87,7 @@ class PostsController < ApplicationController
       end
     end
   end
-  
+
   def load_index
     # ensuring loader only shows once per session
     session[:loading_loader_seen] = true
@@ -219,13 +218,13 @@ class PostsController < ApplicationController
   end
 
   private
-  
+
   def dev_only
     unless dev?
       redirect_to '/404'
     end
   end
-  
+
   # everything required to render main feed
   def run_for_main_feed
     # for recent anrcho spam
@@ -244,7 +243,7 @@ class PostsController < ApplicationController
     # records user viewing posts
     @items.each {|item| seent item}
   end
-  
+
   def invited_or_token_used
     unless invited? or (params[:token] and params[:token].size > 4)
       redirect_to '/404'
