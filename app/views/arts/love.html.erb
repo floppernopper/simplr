@@ -42,7 +42,7 @@
         } else {
           img_id = 0;
           valentines.fadeIn();
-          $("#love_modal").animate({ scrollTop: $(document).height() }, 500);
+          scroll_down();
         }
 
         current_img = $("#love_message_carousel_img_" + img_id);
@@ -58,9 +58,8 @@
       });
 
       valentines.click(function() {
-        // valentines.fadeOut();
-        // carousel.fadeOut();
         get_distance.fadeIn();
+        scroll_down();
         // haptic
         window.navigator.vibrate(1);
       });
@@ -72,6 +71,7 @@
 
         static_ellipsis.toggle();
         ellipsis.fadeIn();
+        scroll_down();
 
         // checks for gps support
         if (navigator.geolocation) {
@@ -94,6 +94,10 @@
         // haptic
         window.navigator.vibrate(1);
       });
+
+      function scroll_down() {
+        $("#love_modal").animate({ scrollTop: $(document).height() }, 500);
+      }
     </script>
   <% end %>
 </div>
