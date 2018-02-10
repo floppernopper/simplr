@@ -1,0 +1,24 @@
+<span id="ellipsis" <%= defined?(hidden) ? 'hidden' : '' %>></span>
+
+<script>
+  var text = $("#ellipsis"); var i = 0;
+  setInterval(function() {
+    switch(i) {
+      case 0:
+        text.text('');
+        break;
+      case 1:
+        text.text('.');
+        break;
+      case 2:
+        text.text('..');
+        break;
+      case 3:
+        text.text('...');
+    }
+    i += 1;
+    if (i > 3) {
+      i = 0;
+    }
+  }, 500);
+</script>

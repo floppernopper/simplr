@@ -153,6 +153,20 @@
   z-index: 30;
 }
 
+@keyframes love_txt_glow {
+  from {
+    text-shadow: 1.5px 1.5px 1.5px pink;
+  }
+  to {
+    text-shadow: -1.5px -1.5px 1.5px pink;
+  }
+}
+
+.love_txt {
+  width: 80%;
+  animation: love_txt_glow 7.5s infinite alternate;
+}
+
 .love_message_carousel_img {
   width: 100%;
 }

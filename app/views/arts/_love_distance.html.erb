@@ -1,5 +1,13 @@
 <div class="love_message_card" id="love_distance" align="center">
-  <p>
-    <%= love_distance %>
+  <p class="love_txt">
+    <%= love_distance %> miles
   </p>
 </div>
+
+<script>
+  var static_ellipsis = $("#static_ellipsis");
+  var ellipsis = $("#ellipsis");
+
+  ellipsis.toggle();
+  static_ellipsis.fadeIn();
+</script>

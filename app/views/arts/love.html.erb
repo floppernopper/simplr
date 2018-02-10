@@ -12,14 +12,15 @@
     </div>
 
     <div class="love_message_card" id="happy_valentines" align="center" hidden>
-      <p>
+      <p class="love_txt">
         Happy Valentines Day!
       </p>
     </div>
 
     <div class="love_message_card" id="get_distance" align="center" hidden>
-      <p>
-        Click to get distance...
+      <p class="love_txt">
+        Click to see how far you are from <%= goddess? ? 'Kristin' \
+          : 'Forrest' %><span id="static_ellipsis">...</span><%= render "app/ellipsis", hidden: true %>
       </p>
     </div>
 
@@ -63,7 +64,13 @@
       });
 
       get_distance.click(function() {
+        var static_ellipsis = $("#static_ellipsis");
+        var ellipsis = $("#ellipsis");
         var latitude, longitude;
+
+        static_ellipsis.toggle();
+        ellipsis.fadeIn();
+
         // checks for gps support
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
