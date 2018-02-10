@@ -1,3 +1,12 @@
+
+<div class="art_card surreal_card" align="center">
+  <%= link_to paper_path do %>
+    <p class="surreal_txt">
+      surreal
+    </p>
+  <% end %>
+</div>
+
 <div class="art_card" align="center" style="background:pink;">
   <div class="color_palette">
     <% for color in color_palette_2.values %>
@@ -19,13 +28,5 @@
 </div>
 
 <%= render "arts/color_block" %>
-
-<div class="art_card art_spacer"></div>
-
-<div class="art_card surreal_card" align="center">
-  <p class="surreal_txt">
-    surreal
-  </p>
-</div>
 
 </br>
