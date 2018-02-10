@@ -1,4 +1,4 @@
-<div class="love_message_card" id="love_distance" align="center">
+<div class="love_message_card love_message_card_glow" id="love_distance" align="center">
   <p class="love_txt">
     <%= love_distance %> miles! ♥
   </p>
@@ -20,5 +20,6 @@
     get_distance.fadeOut();
     // grand finale
     color_bands.fadeIn();
+    heart.toggleClass('love_message_card_glow', false); // toggle off
   });
 </script>

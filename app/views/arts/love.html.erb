@@ -2,25 +2,25 @@
 
   <%= render "arts/bands", hidden: true, reds: true, slow: true %>
 
-  <div class="heart_container" id="heart_container">
+  <div class="heart_container love_message_card_glow" id="heart_container">
     <div class="heart" id="heart"></div>
   </div>
 
   <% if in_dev? or god?; img_size = 2 %>
-    <div class="love_message_carousel_card" id="carousel_card" hidden>
+    <div class="love_message_carousel_card love_message_card_glow" id="carousel_card" hidden>
       <% img_size.times do |i| %>
         <%= image_tag "love/#{i}.jpg",
           class: :love_message_carousel_img, id: "love_message_carousel_img_#{i}", hidden: !i.zero? %>
       <% end %>
     </div>
 
-    <div class="love_message_card" id="happy_valentines" align="center" hidden>
+    <div class="love_message_card love_message_card_glow" id="happy_valentines" align="center" hidden>
       <p class="love_txt" style="width:95%;">
         Happy Valentines Day!
       </p>
     </div>
 
-    <div class="love_message_card" id="get_distance" align="center" hidden>
+    <div class="love_message_card love_message_card_glow" id="get_distance" align="center" hidden>
       <p class="love_txt" align="left">
         Click to see how close you are to
         </br>
@@ -60,6 +60,7 @@
         // haptic
         window.navigator.vibrate(1);
         bands.fadeOut();
+        heart.toggleClass('love_message_card_glow', true); // toggle on
       });
 
       valentines.click(function() {

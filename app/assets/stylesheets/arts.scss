@@ -177,7 +177,6 @@
   margin: 0 auto;
   margin-bottom: 12.5px;
   width: 54.5%;
-  animation: love_card_glow 7.5s infinite alternate;
 }
 
 @keyframes love_card_glow {
@@ -208,6 +207,9 @@
   background: white;
   color: red;
   font-weight: bold;
+}
+
+.love_message_card_glow {
   animation: love_card_glow 7.5s infinite alternate;
 }
 
@@ -231,6 +233,7 @@
 }
 
 .heart_container {
+  transition: all 1s ease-in-out;
   position: relative;
   max-width: 550px;
   margin: 0 auto;
@@ -240,7 +243,6 @@
   padding-bottom: 40px;
   width: 54.5%;
   background: white;
-  animation: love_card_glow 7.5s infinite alternate;
 }
 
 .heart {

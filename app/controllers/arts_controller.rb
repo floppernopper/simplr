@@ -16,7 +16,8 @@ class ArtsController < ApplicationController
     current_location = Geokit::LatLng.new(@coords[0], @coords[1])
     destination = "#{params[:lat]},#{params[:long]}"
 
-    @distance = current_location.distance_to(destination).to_s
+    # gets distance in miles, rounds to 5th decimal place
+    @distance = current_location.distance_to(destination).round(5).to_s
     puts "\n" + @distance + "\n"
 
   end
