@@ -1,4 +1,5 @@
-<div class="color_bands" id="color_bands" <%= defined?(hidden) ? 'hidden' : '' %>>
+<div class="color_bands" id="color_bands"
+  style="background:<%= defined?(background) ? background : '' %>" <%= defined?(hidden) ? 'hidden' : '' %>>
   <% 20.times do |i| %>
     <div class="color_band" id="color_band_<%= i %>"></div>
     <%= render "arts/band_fader.js", target: "color_band", target_id: i,
