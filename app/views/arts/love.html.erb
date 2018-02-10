@@ -1,4 +1,7 @@
 <div class="love_modal" id="love_modal" align="center">
+
+  <%= render "arts/bands", hidden: true, reds: true, slow: true %>
+
   <div class="heart_container" id="heart_container">
     <div class="heart" id="heart"></div>
   </div>
@@ -31,6 +34,7 @@
       var valentines = $("#happy_valentines");
       var carousel = $("#carousel_card");
       var get_distance = $("#get_distance");
+      var bands = $("#color_bands");
       var img_id = 0;
 
       carousel.click(function() {
@@ -55,6 +59,7 @@
         carousel.fadeIn();
         // haptic
         window.navigator.vibrate(1);
+        bands.fadeOut();
       });
 
       valentines.click(function() {

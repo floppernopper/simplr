@@ -1,0 +1,19 @@
+<div class="color_bands" id="color_bands" <%= defined?(hidden) ? 'hidden' : '' %>>
+  <% 20.times do |i| %>
+    <div class="color_band" id="color_band_<%= i %>"></div>
+    <%= render "arts/band_fader.js", target: "color_band", target_id: i,
+      reds: (defined?(reds) ? true : nil), slow: (defined?(slow) ? true : nil) %>
+  <% end %>
+</div>
+
+<script>
+  var color_bands = $(".color_bands");
+  var bands = $(".color_band");
+  $(".color_bands").click(function() {
+    color_bands.toggleClass("color_band_flip");
+    bands.each(function() {
+      //$(this).toggleClass("color_band_flipping");
+    })
+    window.navigator.vibrate(1);
+  });
+</script>
