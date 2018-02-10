@@ -80,7 +80,7 @@ Rails.application.routes.draw do
   get 'find_a_portal', to: 'connections#invite_only_message', as: 'invite_only'
   get 'backdoor', to: 'connections#backdoor', as: 'backdoor'
   get 'peace', to: 'connections#peace', as: 'peace'
-  get 'zen', to: 'connections#zen', as: 'zen'
+  #get 'zen', to: 'connections#zen', as: 'zen'
   get 'zenful', to: 'connections#zen'
 
   # user to user connections
