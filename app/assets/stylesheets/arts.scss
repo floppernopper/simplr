@@ -98,11 +98,10 @@
 
 .surreal_txt {
   /* 16 * 0.0625 = 1px */
-  letter-spacing: 2px;
+  letter-spacing: 12.5px;
   text-shadow: 1.25px 1.25px 1.25px rgb(0, 255, 0);
   font-size: 30px;
-  font-family: "Courier New", Courier,
-    "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .paper_card {
