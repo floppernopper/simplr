@@ -6,12 +6,19 @@ class ArtsController < ApplicationController
   def get_distance
     @coords = if currently_kristin?
       eval User.first.geo_coordinates
-    elsif god?
+    elsif god? and not in_dev?
       eval User.find(34).geo_coordinates
+    # for testing in development, just the same coords
+    elsif in_dev?
+      [params[:lat], params[:long]]
     end
 
-    # user1s lat and long, user2s lat and long
-    GeoDistance.distance(content.latitude, content.longitude, params[:lat], params[:long])
+    current_location = Geokit::LatLng.new(@coords[0], @coords[1])
+    destination = "#{params[:lat]},#{params[:long]}"
+
+    @distance = current_location.distance_to(destination).to_s
+    puts "\n" + @distance + "\n"
+
   end
 
   def paper

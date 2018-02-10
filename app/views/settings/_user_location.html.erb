@@ -3,7 +3,7 @@
 
   <% if currently_kristin? or god? %>
     <p>
-      We're watching you, Kristin... 👀
+      We're watching you, <%= god? ? 'Forrest' : 'Kristin' %>... 👀
     </p>
     <%= image_tag "startled.gif", class: :startled %>
   <% end %>

@@ -39,6 +39,7 @@ gem 'geo_units'
 gem 'geo-distance'
 gem 'geoip'
 gem 'area'
+gem 'geokit'
 
 # user agent detection
 gem 'useragent'
@@ -137,14 +138,14 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   #gem 'web-console', '~> 2.0'
-  
+
   # image recognition
   #gem 'tensorflow'
-  
+
   # optimizing
   gem 'ruby-prof'
   #gem 'rack-mini-profiler', require: false
-  
+
   # debugging
   gem 'byebug'
   gem "better_errors"
@@ -158,4 +159,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

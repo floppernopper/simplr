@@ -1,7 +1,10 @@
 <% if @location %> // if location set successfully
-  if ($("#user_location").length) {
-    $("#user_location").replaceWith("<%=j render 'settings/user_location' %>");
-  } else {
-    $("#user_location_anchor").after("<%=j render 'settings/user_location' %>");
+  var user_location = $("#user_location");
+  var anchor = $("#user_location_anchor");
+  
+  if (user_location.length) {
+    user_location.remove();
   }
+
+  anchor.after("<%=j render 'settings/user_location' %>");
 <% end %>
