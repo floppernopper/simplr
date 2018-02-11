@@ -6,6 +6,7 @@
 
   $(window).bind('beforeunload', function() {
     if (changed) {
+      window.navigator.vibrate(1); // haptic
       return "Are you sure you want to leave?"
     }
   });
