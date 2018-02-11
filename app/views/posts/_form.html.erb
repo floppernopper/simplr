@@ -1,11 +1,11 @@
 <div id="new_post_form">
-  <%= form_for(@post) do |f| %>
+  <%= form_for(@post, id: :post_form) do |f| %>
     <div align="center">
       <%= hidden_field_tag :group_id, @group.id if @group %>
       <%= hidden_field_tag :un_invited, true if @invite_only_page %>
-	    
+
 	    <script><%= render 'posts/group_select_change.js' %></script>
-      
+
       <% if @editing and @post.pictures.present? %>
         <% for picture in @post.pictures %>
           <% if picture.image.url %>
@@ -21,41 +21,41 @@
 
       <%= f.text_area :body, value: (@post.body.present? ? @post.body : ""),
         placeholder: (@invite_only_page ? "Post something anonymously..." : "Post something awesome..."),
-        class: :dark_text_area %>
-            
+        class: :dark_text_area, id: :post_form_text_area %>
+
       <%= link_to add_post_image_path, remote: true, id: :add_image_icon_link, title: "Attach an image" do %>
         <i class="fa fa-picture-o fa-2x dark_link"></i>
       <% end %>
-      
+
       <%= link_to add_post_video_path, remote: true, id: :add_video_icon_link, title: "Attach a video" do %>
         <i class="fa fa-film fa-2x dark_link"></i>
       <% end %>
-      
+
       <% if Rails.env.development? %>
         <%= link_to add_post_audio_path, remote: true, id: :add_audio_icon_link, title: "Attach an audio file" do %>
           <i class="fa fa-play fa-2x dark_link" aria-hidden="true"></i>
         <% end %>
       <% end %>
-      
+
       <div id="hidden_file_field" align="left" hidden>
         <p>
           <%= f.file_field :pictures, multiple: true, name: "pictures[image][]" %>
         </p>
       </div>
-      
+
       <div id="hidden_video_field" hidden>
         <p>
           Video <%= f.file_field :video %>
         </p>
       </div>
-      
+
       <div id="hidden_audio_field" hidden>
         <p>
           Audio <%= f.file_field :audio %>
         </p>
         <%= f.text_field :audio_name, placeholder: "Audio title (optional)", class: :dark_text_field %>
       </div>
-      
+
       <% if current_user and current_user.my_groups.present? and @editing and @post.group_id %>
         <p>
           Currently shared to <%= @post.group.name %>
@@ -81,6 +81,7 @@
       </p></br>
     </div>
   <% end %>
+  <%= render "posts/leave_page?.js" %>
 </div> <!-- reg post form end -->
 
 <% if current_user and (current_user.has_power?('anarchy') or cookies[:anrcho]) and not @editing %>

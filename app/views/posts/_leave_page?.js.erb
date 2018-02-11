@@ -1,0 +1,31 @@
+<script>
+  // Check for any text input, prompt user before they leave page
+  var changed = false;
+  var post_form = $('form');
+  var text_area = $('#post_form_text_area');
+
+  $(window).bind('beforeunload', function() {
+    if (changed) {
+      return "Are you sure you want to leave?"
+    }
+  });
+
+  post_form.submit(function () {
+    $(window).unbind('beforeunload');
+  });
+
+  text_area.on('keypress', function() {
+    changed = true;
+  });
+
+  $(document).on('change', 'input[type="file"]', function() {
+    changed = true;
+  });
+
+  post_form.change(function(e) {
+    var option_selected = $(e.target).find("option:selected");
+    if (typeof option_selected.val() === 'string') {
+      changed = true;
+    }
+  });
+</script>
