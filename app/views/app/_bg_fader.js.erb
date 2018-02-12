@@ -9,7 +9,7 @@ function background_fader() {
   for (var i=0; i < rgb.length; i++) {
 	  rgb[i] = Math.round(Math.random() * 255);
   }
-  
+
   setInterval(function() {
 	  // morphs all of rgb back and forth
 	  for (var i=0; i < 3; i++) {
@@ -36,6 +36,7 @@ function background_fader() {
 	  var target6 = $(".group_card_corner_cut_out");
 	  var target7 = $(".load_bar_section");
 	  var target8 = $(".buffer_pixel");
+    var target9 = $(".notes_slide_menu_container");
 	  target1.css("background", color);
 	  target2.css("background", color);
 	  target3.css("background", color);
@@ -59,4 +60,3 @@ if (!background_fader_started) {
   background_fader();
   var background_fader_started = true;
 }
-
