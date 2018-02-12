@@ -20,7 +20,7 @@
 
 <%= render "app/notices" %>
 
-<% unless god? or goddess? or Rails.env.development? %>
+<% unless god? or Rails.env.development? %>
   <script>
     // The all seeing Eye...
     <%= render "app/click_anywhere?.js" %>
