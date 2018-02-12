@@ -6,7 +6,7 @@
     <div class="heart" id="heart"></div>
   </div>
 
-  <% if in_dev? or not Date.new(2018, 2, 13).future?; img_size = 2 %>
+  <% if in_dev? or not Date.new(2018, 2, 14).future?; img_size = 2 %>
     <div class="love_message_carousel_card love_message_card_glow" id="carousel_card" hidden>
       <% img_size.times do |i| %>
         <%= image_tag "love/#{i}.jpg",
