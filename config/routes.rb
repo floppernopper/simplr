@@ -250,6 +250,7 @@ Rails.application.routes.draw do
   get 'paper', to: 'arts#paper', as: 'paper'
   get 'my_favorite_color', to: 'arts#my_favorite_color', as: 'my_favorite_color'
   get 'get_distance', to: 'arts#get_distance'
+  get 'interactive_art', to: 'arts#my_apps', as: 'my_apps'
 
   resources :proposals do
     resources :comments

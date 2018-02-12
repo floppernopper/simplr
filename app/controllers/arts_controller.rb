@@ -3,6 +3,9 @@ class ArtsController < ApplicationController
   before_action :kristin_and_forrest_only, only: [:love, :create_love_message]
   before_action :arts, only: [:paper, :bands, :love]
 
+  def my_apps
+  end
+
   def get_distance
     @coords = if currently_kristin?
       eval User.first.geo_coordinates
