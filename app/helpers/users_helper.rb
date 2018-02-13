@@ -17,6 +17,8 @@ module UsersHelper
         user.location
       elsif user.views.present? and user.views.last.locale.present?
         user.views.last.locale
+      else
+        ""
       end
       locale_and_time_ago << ", last active " + time_ago(time_ago_in_words(user.last_active_at)) \
         if user.last_active_at
