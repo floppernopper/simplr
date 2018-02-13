@@ -1,11 +1,13 @@
-<div class="load_wheel_container <%= 'load_wheel load_element' if defined?(token) %>"
-  id="load_wheel" <%= 'hidden' if defined?(token) %>>
-  <% 16.times do |num| %>
-    <% id_append = num.to_s; id_append << ("_" + token) if defined?(token) and token.present? %>
-    <div class="load_wheel_pixel <%= "inner_buffer_pixel#{ '_' + token if defined?(token)}" if [5, 6, 9, 10].include? num %>"
-      id="load_wheel_pixel_<%= id_append %>" style="background:black;"></div>
-  <% end %>
-</div>
+<%= link_to my_apps_path do %>
+  <div class="load_wheel_container <%= 'load_wheel load_element' if defined?(token) %>"
+    id="load_wheel" <%= 'hidden' if defined?(token) %>>
+    <% 16.times do |num| %>
+      <% id_append = num.to_s; id_append << ("_" + token) if defined?(token) and token.present? %>
+      <div class="load_wheel_pixel <%= "inner_buffer_pixel#{ '_' + token if defined?(token)}" if [5, 6, 9, 10].include? num %>"
+        id="load_wheel_pixel_<%= id_append %>" style="background:black;"></div>
+    <% end %>
+  </div>
+<% end %>
 
 <script>
   <%= render "pages/load_wheel_fader.js", token: (token if defined?(token)) %>
