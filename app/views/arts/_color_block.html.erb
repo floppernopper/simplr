@@ -1,11 +1,13 @@
 <div class="color_block_container">
   <div class="color_block">
     <div class="color_block_fan_right">
-      <div class="color_block_spinner"></div>
+      <%= link_to my_apps_path do %>
+        <div class="color_block_spinner"></div>
+      <% end %>
     </div>
   </div>
   <div class="interact_label" align="center">
-    <%= link_to "Interact", bands_path, class: :white_link, style: "color:pink;" %> 
+    <%= link_to "Interact", bands_path, class: :white_link, style: "color:pink;" %>
   </div>
 </div>
 
