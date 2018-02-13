@@ -1,56 +1,80 @@
 <% single = true unless defined?(app) and app %>
 <% app = [:light, :space, :ripples, :strum].sample(1)[0] if single %>
 
-<% if app.eql? :light or app.eql? :all %>
-  <%= link_to "https://play.google.com/store/apps/details?id=processing.test.bands" do %>
-    <div class="dark_card" align="center">
-      <%= image_tag "apps/light_0.png", class: :standard_post_image %>
-      <p class="justified_body_text" style="width:90%;">
-        <b>Light</b> - Let there be light, light that grows and changes by your touch.
-      </p>
-    </div>
+<div class="app_container <%= single ? 'blur' : '' %>">
+  <% if app.eql? :light or app.eql? :all %>
+    <%= link_to "https://play.google.com/store/apps/details?id=processing.test.bands", class: :app_link do %>
+      <div class="dark_card app_card" align="center">
+        <%= image_tag "apps/light_0.png", class: :standard_post_image %>
+        <p class="justified_body_text" style="width:90%;">
+          <b>Light</b> - Let there be light, light that grows and changes by your touch.
+        </p>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if app.eql? :space or app.eql? :all %>
-  <%= link_to "https://play.google.com/store/apps/details?id=processing.test.motion3d" do %>
-    <div class="dark_card" align="center">
-      <%= image_tag "apps/space_0.png", class: :standard_post_image %>
-      <p class="justified_body_text" style="width:90%;">
-        <b>Space</b> - Only through space can motion and color truly manifest. Space is the medium of our existence.
-      </p>
-    </div>
+  <% if app.eql? :space or app.eql? :all %>
+    <%= link_to "https://play.google.com/store/apps/details?id=processing.test.motion3d", class: :app_link do %>
+      <div class="dark_card app_card" align="center">
+        <%= image_tag "apps/space_0.png", class: :standard_post_image %>
+        <p class="justified_body_text" style="width:90%;">
+          <b>Space</b> - Only through space can motion and color truly manifest. Space is the medium of our existence.
+        </p>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if app.eql? :ripples or app.eql? :all %>
-  <%= link_to "https://play.google.com/store/apps/details?id=processing.test.ripples" do %>
-    <div class="dark_card" align="center">
-      <%= image_tag "apps/ripples_1.png", class: :standard_post_image %>
-      <p class="justified_body_text" style="width:90%;">
-        <b>Ripples</b> - Tap the screen to see light and color ripple out of the darkness.
-      </p>
-    </div>
+  <% if app.eql? :ripples or app.eql? :all %>
+    <%= link_to "https://play.google.com/store/apps/details?id=processing.test.ripples", class: :app_link do %>
+      <div class="dark_card app_card" align="center">
+        <%= image_tag "apps/ripples_1.png", class: :standard_post_image %>
+        <p class="justified_body_text" style="width:90%;">
+          <b>Ripples</b> - Tap the screen to see light and color ripple out of the darkness.
+        </p>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if app.eql? :strum or app.eql? :all %>
-  <%= link_to "https://play.google.com/store/apps/details?id=processing.test.lines" do %>
-    <div class="dark_card" align="center">
-      <%= image_tag "apps/strum_0.png", class: :standard_post_image %>
-      <p class="justified_body_text" style="width:90%;">
-        <b>Strum</b> - An array of lines that change in color and intensity as you press and drag over them. Swipe left and right for different color sets.
-      </p>
-    </div>
+  <% if app.eql? :strum or app.eql? :all %>
+    <%= link_to "https://play.google.com/store/apps/details?id=processing.test.lines", class: :app_link do %>
+      <div class="dark_card app_card" align="center">
+        <%= image_tag "apps/strum_0.png", class: :standard_post_image %>
+        <p class="justified_body_text" style="width:90%;">
+          <b>Strum</b> - An array of lines that change in color and intensity as you press and drag over them. Swipe left and right for different color sets.
+        </p>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+
+  <% if single %>
+    <!-- when just one app displayed -->
+    <%= link_to my_apps_path do %>
+      <div class="dark_card" align="center">
+        <p>
+          See more
+        </p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
 
 <% if single %>
-  <%= link_to my_apps_path do %>
-    <div class="dark_card" align="center">
-      <p>
-        See more
-      </p>
-    </div>
-  <% end %>
+  <script>
+    var app = $(".app_link");
+    var card = $(".app_card");
+    var blur = $(".blur");
+    // get url before change
+    url = app.attr("href");
+    // url changed temporarily to nil
+    app.attr("href", "javascript:;");
+    // click removes blur and changes link back
+    card.click(function() {
+      blur.toggleClass('blur', false);
+      setTimeout(reset_link, 500);
+    });
+    function reset_link() {
+      app.attr("href", url);
+    }
+  </script>
 <% end %>
