@@ -64,6 +64,7 @@
     var app = $(".app_link");
     var card = $(".app_card");
     var blur = $(".blur");
+    var label = $(".show_app_label");
     // get url before change
     url = app.attr("href");
     // url changed temporarily to nil
@@ -71,6 +72,7 @@
     // click removes blur and changes link back
     card.click(function() {
       blur.toggleClass('blur', false);
+      label.remove();
       setTimeout(reset_link, 500);
     });
     function reset_link() {
