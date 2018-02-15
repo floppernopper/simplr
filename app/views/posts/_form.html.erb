@@ -81,7 +81,7 @@
       </p></br>
     </div>
   <% end %>
-  <%= render "posts/leave_page?.js" %>
+  <%= render "posts/leave_page?.js" if in_dev? or god? or goddess? %>
 </div> <!-- reg post form end -->
 
 <% if current_user and (current_user.has_power?('anarchy') or cookies[:anrcho]) and not @editing %>
