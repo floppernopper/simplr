@@ -18,7 +18,7 @@
 
 @keyframes vaporwave_fader_txt_fader {
   from {
-    color: lightblue;
+    color: white;
   }
   to {
     color: pink;
@@ -27,11 +27,12 @@
 
 .vapor_txt {
   color: white;
-  font-size: 35px;
+  font-size: 40px;
   text-align: center;
   padding-top: 250px;
   font-family: monospace;
-  letter-spacing: 20px;
+  letter-spacing: 30px;
+  font-weight: 400;
   animation: vaporwave_fader_txt_fader 5s infinite alternate;
 }
 
