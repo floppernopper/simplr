@@ -7,6 +7,34 @@
 //2012 Tangerine Tango. Hex #DD4124. ...
 //2011 Honeysucle. Hex #D65076.
 
+@keyframes vaporwave_fader {
+  from {
+    background: pink;
+  }
+  to {
+    background: lightblue;
+  }
+}
+
+@keyframes vaporwave_fader_txt_fader {
+  from {
+    color: lightblue;
+  }
+  to {
+    color: pink;
+  }
+}
+
+.vapor_txt {
+  color: white;
+  font-size: 35px;
+  text-align: center;
+  padding-top: 250px;
+  font-family: monospace;
+  letter-spacing: 20px;
+  animation: vaporwave_fader_txt_fader 5s infinite alternate;
+}
+
 .vaporwave_modal {
   position: fixed;
   top: 0px;
@@ -16,7 +44,8 @@
   background: pink;
   z-index: 10;
   // to stop margins from collapsing
-  overflow: auto;  
+  overflow: auto;
+  animation: vaporwave_fader 5s infinite alternate;
 }
 
 .show_app_label {
