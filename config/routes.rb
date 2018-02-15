@@ -251,6 +251,7 @@ Rails.application.routes.draw do
   get 'my_favorite_color', to: 'arts#my_favorite_color', as: 'my_favorite_color'
   get 'get_distance', to: 'arts#get_distance'
   get 'interactive_art', to: 'arts#my_apps', as: 'my_apps'
+  get 'vaporwave', to: 'arts#vaporwave', as: 'vaporwave'
 
   resources :proposals do
     resources :comments
