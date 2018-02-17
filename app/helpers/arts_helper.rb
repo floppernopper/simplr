@@ -1,6 +1,6 @@
 module ArtsHelper
   def color_palette
-    { 
+    {
       tint: '#72FE95',
       tealish: '#ade6d8',
       serenity: '#008080',
@@ -11,7 +11,7 @@ module ArtsHelper
       tang_milde: '#ffc04d',
     }
   end
-  
+
   def color_palette_2
     { greenery: '#88B04B',
       serenity: '#92A8D1',
@@ -23,7 +23,7 @@ module ArtsHelper
       rose_quartz: '#8DC7BB',
     }
   end
-  
+
   def art_elements
     ['square', 'rectangle', 'triangle_up', 'triangle_down', 'circle']
   end
