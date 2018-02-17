@@ -252,6 +252,7 @@ Rails.application.routes.draw do
   get 'get_distance', to: 'arts#get_distance'
   get 'interactive_art', to: 'arts#my_apps', as: 'my_apps'
   get 'vaporwave', to: 'arts#vaporwave', as: 'vaporwave'
+  get 'infinite_teal_void', to: 'arts#void', as: 'void'
 
   resources :proposals do
     resources :comments

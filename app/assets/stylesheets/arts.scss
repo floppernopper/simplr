@@ -7,6 +7,22 @@
 //2012 Tangerine Tango. Hex #DD4124. ...
 //2011 Honeysucle. Hex #D65076.
 
+@mixin modal {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  // to stop margins from collapsing
+  overflow: auto;
+}
+
+.void_modal {
+  @include modal;
+  background: #003434;
+}
+
 @keyframes vaporwave_fader {
   from {
     background: pink;
@@ -18,10 +34,9 @@
 
 @keyframes vaporwave_fader_txt_fader {
   from {
-    color: white;
+    text-shadow: -1.5px -1.5px 1.5px lightblue;
   }
   to {
-    //color: pink;
     text-shadow: 1.5px 1.5px 1.5px #72fe95;
   }
 }

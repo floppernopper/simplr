@@ -1,7 +1,10 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: [:show, :edit, :update, :destroy]
   before_action :kristin_and_forrest_only, only: [:love, :create_love_message]
-  before_action :arts, only: [:paper, :bands, :love, :my_apps, :vaporwave]
+  before_action :arts, only: [:paper, :bands, :love, :my_apps, :vaporwave, :void]
+
+  def void
+  end
 
   def vaporwave
   end
