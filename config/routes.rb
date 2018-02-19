@@ -253,6 +253,7 @@ Rails.application.routes.draw do
   get 'interactive_art', to: 'arts#my_apps', as: 'my_apps'
   get 'vaporwave', to: 'arts#vaporwave', as: 'vaporwave'
   get 'infinite_teal_void', to: 'arts#void', as: 'void'
+  get 'art_sign_up', to: 'arts#sign_up', as: 'art_sign_up'
 
   resources :proposals do
     resources :comments
