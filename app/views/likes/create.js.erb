@@ -5,4 +5,13 @@ link.remove();
 anchor.after("<%=j render "likes/#{get_like_type_str true}", item: @item,
   bottom_left: (!@item.is_a?(Post) and !@item.is_a?(Proposal)) %>");
 
+<% if @post %>
+  flash_border();
+  setTimeout(flash_border, 1000);
+  function flash_border() {
+    $("#post_card_<%= @post.id %>").toggleClass("border_flash_<%= get_like_type_str %>");
+  }
+<% end %>
+
+
 window.navigator.vibrate(1);

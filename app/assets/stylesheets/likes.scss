@@ -5,3 +5,40 @@
 .nooice_img {
   width: 35px;
 }
+
+.border_flash_like {
+  animation: border_flasher 1s;
+  border-color: rgb(119,158,203);
+}
+
+.border_flash_love {
+  animation: border_flasher 1s;
+  border-color: rgb(255,105,97);
+}
+
+.border_flash_whoa {
+  animation: border_flasher 1s;
+  border-color: rgb(119,221,119);
+}
+
+.border_flash_zen {
+  animation: border_flasher 1s;
+  border-color: rgb(136,227,182);
+}
+
+@keyframes border_flasher {
+  0% {
+    border-width: 0px;
+    border-style: none;
+    border-color: none;
+  }
+  50% {
+    border-width: 2.5px;
+    border-style: solid;
+  }
+  100% {
+    border-width: 0px;
+    border-style: none;
+    border-color: none;
+  }
+}

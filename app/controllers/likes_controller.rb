@@ -1,11 +1,11 @@
 class LikesController < ApplicationController
   before_action :set_item
-  
+
   def show
     @like = Like.find_by_id params[:id]
     @comments = @like.comments
   end
-  
+
   def create
     # starts new like type
     @like = @item.send(get_like_type).new
@@ -30,7 +30,7 @@ class LikesController < ApplicationController
       end
     end
   end
-  
+
   def destroy
     @like = if current_user
       @item.send(get_like_type).where(user_id: current_user.id).last
@@ -39,9 +39,9 @@ class LikesController < ApplicationController
     end
     @like.destroy
   end
-  
+
   private
-  
+
   def get_like_type
     if params[:love]
       :loves
@@ -55,7 +55,7 @@ class LikesController < ApplicationController
       :_likes
     end
   end
-  
+
   def set_item
     @item = if params[:post_id]
       Post.find_by_id params[:post_id]
@@ -69,6 +69,9 @@ class LikesController < ApplicationController
       Vote.find_by_id params[:vote_id]
     elsif params[:like_id]
       Like.find_by_id params[:like_id]
+    end
+    if @item.is_a? Post
+      @post = @item
     end
   end
 end
