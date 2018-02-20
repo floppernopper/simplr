@@ -1,21 +1,23 @@
-<div class="art_card art_border_card" align="center" id="art_border_card">
-  <div class="art_middle">
-    <p class="surreal_txt">
-      hello world
-    </p>
+<% if in_dev? %>
+  <div class="art_card art_border_card" align="center" id="art_border_card">
+    <div class="art_middle">
+      <p class="surreal_txt">
+        hello world
+      </p>
+    </div>
   </div>
-</div>
 
-<script>
-  var border_card = $(".art_border_card");
-  border_card.click(function() {
-    border_card.toggleClass("border_flash");
-    //setTimeout(border_flash, 500);
-  });
-  function border_flash() {
-    border_card.toggleClass("border_flash");
-  }
-</script>
+  <script>
+    var border_card = $(".art_border_card");
+    border_card.click(function() {
+      border_card.toggleClass("border_flash");
+      //setTimeout(border_flash, 500);
+    });
+    function border_flash() {
+      border_card.toggleClass("border_flash");
+    }
+  </script>
+<% end %>
 
 <div class="art_card surreal_card" align="center">
   <%= link_to paper_path do %>
