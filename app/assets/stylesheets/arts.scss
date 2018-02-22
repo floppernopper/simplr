@@ -7,8 +7,84 @@
 //2012 Tangerine Tango. Hex #DD4124. ...
 //2011 Honeysucle. Hex #D65076.
 
-.art_border_card {
-  transition: all 0.3s ease-in-out;
+.kristin_snek_card {
+  position: relative;
+  background: #ff69b4;
+  max-width: 550px;
+  height: 200px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  margin-top: 15px;
+  width: 94.5%;
+}
+
+.art_border_side_inner {
+  transition: all 1s ease-in-out;
+  position: absolute;
+  width: 100%;
+  height: 0%;
+  background: #F3F315;
+  bottom: 0px;
+}
+
+.art_border_vert_inner {
+  transition: all 1s ease-in-out;
+  position: relative;
+  width: 0%;
+  height: 100%;
+  background: #F3F315;
+}
+
+.vert_inner_top {
+  width: 100%;
+  background: #ff69b4;
+}
+
+.side_inner_expand {
+  height: 100%;
+}
+
+.vert_inner_expand {
+  width: 100%;
+}
+
+.vert_inner_shrink {
+  width: 0%;
+}
+
+.art_middle {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  float: left;
+}
+
+.art_border_vert {
+  position: relative;
+  width: 100%;
+  height: 10%;
+  background: #ff69b4;
+  float: left;
+}
+
+.art_vert_top {
+  background: #F3F315;
+}
+
+.art_border_left {
+  position: relative;
+  width: 5%;
+  height: 80%;
+  background: #ff69b4;
+  float: right;
+}
+
+.art_border_right {
+  position: relative;
+  width: 5%;
+  height: 80%;
+  background: #ff69b4;
+  float: left;
 }
 
 @mixin modal {
@@ -154,7 +230,6 @@
   transition: all 1s ease-in-out;
   position: relative;
   background: #CEFFFD;
-  border: 0px solid white;
   max-width: 550px;
   margin: 0 auto;
   margin-bottom: 12.5px;
@@ -180,6 +255,13 @@
   text-shadow: 1.25px 1.25px 1.25px rgb(0, 255, 0);
   font-size: 30px;
   font-family: "Courier New", Courier, monospace;
+}
+
+.outrun_txt {
+  margin-top: 35px;
+  margin-left: 15px;
+  text-shadow: 1.25px 1.25px 1.25px rgb(0, 255, 0);
+  font-size: 25px;
 }
 
 .paper_card {
