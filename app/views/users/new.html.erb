@@ -11,6 +11,20 @@
   <%= render 'form' %>
   <%= render "posts/feed_loader" %>
   <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
+
+  <% muzak = rand 3; if muzak == 0 %>
+    <%= audio_tag "music/future_business.mp3", id: "creator_music" %>
+  <% elsif muzak == 1 %>
+    <%= audio_tag "music/progress.mp3", id: "creator_music" %>
+  <% else %>
+      <%= audio_tag "music/high_tech_city.mp3", id: "creator_music" %>
+  <% end %>
+
+  <script>
+    $("#creator_music")[0].currentTime = 0;
+    $("#creator_music")[0].play();
+  </script>
+
 <% else %>
   <div class="card">
     <p align="center">

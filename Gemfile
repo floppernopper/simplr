@@ -48,7 +48,7 @@ gem 'voight_kampff'
 gem "simple_captcha2"
 
 # fonts and glyphs
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '~> 4.0'
 
 # bootstrap
 #gem 'twitter-bootstrap-rails'
