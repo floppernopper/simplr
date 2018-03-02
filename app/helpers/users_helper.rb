@@ -48,7 +48,7 @@ module UsersHelper
       # featured unless logged in and already joined
       featured << user unless current_user and (current_user.eql? user or current_user.following.include? user)
     end
-    return featured.sample(4)
+    return featured.sort_by {|u| u.posts.size}.last 4
   end
 
   def user_mentioned word

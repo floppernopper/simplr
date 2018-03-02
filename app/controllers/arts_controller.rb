@@ -3,6 +3,9 @@ class ArtsController < ApplicationController
   before_action :kristin_and_forrest_only, only: [:love, :create_love_message]
   before_action :arts, only: [:paper, :bands, :love, :my_apps, :vaporwave, :void]
 
+  def phenomenology
+  end
+
   def void
   end
 

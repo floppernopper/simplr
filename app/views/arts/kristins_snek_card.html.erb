@@ -1,0 +1,45 @@
+<div class="kristin_snek_card" id="kristin_snek_card" align="center">
+  <div class="art_border_vert art_vert_top">
+    <div class="art_border_vert_inner vert_inner_top" id="inner_top"></div>
+  </div>
+
+  <div class="art_border_right">
+    <div class="art_border_side_inner" id="inner_right"></div>
+  </div>
+
+  <div class="art_middle" align="center">
+    <p class="surreal_txt outrun_txt">
+      kristin's snek card™
+    </p>
+  </div>
+
+  <div class="art_border_left" align="center">
+    <div class="art_border_side_inner" id="inner_left"></div>
+  </div>
+
+  <div class="art_border_vert" align="center">
+    <div class="art_border_vert_inner" id="inner_bottom"></div>
+  </div>
+</div>
+
+<script>
+  var snek_card = $("#kristin_snek_card");
+  var vert_inner = $("#inner_bottom");
+  var inner_sides = $(".art_border_side_inner");
+  var inner_top = $("#inner_top");
+
+  snek_card.click(function() {
+    vert_inner.toggleClass('vert_inner_expand');
+    setTimeout(expand_sides, 1000);
+    setTimeout(shrink_top, 2000);
+    window.navigator.vibrate(1);
+  });
+
+  function expand_sides() {
+    inner_sides.toggleClass('side_inner_expand');
+  }
+
+  function shrink_top() {
+    inner_top.toggleClass('vert_inner_shrink');
+  }
+</script>

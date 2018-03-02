@@ -2,7 +2,7 @@ module GroupsHelper
   def visible_to_anons? group
     true if group and group.open
   end
-  
+
   def group_structure_options
     options = [["Choose a social structure", nil],
       ["Model of consensus", "consensus"],
@@ -10,16 +10,16 @@ module GroupsHelper
       ["Autocratic (default)", "autocratic"]]
     return options
   end
-  
+
   def featured_groups
     featured = []
     Group.where.not(image: nil).each do |group|
       # featured unless logged in and already joined
       featured << group unless my_groups.include? group or group.hidden
     end
-    return featured.sample(4)
+    return featured.sort_by {|g| g.posts.size}.last 4
   end
-  
+
   def my_group_options editing=nil
     label = if editing
       "Put in a different group"
@@ -35,7 +35,7 @@ module GroupsHelper
     end
     return options
   end
-  
+
   def my_groups
     _my_groups = []
     if current_user
@@ -48,7 +48,7 @@ module GroupsHelper
     end
     return _my_groups
   end
-  
+
   def group_member_auth group
     if current_user
       if group.members.find_by_user_id current_user.id or current_user.has_power? 'invade_groups'
@@ -56,7 +56,7 @@ module GroupsHelper
       end
     end
   end
-  
+
   def group_auth group
     return true if god? or goddess?
     if current_user
