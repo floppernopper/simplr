@@ -17,7 +17,7 @@ module GroupsHelper
       # featured unless logged in and already joined
       featured << group unless my_groups.include? group or group.hidden
     end
-    return featured.sort_by {|g| g.posts.size}.last 4
+    return featured.sort_by {|g| g.posts.size}.sample(10).last 4
   end
 
   def my_group_options editing=nil
