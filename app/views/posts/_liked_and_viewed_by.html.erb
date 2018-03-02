@@ -77,7 +77,7 @@
     </script>
     <div align="center" id="seen_by_text_0">
       Seen by:
-        <% user_views = @views.where.not(user_id: nil); anon_views = @views.where.not(anon_token: nil) %>
+        <% user_views = @views - View.where(user_id: nil); anon_views = @views - View.where(anon_token: nil) %>
         <% for view in user_views %>
           <%= link_to view.user.name, view.user, class: :white_link, title: "Locale: " + view.locale.to_s if view.user %>
           <%= ", " unless view.eql? user_views.last %>

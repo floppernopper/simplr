@@ -89,8 +89,6 @@ class ApplicationController < ActionController::Base
     else
       item.views
     end
-    # trying to find where views not being saved for anons
-    #puts "\n\n\nGOT THIS FAR\n\n\n"
     if not seen? item
       if current_user
         # unless item is the current user or item is not a user at all and belongs to user
@@ -265,7 +263,7 @@ class ApplicationController < ActionController::Base
   end
 
   def god?
-    (dev? and current_user.god and current_user.eql? User.first) or Rails.env.development?
+    dev? and current_user.god and current_user.eql? User.first
   end
 
   def currently_kristin?
