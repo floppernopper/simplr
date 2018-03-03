@@ -46,14 +46,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def featured_content
+  end
+
   def stale_content?
     # checks content for users and groups followed
     for l in [current_user.following, current_user.my_groups]
       # checks each user or group in above lists for new content
       for i in l
         # checks for new posts and new proposals, less than a month old
-        if i.posts.present? and i.posts.last.created_at > 1.month.ago \
-          or i.proposals.present? and i.proposals.last.created_at > 1.month.ago
+        if (i.posts.present? and i.posts.last.created_at > 1.month.ago) \
+          or (i.proposals.present? and i.proposals.last.created_at > 1.month.ago)
             cookies[:stale_content] = { value: true, expires_at: 1.day.from_now }
             return true
         end
