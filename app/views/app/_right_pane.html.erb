@@ -1,27 +1,31 @@
 <% if (Rails.env.development? and current_user) or (god? and current_user) %>
   <div class="right_pane">
-    <div class="right_pane_sub">
-      <% unless current_user.my_groups.empty? %>
-        <div class="side_pane_label right_pane_label">Group activity</div>
-        <% for group in current_user.my_groups.select { |g| g.total_items_unseen(current_user).to_i > 0 } %>
-          <div>
-            <%= link_to group, class: "dark_link group_activity" do %>
-              <% group_name = if group.name.size > 15 then group.name[0..9] + "..." else group.name end %>
-              <%= image_tag group.image, class: :user_avatar_image if group.image.url %>
-              <%= group_name + " +#{group.total_items_unseen(current_user)}" %>
-            <% end %>
-          </div>
+    <% unless my_active_groups.empty? and Tag.trending.empty? %>
+      <div class="right_pane_sub">
+        <% unless my_active_groups.empty? %>
+          <div class="side_pane_label right_pane_label">Group activity</div>
+          <% for group in my_active_groups %>
+            <div>
+              <%= link_to group, class: "dark_link group_activity" do %>
+                <% group_name = if group.name.size > 15 then group.name[0..9] + "..." else group.name end %>
+                <%= image_tag group.image, class: :user_avatar_image if group.image.url %>
+                <%= group_name + " +#{group.total_items_unseen(current_user)}" %>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-      <div class="side_pane_label right_pane_label side_pane_label_successive">Trending tags</div>
-      <% for tag in Tag.trending %>
-        <div>
-          <%= link_to tag.tag, search_path(query: tag.tag), class: "dark_link group_activity" %>
-        </div>
-      <% end %>
-      </br>
-    </div>
-  
+        <% unless Tag.trending.empty? %>
+          <div class="side_pane_label right_pane_label side_pane_label_successive">Trending tags</div>
+          <% for tag in Tag.trending %>
+            <div>
+              <%= link_to tag.tag, search_path(query: tag.tag), class: "dark_link group_activity" %>
+            </div>
+          <% end %>
+        <% end %>
+        </br>
+      </div>
+    <% end %>
+
     <div class="right_pane_sub">
       <div class="side_pane_label right_pane_label">Notes</div>
       <% for note in current_notes.last(5).reverse %>

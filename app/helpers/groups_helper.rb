@@ -1,4 +1,12 @@
 module GroupsHelper
+  def my_active_groups
+    if current_user and current_user.my_groups.present?
+      current_user.my_groups.select { |g| g.total_items_unseen(current_user).to_i > 0 }
+    else
+      []
+    end
+  end
+
   def visible_to_anons? group
     true if group and group.open
   end

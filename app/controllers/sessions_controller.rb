@@ -1,12 +1,12 @@
 class SessionsController < ApplicationController
   before_action :god_only, only: [:hijack] # also set for development
   before_action :dev_env_only, only: [:dev_login]
-  
+
   def dev_login
     cookies.permanent[:auth_token] = User.first.auth_token
     redirect_to root_url
   end
-  
+
   def hijack
     @user = User.find_by_unique_token params[:token]
     @user ||= User.find_by_id params[:token]
@@ -22,10 +22,10 @@ class SessionsController < ApplicationController
       redirect_to root_url
     end
   end
-  
+
   def new
   end
-  
+
   def create
     @user = User.authenticate(params[:login], params[:password])
     if @user
@@ -37,12 +37,24 @@ class SessionsController < ApplicationController
       end
       cookies.permanent[:logged_in_before] = true
       cookies.permanent[:human] = true
-      redirect_to root_url
+      # sets returning_user cookie with notice if its been a while
+      notice = if returning_user?
+        "Welcome back, #{@user.name}"
+      else
+        "Decryption successfull..."
+      end
+
+      stale_content?
+
+      # records current time for last visit
+      record_last_visit
+      # redirects to home with notice
+      redirect_to root_url, notice: notice
     else
       redirect_to :back, notice: "Invalid username, email, or password"
     end
   end
-  
+
   def destroy
     if current_user
       # destroys all sessions
@@ -51,7 +63,7 @@ class SessionsController < ApplicationController
     end
     redirect_to root_url
   end
-  
+
   def destroy_all_other_sessions
     if current_user
       current_user.update_token
@@ -60,15 +72,15 @@ class SessionsController < ApplicationController
     end
     redirect_to :back
   end
-  
+
   private
-  
+
   def dev_env_only
     unless Rails.env.development?
       redirect_to '/404'
     end
   end
-  
+
   def god_only
     unless god? or goddess? or Rails.env.development?
       redirect_to '/404'

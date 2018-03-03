@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :goddess?, :currently_kristin?,
     :forrest_only_club?, :invited_to_forrest_only_club?, :in_dev?, :is_gatekeeper?, :page_turning,
-    :testing_score?, :unique_element_token
+    :testing_score?, :unique_element_token, :returning_user?, :stale_content?
 
   include SimpleCaptcha::ControllerHelpers
 
@@ -44,6 +44,31 @@ class ApplicationController < ActionController::Base
     for item in @items
       seent item
     end
+  end
+
+  def stale_content?
+    # checks content for users and groups followed
+    for l in [current_user.following, current_user.my_groups]
+      # checks each user or group in above lists for new content
+      for i in l
+        # checks for new posts and new proposals, less than a month old
+        if i.posts.present? and i.posts.last.created_at > 1.month.ago \
+          or i.proposals.present? and i.proposals.last.created_at > 1.month.ago
+            cookies[:stale_content] = { value: true, expires_at: 1.day.from_now }
+            return true
+        end
+      end
+    end
+    nil
+  end
+
+  def returning_user?
+    # last active longer than a month ago?
+    if current_user.last_active_at < 1.month.ago
+      cookies[:returning_user] = { value: true, expires_at: 1.day.from_now }
+      return true
+    end
+    nil
   end
 
   def record_last_visit

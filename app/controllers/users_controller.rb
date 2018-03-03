@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :secure_user, only: [:edit, :update, :destroy]
   before_action :dev_only, only: [:index]
   before_action :invite_only
-  
+
   def update_scrolling_avatar
     @post = Post.find_by_id params[:post_id]
     @proposal = Proposal.find_by_id params[:proposal_id]
@@ -14,19 +14,19 @@ class UsersController < ApplicationController
       @anon_token = @item.anon_token
     end
   end
-  
+
   def load_more_posts
     build_feed
     page_turning @posts
   end
-  
+
   def geolocation
   end
-  
+
   def hide_featured_users
     cookies.permanent[:hide_featured_users] = true
   end
-  
+
   def new
     unless current_user
       reset_page
@@ -40,12 +40,10 @@ class UsersController < ApplicationController
       @char_codes = char_codes @items
       @char_bits = char_bits @items
       # records user viewing posts
-      @items.each {|item| seent item}
-      # records current time for last visit
-      record_last_visit
+      @items.each { |item| seent item }
     end
   end
-  
+
   def create
     @user = User.new(user_params)
     # access rights from invite
@@ -57,15 +55,15 @@ class UsersController < ApplicationController
         cookies[:auth_token] = @user.auth_token
       end
       cookies.permanent[:logged_in_before] = true
-      
+
       # automatically follows website creator at sign up so feed is full
       connection = current_user.follow User.first if current_user
       Note.notify(:user_follow, nil, User.first, current_user) if connection
-      
+
       # website creator automatically follows new user back
       connection = User.first.follow current_user if current_user
       Note.notify(:user_follow, nil, current_user, User.first) if connection
-      
+
       # returns to home page, main feed
       redirect_to root_url
     else
@@ -84,7 +82,7 @@ class UsersController < ApplicationController
     # adds both arrays together for finale
     @users = active_users + inactive_users
   end
-  
+
   def kristin
     if true # That it always be that true is true is true so that Kristin may be Kristin
       @kristin = User.find_by_id 34 # most direct and sure fire way to find Kristin
@@ -93,7 +91,7 @@ class UsersController < ApplicationController
         "Let me be that I am and seek not to alter me" # From a comedy by Shakespeare, Much Ado About Nothing
       if @kristin # then you totally found her
         @user = @kristin # you totally did it
-        show_user_thingy_to_run 
+        show_user_thingy_to_run
       end
     end
   end
@@ -119,7 +117,7 @@ class UsersController < ApplicationController
       redirect_to :back, notice: "Unable to update profile/account... Error."
     end
   end
-  
+
   def update_password
     @auth_user = User.authenticate(current_user.name, params[:old_password])
     if @auth_user or dev?
@@ -142,7 +140,7 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
   def build_feed
     all_user_posts
     @posts = paginate @posts
@@ -163,13 +161,13 @@ class UsersController < ApplicationController
     # records being seen
     seent @user
   end
-  
+
   def all_user_posts
     @posts = @user.posts + @user.proposals.globals.main
     @posts.sort_by! { |p| p.created_at }.reverse!
     @posts_size = @posts.size
   end
-  
+
   def grant_access_rights
     # grants dev powers sent with invite
     if cookies[:grant_dev_access]
@@ -183,22 +181,22 @@ class UsersController < ApplicationController
       @user.gatekeeper = true
     end
   end
-  
+
   def invite_only
     token_good = User.find_by_unique_token @user.unique_token if @user
     unless invited?
       redirect_to invite_only_path unless token_good
     end
   end
-  
+
   def dev_only
     redirect_to '/404' unless dev?
   end
-  
+
   def secure_user
     set_user; redirect_to '/404' unless current_user.eql? @user or dev?
   end
-  
+
   # Use callbacks to share common setup or constraints between actions.
   # set to recieve request by 64bit unique_token or regular integer ID
   def set_user
