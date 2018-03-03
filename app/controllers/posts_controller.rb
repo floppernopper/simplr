@@ -30,27 +30,6 @@ class PostsController < ApplicationController
     @post = Post.find_by_id params[:post_id]
   end
 
-  def open_menu
-  end
-
-  def close_menu
-  end
-
-  def add_group_id
-  end
-
-  def add_video
-  end
-
-  def add_image
-  end
-
-  def add_audio
-  end
-
-  def add_photoset
-  end
-
   def remove_picture
     @picture_id = params[:picture_id]
     @picture = Picture.find_by_id @picture_id
