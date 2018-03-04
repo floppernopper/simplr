@@ -155,10 +155,11 @@ class ConnectionsController < ApplicationController
       if @connection.group
         if request
           Note.notify :group_request_accepted, @connection.group, @connection.user, current_user
+          @group_request_accepted = true
         end
       end
     end
-    redirect_to :back
+    redirect_to :back unless params[:ajax_req].present?
   end
 
   def destroy
@@ -173,7 +174,7 @@ class ConnectionsController < ApplicationController
     elsif @connection
       @connection.destroy
     end
-    redirect_to :back unless @unfollowed or @left_group
+    redirect_to :back unless @unfollowed or @left_group or params[:ajax_req].present?
   end
 
   def members

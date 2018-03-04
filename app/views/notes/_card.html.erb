@@ -8,22 +8,35 @@
       or action.eql? :proposal_like or action.eql? :vote_like %>
         <%= image_tag "nooice.gif", class: :nooice_img %>
     <% end %>
-    
+
     <% item = if action.eql? :post_like or action.eql? :post_love or action.eql? :post_whoa %>
       <% Post.find_by_id note.item_id %>
     <% elsif action.eql? :proposal_like or action.eql? :proposal_up_voted %>
       <% Proposal.find_by_unique_token note.item_token %>
     <% elsif action.eql? :comment_like %>
       <% Comment.find_by_id note.item_id %>
+    <% elsif action.eql? :group_request %>
+      <% Group.find(note.item_id).requests.where(user_id: note.sender_id).last %>
     <% end %>
-    <!-- showing preview content -->
+
     <% if item %>
-      <% if !item.is_a?(Proposal) and !item.is_a?(Comment) and item.pictures.present? and item.pictures.first.image.url %>
-        <%= image_tag item.pictures.first.image, class: :note_img_preview %>
-      <% elsif item.body.present? %>
-        <div class="note_txt_preview">
-          <%= item.body[0..20] + "..." %>
-        </div>
+      <% if item.is_a? Connection %>
+        <p id="group_request_accept_deny">
+          <%= Group.find(note.item_id).name %>:
+          <%= link_to "Accept", update_connection_path(id: item.id, ajax_req: true), method: :put, remote: true %>
+          <%= " | " %>
+          <%= link_to "Deny", destroy_connection_path(id: item.id, ajax_req: true), method: :delete, remote: true %>
+        </p>
+      <% else %>
+        <!-- showing preview content -->
+        <% if !item.is_a?(Proposal) and !item.is_a?(Comment) and item.pictures.present? \
+          and item.pictures.first.image.url %>
+          <%= image_tag item.pictures.first.image, class: :note_img_preview %>
+        <% elsif item.body.present? %>
+          <div class="note_txt_preview">
+            <%= item.body[0..20] + "..." %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   </p>

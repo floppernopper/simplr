@@ -1,0 +1,5 @@
+<% if @group_request_accepted %>
+  var request = $("#group_request_accept_deny");
+  request.after("<%=j render 'connections/request_updated' %>");
+  request.remove();
+<% end %>

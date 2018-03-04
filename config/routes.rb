@@ -102,6 +102,8 @@ Rails.application.routes.draw do
   get 'users/:user_id/invite', to: 'connections#new', as: 'invite'
   get 'groups/:group_id/invite', to: 'connections#new', as: 'invite_from_group'
   get 'my_groups', to: 'groups#my_groups', as: 'my_groups'
+  put 'update_connection/:id', to: 'connections#update', as: 'update_connection'
+  delete 'delete_connection/:id', to: 'connections#destroy', as: 'destroy_connection'
 
   # settings
   put 'settings/update', as: 'update_settings'
