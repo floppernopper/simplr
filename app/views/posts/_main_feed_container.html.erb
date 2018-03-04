@@ -2,7 +2,7 @@
   <%= render "posts/infinite_scroll.js", param: (@preview_items ? "preview" : "posts") %>
 </script>
 
-<% if returning_user_with_stale_content? or god? %>
+<% if returning_user_with_stale_content? %>
   <div class="dark_card" align="center">
     <p>
       Showing featured content...
