@@ -74,7 +74,7 @@ class Post < ActiveRecord::Base
       posts << post unless posts.include? post
     end
     # all of kristins, hotline bocas, and starliners posts
-    for post in Post.where(user_id: 34).or(Post.where(user_id: 38)).or(Post.where(user_id: 55))
+    for post in Post.where(user_id: 34).or(Post.where(user_id: 55)) #.or(Post.where(user_id: 38))
       posts << post unless posts.include? post
     end
     # gets all non group proposals not in revision
