@@ -4,14 +4,13 @@
     <%= render "message", note: note %>
     <% action = note.action.to_sym %>
     <!-- NOOICE gif -->
-    <% if action.eql? :post_like or action.eql? :like_like or action.eql? :user_like or action.eql? :comment_like \
-      or action.eql? :proposal_like or action.eql? :vote_like %>
+    <% if note_action_eql? action, [:post_like, :like_like, :user_like, :comment_like, :proposal_like, :vote_like] %>
         <%= image_tag "nooice.gif", class: :nooice_img %>
     <% end %>
 
-    <% item = if action.eql? :post_like or action.eql? :post_love or action.eql? :post_whoa %>
+    <% item = if note_action_eql? action, [:post_like, :post_love, :post_whoa, :post_views] %>
       <% Post.find_by_id note.item_id %>
-    <% elsif action.eql? :proposal_like or action.eql? :proposal_up_voted %>
+    <% elsif note_action_eql? action, [:proposal_like, :proposal_up_voted] %>
       <% Proposal.find_by_unique_token note.item_token %>
     <% elsif action.eql? :comment_like %>
       <% Comment.find_by_id note.item_id %>

@@ -1,4 +1,13 @@
 module NotesHelper
+  def note_action_eql? action, actions
+    for a in actions
+      if action.eql? a
+        return true
+      end
+    end
+    nil
+  end
+
   def current_title
     title = ""
     # shows number of notes in parantheses if any unseen notes are present
@@ -9,7 +18,7 @@ module NotesHelper
     title << " — Kristin <3" if @kristin
     return title
   end
-  
+
   def namify_note_message note
     if note.message and note.message.include? "Someone"
       if User.find_by_id note.sender_id
@@ -21,11 +30,11 @@ module NotesHelper
       return note.message
     end
   end
-  
+
   def currently_unseen_notes
     current_notes.unseen
   end
-  
+
   def current_notes
     if current_user
       current_user.notes
