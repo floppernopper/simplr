@@ -149,9 +149,12 @@ class ApplicationController < ActionController::Base
       view = item.views.where(user_id: current_user.id).last
       view.update score_count: view.score_count.to_i + 1
     end
-    if item.is_a? Post and item.user \
-      and item.views.where.not(user_id: item.user.id).where('created_at >= ?', 1.week.ago).size >= 5
-      Note.notify :post_views, item, item.user
+    # notify users of more than a few views they've received on a post, every week
+    if item.is_a? Post and item.user and item.views.where.not(user_id: item.user.id)
+                                                   .where('created_at >= ?', 1.week.ago)
+                                                   .where(anon_token: nil).size >= 5
+      Note.notify :post_views, item, item.user \
+        unless item.user.notes.where(action: "post_views").where('created_at >= ?', 1.week.ago).present?
     end
   end
 
