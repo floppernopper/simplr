@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :goddess?, :currently_kristin?,
     :forrest_only_club?, :invited_to_forrest_only_club?, :in_dev?, :is_gatekeeper?, :page_turning, :testing_score?,
-    :unique_element_token, :returning_user?, :stale_content?, :returning_user_with_stale_content?
+    :unique_element_token, :returning_user?, :stale_content?, :returning_user_with_stale_content?, :featured_content
 
   include SimpleCaptcha::ControllerHelpers
 
