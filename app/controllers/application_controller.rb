@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method :anon_token, :current_user, :current_identity, :mobile?, :browser, :get_location,
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :goddess?, :currently_kristin?,
-    :forrest_only_club?, :invited_to_forrest_only_club?, :in_dev?, :is_gatekeeper?, :page_turning,
-    :testing_score?, :unique_element_token, :returning_user?, :stale_content?
+    :forrest_only_club?, :invited_to_forrest_only_club?, :in_dev?, :is_gatekeeper?, :page_turning, :testing_score?,
+    :unique_element_token, :returning_user?, :stale_content?, :returning_user_with_stale_content?
 
   include SimpleCaptcha::ControllerHelpers
 
@@ -47,6 +47,17 @@ class ApplicationController < ActionController::Base
   end
 
   def featured_content
+    featured = []
+    for item in (Post.where.not(user_id: current_user.id).to_a + Proposal.where.not(user_id: current_user.id).to_a)
+      if (item.likes.size + item.comments.size) >= 1
+        featured << item
+      end
+    end
+    featured.sort_by {|i| i.created_at}.reverse
+  end
+
+  def returning_user_with_stale_content?
+    cookies[:returning_user].present? and cookies[:stale_content].present?
   end
 
   def stale_content?

@@ -70,6 +70,10 @@ class User < ActiveRecord::Base
     return powers
   end
 
+  def self.grant_xp_to_all
+    
+  end
+
   def loot treasure
     # duplicates treasure and assigns duplicate to user
     dup_treasure = treasure.dup; dup_treasure.user_id = self.id

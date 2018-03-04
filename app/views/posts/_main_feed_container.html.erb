@@ -2,6 +2,28 @@
   <%= render "posts/infinite_scroll.js", param: (@preview_items ? "preview" : "posts") %>
 </script>
 
+<% if returning_user_with_stale_content? or god? %>
+  <div class="dark_card" align="center">
+    <p>
+      Showing featured content...
+    </p>
+  </div>
+
+  <% for item in featured_content.first 10 %>
+    <% if item.is_a? Post %>
+      <%= render "posts/card", post: item %>
+    <% elsif item.is_a? Proposal %>
+      <%= render "proposals/card", proposal: item %>
+    <% end %>
+  <% end %>
+
+  <div class="dark_card" align="center">
+    <p>
+      End of featured content...
+    </p>
+  </div>
+<% end %>
+
 <div id="feed_container_anchor"></div>
 <%= render "posts/feed_container", items: items, all_items: all_items %>
 
