@@ -1,0 +1,7 @@
+<% notes_icon = if currently_unseen_notes.present? %>
+  <% '<i class="fa fa-bell fa-lg" id="notes_slide_icon"></i>' %>
+<% else %>
+  <% '<i class="fa fa-bell-o fa-lg" id="notes_slide_icon"></i>' %>
+<% end %>
+
+<div id="notifications_link_icon"><%= notes_icon.html_safe %></div>

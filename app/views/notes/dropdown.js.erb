@@ -1,5 +1,3 @@
-<% if @unseen.present? %>
-  var icon = $("#notifications_link_icon");
-  icon.after("<%=j '<i class="fa fa-bell-o fa-lg"></i>'.html_safe  %>");
-  icon.remove();
-<% end %>
+var icon = $("#notifications_link_icon");
+icon.after("<%=j render 'notes/link_icon'  %>");
+icon.remove();
