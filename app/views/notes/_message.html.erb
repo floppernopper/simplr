@@ -4,7 +4,7 @@ link_class << " unseen_note_message" if @dark and not note.seen %>
 
 <% message = namify_note_message(note); \
 action = note.action.to_sym; case action %>
-<% when :post_comment, :also_commented, :post_like, :post_whoa, :post_love, :post_zen, :post_share %>
+<% when :post_comment, :also_commented, :post_like, :post_whoa, :post_love, :post_zen, :post_share, :post_views %>
   <% post = Post.find_by_id note.item_id %>
   <% if post %>
     <%= link_to message, show_post_path(post.unique_token), class: link_class %>
@@ -26,14 +26,14 @@ action = note.action.to_sym; case action %>
 <% when :like_like %>
   <% post = Like.find(note.item_id).post if Like.find_by_id note.item_id %>
   <% like = get_like_like note %>
-  
+
   <% if post %>
     <%= link_to message, show_post_path(post.unique_token), class: link_class %>
   <% elsif like %>
     <% post = get_like_liked_post like %>
     <%= link_to message, show_post_path(post.unique_token), class: link_class if post %>
   <% end %>
-  <% if like and not @dark %>    
+  <% if like and not @dark %>
     <span id="like_like_link_anchor_<%= like.id %>"></span>
     <%= render "likes/link", item: like, bottom_left: true %>
   <% end %>
@@ -49,7 +49,7 @@ action = note.action.to_sym; case action %>
   <%= link_to message, show_message_folder_path(note.item_id), class: link_class %>
 <% when :hype_received %>
   <%= link_to message, show_treasure_path(token: note.item_token), class: link_class %>
-<!-- Proposal notifications -->      
+<!-- Proposal notifications -->
 <% when :ratified, :proposal_up_voted, :proposal_down_voted, :proposal_revised, :proposal_comment, :proposal_like %>
   <%= link_to note.message, show_proposal_path(note.item_token), class: link_class if note.item_token %>
 <% when :proposal_blocked, :revision_submitted %>

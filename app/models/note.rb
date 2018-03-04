@@ -1,9 +1,9 @@
 class Note < ActiveRecord::Base
   belongs_to :user
   before_create :write_message
-  
+
   scope :unseen, -> { where seen: [nil, false] }
-  
+
   def self.notify action, item=nil, receiver=nil, sender=nil
     self.create(
       action: action,
@@ -19,7 +19,7 @@ class Note < ActiveRecord::Base
       sender_token: (sender.is_a?(String) ? sender : nil)
     )
   end
-  
+
   def action_text action
     _actions = { post_comment: "Someone commented on your post.",
       post_like: "Someone liked your post.",
@@ -27,6 +27,7 @@ class Note < ActiveRecord::Base
       post_love: "Someone loved your post.",
       post_zen: "Someone said your post was very zen.",
       post_share: "Someone shared your post.",
+      post_views: "People are seeing your post.",
       comment_like: "Someone liked your comment.",
       comment_reply: "Someone replied to your comment.",
       also_commented: "Someone also commented on this post.",
@@ -56,9 +57,9 @@ class Note < ActiveRecord::Base
       your_turn_in_game: "It's your turn!" }
     return _actions[action.to_sym]
   end
-  
+
   private
-  
+
   def write_message
     self.message = self.action_text self.action
   end
