@@ -9,6 +9,9 @@
 <% unless current_user %>
   <%= render "connections/invited_message" %>
   <%= render 'form' %>
+
+  <%= render 'app/github_card' %>
+
   <%= render "posts/feed_loader" %>
   <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
 
