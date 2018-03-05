@@ -51,7 +51,7 @@ class PostsController < ApplicationController
     end
     @dup_post.group_id = nil
     if @dup_post.save
-      @share_successful = true
+      @successful_share = @post
       Tag.extract @dup_post
       # gets the true original post
       original_post = @post.original ? @post.original : @post
