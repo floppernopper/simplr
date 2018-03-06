@@ -4,7 +4,7 @@ module PortalsHelper
   def gatekeeper? user
     User.where(gatekeeper: true).last.eql? user
   end
-  
+
   def portal_qr_code link
     return RQRCode::QRCode.new link, size: 5, level: :h
   end
@@ -15,7 +15,7 @@ module PortalsHelper
     link += enter_portal_path(portal.unique_token)
     return link
   end
-  
+
   def portal_cluster_size
     options = [["Generate as a cluster? (multiple)", nil],
       ["5", 5],
@@ -24,7 +24,20 @@ module PortalsHelper
       ["50", 50]]
     return options
   end
-  
+
+  def portal_size
+    options = [["Choose number of uses", nil],
+      ["5", 5],
+      ["10", 10],
+      ["25", 25],
+      ["50", 50],
+      ["75", 75],
+      ["100", 100],
+      ["150", 150],
+      ["200", 200]]
+    return options
+  end
+
   def portal_life_durations
     options = [["How long should it stay open for?", nil],
       ["1 week (default)", 7],

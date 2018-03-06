@@ -1,7 +1,7 @@
 <%= form_tag generate_portal_path, method: :post do %>
   <%= hidden_field_tag :from_portal_index, true if @portals_index %>
   <p>
-    <%= select_tag :remaining_uses, options_for_select(select_number_options("Choose number of uses", 50)) %>
+    <%= select_tag :remaining_uses, options_for_select(portal_size) %>
   </p>
   <p>
     <%= select_tag :remaining_days, options_for_select(portal_life_durations) %>
