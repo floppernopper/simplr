@@ -8,6 +8,8 @@
     <h2 id="user_title" class="user_title">
       <% if gatekeeper? user %>
         <i class="fa fa-fort-awesome"></i> Official Gatekeeper of Social Maya
+      <% elsif user.kristin? %>
+        <%= link_to user.title.html_safe, leo_path %>
       <% else %>
         <%= user.title.html_safe %>
       <% end %>
