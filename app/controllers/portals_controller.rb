@@ -25,7 +25,7 @@ class PortalsController < ApplicationController
   end
 
   def clusters
-    @clusters = Portal.clusters.reverse
+    @clusters = Portal.clusters.sort_by {|p| p.created_at }.reverse
     for cluster in @clusters
       if DateTime.current > cluster.expires_at or not cluster.portals.present?
         cluster.destroy
