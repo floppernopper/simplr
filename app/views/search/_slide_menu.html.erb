@@ -1,0 +1,39 @@
+<div class="search_slide_menu_container">
+  <%= link_to toggle_search_dropdown_path, remote: true, class: :search_slide_menu_toggle_link do %>
+    <i id="search_slide_icon" class="fa fa-compass fa-lg"></i>
+  <% end %>
+
+  <%= render "search/dropdown", tags: Tag.trending %>
+</div>
+
+<script>
+  function search_dropdown_side_on_out() {
+    var slide_menu = $(".search_slide_menu_container");
+    var toggle_link = $(".search_slide_menu_toggle_link");
+    var dropdown = $("#search_dropdown");
+    var link_icon = $("#search_slide_icon");
+
+    // fix for nav_links
+    var toggle = false;
+
+    toggle_link.click(function(){
+      toggle = !toggle;
+
+      slide_menu.toggleClass("search_modal");
+      toggle_link.toggleClass("search_icon_push");
+      link_icon.toggleClass("plus_fade");
+      if (dropdown.is(':hidden')) {
+        setTimeout(toggle_dropdown, 400);
+      } else {
+        dropdown.fadeOut();
+      }
+      window.navigator.vibrate(1);
+    });
+    function toggle_dropdown() {
+      if (toggle) {
+        dropdown.fadeIn();
+      }
+    }
+  }
+  search_dropdown_side_on_out();
+</script>

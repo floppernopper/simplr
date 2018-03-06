@@ -1,6 +1,6 @@
-<div id="search_dropdown" align="center">
+<div id="search_dropdown" align="center" hidden>
   <%= render "search/form" %>
-  <% for tag in @tags %>
+  <% for tag in tags %>
     <p>
       <%= link_to tag.tag, search_path(query: tag.tag) %>
     </p>

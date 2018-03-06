@@ -1,8 +1,0 @@
-function search_dropdown() {
-  $("#search_dropdown_anchor").after("<%=j render 'search/dropdown' %>");
-}
-
-if (!search_dropdown_started) {
-  search_dropdown();
-  var search_dropdown_started = true;
-}
