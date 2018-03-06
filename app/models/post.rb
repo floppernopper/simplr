@@ -85,8 +85,8 @@ class Post < ActiveRecord::Base
     for proposal in Proposal.globals.main
       posts << proposal
     end
-    # only get foc posts when forrest_only
-    posts.delete_if { |item| !item.forrest_only } if forrest_only
+    # only get foc posts when forrest_only, remove any hidden posts from preview
+    posts.delete_if { |item| (forrest_only and !item.forrest_only) or (item.is_a? Post and item.hidden) }
     # sorts posts chronologically
     posts.sort_by! { |item| item.created_at }
     return posts.reverse
