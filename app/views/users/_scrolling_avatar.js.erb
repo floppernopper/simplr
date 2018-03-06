@@ -1,43 +1,43 @@
-<% if dev? %>
+<% if true %>
   <script>
     /*
 
       Scrolling Avatar
-      
+
       Finds the post/motion on the page that is closest to being in the vertical center
       Updates the username/avatar displayed at the bottom left when a vertically centered post is found
-      
+
         Written by Forrest Wilkins
-        
-        
+
+
       Could just find center of page and center of post and see if both match instead of dealing with margin
       like oscar said
-      
+
     */
 
     var leeway_dist = 150;
     var check_rate = 15;
-    
+
     $(window).bindWithDelay("scroll", function() {
       // initializes vars for getting closest post to center
       var closest_dist = null
       var closest = null;
-      
+
       // loops through every post/motion on the page
       $(".standard_content_card").each(function() {
         // gets height of screen and *this* post card
         var screen_height = $(window).height();
         var card_height = $(this).height();
-        
+
         // gets margins between post and vertical
         var margins = Math.abs(screen_height - card_height);
         var margin = margins / 2;
-        
+
         // how many px from top of card to top of screen
         var from_top = Math.abs($(this).offset().top - $(window).scrollTop());
         // gets post card's distance from being vertically centered on page
         var dist_fr_center = Math.abs(margin - from_top);
-        
+
         // only updates avatar if at least in range of X px's from center
         if (dist_fr_center <= leeway_dist) {
           // finds the post card that is the closest to the vertical center
@@ -47,11 +47,11 @@
           }
         }
       });
-      
-      
+
+
       // output margin, from_top, dist_fr_center, next to name
-      
-      
+
+
       // if a closest to center post was found
       if (closest != null) {
         // update scrolling avatar/username
@@ -64,7 +64,7 @@
 	        data: param
         });
       }
-      
+
       // scrolling_avatar fades away if scrolled back to the top
       if ($(window).scrollTop() < 5) {
         $(".scrolling_avatar").each(function() {
