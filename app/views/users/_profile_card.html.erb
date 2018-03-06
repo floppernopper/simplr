@@ -8,8 +8,6 @@
     <h2 id="user_title" class="user_title">
       <% if gatekeeper? user %>
         <i class="fa fa-fort-awesome"></i> Official Gatekeeper of Social Maya
-      <% elsif user.kristin? %>
-        <%= link_to user.title.html_safe, leo_path %>
       <% else %>
         <%= user.title.html_safe %>
       <% end %>
@@ -40,7 +38,7 @@
   <div align="center">
     <% if user.image.url %>
       <% if @user_shown %>
-        <%= link_to geolocation_path, remote: true do %>
+        <%= link_to (user.kristin? ? leo_path : geolocation_path), remote: !user.kristin? do %>
           <%= image_tag user.image, class: :profile_picture %>
         <% end %>
       <% else %>
