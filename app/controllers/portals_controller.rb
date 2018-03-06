@@ -35,7 +35,7 @@ class PortalsController < ApplicationController
 
   def index
     @portals_index = true
-    @portals = Portal.loners.reverse
+    @portals = Portal.loners.sort_by {|p| p.created_at }.reverse
     for portal in @portals
       if DateTime.current > portal.expires_at
         portal.destroy
