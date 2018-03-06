@@ -69,12 +69,16 @@ class Post < ActiveRecord::Base
         posts << post if post.user_id.eql? 1
       end
     end
+    # get all memories shared by first user
+    for post in self.where.not(original_id: nil).where(user_id: 1)
+      posts << post unless posts.include? post
+    end
     # gets all anonymous posts
-    for post in Post.where(user_id: nil).where.not(anon_token: nil)
+    for post in self.where(user_id: nil).where.not(anon_token: nil)
       posts << post unless posts.include? post
     end
     # all of kristins, hotline bocas, and starliners posts
-    for post in Post.where(user_id: 34).or(Post.where(user_id: 38)).or(Post.where(user_id: 55))
+    for post in self.where(user_id: 34).or(self.where(user_id: 38)).or(Post.where(user_id: 55))
       posts << post unless posts.include? post
     end
     # gets all non group proposals not in revision
