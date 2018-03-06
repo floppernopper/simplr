@@ -8,7 +8,8 @@
     </div>
   <% end %>
   <div class="notes_dropdown_link standard_nav_menu_link">
-    <%= link_to "See all", notes_path, class: :dark_link %>
+    <%= link_to "See all#{' (' + (currently_unseen_notes.size - notes.size).to_s + ' more unseen)' \
+      if currently_unseen_notes.size > notes.size}", notes_path, class: :dark_link %>
   </div>
   </br>
 </div>

@@ -1,7 +1,7 @@
 <div class="notes_dropdown" id="notes_dropdown" hidden>
   <%= link_to '<i class="fa fa-times"></i>'.html_safe, notes_dropdown_path,
     remote: true, class: "standard_nav_menu_link toggle_notes_dropdown", align: :right, title: "Exit menu" %>
-  
+
   <div class="notes_dropdown_title">
     <b>Notifications</b>
   </div>
@@ -11,7 +11,8 @@
     </div>
   <% end %>
   <div class="notes_dropdown_link standard_nav_menu_link">
-    <%= link_to "See all", notes_path, class: :dark_link %>
+    <%= link_to "See all#{' (' + (currently_unseen_notes.size - notes.size).to_s + ' more)' \
+      if currently_unseen_notes.present?}", notes_path, class: :dark_link %>
   </div>
   </br>
 </div>
