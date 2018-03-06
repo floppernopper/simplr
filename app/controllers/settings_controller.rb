@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  before_action :dev_only, only: [:dev_panel]
+  before_filter :dev_only, only: [:dev_panel]
 
   def set_location
     # sets coords
@@ -63,6 +63,8 @@ class SettingsController < ApplicationController
   private
 
   def dev_only
-    dev?
+    unless dev?
+      redirect_to '/404'
+    end
   end
 end
