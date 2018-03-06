@@ -15,8 +15,6 @@
   class: :standard_nav_menu_link, title: "Click to see all of the groups you'#{anrcho? ? 've found' : 're in'}." %>
 
 <% unless current_user %>
-  <%= link_to fa_icon("paint-brush", "Arts"), arts_path, class: :standard_nav_menu_link %>
-  
 	<%= link_to fa_icon("user-plus", "Sign up"), new_user_path, class: :standard_nav_menu_link,
 	  title: "Click here to sign up and see way less ads." %>
 
@@ -51,6 +49,8 @@
 	  class: :standard_nav_menu_link, title: "Click here to destroy your cookie.",
 	  data: { confirm: "Are you sure?" } %>
 <% end %>
+
+<%= link_to fa_icon("paint-brush", "Arts"), arts_path, class: :standard_nav_menu_link unless current_user %>
 
 <%= link_to fa_icon("users", "Anrcho"), proposals_path,
   class: :standard_nav_menu_link, id: :power_nav_menu_link unless @anrcho or Rails.env.development? %>
