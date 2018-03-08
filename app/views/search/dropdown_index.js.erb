@@ -8,3 +8,7 @@ $("#search_results_anchor").after("<%=j render 'search/results', results: @resul
 var results = $("#search_results")
 results.fadeIn();
 results.toggleClass('search_dropdown_results');
+
+window.navigator.vibrate(1);
+$("#search_interface_sound")[0].currentTime = 0;
+$("#search_interface_sound")[0].play();

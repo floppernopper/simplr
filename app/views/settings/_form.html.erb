@@ -39,6 +39,8 @@
           dropdown.remove();
           container.toggleClass('standard_modal');
           $(".circle_menu_link").trigger('click');
+          $("#post_interface_sound")[0].currentTime = 0;
+          $("#post_interface_sound")[0].play();
         });
       </script>
     <% end %>

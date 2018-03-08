@@ -23,10 +23,14 @@
       form.submit(function(event) {
         /* Act on the event */
         ellipsis.fadeIn();
+        window.navigator.vibrate(1);
+        $("#post_interface_sound")[0].currentTime = 0;
+        $("#post_interface_sound")[0].play();
       });
       <%= render "app/fader.js", target: 'search_ellipsis', target_id: '' %>
     </script>
   </div>
 
+  <%= audio_tag "interface/interface_9.mp3", id: "search_interface_sound" %>
   <i id="search_results_anchor"></i>
 </div>
