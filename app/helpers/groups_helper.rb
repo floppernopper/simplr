@@ -19,13 +19,14 @@ module GroupsHelper
     return options
   end
 
-  def featured_groups
+  def featured_groups more=nil
     featured = []
     Group.where.not(image: nil).each do |group|
       # featured unless logged in and already joined
       featured << group unless my_groups.include? group or group.hidden
     end
-    return featured.sort_by {|g| g.posts.size}.sample(10).last 4
+    featured.sort_by! {|g| g.posts.size}
+    return featured.sample(more ? 20 : 10).last(more ? 10 : 4)
   end
 
   def my_group_options editing=nil

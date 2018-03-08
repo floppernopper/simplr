@@ -7,12 +7,13 @@
 </div>
 
 <script>
-  function search_dropdown_side_on_out() {
+  function search_dropdown_slide_on_out() {
     var slide_menu = $(".search_slide_menu_container");
     var toggle_link = $(".search_slide_menu_toggle_link");
     var link_icon = $("#search_slide_icon");
     var dropdown = $("#search_dropdown");
     var form = $("#search_form_text_field");
+    var results = $('#search_results');
 
     // fix for nav_links
     var toggle = false;
@@ -28,6 +29,11 @@
       } else {
         dropdown.toggle();
       }
+
+      if (results.length) {
+        results.toggleClass('search_dropdown_results', true);
+      }
+
       window.navigator.vibrate(1);
     });
     function toggle_dropdown() {
@@ -37,5 +43,5 @@
       }
     }
   }
-  search_dropdown_side_on_out();
+  search_dropdown_slide_on_out();
 </script>

@@ -14,7 +14,7 @@
 .search_ellipsis {
   transition: all .4s ease-in-out;
   position: relative;
-  left: -50px;
+  left: -67.5px;
   bottom: -20px;
   width: 50%;
   color: white;
@@ -24,10 +24,10 @@
 
 .search_form_bubble {
   padding: 15px;
-  background: rgb(10,10,10);
+  background: rgb(50,50,50);
   width: 15%;
   min-width: 250px;
-  border-radius: 25px;
+  // border-radius: 25px;
 }
 
 .search_results {

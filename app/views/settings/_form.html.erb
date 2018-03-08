@@ -37,8 +37,8 @@
         link.click(function() {
           dropdown.fadeOut();
           dropdown.remove();
-          container.toggleClass('standard_modal');
-          $("#settings_nav_link").toggleClass('plus_fade');
+          container.toggleClass('standard_modal', false);
+          $("#settings_nav_link").toggleClass('plus_fade', false);
           $(".circle_menu_link").trigger('click');
           $("#post_interface_sound")[0].currentTime = 0;
           $("#post_interface_sound")[0].play();
