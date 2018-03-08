@@ -1,5 +1,6 @@
 var copyTextarea = $('#portal_link_field_<%= @portal.unique_token %>');
 copyTextarea.select();
+window.navigator.vibrate(1);
 
 try {
   var successful = document.execCommand('copy');
