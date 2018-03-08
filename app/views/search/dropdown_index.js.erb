@@ -1,0 +1,8 @@
+if ($("#search_results").length) {
+  $("#search_results").remove();
+}
+
+$("#search_results_anchor").after("<%=j render 'search/results', results: @results %>");
+var results = $("#search_results")
+results.fadeIn();
+results.toggleClass('search_dropdown_results');

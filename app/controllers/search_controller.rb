@@ -11,6 +11,7 @@ class SearchController < ApplicationController
   end
 
   def index
+    @search_index = true
     @results_shown = true
   end
 
@@ -92,6 +93,8 @@ class SearchController < ApplicationController
       # to prevent duplicate treasures from being created
       break if @discover or @found_love
     end
+    # remove duplicates
+    @results.uniq!
     # removes any types not found at all, for display to view with/without commas
     @result_types.each { |key, val| @result_types.delete(key) if val.zero?  }
   end

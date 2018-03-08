@@ -2,14 +2,14 @@
 <div id="spacing_header"></div>
 
 <%= render "arts/circle_menu" %>
-<%= render "search/slide_menu" if @arts %>
+<%= render "search/slide_menu" %>
 
 <% unless @arts %>
   <%= link_to '<i class="fa fa-home fa-lg"></i>'.html_safe, root_url,
     class: :return_home_link, title: "Return home" unless @you_are_home %>
 
   <%= link_to '<i class="fa fa-search fa-lg"></i>'.html_safe, search_path, class: :search_nav_link,
-	    title: "Search for groups, users, posts, comments, etc." %>
+	    title: "Search for groups, users, posts, comments, etc." if false %>
 
   <%= render "notes/slide_menu" %>
   <%= render "messages/nav_link" %>
