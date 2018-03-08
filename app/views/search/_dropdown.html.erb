@@ -12,7 +12,7 @@
     <% end %>
 
     <div class="search_ellipsis" hidden>
-      <div class="search_ellipsis_inner" id="search_ellipsis">
+      <div class="search_ellipsis_inner dark_link" id="search_ellipsis">
         Loading<%= render 'app/ellipsis' %>
       </div>
     </div>
@@ -27,7 +27,6 @@
         $("#post_interface_sound")[0].currentTime = 0;
         $("#post_interface_sound")[0].play();
       });
-      <%= render "app/fader.js", target: 'search_ellipsis', target_id: '' %>
     </script>
   </div>
 
