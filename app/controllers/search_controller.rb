@@ -132,6 +132,7 @@ class SearchController < ApplicationController
 
   def get_results
     @query = params[:query].present? ? params[:query] : session[:query]
+    session[:query] = @query
     search if @query.present?
   end
 
