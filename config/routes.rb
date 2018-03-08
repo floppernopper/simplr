@@ -168,6 +168,7 @@ Rails.application.routes.draw do
 
   # search
   get 'search', to: 'search#index', as: 'search'
+  get 'dropdown_search', to: 'search#dropdown_index', as: 'dropdown_search'
   get 'search/toggle_dropdown', as: 'toggle_search_dropdown'
 
   # views
