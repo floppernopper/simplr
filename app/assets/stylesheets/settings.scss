@@ -8,12 +8,16 @@
   padding: 15px 0px;
 }
 
+.settings_nav_link {
+  transition: all 0.3s ease-in-out;
+}
+
 .settings_dropdown {
-  transition: all 0.4s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .settings_nav_container {
-  transition: all 0.4s ease-in-out;
+  transition: all 0.1s ease-in-out;
   z-index: 10;
 }
 
