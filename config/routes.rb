@@ -111,6 +111,7 @@ Rails.application.routes.draw do
   get 'dev', to: 'settings#dev_panel', as: 'dev_panel'
   get 'connections/copy_invite_link', as: 'copy_invite_link'
   put 'set_location', to: 'settings#set_location'
+  get 'settings_dropdown', to: 'settings#dropdown', as: 'settings_dropdown'
 
   # dev
   get 'dev_log', to: 'sessions#dev_login', as: 'dev_login'

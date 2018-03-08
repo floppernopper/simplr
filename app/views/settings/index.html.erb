@@ -1,16 +1,1 @@
-<h2 class="standard_page_header">Settings <i class="fa fa-cogs"></i></h2>
-
-<div class="card"><%= render "settings/form" %></div>
-
-<%= render "set_location" %>
-
-<% if dev? %>
-  <div class="dark_card" align="center">
-    <p>
-      Dev settings coming soon...
-    </p>
-  </div>
-<% end %>
-
-<% @user = current_user %>
-<%= render "users/danger_area" %>
+<%= render "settings/settings" %>

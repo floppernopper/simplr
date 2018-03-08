@@ -22,7 +22,11 @@
 <% else %>
   <%= link_to fa_icon("users", "Following"), following_path(current_user.id), class: :standard_nav_menu_link %>
 
-  <%= link_to fa_icon("cog", "Settings"), settings_path, class: :standard_nav_menu_link %>
+  <%= link_to fa_icon("cog", "Settings"), settings_dropdown_path, remote: true,
+    id: :settings_nav_link, class: :standard_nav_menu_link %>
+    <div id="settings_nav_container" class="settings_nav_container">
+      <i id="settings_nav_anchor"></i>
+    </div>
 
   <% if current_user.active_powers.present? and current_user.treasures.find_by_power 'discover' %>
     <script>

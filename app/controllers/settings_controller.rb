@@ -1,6 +1,10 @@
 class SettingsController < ApplicationController
   before_filter :dev_only, only: [:dev_panel]
 
+  def dropdown
+    @dropdown = true
+  end
+
   def set_location
     # sets coords
     latitude = params[:lat]

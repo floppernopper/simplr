@@ -1,8 +1,10 @@
 <p id="user_location">
   <h4><%= current_user.location %></h4>
-
-  <p>
-    We're watching you, <%= current_user.name %>... 👀
-  </p>
-  <%= image_tag "startled.gif", class: :startled %>
+  
+  <% if currently_kristin? %>
+    <p>
+      We're watching you, <%= current_user.name %>... 👀
+    </p>
+    <%= image_tag "startled.gif", class: :startled %>
+  <% end %>
 </p>

@@ -23,5 +23,24 @@
         <b>Save <i class="fa fa-cog"></i></b>
       </button>
     </p>
+
+
+    <% if @dropdown %>
+      <%= link_to 'Exit settings', 'javascript:;', remote: true, title: "Exit menu",
+        class: :top_right_link, id: :exit_settings_link %>
+
+      <script>
+        var link = $("#exit_settings_link");
+        var dropdown = $("#settings_dropdown");
+        var container = $("#settings_nav_container");
+
+        link.click(function() {
+          dropdown.fadeOut();
+          dropdown.remove();
+          container.toggleClass('standard_modal');
+          $(".circle_menu_link").trigger('click');
+        });
+      </script>
+    <% end %>
   </div>
 <% end %>
