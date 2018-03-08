@@ -2,7 +2,7 @@
   <% placeholder = (session[:query] ? "Last query: #{session[:query]}" : "Search") %>
 
   <div class="search_form_bubble">
-    <%= form_tag dropdown_search_path, method: :get, remote: true do |f| %>
+    <%= form_tag dropdown_search_path, method: :get, remote: true, id: :search_dropdown_form do |f| %>
   	  <%= text_field_tag :query, nil, placeholder: placeholder,
         id: :search_form_text_field, class: :search_form_text_field %>
 
@@ -10,6 +10,22 @@
         <i class="fa fa-search"></i>
       </button>
     <% end %>
+
+    <div class="search_ellipsis" hidden>
+      <div class="search_ellipsis_inner" id="search_ellipsis">
+        Loading<%= render 'app/ellipsis' %>
+      </div>
+    </div>
+
+    <script>
+      var form = $("#search_dropdown_form");
+      var ellipsis = $(".search_ellipsis");
+      form.submit(function(event) {
+        /* Act on the event */
+        ellipsis.fadeIn();
+      });
+      <%= render "app/fader.js", target: 'search_ellipsis', target_id: '' %>
+    </script>
   </div>
 
   <i id="search_results_anchor"></i>

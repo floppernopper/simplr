@@ -2,6 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.ellipsis_shrink {
+  font-size: 0px;
+}
+
+.search_ellipsis_inner {
+  position: relative;
+  float: left;
+}
+
+.search_ellipsis {
+  transition: all .4s ease-in-out;
+  position: relative;
+  left: -50px;
+  bottom: -20px;
+  width: 50%;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
 .search_form_bubble {
   padding: 15px;
   background: rgb(50, 50, 50);
