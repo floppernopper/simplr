@@ -1,4 +1,4 @@
-<div id="search_results" <%= @search_index ? '' : 'hidden' %>>
+<div id="search_results" class="search_results" <%= @search_index ? '' : 'hidden' %>>
   <% for item in results %>
   	<% if item.present? and item.class.present? %>
   		<% _class = item.class.to_s.downcase %>
