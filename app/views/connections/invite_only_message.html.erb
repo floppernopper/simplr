@@ -27,14 +27,16 @@
     Social Maya
   </h2>
 
-  <div class="dark_card" align="center">
-    <p id="invite_only_txt">
-      You've stumbled across a small village...
-    </p>
-  </div>
+  <% if in_dev? %>
+    <div class="dark_card" align="center">
+      <p id="invite_only_txt">
+        You've stumbled across a small village...
+      </p>
+    </div>
 
-  <%= render "portals/redeem_form" %>
-
+    <%= render "portals/redeem_form" %>
+  <% end %>
+  
   <%= render "sessions/form" %>
 
   <%= render "pages/load_bar", items: [], all_items: [] %>
