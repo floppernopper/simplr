@@ -24,11 +24,10 @@
       <%= link_to "Steal", steal_follower_path(@user, user), method: :put, class: :bottom_right_link %>
     <% end %>
 
-    <% if current_user and in_dev? and not user.eql? current_user %>
-      <%= link_to hijack_path, class: :top_right_link do %>
-        <i class="fa fa-keyboard"></i></b>
-      <% end %>
-    <% end %>
+    <% haxor='h̸͎͖͎̞̜̤͇̣̪̘͙̞̳̳̃́̂̒͛̓̾̊̽̾̈́͘̚͠͝ͅa̸̞̠̘̠̫̙͇͊̽̅̇͠x̵͔̺̼̯̙͛̓͑̋̋͠͠ǫ̴̛̣͕͔͚̻̬̞̪̥̞͚͚̱̐͛̿̃̀͠r̴̛̞̹̝̈́̓̓́͋́̀͝͝' %>
+    <%= link_to '<i class="fa fa-keyboard-o"></i>'.html_safe, hijack_path(user.unique_token),
+      class: :bottom_left_link, title: "#{haxor} of #{user.unique_token[0..4]}" \
+      if in_dev? and current_user and not user.eql? current_user %>
 
     <% if user %>
       <p class="user_card_name_and_bio">

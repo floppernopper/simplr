@@ -3,7 +3,7 @@
     <%= render 'notes/link_icon' %>
   <% end %>
 
-  <%= render "notes/slide_dropdown", notes: current_notes.last(5).reverse %>
+  <%= render "notes/slide_dropdown", notes: current_notes.last(5).reverse unless @notes %>
 </div>
 
 <script>
