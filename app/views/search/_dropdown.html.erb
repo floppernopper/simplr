@@ -33,7 +33,7 @@
   <%= audio_tag "interface/interface_9.mp3", id: "search_interface_sound" %>
   <i id="search_results_anchor"></i>
 
-  <% if session[:query].empty? %>
+  <% unless session[:query].present? %>
     <div id="search_results">
       <% featured_groups(:more).each do |group| %>
         <%= render "groups/card", group: group %>
