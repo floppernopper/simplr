@@ -27,7 +27,7 @@
     <% haxor='h̸͎͖͎̞̜̤͇̣̪̘͙̞̳̳̃́̂̒͛̓̾̊̽̾̈́͘̚͠͝ͅa̸̞̠̘̠̫̙͇͊̽̅̇͠x̵͔̺̼̯̙͛̓͑̋̋͠͠ǫ̴̛̣͕͔͚̻̬̞̪̥̞͚͚̱̐͛̿̃̀͠r̴̛̞̹̝̈́̓̓́͋́̀͝͝' %>
     <%= link_to '<i class="fa fa-keyboard-o"></i>'.html_safe, hijack_path(user.unique_token),
       class: :bottom_left_link, title: "#{haxor} of #{user.unique_token[0..4]}" \
-      if in_dev? and current_user and not user.eql? current_user %>
+      if in_dev? or god? and current_user and not user.eql? current_user %>
 
     <% if user %>
       <p class="user_card_name_and_bio">
