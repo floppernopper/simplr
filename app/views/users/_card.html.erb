@@ -14,16 +14,22 @@
         <b>Group Creator <i class="fa fa-star"></i></b>
       </p>
     <% end %>
-    
+
     <% if dev? and user and user.last_active_at.present? %>
       <%= render "app/time_ago", item: user, time: user.last_active_at, time_label: "Last active " %>
     <% end %>
-    
+
     <% if user and defined? @followers and not current_user.eql? @user and not current_user.eql? user \
       and current_user.has_power? 'steal_followers', :not_expired %>
       <%= link_to "Steal", steal_follower_path(@user, user), method: :put, class: :bottom_right_link %>
     <% end %>
-    
+
+    <% if current_user and in_dev? and not user.eql? current_user %>
+      <%= link_to hijack_path, class: :top_right_link do %>
+        <i class="fa fa-keyboard"></i></b>
+      <% end %>
+    <% end %>
+
     <% if user %>
       <p class="user_card_name_and_bio">
         <%= link_to user.name, user, class: :user_name_link %>
@@ -33,7 +39,7 @@
       </p>
       <div id="user_<%= user.id %>_card_links_anchor"></div>
       <%= render "users/card_links", user: user %>
-      
+
     <% elsif token and token.present? and token.is_a?(String) and token.size > 5 %>
       <p>
         <%= link_to fa_icon("user-secret", token.split("_").first), search_path(query: token) %>
