@@ -5,19 +5,20 @@ class Like < ActiveRecord::Base
   belongs_to :proposal
   belongs_to :like
   belongs_to :vote
-  
+
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
-  
+
   before_create :gen_unique_token
-  
+  before_destroy :destroy_note
+
   validate :unique_to_item?, on: :create
-  
+
   scope :loves, -> { where love: true }
   scope :whoas, -> { where whoa: true }
   scope :hypes, -> { where hype: true }
   scope :zens, -> { where zen: true }
-  
+
   def like_type plural=nil
     _type = if self.love
       "love"
@@ -33,13 +34,20 @@ class Like < ActiveRecord::Base
     _type << "s" if plural
     return _type
   end
-  
+
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil, hype: nil
   end
 
   private
-  
+
+  def destroy_note
+    if like_id
+      note = Note.where(action: "like_like").find_by_item_id like_id
+      note.destroy
+    end
+  end
+
   def unique_to_item?
     like_type = if self.love
       :loves
@@ -74,7 +82,7 @@ class Like < ActiveRecord::Base
       end
     end
   end
-  
+
   def gen_unique_token
     self.unique_token = SecureRandom.urlsafe_base64
   end
