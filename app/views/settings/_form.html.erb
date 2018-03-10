@@ -1,49 +1,61 @@
-<%= form_tag update_settings_path, method: :put do %>
-  <div align="center">
-    <% Setting.names.each do |category, names| %>
-      <% for name in names %>
-        <p>
-          <%= setting_titles[name.to_sym] + ": " %>
-          <%= check_box_tag name.to_sym, nil, settings[name.to_sym] if category.eql? :on %>
-          <% if category.eql? :state %>
-            <%= fields_for name.to_sym do |f| %>
-              <% [:r, :g, :b].each do |color| %>
-                <%= f.select color, options_for_select(rgb_options(name, color)) %>
+<div class="settings_form">
+  <%= form_tag update_settings_path, method: :put, remote: !@index, id: :settings_form do |f| %>
+    <%= hidden_field_tag :ajax, true unless @index %>
+    <div align="center">
+      <% Setting.names.each do |category, names| %>
+        <% for name in names %>
+          <p>
+            <%= setting_titles[name.to_sym] + ": " %>
+            <%= check_box_tag name.to_sym, nil, settings[name.to_sym] if category.eql? :on %>
+            <% if category.eql? :state %>
+              <%= fields_for name.to_sym do |f| %>
+                <% [:r, :g, :b].each do |color| %>
+                  <%= f.select color, options_for_select(rgb_options(name, color)) %>
+                <% end %>
               <% end %>
             <% end %>
-          <% end %>
-        </p>
+          </p>
+        <% end %>
       <% end %>
-    <% end %>
-    <p>
-      Restore default settings: <%= check_box_tag :restore_defaults %>
-    </p>
-    <p>
-      <button type="submit" name="commit" class="standard_form_button">
-        <b>Save <i class="fa fa-cog"></i></b>
-      </button>
-    </p>
+      <p>
+        Restore default settings: <%= check_box_tag :restore_defaults %>
+      </p>
+      <p>
+        <button type="submit" name="commit" class="standard_form_button" id="settings_form_button">
+          <b>Save <i class="fa fa-cog"></i></b>
+        </button>
+      </p>
 
+      <% if @dropdown %>
+        <%= link_to 'Exit settings', 'javascript:;', remote: true, title: "Exit menu",
+          class: :top_right_link, id: :exit_settings_link %>
 
-    <% if @dropdown %>
-      <%= link_to 'Exit settings', 'javascript:;', remote: true, title: "Exit menu",
-        class: :top_right_link, id: :exit_settings_link %>
+        <script>
+          function settings_form_events() {
+            var form = $("#settings_form");
+            var button = $("#settings_form_button");
+            var link = $("#exit_settings_link");
+            var dropdown = $("#settings_dropdown");
+            var container = $("#settings_nav_container");
 
-      <script>
-        var link = $("#exit_settings_link");
-        var dropdown = $("#settings_dropdown");
-        var container = $("#settings_nav_container");
+            form.subit(function(){
+              button.text("Loading...");
+              <%= render "app/fader.js", target: "settings_form_button", target_id: "", fast: true %>
+            });
 
-        link.click(function() {
-          dropdown.fadeOut();
-          dropdown.remove();
-          container.toggleClass('standard_modal', false);
-          $("#settings_nav_link").toggleClass('plus_fade', false);
-          $(".circle_menu_link").trigger('click');
-          $("#post_interface_sound")[0].currentTime = 0;
-          $("#post_interface_sound")[0].play();
-        });
-      </script>
-    <% end %>
-  </div>
-<% end %>
+            link.click(function() {
+              dropdown.fadeOut();
+              dropdown.remove();
+              container.toggleClass('standard_modal', false);
+              $("#settings_nav_link").toggleClass('plus_fade', false);
+              $(".circle_menu_link").trigger('click');
+              $("#post_interface_sound")[0].currentTime = 0;
+              $("#post_interface_sound")[0].play();
+            });
+          }
+          settings_form_events();
+        </script>
+      <% end %>
+    </div>
+  <% end %>
+</div>

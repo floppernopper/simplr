@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  before_filter :dev_only, only: [:dev_panel]
+  before_action :dev_only, only: [:dev_panel]
 
   def dropdown
     @dropdown = true
@@ -41,6 +41,7 @@ class SettingsController < ApplicationController
   end
 
   def index
+    @index = true
   end
 
   def update
@@ -61,7 +62,7 @@ class SettingsController < ApplicationController
         end
       end
     end
-    redirect_to :back, notice: "Settings updated successfully..."
+    redirect_to :back, notice: "Settings updated successfully..." unless params[:ajax]
   end
 
   private
