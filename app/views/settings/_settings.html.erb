@@ -1,6 +1,12 @@
 <div id="settings_dropdown" class="settings_dropdown" <%= defined?(hidden) ? 'hidden' : '' %>>
   <h2 class="standard_page_header">Settings <i class="fa fa-cogs"></i></h2>
 
+  <div class="dark_card" id="settings_saved_msg" align="center" hidden>
+    <p>
+      Settings saved successfully...
+    </p>
+  </div>
+
   <div class="card"><%= render "settings/form" %></div>
 
   <%= render "set_location" %>

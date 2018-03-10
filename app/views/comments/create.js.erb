@@ -10,7 +10,7 @@
 
     $("#comment_form_card").before("<%=j render 'card', comment: @comment_just_created %>");
   <% end %>
-  
+
   $("#post_interface_sound")[0].currentTime = 0;
   $("#post_interface_sound")[0].play();
 <% elsif @proposal %>

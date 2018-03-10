@@ -41,7 +41,6 @@ class SettingsController < ApplicationController
   end
 
   def index
-    @index = true
   end
 
   def update
@@ -62,7 +61,11 @@ class SettingsController < ApplicationController
         end
       end
     end
-    redirect_to :back, notice: "Settings updated successfully..." unless params[:ajax]
+    if params[:ajax]
+      @dropdown = true
+    else
+      redirect_to :back, notice: "Settings updated successfully..."
+    end
   end
 
   private

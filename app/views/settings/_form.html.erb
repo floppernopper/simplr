@@ -1,6 +1,6 @@
 <div class="settings_form">
-  <%= form_tag update_settings_path, method: :put, remote: !@index, id: :settings_form do |f| %>
-    <%= hidden_field_tag :ajax, true unless @index %>
+  <%= form_tag update_settings_path, method: :put, remote: @dropdown, id: :settings_form do %>
+    <%= hidden_field_tag :ajax, true if @dropdown %>
     <div align="center">
       <% Setting.names.each do |category, names| %>
         <% for name in names %>
@@ -22,7 +22,8 @@
       </p>
       <p>
         <button type="submit" name="commit" class="standard_form_button" id="settings_form_button">
-          <b>Save <i class="fa fa-cog"></i></b>
+          <b id="button_text">Save <i class="fa fa-cog"></i></b>
+          <b id="button_ellipsis" hidden>Loading<%= render 'app/ellipsis' %></b>
         </button>
       </p>
 
@@ -33,14 +34,18 @@
         <script>
           function settings_form_events() {
             var form = $("#settings_form");
-            var button = $("#settings_form_button");
+            var button_text = $("#button_text");
             var link = $("#exit_settings_link");
             var dropdown = $("#settings_dropdown");
             var container = $("#settings_nav_container");
+            var ellipsis = $("#button_ellipsis");
 
-            form.subit(function(){
-              button.text("Loading...");
-              <%= render "app/fader.js", target: "settings_form_button", target_id: "", fast: true %>
+            form.submit(function(){
+              button_text.toggle();
+              ellipsis.toggle();
+              $("#post_interface_sound")[0].currentTime = 0;
+              $("#post_interface_sound")[0].play();
+              window.navigator.vibrate(1);
             });
 
             link.click(function() {
@@ -51,6 +56,7 @@
               $(".circle_menu_link").trigger('click');
               $("#post_interface_sound")[0].currentTime = 0;
               $("#post_interface_sound")[0].play();
+              window.navigator.vibrate(1);
             });
           }
           settings_form_events();

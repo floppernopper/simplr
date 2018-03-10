@@ -1,4 +1,12 @@
 var form = $(".settings_form");
+var msg = $("#settings_saved_msg");
 
 form.after("<%=j render 'form' %>");
 form.remove();
+
+$("#user_interface_sound")[0].currentTime = 0;
+$("#user_interface_sound")[0].play();
+
+msg.fadeIn();
+
+settings_form_events();
