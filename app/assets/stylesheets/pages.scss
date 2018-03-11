@@ -54,7 +54,7 @@
   @include circle_menu_section;
   border-top-left-radius: 100%;
   background: lightblue;
-  
+
 }
 
 .circle_menu_section_top_right {
@@ -265,7 +265,7 @@
   right: 15px
 }
 
-.fibonacci_loading {  
+.fibonacci_loading {
   position: relative;
   max-width: 565px;
   margin: 0 auto;
@@ -395,6 +395,45 @@
   display: none;
 }
 
+@mixin line_fader {
+  transition: all 0.3s ease-out;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: black;
+  width: 100%;
+  height: 0px;
+  z-index: 15;
+}
+
+.top_line_fader {
+  @include line_fader;
+}
+
+.bottom_line_fader {
+  transition: all 0.3s ease-out;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  background: black;
+  width: 100%;
+  height: 0px;
+  z-index: 15;
+}
+
+.top_line_faded {
+  box-shadow: 0px 3.5px 1.25px 1.5px pink;
+  background: lightblue;
+  height: 3.5px;
+}
+
+.bottom_line_faded {
+  box-shadow: 0px -3.5px 1.25px 1.5px pink;
+  background: lightblue;
+  height: 3.5px;
+  bottom: 3.5px;
+}
+
 // for mobile
 @media screen and (max-width: 975px) {
   .right_pane {
@@ -403,7 +442,3 @@
     left: 0px;
   }
 }
-
-
-
-

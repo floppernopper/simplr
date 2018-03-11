@@ -3,23 +3,38 @@
 function toggle_scroll_to_top_link() {
   var link_shown = false;
   $(window).bindWithDelay("scroll", function() {
+    var at_bottom = $(window).scrollTop() + $(window).height() > $(document).height() - 5;
     // show link when scrolled to the bottom and hide when scrolled back to top
-    if (!link_shown && $(window).scrollTop() + $(window).height() > $(document).height() - 5) {
+    // if at bottom and link not shown, show link and bottom line fader
+    if (!link_shown && at_bottom) {
+      toggle_bottom_line_faded();
+      setTimeout(toggle_bottom_line_faded, 500);
       $("#scroll_to_top_link").fadeIn();
-      window.navigator.vibrate(1);
+      //window.navigator.vibrate(1);
       link_shown = true;
+      // if at bottom but link already shown
+    } else if (at_bottom) {
+      toggle_bottom_line_faded();
+      setTimeout(toggle_bottom_line_faded, 500);
+      //window.navigator.vibrate(1);
+      // if scrolled back to the top
     } else if (link_shown && $(window).scrollTop() < 10) {
       $("#scroll_to_top_link").fadeOut();
-      window.navigator.vibrate(1);
+      //window.navigator.vibrate(1);
       link_shown = false;
       // haptic feedback for scrolling to top
+      // if scrolled to top with link not shown
     } else if ($(window).scrollTop() < 10) {
-      window.navigator.vibrate(1);
+      //window.navigator.vibrate(1);
       toggle_top_line_faded();
       setTimeout(toggle_top_line_faded, 500);
     }
   }, 200);
-  
+
+  function toggle_bottom_line_faded() {
+    $(".bottom_line_fader").toggleClass("bottom_line_faded");
+  }
+
   function toggle_top_line_faded() {
     $(".top_line_fader").toggleClass("top_line_faded");
   }
