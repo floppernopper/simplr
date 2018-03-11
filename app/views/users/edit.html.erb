@@ -4,15 +4,21 @@
 	    <% if (@user.god or @user.dev) or kristin? %>
         <%= f.text_field :title, placeholder: "Change your title", class: "dark_text_field", id: :user_field_1 %>
       <% end %>
-      
+
       <%= f.text_field :name, placeholder: "Change your name", class: "dark_text_field", id: :user_field_2 %>
-      
+
 		  <%= f.text_area :body, placeholder: "Describe yourself", class: "dark_text_area", id: :user_field_3 %>
-		  
+
 		  <p>
 		    Avatar: <%= f.file_field :image, id: :user_field_4 %>
 	    </p>
-	    
+
+      <% if god? %>
+        <p>
+          Featured: <%= f.check_box :featured, { checked: @user.featured } %>
+        </p>
+      <% end %>
+
 	    <p>
 		    <%= f.submit "Update Profile", class: "dark_form_button", id: :user_field_5 %>
 	    </p>

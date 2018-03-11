@@ -6,6 +6,10 @@
       data: { confirm: "Are you sure you want to permanently delete this post?" } %>
   <% end %>
 
+  <%= link_to "#{post.featured ? 'Unf' : 'F'}eature",
+    feature_post_path(post), method: :put, remote: true, class: :post_mini_menu_link,
+    data: { confirm: "Are you sure you want to #{post.featured ? 'unf' : 'f'}eature this post?" } if god? %>
+
   <%= link_to 'Classify',
     classify_picture_path(post.unique_token),
     remote: true, class: :post_mini_menu_link,

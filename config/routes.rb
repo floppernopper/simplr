@@ -145,6 +145,7 @@ Rails.application.routes.draw do
   get 'posts/read_more/:post_id', to: 'posts#read_more', as: 'read_more'
   get 'play_post_audio/:id', to: 'posts#play_audio', as: 'play_post_audio'
   put 'posts/:id/hide', to: 'posts#hide', as: 'hide_post'
+  put 'posts/:id/feature', to: 'posts#feature', as: 'feature_post'
   get 'posts/:token', to: 'posts#show', as: 'show_post'
   delete 'destroy_post/:token', to: 'posts#destroy', as: 'destroy_post'
   get 'floating_pictures/:token', to: 'posts#floating_images', as: 'floating_images'

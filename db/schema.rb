@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303003318) do
+ActiveRecord::Schema.define(version: 20180311002416) do
 
   create_table "arts", force: :cascade do |t|
     t.integer  "user_id"
@@ -283,6 +283,7 @@ ActiveRecord::Schema.define(version: 20180303003318) do
     t.boolean  "sound"
     t.string   "audio"
     t.string   "audio_name"
+    t.boolean  "featured"
   end
 
   create_table "products", force: :cascade do |t|

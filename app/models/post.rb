@@ -22,6 +22,7 @@ class Post < ActiveRecord::Base
   scope :global, -> { where group_id: nil }
   scope :forrest_only, -> { where forrest_only: true }
   scope :un_invited, -> { where un_invited: true }
+  scope :featured, -> { where featured: true }
 
   def self.clusters parent=nil
     if parent.is_a? User
@@ -71,20 +72,28 @@ class Post < ActiveRecord::Base
     end
     # get all memories shared by first user
     for post in self.where.not(original_id: nil).where(user_id: 1)
-      posts << post unless posts.include? post
+      posts << post
     end
     # gets all anonymous posts
     for post in self.where(user_id: nil).where.not(anon_token: nil)
-      posts << post unless posts.include? post
+      posts << post
+    end
+    # users explicitly featured by dev
+    for user in User.featured
+      for post in user.posts
+        posts << post
+      end
     end
     # all of kristins, hotline bocas, and starliners posts
-    for post in self.where(user_id: 34).or(self.where(user_id: 38)).or(Post.where(user_id: 55))
-      posts << post unless posts.include? post
+    for post in self.featured
+      posts << post
     end
     # gets all non group proposals not in revision
     for proposal in Proposal.globals.main
       posts << proposal
     end
+    # removes duplicates
+    posts.uniq!
     # only get foc posts when forrest_only, remove any hidden posts from preview
     posts.delete_if { |item| (forrest_only and !item.forrest_only) or (item.is_a? Post and item.hidden) }
     # sorts posts chronologically

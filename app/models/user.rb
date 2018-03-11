@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  scope :featured, -> { where featured: true }
   scope :forrest_only, -> { where forrest_only: true }
 
   def my_cart
@@ -71,7 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def self.grant_xp_to_all
-    
+
   end
 
   def loot treasure

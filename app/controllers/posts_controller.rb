@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :share,
-    :hide, :open_menu, :close_menu, :add_photoset, :classify]
+    :hide, :feature, :open_menu, :close_menu, :add_photoset, :classify]
   before_action :secure_post, only: [:edit, :update, :destroy]
   before_action :reset_page_num, only: [:index, :show]
   before_action :invite_only, except: [:show, :create, :add_image, :add_video]
   before_action :invited_or_token_used, only: [:show]
 
-  before_action :dev_only, only: [:classify]
+  before_action :dev_only, only: [:classify, :feature]
 
   def classify
     @picture = @post.pictures.first
@@ -34,6 +34,10 @@ class PostsController < ApplicationController
     @picture_id = params[:picture_id]
     @picture = Picture.find_by_id @picture_id
     @picture.destroy
+  end
+
+  def feature
+    @post.update featured: !@post.featured
   end
 
   def hide

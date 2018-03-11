@@ -1,0 +1,11 @@
+var link = $("#post_menu_link_<%= @post.id %>");
+
+$("#post_mini_menu_<%= @post.id %>").remove();
+
+link.after("<%=j render "posts/open_menu_link", post: @post %>");
+link.remove();
+
+$("#post_interface_sound")[0].currentTime = 0;
+$("#post_interface_sound")[0].play();
+
+window.navigator.vibrate(1);
