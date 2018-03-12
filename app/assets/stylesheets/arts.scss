@@ -7,6 +7,11 @@
 //2012 Tangerine Tango. Hex #DD4124. ...
 //2011 Honeysucle. Hex #D65076.
 
+.click_visualization_modal {
+  @include modal;
+  background: green;
+}
+
 .border_flash_modal {
   position: fixed;
   top: 0px;

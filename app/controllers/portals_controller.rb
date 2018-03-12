@@ -1,7 +1,11 @@
 class PortalsController < ApplicationController
   before_action :invite_only, except: [:show, :enter]
-  before_action :dev_only, only: [:index, :destroy, :destroy_all, :update]
+  before_action :dev_only, only: [:index, :destroy, :destroy_all, :update, :disseminator]
   before_action :set_portal, only: [:copy_link, :edit, :show, :enter, :update, :destroy]
+
+  def disseminator
+    @portal = Portal.all.sort_by{|p| p.remaining_uses}.last
+  end
 
   def edit
   end
