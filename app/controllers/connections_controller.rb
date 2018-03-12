@@ -31,7 +31,7 @@ class ConnectionsController < ApplicationController
   def zen
     cookies.clear
     cookies[:zen] = true
-    redirect_to root_url
+    redirect_to new_user_path
   end
 
   # to make inviting easier in person without sending them a link
