@@ -75,13 +75,22 @@
 
       <p>
         <% form_button_id = rand 1000 %>
-        <button type="submit" name="commit" class="dark_form_button" id="post_form_button_<%= form_button_id %>">
+        <button type="submit" name="commit" class="dark_form_button post_form_button" id="post_form_button_<%= form_button_id %>">
           <b><%= @post.id.nil? ? "Post" : "Save" %> <i class="fa fa-pencil"></i></b>
         </button>
       </p></br>
     </div>
+
+    <script>
+      var b = $(".post_form_button");
+      b.click(function() {
+        b.text("Loading...");
+        <%= render "app/fader.js", target: "post_form_button", target_id: form_button_id, fast: true %>
+        $("#post_form").trigger('submit');
+      });
+    </script>
   <% end %>
-  <%= render "posts/leave_page?.js" if in_dev? or god? or goddess? %>
+  <%= render "posts/leave_page?.js" if false %>
 </div> <!-- reg post form end -->
 
 <% if current_user and (current_user.has_power?('anarchy') or cookies[:anrcho]) and not @editing %>
