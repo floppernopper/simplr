@@ -1,5 +1,11 @@
 <%= render 'portals/card', portal: @portal %>
 
+<div class="dark_card" align="center">
+  <p>
+    Above is the most open portal...
+  </p>
+</div>
+
 <script>
   var copyTextarea = $('#portal_link_field_<%= @portal.unique_token %>');
   copyTextarea.select();
