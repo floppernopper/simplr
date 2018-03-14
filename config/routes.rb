@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   get 'edit_portal/:token', to: 'portals#edit', as: 'edit_portal'
   # alias route for enter_portal_path, shorter url
   get 'e/:token', to: 'portals#enter', as: 'inter_portal'
+  get 'port', to: 'portals#disseminator', as: 'disseminator'
 
   # invitation connections
   post 'generate_invitation_to_site', to: 'connections#generate_invite', as: 'generate_invite'

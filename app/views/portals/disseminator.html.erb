@@ -1,0 +1,14 @@
+<%= render 'portals/card', portal: @portal %>
+
+<script>
+  var copyTextarea = $('#portal_link_field_<%= @portal.unique_token %>');
+  copyTextarea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+</script>

@@ -4,7 +4,7 @@ class PortalsController < ApplicationController
   before_action :set_portal, only: [:copy_link, :edit, :show, :enter, :update, :destroy]
 
   def disseminator
-    @portal = Portal.all.sort_by{|p| p.remaining_uses}.last
+    @portal = Portal.loners.sort_by{|p| p.remaining_uses}.last
   end
 
   def edit
