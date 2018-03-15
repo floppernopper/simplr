@@ -11,6 +11,7 @@ class View < ActiveRecord::Base
   validate :unique_to_item?, on: :create
 
   scope :by_user, -> { where.not user_id: nil }
+  scope :anon, -> { where(user_id: nil).where.not(anon_token: nil) }
   scope :with_locale, -> { where.not(locale: nil).where.not locale: ""  }
   scope :item_views, -> { where.not click: true }
   scope :clicks, -> { where click: true }

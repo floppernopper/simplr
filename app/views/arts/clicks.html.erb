@@ -1,3 +1,11 @@
 <div class="click_visualization_modal">
-  
+  <% for click in @clicks %>
+    <%= render "arts/click", click: click %>
+  <% end %>
 </div>
+
+<script>
+  $(".click_dot").each(function() {
+
+  });
+</script>

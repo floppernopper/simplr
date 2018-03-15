@@ -1,4 +1,4 @@
-<% if current_user %>
+<% if current_user or @arts %>
   $(document).click(function(e) {
     // Check for left button
     if (e.button == 0) {

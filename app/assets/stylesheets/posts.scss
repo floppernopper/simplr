@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.new_post_form_pulse {
+  background: rgb(119,158,203);
+  box-shadow: -7.5px -7.5px 7.5px rgb(136,227,182);
+}
+
+
+@keyframes crescent_card_pulse {
+  0% {
+    background: rgb(119,158,203);
+    box-shadow: -7.5px -7.5px 7.5px rgb(136,227,182);
+  }
+  100% {
+    background: rgb(255,105,97);
+    box-shadow: 7.5px 7.5px 7.5px rgb(119,221,119);
+  }
+}
+
 .feed_loader_loading_label {
   font-family: "Courier New", Courier, monospace;
   font-size: 50px;
