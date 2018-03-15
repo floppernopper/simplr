@@ -132,12 +132,12 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: black;
+  background: white;
 }
 
 .click_visualization_modal {
   @include modal;
-  background: green;
+  background: black;
 }
 
 @keyframes vaporwave_fader {
