@@ -4,11 +4,7 @@ class ArtsController < ApplicationController
   before_action :arts, only: [:paper, :bands, :love, :my_apps, :vaporwave, :void, :clicks]
 
   def clicks
-    @clicks = if current_user
-      current_user.views.clicks
-    else
-      View.anon.clicks
-    end
+    @clicks = View.clicks.with_size
   end
 
   def phenomenology
