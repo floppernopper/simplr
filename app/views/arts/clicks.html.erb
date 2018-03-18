@@ -1,4 +1,11 @@
 <div class="click_visualization_modal">
+
+  <% for size in View.screen_sizes %>
+    <div class="click_vis_screen"
+      style="width:<%= size[0] %>px;height:<%= size[1] %>px;">
+    </div>
+  <% end %>
+
   <% for click in @clicks %>
     <%= render "arts/click", click: click %>
   <% end %>

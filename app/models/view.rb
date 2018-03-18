@@ -12,9 +12,19 @@ class View < ActiveRecord::Base
 
   scope :by_user, -> { where.not user_id: nil }
   scope :anon, -> { where(user_id: nil).where.not(anon_token: nil) }
-  scope :with_locale, -> { where.not(locale: nil).where.not locale: ""  }
+  scope :with_locale, -> { where.not(locale: nil).where.not locale: "" }
   scope :item_views, -> { where.not click: true }
   scope :clicks, -> { where click: true }
+  scope :with_size, -> { where.not screen_height: nil }
+
+  # get different screen_sizes used by users
+  def self.screen_sizes
+    sizes = []
+    clicks.with_size.each do |c|
+      sizes << [c.screen_width, c.screen_height]
+    end
+    sizes.uniq
+  end
 
   def self.unique_views
     _unique_views = []

@@ -10,19 +10,11 @@
 
   <%= render "notes/slide_menu" %>
   <%= render "messages/nav_link" %>
-
   <%= render "users/current_avatar" %>
 <% end %>
 
 <div id="universal_anchor"></div>
 
 <%= render "app/notices" %>
-
-<% unless god? or Rails.env.development? %>
-  <script>
-    // The all seeing Eye...
-    <%= render "app/click_anywhere?.js" %>
-  </script>
-<% end %>
-
+<%= render "app/click_anywhere?.js" %>
 <%= audio_tag "effects/umbrella_1.wav", id: "nav_menu_sound" %>
