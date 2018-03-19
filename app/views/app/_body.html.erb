@@ -1,5 +1,5 @@
 <!-- replace any newline escapes with breakline -->
-<% item_body = item.body.gsub "\n", "<br/>" %>
+<% item_body = item.body.gsub "\n", "<br/> " %>
 
 <% for word in item_body.split(" ") %>
 	<% unless word.include? "#" and word.size > 1 %>
