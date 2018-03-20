@@ -7,18 +7,6 @@ class ArtsController < ApplicationController
     @clicks = View.clicks.with_size
   end
 
-  def phenomenology
-  end
-
-  def void
-  end
-
-  def vaporwave
-  end
-
-  def my_apps
-  end
-
   def get_distance
     @coords = if currently_kristin?
       eval User.first.geo_coordinates
