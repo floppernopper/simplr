@@ -80,17 +80,6 @@
         </button>
       </p></br>
     </div>
-
-    <script>
-      var b = $(".post_form_button");
-      var f = $("#new_post_form");
-
-      b.click(function() {
-        b.text("Loading...");
-        <%= render "app/fader.js", target: "post_form_button", target_id: form_button_id, fast: true %>
-        $("#post_form").trigger('submit');
-      });
-    </script>
   <% end %>
   <%= render "posts/leave_page?.js" if false %>
 </div> <!-- reg post form end -->
