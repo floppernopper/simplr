@@ -4,7 +4,7 @@ class ConnectionsController < ApplicationController
   before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite, :new, :create, :members]
   before_action :invited_or_anrcho, only: [:new, :create, :members]
   before_action :user_access, only: [:invites, :followers]
-  #before_action :dev_only, only: [:zen]
+  before_action :dev_only, only: [:zen] # zenful only for devs in production now
 
   def hide_stop_invited_music
     if params[:stop_invited_music]
