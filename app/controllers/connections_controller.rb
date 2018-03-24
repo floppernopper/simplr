@@ -6,6 +6,13 @@ class ConnectionsController < ApplicationController
   before_action :user_access, only: [:invites, :followers]
   #before_action :dev_only, only: [:zen]
 
+  def hide_stop_invited_music
+    if params[:stop_invited_music]
+      cookies[:invited_music_stopped] = true
+      @invited_music_stopped = true
+    end
+  end
+
   def invite_someone
     unless current_user and (current_user.has_power? 'invite_someone' or current_user.gatekeeper)
       redirect_to '/404'

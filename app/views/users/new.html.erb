@@ -16,17 +16,19 @@
   <%= audio_tag "effects/bip.mp3", id: "post_interface_sound" %>
 
   <% muzak = rand 3; if muzak == 0 %>
-    <%= audio_tag "music/future_business.mp3", id: "creator_music" %>
+    <%= audio_tag "music/future_business.mp3", id: "invited_music" %>
   <% elsif muzak == 1 %>
-    <%= audio_tag "music/progress.mp3", id: "creator_music" %>
+    <%= audio_tag "music/progress.mp3", id: "invited_music" %>
   <% else %>
-      <%= audio_tag "music/high_tech_city.mp3", id: "creator_music" %>
+      <%= audio_tag "music/high_tech_city.mp3", id: "invited_music" %>
   <% end %>
 
-  <script>
-    $("#creator_music")[0].currentTime = 0;
-    $("#creator_music")[0].play();
-  </script>
+  <% unless cookies[:invited_music_stopped] %>
+    <script>
+      $("#invited_music")[0].currentTime = 0;
+      $("#invited_music")[0].play();
+    </script>
+  <% end %>
 
 <% else %>
   <div class="card">

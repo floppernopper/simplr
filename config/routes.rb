@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  apipie
   resources :arts
   resources :orders
   resources :games
@@ -83,6 +84,7 @@ Rails.application.routes.draw do
   get 'peace', to: 'connections#peace', as: 'peace'
   #get 'zen', to: 'connections#zen', as: 'zen'
   get 'zenful', to: 'connections#zen'
+  get 'hide_stop_invited_music', to: 'connections#hide_stop_invited_music', as: 'hide_stop_invited_music'
 
   # user to user connections
   post 'users/:user_id/follow', to: 'connections#create', as: 'follow'

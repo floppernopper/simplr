@@ -1,0 +1,13 @@
+<% unless cookies[:invited_music_stopped] or cookies[:stop_invited_music_already_seen] %>
+  <% if rand(1..page_size).eql? page_size %>
+    <div class="dark_card" id="stop_invited_music_card" align="center">
+      <%= link_to hide_stop_invited_music_path(stop_invited_music: true), remote: true, class: :dark_link do %>
+        <p>
+          Click here to stop music...
+        </p>
+      <% end %>
+      <%= link_to '<i class="fa fa-times"></i>'.html_safe, hide_stop_invited_music_path, remote: true, class: :top_right_link %>
+    </div>
+    <% cookies[:stop_invited_music_already_seen] = true %>
+  <% end %>
+<% end %>

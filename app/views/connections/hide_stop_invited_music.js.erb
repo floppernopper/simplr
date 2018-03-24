@@ -1,0 +1,11 @@
+<% if @invited_music_stopped %>
+  $("#invited_music")[0].pause();
+  $("#invited_music")[0].currentTime = 0;
+<% end %>
+
+$("#stop_invited_music_card").remove();
+
+// sound and haptic for card being removed by link click
+$("#post_interface_sound")[0].currentTime = 0;
+$("#post_interface_sound")[0].play();
+window.navigator.vibrate(1);

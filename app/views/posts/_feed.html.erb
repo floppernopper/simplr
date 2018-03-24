@@ -6,8 +6,11 @@
   <% elsif item.is_a? Proposal %>
     <%= render "proposals/card", proposal: item %>
   <% end %>
+
   <%= render "users/featured" %>
   <%= render "groups/featured" %>
+
+  <%= render "connections/stop_invited_music" %>
 <% end %>
 
 <% unless @items.size < page_size %>
