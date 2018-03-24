@@ -95,6 +95,9 @@ gem 'google_custom_search_api'
 # for scraping wikipedia
 gem 'wikipedia-client'
 
+# documentation
+gem 'apipie-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 # Use sqlite3 as the database for Active Record
@@ -155,9 +158,6 @@ group :development do
   #gem 'rails-erd'
   gem 'rubycritic'
   gem 'rubocop'
-
-  # documentation
-  gem 'apipie-rails'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
