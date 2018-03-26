@@ -4,12 +4,14 @@ module PostsHelper
       original = Post.find_by_id post.original_id
       if original
         # ensures photoset order if its been changed by op
-        originals = original.pictures.to_a.sort_by { |i| i.order } if original.pictures.first.ensure_order
+        originals = original.pictures.to_a
+        originals.sort_by { |i| i.order } if original.pictures.first.ensure_order
         return originals
       end
     else
       # ensures photoset order if its been changed
-      pictures = post.pictures.to_a.sort_by! { |i| i.order } if post.pictures.first.ensure_order
+      pictures = post.pictures.to_a
+      pictures.sort_by! { |i| i.order } if post.pictures.first.ensure_order
       return pictures
     end
   end

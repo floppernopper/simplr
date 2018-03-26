@@ -1,4 +1,4 @@
-<% for picture in original_post_pictures(post).all[1..-1] %>
+<% for picture in original_post_pictures(post)[1..-1] %>
   <%= link_to show_post_path(post.unique_token) do %>
     <%= image_tag picture.image, class: :standard_post_image %>
   <% end %>
