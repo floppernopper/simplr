@@ -59,10 +59,10 @@
             <%= link_to show_post_path(post.unique_token) do %>
               <%= image_tag original_post_pictures(post).first.image, class: :standard_post_image %>
             <% end %>
-            <% if original_post_pictures(post).all[1..-1].present? %>
+            <% if original_post_pictures(post)[1..-1].present? %>
               <table id="mini_photoset_table_<%= post.id %>">
                 <tr>
-                  <% for picture in original_post_pictures(post).all[1..-1] %>
+                  <% for picture in original_post_pictures(post)[1..-1] %>
                     <td>
                       <%= link_to add_post_photoset_path(post), remote: true, title: "Click here to enlarge." do %>
                         <%= image_tag picture.image, class: :my_groups_group_icon %>

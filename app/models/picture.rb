@@ -2,6 +2,8 @@ class Picture < ActiveRecord::Base
   belongs_to :product
   belongs_to :post
 
+  before_create :ensure_order_by_update
+
   mount_uploader :image, ImageUploader
 
   def move_up
@@ -62,7 +64,9 @@ class Picture < ActiveRecord::Base
 
   private
 
+  # still has to account for order of pictures added in update to post
   def ensure_order_by_update
-
+    post = Post.find_by_id post_id
+    self.order = post.pictures.size if post
   end
 end
