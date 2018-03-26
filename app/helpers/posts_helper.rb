@@ -12,10 +12,6 @@ module PostsHelper
       pictures = post.pictures.to_a.sort_by! { |i| i.order } if post.pictures.first.ensure_order
       return pictures
     end
-
-
-
-      return original.pictures.sort_by { |i| i.order }
   end
 
   def original_post_image post
