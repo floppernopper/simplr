@@ -6,7 +6,7 @@ class Picture < ActiveRecord::Base
 
   def move_up
     ensure_order
-    new_order = order + 1
+    new_order = order - 1
     # get the image above this one being moved down
     img_above = post.pictures.find_by_order new_order
     # moves the img above down
@@ -17,7 +17,7 @@ class Picture < ActiveRecord::Base
 
   def move_down
     ensure_order
-    new_order = order - 1
+    new_order = order + 1
     # get the image below this one being moved up
     img_below = post.pictures.find_by_order new_order
     # moves the img below up
@@ -28,12 +28,16 @@ class Picture < ActiveRecord::Base
 
   # updates all imgs in post with order
   def ensure_order
-    if order.nil?
-      i=0; for img in post.pictures
-        img.update order: i
-        i += 1
+    if post.pictures.size > 1
+      if order.nil?
+        i=0; for img in post.pictures
+          img.update order: i if img.order.nil?
+          i += 1
+        end
       end
+      return true
     end
+    nil
   end
 
   def classify

@@ -1,6 +1,7 @@
 var photoset = $(".form_photoset");
 
 photoset.after("<%=j render 'posts/form_photoset' %>");
+photoset.remove();
 
 $("#post_interface_sound")[0].currentTime = 0;
 $("#post_interface_sound")[0].play();
