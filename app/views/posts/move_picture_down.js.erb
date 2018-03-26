@@ -1,4 +1,6 @@
-$("#post_picture_<%= @picture.id %>").toggle();
+var photoset = $(".form_photoset");
+
+photoset.after("<%=j render 'posts/form_photoset' %>");
 
 $("#post_interface_sound")[0].currentTime = 0;
 $("#post_interface_sound")[0].play();

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180311002416) do
+ActiveRecord::Schema.define(version: 20180326013241) do
 
   create_table "arts", force: :cascade do |t|
     t.integer  "user_id"
@@ -245,6 +245,7 @@ ActiveRecord::Schema.define(version: 20180311002416) do
     t.integer  "wiki_id"
     t.integer  "product_id"
     t.string   "classifier_name"
+    t.integer  "order"
   end
 
   create_table "portals", force: :cascade do |t|

@@ -1,9 +1,41 @@
 class Picture < ActiveRecord::Base
   belongs_to :product
   belongs_to :post
-  
+
   mount_uploader :image, ImageUploader
-  
+
+  def move_up
+    ensure_order
+    new_order = order + 1
+    # get the image above this one being moved down
+    img_above = post.pictures.find_by_order new_order
+    # moves the img above down
+    img_above.update order: order
+    # updates with new position
+    update order: new_order
+  end
+
+  def move_down
+    ensure_order
+    new_order = order - 1
+    # get the image below this one being moved up
+    img_below = post.pictures.find_by_order new_order
+    # moves the img below up
+    img_below.update order: order
+    # updates with new position
+    update order: new_order
+  end
+
+  # updates all imgs in post with order
+  def ensure_order
+    if order.nil?
+      i=0; for img in post.pictures
+        img.update order: i
+        i += 1
+      end
+    end
+  end
+
   def classify
     # switch between tensorflows
     use_tensorflow_rb = false

@@ -1,0 +1,20 @@
+
+
+<div class="form_photoset">
+  <% for picture in @post.pictures %>
+    <% if picture.image.url %>
+      <div id="post_picture_<%= picture.id %>">
+        <%= image_tag picture.image, class: :standard_post_image %>
+        <%= link_to "Move up", move_post_picture_up_path(picture), method: :put, remote: true,
+          class: "remove_post_picture_link white_link", title: "Click to move this picture up in the set" %>
+        ·
+        <%= link_to "Move down", move_post_picture_down_path(picture), method: :put, remote: true,
+          class: "remove_post_picture_link white_link", title: "Click to move this picture down in the set" %>
+        ·
+        <%= link_to "Remove", remove_post_picture_path(picture), method: :delete, remote: true,
+          class: "remove_post_picture_link white_link", title: "Click to remove this picture from the set",
+          data: { confirm: "Are you sure you?" } %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

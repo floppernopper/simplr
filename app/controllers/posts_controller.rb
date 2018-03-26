@@ -30,6 +30,20 @@ class PostsController < ApplicationController
     @post = Post.find_by_id params[:post_id]
   end
 
+  def move_picture_up
+    @picture = Picture.find_by_id params[:id]
+    @picture.move_up
+
+    @post = @picture.post
+  end
+
+  def move_picture_down
+    @picture = Picture.find_by_id params[:id]
+    @picture.move_down
+
+    @post = @picture.post
+  end
+
   def remove_picture
     @picture_id = params[:picture_id]
     @picture = Picture.find_by_id @picture_id
