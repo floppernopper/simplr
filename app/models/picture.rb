@@ -59,4 +59,10 @@ class Picture < ActiveRecord::Base
     self.update classifier_name: name
     return self.classifier_name
   end
+
+  private
+
+  def ensure_order_by_update
+
+  end
 end

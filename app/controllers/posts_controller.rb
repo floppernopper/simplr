@@ -174,6 +174,8 @@ class PostsController < ApplicationController
           params[:pictures][:image].each do |image|
             @post.pictures.create image: image
           end
+          # adds order numbers to each picture in photoset if more than 1
+          @post.pictures.first.ensure_order if @post.pictures.present? and @post.pictures.size > 1
         end
         # extracts any hashtags along with their position in the text
         Tag.extract @post
@@ -197,6 +199,8 @@ class PostsController < ApplicationController
         params[:pictures][:image].each do |image|
           @post.pictures.create image: image
         end
+        # adds order numbers to each picture in photoset if more than 1 now
+        @post.pictures.first.ensure_order if @post.pictures.present? and @post.pictures.size > 1
       end
       Tag.extract @post
       redirect_to show_post_path @post.unique_token
