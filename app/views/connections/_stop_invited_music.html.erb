@@ -1,4 +1,4 @@
-<% unless cookies[:invited_music_stopped] or cookies[:stop_invited_music_already_seen] %>
+<% unless current_user or cookies[:invited_music_stopped] or cookies[:stop_invited_music_already_seen] %>
   <% if rand(1..page_size).eql? page_size %>
     <div class="dark_card" id="stop_invited_music_card" align="center">
       <%= link_to hide_stop_invited_music_path(stop_invited_music: true), remote: true, class: :dark_link do %>
