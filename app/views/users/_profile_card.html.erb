@@ -76,6 +76,7 @@
 
     <div id="user_<%= user.id %>_card_links_anchor"></div>
     <%= render "users/card_links", user: user %>
+
     <%= render "users/my_groups", user: user if user.my_groups.size > 1 %>
   </div>
 </div>

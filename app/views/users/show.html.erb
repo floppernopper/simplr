@@ -1,11 +1,13 @@
 <%= render "users/profile_card", user: @user %>
 
-<%= link_to connections_index_path do %>
-  <div class="dark_card" align="center">
-    <p>
-      Following (<%= @user.following.size %>), followers (<%= @user.followers.size %>), groups (<%= @user.groups.size %>)
-    </p>
-  </div>
+<% if @user.following.present? or @user.followers.present? or @user.my_groups.present? %>
+  <%= link_to connections_index_path do %>
+    <div class="dark_card" align="center">
+      <p class="dark_link">
+        Following (<%= @user.following.size %>), followers (<%= @user.followers.size %>), groups (<%= @user.my_groups.size %>)
+      </p>
+    </div>
+  <% end %>
 <% end %>
 
 <% if this_user_current? %>
