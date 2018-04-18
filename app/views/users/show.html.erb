@@ -1,5 +1,13 @@
 <%= render "users/profile_card", user: @user %>
 
+<%= link_to connections_index_path do %>
+  <div class="dark_card" align="center">
+    <p>
+      Following (<%= @user.following.size %>), followers (<%= @user.followers.size %>), groups (<%= @user.groups.size %>)
+    </p>
+  </div>
+<% end %>
+
 <% if this_user_current? %>
   <%= render "users/progress_bar", user: @user if @user.xp and Rails.env.development? %>
   <div class="dark_card" id="post_form_card">

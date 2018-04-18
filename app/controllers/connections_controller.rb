@@ -6,6 +6,13 @@ class ConnectionsController < ApplicationController
   before_action :user_access, only: [:invites, :followers]
   before_action :dev_only, only: [:zen] # zenful only for devs in production now
 
+  def index
+    @user = User.find_by_unique_token params[:token]
+    @following = @user.following
+    @followers = @user.followers
+    @groups = @user.my_groups
+  end
+
   def hide_stop_invited_music
     if params[:stop_invited_music]
       cookies[:invited_music_stopped] = true

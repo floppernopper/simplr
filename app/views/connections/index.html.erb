@@ -1,0 +1,57 @@
+<h2 class="standard_page_header">Following <i class="fa fa-users"></i></h2>
+
+<% for user in @following.last 5 %>
+  <%= render "users/card", user: user %>
+<% end %>
+
+</br>
+<h2 class="standard_page_header">Followers <i class="fa fa-users"></i></h2>
+
+<% for user in @followers.last 5 %>
+  <%= render "users/card", user: user %>
+<% end %>
+
+</br>
+<h2 class="standard_page_header">Groups <i class="fa fa-cubes"></i></h2>
+
+<% for group in @groups.last 5 %>
+  <%= render "groups/card", group: group %>
+<% end %>
+
+<% if @following.empty? %>
+  <div class="card">
+    <p align="center">
+      <% if current_user and current_user.eql? @user %>
+        You haven't started following anyone yet.
+        <%= link_to "Click here", search_path(query: "users") %> to find other users to follow.
+      <% else %>
+        This user isn't following anyone yet.
+      <% end %>
+    </p>
+  </div>
+<% end %>
+
+<% if @followers.empty? %>
+  <div class="card">
+    <p align="center">
+      <% if current_user and current_user.eql? @user %>
+        No one is following you yet. Try searching for other users to follow or post more to get your name out there.
+      <% else %>
+        This user isn't followed by anyone yet.
+      <% end %>
+    </p>
+  </div>
+<% end %>
+
+<% if @groups.empty? %>
+  <div class="card">
+    <p align="center">
+      <% if current_user and current_user.eql? @user %>
+        You aren't in any groups yet. <%= link_to "Click here",
+          search_path(query: "groups") %> to search for groups to join. Or start your own <%= link_to "here", my_groups_path %>.
+      <% else %>
+        This user isn't in any groups yet.
+      <% end %>
+    </p>
+  </div>
+<% end %>
