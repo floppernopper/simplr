@@ -2,24 +2,27 @@
 <html>
   <head>
     <title><%= current_title %></title>
-      
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true unless @cluster_flier_page %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+    <% unless low_energy? %>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true unless @cluster_flier_page %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <% end %>
+
     <%= csrf_meta_tags %>
-    
+
     <%= favicon_link_tag "favicons/#{get_site_ico}.ico" %>
-    
+
     <%= render "app/meta_tags" %>
-    
+
 	  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	  
+
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="#000000">
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#000000">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
-    
+
   </head>
   <body>
     <%= render "app/header" if (invited? or anrcho? or @arts) and not (@cluster_flier_page or @forrest_web_co or @down) %>

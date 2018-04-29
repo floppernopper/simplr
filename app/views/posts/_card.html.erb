@@ -2,202 +2,209 @@
   or (current_user and post.user and current_user.following? post.user) or @featured_content) \
   and not ((post.hidden or (post.user and post.user.hidden)) and not own_item? post) %>
 
-  <div class="card standard_content_card <%= (post.hidden and (!own_item?(post) or god?)) ? ' blur' : '' %>"
-    id="post_card_<%= post.id %>">
+  <% unless low_energy? %>
+    <div class="card standard_content_card <%= (post.hidden and (!own_item?(post) or god?)) ? ' blur' : '' %>"
+      id="post_card_<%= post.id %>">
 
-    <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
-    <% if post.original and post.original.user %>
-      <!-- reuses group classes because they fit -->
-      <span class="posted_label">
-        <% if post.original.user_id.eql? post.user_id %>
-          shared a <%= link_to "memory", show_post_path(post.original.unique_token), class: :posted_link %>.
-        <% else %>
-          shared from <%= link_to post.original.user.name, post.original.user, class: :posted_link,
-            title: "Originally posted by #{post.original.user.name}" %>
-        <% end %>
-      </span>
-    <% elsif post.original and post.original.anon_token %>
-      <span class="posted_label">
-        shared from <%= link_to "anon", search_path(query: post.original.anon_token), class: :posted_link,
-          title: "Originally posted by #{post.original.anon_token}" %>
-      </span>
-    <% elsif post.group %>
-      <% group_name = if post.group.name.size > 15 then post.group.name[0..9] + "..." else post.group.name end %>
-      <span class="posted_label">
-        posted to <%= link_to group_name, post.group, class: :posted_link,
-          title: "Group (#{post.group.name})" %>
-      </span>
-    <% end %>
+      <%= render "users/avatar_card_link", user: post.user, token: post.anon_token %>
+      <% if post.original and post.original.user %>
+        <!-- reuses group classes because they fit -->
+        <span class="posted_label">
+          <% if post.original.user_id.eql? post.user_id %>
+            shared a <%= link_to "memory", show_post_path(post.original.unique_token), class: :posted_link %>.
+          <% else %>
+            shared from <%= link_to post.original.user.name, post.original.user, class: :posted_link,
+              title: "Originally posted by #{post.original.user.name}" %>
+          <% end %>
+        </span>
+      <% elsif post.original and post.original.anon_token %>
+        <span class="posted_label">
+          shared from <%= link_to "anon", search_path(query: post.original.anon_token), class: :posted_link,
+            title: "Originally posted by #{post.original.anon_token}" %>
+        </span>
+      <% elsif post.group %>
+        <% group_name = if post.group.name.size > 15 then post.group.name[0..9] + "..." else post.group.name end %>
+        <span class="posted_label">
+          posted to <%= link_to group_name, post.group, class: :posted_link,
+            title: "Group (#{post.group.name})" %>
+        </span>
+      <% end %>
 
-    <table class="top_right_link">
-      <tr>
-        <td>
-          <%= render "app/time_ago", item: post %>
-        </td>
-        <% if own_item? post or dev? %>
+      <table class="top_right_link">
+        <tr>
           <td>
-            <%= render "posts/open_menu_link", post: post %>
+            <%= render "app/time_ago", item: post %>
           </td>
-        <% end %>
-      </tr>
-    </table>
+          <% if own_item? post or dev? %>
+            <td>
+              <%= render "posts/open_menu_link", post: post %>
+            </td>
+          <% end %>
+        </tr>
+      </table>
 
-    <div align="center">
-      <% if post.image.url %>
-        <p>
-          <% unless @post_shown %>
-            <%= link_to show_post_path(post.unique_token) do %>
+      <div align="center">
+        <% if post.image.url %>
+          <p>
+            <% unless @post_shown %>
+              <%= link_to show_post_path(post.unique_token) do %>
+                <%= image_tag original_post_image(post), class: :standard_post_image %>
+              <% end %>
+            <% else %>
               <%= image_tag original_post_image(post), class: :standard_post_image %>
             <% end %>
-          <% else %>
-            <%= image_tag original_post_image(post), class: :standard_post_image %>
-          <% end %>
-        </p>
-      <% elsif original_post_pictures(post).present? %>
-        <p>
-          <% unless @post_shown %>
-            <%= link_to show_post_path(post.unique_token) do %>
-              <%= image_tag original_post_pictures(post).first.image, class: :standard_post_image %>
+          </p>
+        <% elsif original_post_pictures(post).present? %>
+          <p>
+            <% unless @post_shown %>
+              <%= link_to show_post_path(post.unique_token) do %>
+                <%= image_tag original_post_pictures(post).first.image, class: :standard_post_image %>
+              <% end %>
+              <% if original_post_pictures(post)[1..-1].present? %>
+                <table id="mini_photoset_table_<%= post.id %>">
+                  <tr>
+                    <% for picture in original_post_pictures(post)[1..-1] %>
+                      <td>
+                        <%= link_to add_post_photoset_path(post), remote: true, title: "Click here to enlarge." do %>
+                          <%= image_tag picture.image, class: :my_groups_group_icon %>
+                        <% end %>
+                      </td>
+                    <% end %>
+                  </tr>
+                </table>
+              <% end %>
+            <% else %>
+              <% original_post_pictures(post).each do |picture| %>
+                <%= image_tag picture.image, class: :standard_post_image %>
+              <% end %>
             <% end %>
-            <% if original_post_pictures(post)[1..-1].present? %>
-              <table id="mini_photoset_table_<%= post.id %>">
-                <tr>
-                  <% for picture in original_post_pictures(post)[1..-1] %>
-                    <td>
-                      <%= link_to add_post_photoset_path(post), remote: true, title: "Click here to enlarge." do %>
-                        <%= image_tag picture.image, class: :my_groups_group_icon %>
-                      <% end %>
-                    </td>
-                  <% end %>
-                </tr>
-              </table>
+          </p>
+        <% end %>
+
+        <% if post.video_url %>
+          <p>
+            <%= video_tag post.video_url.to_s, autoplay: true, loop: true, class: :standard_post_video %>
+          </p>
+        <% end %>
+
+        <% if post.audio_url %>
+          <%= audio_tag post.audio_url.to_s, id: "post_sound_#{post.id}" %>
+          <p>
+            <%= link_to play_post_audio_path(post.id), remote: true do %>
+              <%= post.audio_name.present? ? post.audio_name : post.audio_url.to_s %>
+              <i class="fa fa-music" aria-hidden="true"></i>
             <% end %>
-          <% else %>
-            <% original_post_pictures(post).each do |picture| %>
-              <%= image_tag picture.image, class: :standard_post_image %>
-            <% end %>
+          </p>
+        <% end %>
+
+        <% if post.body.present? %>
+          <% body_size = 500 %>
+          <% if post.body.size < body_size or @post_shown %>
+  	        <p class="standard_body <%= justified_body post %>" id="post_body_text_<%= post.id %>">
+              <%= render "app/body", item: post %>
+  		      </p>
+  		    <% else %>
+  	        <p class="standard_body justified_body_text" id="post_body_text_<%= post.id %>">
+              <%= post.body[0..body_size] + "... " %>
+              <%= link_to "Read more", read_more_path(post.id), remote: true, id: :read_more_link %>
+  		      </p>
+            <%= render "app/link_sound.js", link_id: :read_more_link, sound: :post_interface_sound %>
+  		    <% end %>
+  		  <% end %>
+
+  		  <% if post.pictures.present? and post.pictures.first.classifier_name.present? %>
+  		    <p>
+  		      <b>Classified: <%= post.pictures.first.classifier_name %></b>
+  		    </p>
+  		  <% end %>
+
+  		  <% if testing_score? %>
+  		    <p>Score = <%= post.score current_user %><p>
+  		    <p>
+  		      <% weights = post.score(current_user, :get_weights) %>
+  		      Score weights: <%= weights %>
+  		    </p>
+  		  <% end %>
+      </div>
+
+  	  <div id="post_comments_anchor_<%= post.id %>"></div>
+
+      <%= link_to "Comments#{ ' ' + post.comments.size.to_s unless post.comments.size.zero? }",
+        (@post_shown ? @post : toggle_comments_path(post)), remote: true,
+        class: :bottom_right_link, id: "show_comments_#{post.id}" %>
+      <%= render "app/link_sound.js", link_id: "show_comments_#{post.id}", sound: :post_interface_sound %>
+
+      <table class="bottom_left_link">
+        <tr>
+          <td>
+            <span id="like_post_link_anchor_<%= post.id %>"></span>
+            <%= render "likes/link", item: post %>
+          </td>
+          <td>
+            ·
+          </td>
+
+          <% if current_user and (current_user.has_power? 'love' or post.loves.present?) %>
+            <td>
+              <span id="love_post_link_anchor_<%= post.id %>"></span>
+              <%= render "likes/love_link", item: post %>
+            </td>
+            <td>
+              ·
+            </td>
           <% end %>
-        </p>
-      <% end %>
 
-      <% if post.video_url %>
-        <p>
-          <%= video_tag post.video_url.to_s, autoplay: true, loop: true, class: :standard_post_video %>
-        </p>
-      <% end %>
-
-      <% if post.audio_url %>
-        <%= audio_tag post.audio_url.to_s, id: "post_sound_#{post.id}" %>
-        <p>
-          <%= link_to play_post_audio_path(post.id), remote: true do %>
-            <%= post.audio_name.present? ? post.audio_name : post.audio_url.to_s %>
-            <i class="fa fa-music" aria-hidden="true"></i>
+          <% if current_user and (current_user.has_power? 'zen' or post.zens.present?) %>
+            <td>
+              <span id="zen_post_link_anchor_<%= post.id %>"></span>
+              <%= render "likes/zen_link", item: post %>
+            </td>
+            <td>
+              ·
+            </td>
           <% end %>
-        </p>
-      <% end %>
 
-      <% if post.body.present? %>
-        <% body_size = 500 %>
-        <% if post.body.size < body_size or @post_shown %>
-	        <p class="standard_body <%= justified_body post %>" id="post_body_text_<%= post.id %>">
-            <%= render "app/body", item: post %>
-		      </p>
-		    <% else %>
-	        <p class="standard_body justified_body_text" id="post_body_text_<%= post.id %>">
-            <%= post.body[0..body_size] + "... " %>
-            <%= link_to "Read more", read_more_path(post.id), remote: true, id: :read_more_link %>
-		      </p>
-          <%= render "app/link_sound.js", link_id: :read_more_link, sound: :post_interface_sound %>
-		    <% end %>
-		  <% end %>
+          <% if current_user and (current_user.has_power? 'whoa' or post.whoas.present?) %>
+            <td>
+              <span id="whoa_post_link_anchor_<%= post.id %>"></span>
+              <%= render "likes/whoa_link", item: post %>
+            </td>
+            <td>
+              ·
+            </td>
+          <% end %>
 
-		  <% if post.pictures.present? and post.pictures.first.classifier_name.present? %>
-		    <p>
-		      <b>Classified: <%= post.pictures.first.classifier_name %></b>
-		    </p>
-		  <% end %>
-
-		  <% if testing_score? %>
-		    <p>Score = <%= post.score current_user %><p>
-		    <p>
-		      <% weights = post.score(current_user, :get_weights) %>
-		      Score weights: <%= weights %>
-		    </p>
-		  <% end %>
+          <td>
+            <span id="share_post_link_anchor_<%= post.id %>"></span>
+            <%= render "posts/share_link", post: post %>
+          </td>
+        </tr>
+      </table>
     </div>
 
-	  <div id="post_comments_anchor_<%= post.id %>"></div>
+    <% if settings(post.user)[:post_bg_fader_on] or @invite_only_page %>
+      <script>
+        <%= render "app/fader.js", target: "post_card", target_id: post.id, background: true, slow: true %>
+      </script>
+    <% elsif settings(post.user)[:post_bg_color].present? %>
+      <script>
+        <%= render "posts/bg_color.js", post: post %>
+      </script>
+    <% end %>
 
-    <%= link_to "Comments#{ ' ' + post.comments.size.to_s unless post.comments.size.zero? }",
-      (@post_shown ? @post : toggle_comments_path(post)), remote: true,
-      class: :bottom_right_link, id: "show_comments_#{post.id}" %>
-    <%= render "app/link_sound.js", link_id: "show_comments_#{post.id}", sound: :post_interface_sound %>
+    <% if settings(post.user)[:post_txt_fader_on] %>
+      <script>
+        <%= render "app/fader.js", target: "post_body_text", target_id: post.id %>
+      </script>
+    <% elsif settings(post.user)[:post_txt_color].present? %>
+      <script>
+        <%= render "posts/txt_color.js", post: post %>
+      </script>
+    <% end %>
+  <% else %>
+    
 
-    <table class="bottom_left_link">
-      <tr>
-        <td>
-          <span id="like_post_link_anchor_<%= post.id %>"></span>
-          <%= render "likes/link", item: post %>
-        </td>
-        <td>
-          ·
-        </td>
 
-        <% if current_user and (current_user.has_power? 'love' or post.loves.present?) %>
-          <td>
-            <span id="love_post_link_anchor_<%= post.id %>"></span>
-            <%= render "likes/love_link", item: post %>
-          </td>
-          <td>
-            ·
-          </td>
-        <% end %>
 
-        <% if current_user and (current_user.has_power? 'zen' or post.zens.present?) %>
-          <td>
-            <span id="zen_post_link_anchor_<%= post.id %>"></span>
-            <%= render "likes/zen_link", item: post %>
-          </td>
-          <td>
-            ·
-          </td>
-        <% end %>
-
-        <% if current_user and (current_user.has_power? 'whoa' or post.whoas.present?) %>
-          <td>
-            <span id="whoa_post_link_anchor_<%= post.id %>"></span>
-            <%= render "likes/whoa_link", item: post %>
-          </td>
-          <td>
-            ·
-          </td>
-        <% end %>
-
-        <td>
-          <span id="share_post_link_anchor_<%= post.id %>"></span>
-          <%= render "posts/share_link", post: post %>
-        </td>
-      </tr>
-    </table>
-  </div>
-
-  <% if settings(post.user)[:post_bg_fader_on] or @invite_only_page %>
-    <script>
-      <%= render "app/fader.js", target: "post_card", target_id: post.id, background: true, slow: true %>
-    </script>
-  <% elsif settings(post.user)[:post_bg_color].present? %>
-    <script>
-      <%= render "posts/bg_color.js", post: post %>
-    </script>
-  <% end %>
-
-  <% if settings(post.user)[:post_txt_fader_on] %>
-    <script>
-      <%= render "app/fader.js", target: "post_body_text", target_id: post.id %>
-    </script>
-  <% elsif settings(post.user)[:post_txt_color].present? %>
-    <script>
-      <%= render "posts/txt_color.js", post: post %>
-    </script>
   <% end %>
 <% end %>
