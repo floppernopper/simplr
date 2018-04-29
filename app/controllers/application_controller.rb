@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   before_action :bots_to_404
 
   def low_energy?
-    cookies[:low_energy].present? or in_dev?
+    false # cookies[:low_energy].present? or in_dev?
   end
 
   def get_location
