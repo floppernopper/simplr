@@ -5,7 +5,7 @@
 		<p class="proposal_title_text"><%= proposal.title %></p>
   <% end %>
 <% end %>
-		  
+
 <% if proposal.image.url %>
   <p>
     <% if @proposal_shown %>
@@ -22,12 +22,19 @@
   <%= render "app/body", item: proposal %>
 </p>
 
-<% if proposal.action.eql? 'grant_title' %>
-  <p>
-    <b>Title to grant:</b> <%= eval(proposal.misc_data)[:title] %>
-  </p>
+<% if proposal.action.present? %>
+  <% case proposal.action %>
+  <% when 'grant_title' %>
+    <p>
+      <b>Title to grant:</b> <%= eval(proposal.misc_data)[:title] %>
+    </p>
+  <% when 'update_name' %>
+    <p>
+      <b>Name:</b> <%= proposal.misc_data %>
+    </p>
+  <% end %>
 <% end %>
-		  
+
 <% if testing_score? %>
   <p>Score = <%= proposal.score %><p>
   <p>
