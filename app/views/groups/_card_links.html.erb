@@ -1,6 +1,6 @@
 <div id="group_<%= group.id %>_card_links">
   <% if group_auth group %>
-    <%= link_to 'Edit', edit_group_path(group), class: :bottom_right_link %>
+    <%= link_to 'Edit', edit_group_path(group), class: :bottom_right_link unless group.social_structure.eql? 'consensus' %>
   <% elsif current_user %>
     <% if group.members.find_by_user_id current_user.id %>
       <%= link_to 'Leave', leave_group_path(group.id), method: :delete, remote: true, class: :bottom_right_link %>

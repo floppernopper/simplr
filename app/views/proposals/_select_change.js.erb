@@ -15,6 +15,13 @@ $("#new_proposal_form").change(function(e) {
 			case 'grant_title':
         anchor.after("<%=j render 'proposals/action_fields', f_builder: f_builder, field: 'grant_title' %>");
 			  break;
+			case 'update_name':
+				anchor.after("<%=j render 'proposals/action_fields', f_builder: f_builder, field: 'update_name' %>");
+				break;
 		}
+		// sound and haptic feedback
+		$("#post_interface_sound")[0].currentTime = 0;
+		$("#post_interface_sound")[0].play();
+		window.navigator.vibrate(1);
 	}
 });

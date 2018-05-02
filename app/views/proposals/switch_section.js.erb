@@ -1,3 +1,8 @@
 $("#feed_container").remove();
 $("#feed_container_anchor").after("<%=j render 'proposals/feed_container', \
   parents: (@group.present? ? 'groups' : nil) %>");
+
+  // sound and haptic feedback
+  $("#post_interface_sound")[0].currentTime = 0;
+  $("#post_interface_sound")[0].play();
+  window.navigator.vibrate(1);

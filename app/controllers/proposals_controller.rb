@@ -59,11 +59,11 @@ class ProposalsController < ApplicationController
     @proposal.user_id = current_user.id if current_user
     @proposal.group_id = params[:group_id]
     @proposal.anon_token = anon_token
-    
+
     if @proposal.action.eql? "grant_title"
-      
+
     end
-    
+
     build_action
     if @proposal.save
       Tag.extract @proposal
@@ -143,7 +143,7 @@ class ProposalsController < ApplicationController
   end
 
   private
-  
+
   def bots_to_404
     redirect_to '/404' if request.bot?
   end
@@ -178,6 +178,7 @@ class ProposalsController < ApplicationController
       grant[:title] = params[:title]
       grant[:days_alive] = params[:days_alive]
       @proposal.misc_data = grant.to_s
+    when :update_name
     end
   end
 

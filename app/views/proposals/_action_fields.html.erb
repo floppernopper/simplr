@@ -4,18 +4,22 @@
 	<% case (defined?(field) ? field : nil) %>
 	<% when 'add_hashtags' %>
 		<p>
-			<%= f_builder.text_field :misc_data, placeholder: "Add hashtags..." %>
+			<%= f_builder.text_field :misc_data, placeholder: "Add hashtags...", class: :standard_text_field %>
 		</p>
 	<% when 'meetup' %>
 		<p>
-			<%= f_builder.text_area :misc_data, placeholder: "Date and location..." %>
+			<%= f_builder.text_area :misc_data, placeholder: "Date and location...", class: :standard_text_area %>
 		</p>
 	<% when 'grant_title' %>
 	  <p>
-	    <%= text_field_tag :title, nil, placeholder: "Write a title to grant..." %>
+	    <%= text_field_tag :title, nil, placeholder: "Write a title to grant...", class: :standard_text_field %>
 	  </p>
 	  <p>
-	    <%= text_field_tag :days_alive, nil, placeholder: "How many days should it last?" %>
+	    <%= text_field_tag :days_alive, nil, placeholder: "How many days should it last?", class: :standard_text_field %>
+	  </p>
+	<% when 'update_name' %>
+	  <p>
+	    <%= f_builder.text_field :misc_data, placeholder: "Write a new name for the group...", class: :standard_text_field %>
 	  </p>
 	<% end %>
 </div>
