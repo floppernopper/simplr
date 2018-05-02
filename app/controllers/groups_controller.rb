@@ -5,17 +5,17 @@ class GroupsController < ApplicationController
   before_action :invite_only, except: [:new, :create, :update, :destroy, :show, :edit, :my_anon_groups]
   before_action :invited_or_anrcho, only: [:new, :create, :show]
   before_action :anrcho_only, only: [:my_anon_groups]
-  
+
   def load_more_posts
     build_feed
     @items = paginate @items
     page_turning @items
   end
-  
+
   def hide_featured_groups
     cookies.permanent[:hide_featured_groups] = true
   end
-  
+
   def their_groups
     @user = User.find_by_id params[:user_id]
     @groups = @user.my_groups.reverse
@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
   def my_groups
     @group = Group.new
   end
-  
+
   def my_anon_groups
     unless current_user
       Group.delete_all_old
@@ -43,7 +43,7 @@ class GroupsController < ApplicationController
       @groups.reverse!
     end
   end
-  
+
   def index
     @groups = Group.global.reverse
   end
@@ -99,7 +99,7 @@ class GroupsController < ApplicationController
   def update
     if @group.update(group_params)
       Tag.extract @group
-      redirect_to @group
+      redirect_to :back, notice: "Group updated successfully..."
     else
       render :edit
     end
@@ -115,35 +115,35 @@ class GroupsController < ApplicationController
   end
 
   private
-  
+
   def build_feed
     @items = @group.posts + @group.proposals
     @items.sort_by! { |i| i.created_at }.reverse!
     @items_size = @items.size
   end
-  
+
   def anrcho_only
     unless anrcho?
       redirect_to '/404'
     end
   end
-  
+
   def invited_or_anrcho
     unless invited? or anrcho?
       redirect_to invite_only_path
     end
   end
-  
+
   def invite_only
     unless invited?
       redirect_to invite_only_path
     end
   end
-  
+
   def dev_only
     redirect_to '/404' unless dev?
   end
-  
+
   def secure_group
     set_group
     secure = if current_user
@@ -153,7 +153,7 @@ class GroupsController < ApplicationController
     end
     redirect_to '/404' unless secure or dev?
   end
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_group
     if params[:token]

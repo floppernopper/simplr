@@ -10,20 +10,31 @@
       <% if group.body.present? %>
 	      <p class="<%= 'justified_body_text' if group.body.size > 150 %>">
           <%= render "app/body", item: group %>
-          
+
           <% if group.posts.present? %>
-            <span style="font-size: 11px; font-weight: bolder;">
+            <span class="small_group_txt">
               Posts: <%= group.posts.size %>
             </span>
           <% end %>
 
           <% if group.proposals.present? %>
-            <span style="font-size: 11px; font-weight: bolder;">
+            <span class="small_group_txt">
               Motions: <%= group.proposals.size %>
             </span>
           <% end %>
 		    </p>
 		  <% end %>
+
+      <% if group.social_structure.present? %>
+        <p class="small_group_txt">
+          <% case group.social_structure %>
+          <% when 'consensus' %>
+            <%= link_to "This group uses Model of Consensus voting.", tutorial_path, class: :small_group_txt %>
+            <% when 'direct' %>
+              <%= "This group uses Direct Democracy, or majority vote." %>
+          <% end %>
+        </p>
+      <% end %>
 
       <% if @group_shown %>
         <% if group.active_chat? %>

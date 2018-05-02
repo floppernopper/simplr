@@ -14,25 +14,25 @@
     <div align="center">
       <%= f.text_field :name, placeholder: "Name", class: :dark_text_field %>
       <%= f.text_area :body, placeholder: "Description", class: :dark_text_area %>
-      
+
 		  <p>Icon: <%= f.file_field :image %></p>
-      
+
       <% if dev? %>
         <p>
           Posts visible to anons: <%= f.check_box :open, { checked: @group.open } %>
         </p>
       <% end %>
-      
+
       <p>
         Only accessible by URL or matched tags: <%= f.check_box :hidden, { checked: @group.hidden } %>
       </p>
-      
+
       <% if in_dev? %>
         <p>
-          <%= select_tag :social_structure, options_for_select(group_structure_options) %>
+          <%= f.select :social_structure, options_for_select(group_structure_options, @group.social_structure) %>
         </p>
       <% end %>
-      
+
       <button type="submit" name="commit" class="dark_form_button">
         <b><%= @editing ? "Save" : "Create" %> <i class="fa fa-group"></i></b>
       </button>

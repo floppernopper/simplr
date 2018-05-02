@@ -2,26 +2,26 @@ class Proposal < ActiveRecord::Base
   belongs_to :proposal
   belongs_to :group
   belongs_to :user
-  
+
   has_many :proposals, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :views, dependent: :destroy
   has_many :likes, dependent: :destroy
-  
+
   before_create :gen_unique_token
   before_save :spam_filter
   validates_presence_of :body
-  
+
   scope :main, -> { where requires_revision: [nil, false] }
   scope :globals, -> { where(group_id: nil).where.not action: :revision }
   scope :voting, -> { where(ratified: [nil, false]).where requires_revision: [nil, false] }
   scope :revision, -> { where requires_revision: true }
   scope :ratified, -> { where ratified: true }
-  
+
   mount_uploader :image, ImageUploader
-  
+
   def evaluate
     if ratifiable?
       self.ratify!
@@ -36,7 +36,7 @@ class Proposal < ActiveRecord::Base
       puts "\nProposal #{self.id} has been deprecated."
     end
   end
-  
+
   def ratify!
     # for revision proposals
     if self.proposal
@@ -83,17 +83,17 @@ class Proposal < ActiveRecord::Base
     puts "\nProposal #{self.id} has been ratified.\n"
     self.tweet if ENV['RAILS_ENV'].eql? 'production'
   end
-  
+
   def rank user=nil, feed=nil
     proposals = self.group.present? ? self.group.proposals : Proposal.globals
     ranked = proposals.sort_by { |proposal| proposal.score }
     return ranked.reverse.index(self) + 1 if ranked.include? self
   end
-  
+
   def score user=nil, feed=nil, get_weights=nil
     Vote.score(self, get_weights)
   end
-  
+
   def self.action_types
     { general: "General statement or idea",
       direct_action: "Plan some direct action",
@@ -106,11 +106,15 @@ class Proposal < ActiveRecord::Base
       just_a_test: "Test motion",
       grant_title: "Grant title" }
   end
-  
+
   def self.group_action_types
     { add_hashtags: "Add hashtags",
+      update_name: "Update group name",
       update_banner: "Update group banner",
+      update_description: "Update group description",
+      update_social_structure: "Update group social structure",
       add_locale: "Set your locale as the groups",
+      update_social_structure: "Update group social structure",
       disband_early: "Disband, effective immediately",
       postpone_expiration: "Postpone expiration of the group",
       set_ratification_threshold: "Set ratification threshold to 25",
@@ -119,22 +123,22 @@ class Proposal < ActiveRecord::Base
       grant_title: "Grant title",
       debate: "Debate" }
   end
-  
+
   def votes_to_ratify
     # also accounts for non verified votes as well, as half votes, since no peer review
     (self.ratification_threshold - (self.verified_up_votes.size + (self.up_votes.size / 2))).to_i + 1
   end
-  
+
   def requires_revision?
     self.verified_down_votes.size > 0 and not self.revised
   end
-  
+
   def ratifiable?
     # also accounts for non verified votes as well, as half votes, since no peer review
     !self.ratified and !(self.proposal.present? and self.proposal.revised) and self.verified_down_votes.size.zero? \
       and (self.verified_up_votes.size + (self.up_votes.size / 2)) > self.ratification_threshold
   end
-  
+
   def ratification_threshold
     # dynamic threshold able to be set by group proposal
     _threshold = if self.group and self.group.ratification_threshold.present?
@@ -155,29 +159,29 @@ class Proposal < ActiveRecord::Base
   		return _threshold / 2
   	end
   end
-  
+
   def verified_up_votes
     self.up_votes.where verified: true
   end
-  
+
   def verified_down_votes
     self.down_votes.where verified: true
   end
-  
+
   def up_votes
     self.votes.up_votes.where moot: [nil, false]
   end
-  
+
   def down_votes
     self.votes.down_votes.where moot: [nil, false]
   end
-  
+
   def seent current_token
     unless self.seen? current_token
       self.views.create token: current_token
     end
   end
-  
+
   def seen? current_token
     if self.views.find_by_token current_token
       return true
@@ -185,11 +189,11 @@ class Proposal < ActiveRecord::Base
       return false
     end
   end
-  
+
   def revisions
     self.proposals.where action: "revision"
   end
-  
+
   # all proposals need to be updated as version 1 before this can work
   # unless database started with version 1 proposals by default
   def old_versions
@@ -199,11 +203,11 @@ class Proposal < ActiveRecord::Base
       end
     return versions
   end
-  
+
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
   end
-  
+
   def tweet
     message = ""
     insert = lambda { |char| message << char if message.size < 140 }
@@ -233,7 +237,7 @@ class Proposal < ActiveRecord::Base
       puts "Twitter API keys are not present."
     end
   end
-  
+
   def self.filter_spam
     for proposal in self.all
       if proposal.is_spam?
@@ -241,7 +245,7 @@ class Proposal < ActiveRecord::Base
       end
     end
   end
-  
+
   def is_spam?
     for i in [self.title.to_s, self.body.to_s]
       if i.include? "business" or i.include? "capital" or i.include? "fund"
@@ -250,15 +254,15 @@ class Proposal < ActiveRecord::Base
     end
     nil
   end
-  
+
   private
-  
+
   def spam_filter
     if self.is_spam?
       errors.add(:post, "cannot be spam")
     end
   end
-  
+
   def gen_unique_token
     begin
       self.unique_token = SecureRandom.urlsafe_base64
