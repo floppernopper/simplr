@@ -4,6 +4,14 @@
   <%= render "app/lineage", line: { group: @group, proposal: @proposal } %>
 <% end %>
 
+<% if @proposal.requires_revision? %>
+  <div class="dark_card" align="center">
+    <p class="dark_link">
+      This motion's been blocked and requires revision.
+    </p>
+  </div>
+<% end %>
+
 <%= render "proposals/card", proposal: @proposal %>
 
 <%= render "posts/liked_and_viewed_by" %>
@@ -17,7 +25,7 @@
   <% for vote in @votes %>
     <%= render "votes/card", vote: vote if vote.body.present? %>
   <% end %>
-  
+
 <% elsif @show_revisions %>
 	<% for revision in @revisions %>
 		<%= render "proposals/card", proposal: revision %>
@@ -27,7 +35,7 @@
 		  <%= render "proposals/new_revision" %>
 	  </div>
 	<% end %>
-	
+
 <% elsif @show_comments %>
 	<% for comment in @comments %>
 		<%= render "comments/card", comment: comment %>

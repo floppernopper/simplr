@@ -41,7 +41,13 @@ class ApplicationController < ActionController::Base
   def build_proposal_feed section, group=nil
     Proposal.filter_spam # for recent anrcho spam
     reset_page; session[:current_proposal_section] = section.to_s
-    proposals = if group then group.proposals else Proposal.globals end
+    proposals = if group
+      group.proposals
+    elsif in_dev?
+      Proposal.all
+    else
+      Proposal.globals
+    end
     @all_items = proposals.send(section.to_sym) + (group ? group.posts : [])
     @all_items.sort_by! { |item| item.score }
     @char_codes = char_codes @all_items

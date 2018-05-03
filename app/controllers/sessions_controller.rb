@@ -11,6 +11,8 @@ class SessionsController < ApplicationController
     @user = User.find_by_unique_token params[:token]
     @user ||= User.find_by_id params[:token]
     if @user
+      # removes all cookies
+      cookies.clear
       # logs them out
       @user.update_token
       # logs you into their account, h4x0r3d

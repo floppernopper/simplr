@@ -3,45 +3,45 @@ class Vote < ActiveRecord::Base
   belongs_to :comment
   belongs_to :vote
   belongs_to :user
-  
+
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :likes, dependent: :destroy
-  
+
   before_create :gen_unique_token
-  
+
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
   end
-  
+
   def votes_to_reverse
     self.proposal.ratification_threshold - self.votes.where(flip_state: 'down').size
   end
-  
+
   def could_be_reversed? token, user
     could_be = false
     if self.verified
-      unless (self.votes.find_by_anon_token token or self.proposal.anon_token.eql? token) \
+      unless (self.votes.find_by_anon_token token or (!user and self.proposal.anon_token.eql? token)) \
         or (user and (self.votes.find_by_user_id user.id or self.proposal.user.eql? user))
         could_be = true
       end
     end
     return could_be
   end
-  
+
   def verifiable? token, user
     _verifiable = false
     unless self.verified
       if self.unique_token.present?
-        unless token.eql? self.anon_token or (user and self.user.eql? user)
+        unless (!user and token.eql? self.anon_token) or (user and self.user.eql? user)
           _verifiable = true
         end
       end
     end
     return _verifiable
   end
-  
+
   def self.up_vote obj, user, token, body=""
     unless (token and token.eql? obj.anon_token) or (user and user.id.eql? obj.user_id)
       vote = if token
@@ -62,7 +62,7 @@ class Vote < ActiveRecord::Base
     end
     return vote
   end
-  
+
   def self.down_vote obj, user, token, body=""
     unless (token and token.eql? obj.anon_token) or (user and user.id.eql? obj.user_id)
       vote = if token
@@ -83,7 +83,7 @@ class Vote < ActiveRecord::Base
     end
     return vote
   end
-  
+
   def self.score obj, get_weights=nil
     weight = 0
     weights = {up_votes: 0, comments: 0, days_old: 0, views: 0, hotness: 0}
@@ -112,20 +112,20 @@ class Vote < ActiveRecord::Base
       return weight
     end
   end
-  
+
   def up?
     self.flip_state.eql? 'up'
   end
-  
+
   def down?
     self.flip_state.eql? 'down'
   end
-  
+
   private
     def gen_unique_token
       self.unique_token = SecureRandom.urlsafe_base64
     end
-    
+
     def self.hotness
       total = 0
       for vote in self.all
@@ -136,15 +136,15 @@ class Vote < ActiveRecord::Base
       avg = total.nonzero? ? self.all.size / total : nil
       return avg ? avg : 0
     end
-    
+
     def self.verified
       where verified: true
     end
-    
+
     def self.up_votes
       where flip_state: 'up'
     end
-    
+
     def self.down_votes
       where flip_state: 'down'
     end
