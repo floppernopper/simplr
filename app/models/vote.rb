@@ -19,10 +19,11 @@ class Vote < ActiveRecord::Base
     self.proposal.ratification_threshold - self.votes.where(flip_state: 'down').size
   end
 
+  # if could be reversed by current_user or anon
   def could_be_reversed? token, user
     could_be = false
     if self.verified
-      unless (self.votes.find_by_anon_token token or (!user and self.proposal.anon_token.eql? token)) \
+      unless (!user and self.votes.find_by_anon_token token or (!user and self.proposal.anon_token.eql? token)) \
         or (user and (self.votes.find_by_user_id user.id or self.proposal.user.eql? user))
         could_be = true
       end
@@ -122,30 +123,31 @@ class Vote < ActiveRecord::Base
   end
 
   private
-    def gen_unique_token
-      self.unique_token = SecureRandom.urlsafe_base64
-    end
+  
+  def gen_unique_token
+    self.unique_token = SecureRandom.urlsafe_base64
+  end
 
-    def self.hotness
-      total = 0
-      for vote in self.all
-        next_vote = self.all.find_by_id(vote.id + 1); if next_vote.nil? then break end
-        total += 1 if vote.created_at.to_date > 1.days.ago \
-          and (vote.created_at.to_date - next_vote.created_at.to_date).to_i.zero?
-      end
-      avg = total.nonzero? ? self.all.size / total : nil
-      return avg ? avg : 0
+  def self.hotness
+    total = 0
+    for vote in self.all
+      next_vote = self.all.find_by_id(vote.id + 1); if next_vote.nil? then break end
+      total += 1 if vote.created_at.to_date > 1.days.ago \
+        and (vote.created_at.to_date - next_vote.created_at.to_date).to_i.zero?
     end
+    avg = total.nonzero? ? self.all.size / total : nil
+    return avg ? avg : 0
+  end
 
-    def self.verified
-      where verified: true
-    end
+  def self.verified
+    where verified: true
+  end
 
-    def self.up_votes
-      where flip_state: 'up'
-    end
+  def self.up_votes
+    where flip_state: 'up'
+  end
 
-    def self.down_votes
-      where flip_state: 'down'
-    end
+  def self.down_votes
+    where flip_state: 'down'
+  end
 end

@@ -1,3 +1,5 @@
+<%= render "users/card", user: @user %>
+
 <div class="card">
   <% if @user %>
     <% if my_groups.present? %>
@@ -7,9 +9,9 @@
           <p>
             Invite <%= link_to @user.name, @user %> to a group
           </p>
-        
+
           <p><%= select_tag :group_id, options_for_select(my_group_options) %></p>
-	
+
           <button type="submit" name="commit" class="standard_form_button">
             <b>Invite <i class="fa fa-cube"></i></b>
           </button>
@@ -28,9 +30,9 @@
           <p>
             Invite someone to <%= link_to @group.name, @group %>
           </p>
-        
+
           <p><%= select_tag :user_id, options_for_select(following_options) %></p>
-          
+
           <button type="submit" name="commit" class="standard_form_button">
             <b>Invite <i class="fa fa-cube"></i></b>
           </button>
