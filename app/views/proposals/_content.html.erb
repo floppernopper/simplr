@@ -23,7 +23,7 @@
 </p>
 
 <% if proposal.action.present? %>
-  <% case proposal.action %>
+  <% case proposal.action.eql?('revision') ? proposal.revised_action : proposal.action %>
   <% when 'grant_title' %>
     <p>
       <b>Title to grant:</b> <%= eval(proposal.misc_data)[:title] %>
