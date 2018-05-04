@@ -127,12 +127,12 @@
 	width: 25%;
 }
 
-#votes_section {
+.proposal_sub_section {
   @include section;
 	width: 50%;
 }
 
-#comments_section {
-  @include section;
-	width: 50%;
+.proposal_sub_tri_section {
+	@include section;
+	width: 33.33333%;
 }

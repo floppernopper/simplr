@@ -6,7 +6,7 @@
 
 <% if @proposal.requires_revision? %>
   <div class="dark_card" align="center">
-    <p class="dark_link">
+    <p class="dark_link small_group_txt">
       This motion's been blocked and requires revision.
     </p>
   </div>
@@ -18,9 +18,11 @@
 
 <%= render "proposals/sub_section_links", proposal: @proposal %>
 
+
+<%= render "votes/voter_links", label: "Supporters", votes: @up_votes %>
+<%= render "votes/voter_links", label: "Blockers", votes: @down_votes %>
+
 <% if @show_votes %>
-  <%= render "votes/voter_links", label: "Supporters", votes: @up_votes %>
-  <%= render "votes/voter_links", label: "Blockers", votes: @down_votes %>
   <%= render "votes/confirm_humanity" %>
   <% for vote in @votes %>
     <%= render "votes/card", vote: vote if vote.body.present? %>
@@ -31,9 +33,7 @@
 		<%= render "proposals/card", proposal: revision %>
 	<% end %>
 	<% unless @proposal.revised %>
-	  <div class="card">
-		  <%= render "proposals/new_revision" %>
-	  </div>
+	  <%= render "proposals/new_revision" %>
 	<% end %>
 
 <% elsif @show_comments %>

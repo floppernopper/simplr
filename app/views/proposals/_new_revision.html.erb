@@ -1,21 +1,20 @@
 <!-- proposals -->
 
-<div align="center">
+<div class="dark_card" align="center">
   <%= form_for @revision, url: create_proposal_path, method: :post do |f| %>
     <%= hidden_field_tag :proposal_id, @proposal.id %>
     <%= hidden_field_tag :proposal_action, "revision" %>
-    <p>
-      <%= f.label "Submit a different version for ratification" %>
+    <p class="dark_link small_group_txt">
+      <b>Submit a different version for ratification</b>
     </p>
     <p>
-	    <%= f.text_field :title, value: @proposal.title, placeholder: "Title" %>
+	    <%= f.text_area :body, value: @proposal.body, placeholder: "Body", class: :dark_text_area %>
     </p>
     <p>
-	    <%= f.text_area :body, value: @proposal.body, placeholder: "Body" %>
+      <%= select_tag :revised_action, options_for_select(action_types(@group), @proposal.action), id: :proposal_action_select %>
     </p>
-    <p>
-      <%= select_tag :revised_action, options_for_select(action_types(@group)), id: :proposal_action_select %>
-    </p>
-    <%= f.submit "Submit" %>
+    <button type="submit" name="commit" class="dark_form_button">
+      <b>Submit revision <i class="fa fa-hand-o-up"></i></b>
+    </button>
   <% end %>
 </div>

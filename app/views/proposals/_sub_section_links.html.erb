@@ -1,18 +1,29 @@
 <!-- proposals -->
 
 <script>
-  <%= render "proposals/sub_fader.js" %>
+  <% for section in ['votes_section', 'comments_section', 'revisions_section'] %>
+    <%= render "app/fader.js", target: section, target_id: '', background: true, slow: true %>
+  <% end %>
 </script>
-  
+
 <div id="proposal_sections">
   <%= link_to show_proposal_path(token: proposal.unique_token, votes: true) do %>
-    <div id="votes_section">
+    <div class="proposal_sub<%= '_tri' if proposal.requires_revision? %>_section" id="votes_section">
 	    <div class="section_text">Votes</div>
     </div>
   <% end %>
+
   <%= link_to show_proposal_path(token: proposal.unique_token, comments: true) do %>
-    <div id="comments_section">
+    <div class="proposal_sub<%= '_tri' if proposal.requires_revision? %>_section" id="comments_section">
 	    <div class="section_text">Comments</div>
     </div>
+  <% end %>
+
+  <% if proposal.requires_revision? %>
+    <%= link_to show_proposal_path(token: proposal.unique_token, revisions: true) do %>
+      <div class="proposal_sub_tri_section" id="revisions_section">
+  	    <div class="section_text">Revisions</div>
+      </div>
+    <% end %>
   <% end %>
 </div>
