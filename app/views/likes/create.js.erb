@@ -3,7 +3,7 @@ var anchor = $("#<%= "#{get_like_type_str}_#{@item.class.to_s.downcase}_link_anc
 
 link.remove();
 anchor.after("<%=j render "likes/#{get_like_type_str true}", item: @item,
-  bottom_left: (!@item.is_a?(Post) and !@item.is_a?(Proposal)) %>");
+  bottom_left: (!@item.is_a?(Post) and !@item.is_a?(Proposal) and !@item.is_a?(Vote)) %>");
 
 <% if @post %>
   flash_border();
