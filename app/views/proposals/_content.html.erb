@@ -23,6 +23,7 @@
 </p>
 
 <% if proposal.action.present? %>
+  <!-- make sure revised action is used if proposal is a revision -->
   <% case proposal.action.eql?('revision') ? proposal.revised_action : proposal.action %>
   <% when 'grant_title' %>
     <p>

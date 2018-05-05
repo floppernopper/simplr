@@ -1,4 +1,14 @@
 class VotesController < ApplicationController
+  def update
+    @vote = Vote.find_by_unique_token params[:token]
+    if @vote.update(vote_params)
+      @vote_updated_successfully = true
+      flash.now[:notice] = "Vote was successfully updated."
+    else
+      flash.now[:notice] = "Vote could not be updated."
+    end
+  end
+
   def destroy
     @proposal = Proposal.find_by_unique_token(params[:token])
     @votes = if params[:unfor]
@@ -94,5 +104,11 @@ class VotesController < ApplicationController
     @vote = Vote.find_by_unique_token params[:token]
     @comments = @vote.comments
     @comment = Comment.new
+  end
+
+  private
+
+  def vote_params
+    params.require(:vote).permit(:body, :flip_state)
   end
 end

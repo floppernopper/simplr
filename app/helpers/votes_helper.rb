@@ -1,4 +1,24 @@
 module VotesHelper
+  def vote_body_text_area_txt vote, new_flip_state=nil
+    state = if vote.up?
+      "up"
+    elsif vote.down?
+      "down"
+    end
+    state = if new_flip_state.eql? 'up'
+      "up"
+    elsif new_flip_state.eql? 'down'
+      "down"
+    else
+      state
+    end
+    if state.eql? 'up'
+      "Why do you support this proposal? (optional)"
+    elsif state.eql? 'down'
+      "Why are you blocking this proposal? (optional)"
+    end
+  end
+
   def vote_can_be_reversed? vote
     humanity_confirmed? and vote.could_be_reversed? anon_token, current_user \
       and ((vote.up? and vote.proposal.ratified) or (vote.down? and vote.proposal.requires_revision?))

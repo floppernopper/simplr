@@ -11,6 +11,8 @@ class Vote < ActiveRecord::Base
 
   before_create :gen_unique_token
 
+  before_update :ensure_not_verified
+
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
   end
@@ -123,7 +125,13 @@ class Vote < ActiveRecord::Base
   end
 
   private
-  
+
+  def ensure_not_verified
+    if self.verified
+      errors.add :post, "cannot be changed after verification."
+    end
+  end
+
   def gen_unique_token
     self.unique_token = SecureRandom.urlsafe_base64
   end

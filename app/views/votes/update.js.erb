@@ -1,0 +1,9 @@
+<% if @vote_updated_successfully %>
+  var update_vote_card = $("#update_vote_card");
+  update_vote_card.after("<%=j render 'votes/card', vote: @vote if @vote.body.present? %>");
+  update_vote_card.remove();
+  // sound and haptic feedback
+  $("#post_interface_sound")[0].currentTime = 0;
+  $("#post_interface_sound")[0].play();
+  window.navigator.vibrate(1);
+<% end %>

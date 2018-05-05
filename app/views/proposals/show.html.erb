@@ -6,7 +6,7 @@
 
 <% if @proposal.requires_revision? %>
   <div class="dark_card" align="center">
-    <p class="dark_link small_group_txt">
+    <p class="dark_link">
       This motion's been blocked and requires revision.
     </p>
   </div>
@@ -24,8 +24,17 @@
 
 <% if @show_votes %>
   <%= render "votes/confirm_humanity" %>
-  <% for vote in @votes %>
+  <% for vote in @votes.reverse %>
     <%= render "votes/card", vote: vote if vote.body.present? %>
+  <% end %>
+
+  <% if current_user and @votes.where(user_id: current_user.id, body: "").present? %>
+    <div class="dark_card" id="update_vote_card" align="center">
+      <p class="dark_link">
+        Would you like to update your vote to include some text? This allows for votes to be reviewed and verified by a peer.
+      </p>
+      <%= render "votes/form", vote: @votes.find_by_user_id(current_user.id) %>
+    </div>
   <% end %>
 
 <% elsif @show_revisions %>

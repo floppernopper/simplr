@@ -1,0 +1,4 @@
+<% new_flip_state = defined?(new_flip_state) ? new_flip_state : nil %>
+
+<%= f_builder.text_area :body, placeholder: vote_body_text_area_txt(vote, new_flip_state),
+  class: "dark_text_area", id: :vote_body_text_area %>

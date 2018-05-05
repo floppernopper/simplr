@@ -1,0 +1,21 @@
+$("#vote_form").change(function(e) {
+	var option_selected = $(e.target).find("option:selected");
+	if (typeof option_selected.val() === 'string') {
+    var text_area = $("#vote_body_text_area");
+    // changes form to votes new flip state
+		switch (option_selected.val()) {
+			case 'up':
+        text_area.after("<%=j render 'votes/body_text_area', f_builder: f_builder, vote: vote, new_flip_state: 'up' %>");
+				break;
+			case 'down':
+        text_area.after("<%=j render 'votes/body_text_area', f_builder: f_builder, vote: vote, new_flip_state: 'down' %>");
+				break;
+		}
+    // clean up
+    text_area.remove();
+		// sound and haptic feedback
+		$("#post_interface_sound")[0].currentTime = 0;
+		$("#post_interface_sound")[0].play();
+		window.navigator.vibrate(1);
+	}
+});

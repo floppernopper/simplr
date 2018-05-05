@@ -89,7 +89,7 @@ class ProposalsController < ApplicationController
       # gets all votes for and against
       @up_votes = @proposal.up_votes
       @down_votes = @proposal.down_votes
-      @votes = @proposal.votes.reverse
+      @votes = @proposal.votes
 
       # gets all comments/discussion
       @comments = @proposal.comments

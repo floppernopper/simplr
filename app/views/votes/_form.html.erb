@@ -1,0 +1,18 @@
+<div class="vote_form" id="vote_form">
+  <%= form_for vote, url: update_vote_path(vote.unique_token), method: :put, remote: true do |f| %>
+  <script><%= render 'votes/select_change.js', vote: vote, f_builder: f %></script>
+
+    <p>
+      <%= render "votes/body_text_area", f_builder: f, vote: vote %>
+    </p>
+
+		<p>Flip state: <%= f.select :flip_state, options_for_select([["Flip state of vote (for or against)", nil],
+      ["Support", "up"], ["Block", "down"]], vote.flip_state), id: :vote_flip_state_select %></p>
+
+    <button type="submit" name="commit" class="dark_form_button">
+      <b>Update vote <i class="fa fa-hand-o-up"></i></b>
+    </button>
+  <% end %>
+</div>
+
+<i class="vote_form_anchor"></i>

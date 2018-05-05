@@ -146,7 +146,7 @@ class Proposal < ActiveRecord::Base
     else
       5
     end
-    # views for group if present
+    # views for group (instead of motion views) if present
     _views = if self.group
       self.group.views
     else
