@@ -25,12 +25,13 @@
 <% if @show_votes %>
   <%= render "votes/confirm_humanity" %>
 
-  <% if current_user and @votes.where(user_id: current_user.id, body: "").present? %>
+  <% if current_user and @votes.where(user_id: current_user.id, body: "", verified: nil).present? %>
+    <% blank_vote = @votes.find_by_user_id(current_user.id) %>
     <div class="dark_card" id="update_vote_card" align="center">
       <p class="dark_link">
-        Would you like to update your vote to include some text? This allows for votes to be reviewed and verified by a peer.
+        Would you like to update your vote to include some text? This allows for votes to be later reviewed and verified by a peer.
       </p>
-      <%= render "votes/form", vote: @votes.find_by_user_id(current_user.id) %>
+      <%= render "votes/form", vote: blank_vote %>
     </div>
   <% end %>
 
