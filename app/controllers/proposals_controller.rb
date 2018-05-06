@@ -170,8 +170,10 @@ class ProposalsController < ApplicationController
       @proposal.misc_data = request.remote_ip.to_s
     when :revision
       @proposal.action = "revision"
+      # revision belongs to motion that it's revising
       @proposal.proposal_id = params[:proposal_id]
       @proposal.revised_action = params[:revised_action]
+      # where versioning happens, gets blocked proposals version + 1, when a revision
       @proposal.version = Proposal.find(params[:proposal_id]).version.to_i + 1
     when :grant_title
       grant = {title: nil, days_alive: nil}

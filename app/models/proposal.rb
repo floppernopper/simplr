@@ -53,6 +53,7 @@ class Proposal < ActiveRecord::Base
         })
         if new_version.save
           self.proposal.update(
+            # old version now belongs to revision
             proposal_id: new_version.id,
             revised: true
           )

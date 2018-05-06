@@ -24,9 +24,6 @@
 
 <% if @show_votes %>
   <%= render "votes/confirm_humanity" %>
-  <% for vote in @votes.reverse %>
-    <%= render "votes/card", vote: vote if vote.body.present? %>
-  <% end %>
 
   <% if current_user and @votes.where(user_id: current_user.id, body: "").present? %>
     <div class="dark_card" id="update_vote_card" align="center">
@@ -35,6 +32,12 @@
       </p>
       <%= render "votes/form", vote: @votes.find_by_user_id(current_user.id) %>
     </div>
+  <% end %>
+
+  <i id="new_vote_cast_anchor"></i>
+
+  <% for vote in @votes.reverse %>
+    <%= render "votes/card", vote: vote if vote.body.present? %>
   <% end %>
 
 <% elsif @show_revisions %>
@@ -55,7 +58,7 @@
 <% if god? %>
   <div class="dark_card" align="center">
     <%= link_to 'Delete proposal (Destroys proposal/motion permanently)', destroy_proposal_path(@proposal.unique_token),
-      method: :delete, class: :caution_link, title: "Deletes this proposal/motion permanently, forever, gone.",
+      method: :delete, class: :dark_link, title: "Deletes this proposal/motion permanently, forever, gone.",
       data: { confirm: "Are you sure you want to delete this proposal/motion permanently and forever?" } %>
   </div>
 <% end %>
