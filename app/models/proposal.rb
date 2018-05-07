@@ -80,6 +80,12 @@ class Proposal < ActiveRecord::Base
       when :limit_views
         self.group.update view_limit: 3
       when :grant_title
+      when :update_name
+        self.group.update name: self.misc_data
+      when :update_description
+        self.group.update body: self.misc_data
+      when :update_social_structure
+        self.group.update social_structure: self.misc_data
       end
     # global proposals
     else
