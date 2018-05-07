@@ -3,10 +3,10 @@ class CommentsController < ApplicationController
   before_action :invite_only, except: [:new, :show, :create, :add_image]
   before_action :invite_only_or_anrcho, only: [:new, :show, :create, :add_image]
   before_action :dev_only, only: [:index]
-  
+
   def add_image
   end
-  
+
   def toggle_mini_index
     @post = Post.find_by_id params[:post_id]
     @comments = @post.comments.last 5 if @post
@@ -60,7 +60,11 @@ class CommentsController < ApplicationController
     @from_mini_form = true if params[:mini_form] and params[:mini_form].present?
     if @comment.save
       @successfully_created = true
+      # extracts and hastags, creates them as db obj
       Tag.extract @comment
+      # checks for user mention and notifys mentioned user
+      user_mentioned? @comment
+      # checks if a reply, notfy and redirects accordingly
       if @comment.comment
         Note.notify :comment_reply, @comment.comment, @comment.comment.user, current_identity \
           unless current_user.eql? @comment.comment.user \
@@ -90,7 +94,7 @@ class CommentsController < ApplicationController
         redirect_to show_proposal_path @proposal.unique_token, comments: true unless params[:ajax_req]
       elsif @comment.vote
         Note.notify :vote_comment, @comment.vote, @comment.vote.anon_token
-        redirect_to show_vote_path @comment.vote.unique_token 
+        redirect_to show_vote_path @comment.vote.unique_token
       end
     else
       redirect_to :back
@@ -119,11 +123,11 @@ class CommentsController < ApplicationController
   end
 
   private
-  
+
   def dev_only
     redirect_to '/404' unless dev?
   end
-  
+
   def invite_only_or_anrcho
     unless invited? or anrcho?
       redirect_to '/404'
@@ -135,7 +139,7 @@ class CommentsController < ApplicationController
       redirect_to invite_only_path
     end
   end
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
     @comment = Comment.find(params[:id])

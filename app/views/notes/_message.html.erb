@@ -19,7 +19,7 @@ action = note.action.to_sym; case action %>
   <% else %>
     <%= message %> Content no longer available.
   <% end %>
-<% when :comment_like, :comment_reply %>
+<% when :comment_like, :comment_reply, :user_mention_comment %>
   <%= link_to message, comment_path(note.item_id), class: link_class %>
 <% when :user_like %>
   <%= link_to message, user_path(item.item_id), class: link_class %>

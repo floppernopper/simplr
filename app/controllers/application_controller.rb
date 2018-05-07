@@ -26,11 +26,19 @@ class ApplicationController < ActionController::Base
       for word in item.body.split(" ")
         if word.include?("@")
           user = User.find_by_name(word.slice(word.index("@")+1..word.size))
-          return user if user
+          if user
+            msg = case item.class.to_s
+            when "Post"
+              :user_mention
+            when "Comment"
+              :user_mention_comment
+            end
+            Note.notify msg, item, user, (current_user ? current_user : anon_token)
+          end
         end
       end
     end
-    nil
+    user
   end
 
   def low_energy?
