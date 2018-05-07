@@ -1,7 +1,12 @@
 <!-- proposals -->
 
 <div class="top_right_glimmer" id="top_right_glimmer_<%= proposal.id %>" style="background:white"></div>
-
 <div class="bottom_right_glimmer" id="bottom_right_glimmer_<%= proposal.id %>" style="background:white"></div>
-
 <div class="bottom_left_glimmer" id="bottom_left_glimmer_<%= proposal.id %>" style="background:white"></div>
+
+<script>
+  <% for section in ['top_right_glimmer_' + proposal.id.to_s,
+    'bottom_right_glimmer_' + proposal.id.to_s, 'bottom_left_glimmer_' + proposal.id.to_s] %>
+    <%= render "app/fader.js", target: section, target_id: '', background: true, fast: true %>
+  <% end %>
+</script>

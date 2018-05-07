@@ -4,8 +4,7 @@
   not (proposal.action.eql?("revision") and proposal.revised_action.to_s.empty?) %>
 	<strong>
 	  <% motion = proposal.action.eql?("revision") ? proposal.revised_action : proposal.action %>
-	  <%= link_to "#{motion}".gsub("_", " ").capitalize, search_path(query: motion), class: :action_type_label %>
+	  <%= link_to "#{motion}".gsub("_", " ").capitalize, search_path(query: motion),
+      class: :standard_post_link %>
 	</strong>
 <% end %>
-
-

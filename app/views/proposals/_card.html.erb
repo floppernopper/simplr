@@ -1,7 +1,7 @@
 <div class="card standard_content_card" id="proposal_card_<%= proposal.id %>">
 	<div class="card_corner_cut_out"></div>
   <%= render "proposals/time_ago", item: proposal %>
-  
+
   <% if proposal.group %>
     <% group_name = if proposal.group.name.size > 15 then proposal.group.name[0..9] + "..." else proposal.group.name end %>
     <span class="posted_label">
@@ -9,20 +9,30 @@
         title: "Group (#{proposal.group.name})" %>
     </span>
   <% end %>
-  
-  <!-- shows type of proposal to be motioned -->
-  <%= render "proposals/action_type", proposal: proposal %>
-  
-  <% if proposal.ratified %>
-    <%= link_to 'Ratified <i class="fa fa-check"></i>'.html_safe,
-      show_proposal_path(proposal.unique_token), class: :verified_label %>
-  <% end %>
-  
+
+	<table class="bottom_right_link">
+		<tr>
+			<td>
+			  <!-- shows type of proposal to be motioned -->
+			  <%= render "proposals/action_type", proposal: proposal %>
+			</td>
+			<td>
+				·
+			</td>
+			<td>
+			  <% if proposal.ratified %>
+			    <%= link_to 'Ratified <i class="fa fa-check"></i>'.html_safe,
+			      show_proposal_path(proposal.unique_token), class: "standard_post_link ratified_link_yay" %>
+			  <% end %>
+			</td>
+		</tr>
+	</table>
+
   <!-- to be triggered when user casts the ending vote -->
   <div id="ratification_glimmer_anchor_<%= proposal.id %>"></div>
   <%= render "proposals/ratification_glimmer", proposal: proposal if proposal.ratified %>
   <%= render "users/avatar_card_link", token: proposal.anon_token, user: proposal.user %>
-  
+
   <%= render "proposals/history_icon_link", proposal: proposal %>
   <div id="proposal_card_spacer"></div>
   <div align="center">
@@ -30,7 +40,7 @@
 	  <!-- anchor for inserting new comment form -->
 	  <div id="new_form_anchor_<%= proposal.id %>"></div>
   </div>
-  
+
   <table class="bottom_left_link">
       <tr>
         <td>
@@ -59,7 +69,7 @@
     		  <%= render "comments/link", proposal: proposal %>
         </td>
     </table>
-  
+
 </div>
 
 <script>

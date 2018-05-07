@@ -53,7 +53,9 @@ class Proposal < ActiveRecord::Base
           title: self.title,
           body: self.body,
           # to stay in group if present
-          group_id: self.group_id
+          group_id: self.group_id,
+          # also very important to most actions
+          misc_data: self.misc_data
           # needs imgs as well, with img model
         })
         if new_version.save
