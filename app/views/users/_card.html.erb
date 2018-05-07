@@ -6,7 +6,8 @@
   <% if user %>
     id="user_profile_card_<%= user.id %>"
   <% end %>
->
+  >
+  
   <%= render "users/avatar_card_link", user: user, token: (defined?(token) ? token : nil) %>
   <div align="center">
     <% if defined?(group_creator) %>

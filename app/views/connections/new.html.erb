@@ -1,4 +1,6 @@
-<%= render "users/card", user: @user %>
+<% if @user %>
+  <%= render "users/card", user: @user %>
+<% end %>
 
 <div class="card">
   <% if @user %>
