@@ -13,8 +13,8 @@ module GroupsHelper
 
   def group_structure_options
     options = [["Choose a social structure", nil],
-      ["Model of consensus", "consensus"],
-      ["Direct democracy", "direct"],
+      ["Model of Consensus voting", "consensus"],
+      ["Direct democracy (majority rule)", "direct"],
       ["Autocratic (default)", "autocratic"]]
     return options
   end

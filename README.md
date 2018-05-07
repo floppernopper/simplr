@@ -2,8 +2,6 @@
 
 Social Maya, a free and open source social network, and intentional digital community for artists and philosophers.
 
-Let this be a radically all-inclusive, albeit secure, online zone for the digital proletariate of the Information Age.
-
 This is free and open source software, as specified above by the GNU General Public License.
 
 ## Setting up Social Maya server

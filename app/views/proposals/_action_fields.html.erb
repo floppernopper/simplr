@@ -15,6 +15,16 @@
 	  <p>
 	    <%= text_field_tag :days_alive, nil, placeholder: "How many days should it last?", class: :standard_text_field %>
 	  </p>
+	<% when 'update_social_structure' %>
+	  <p>
+	    <%= f_builder.select :misc_data,
+				options_for_select(group_structure_options, @proposal.group.social_structure), class: :standard_text_field %>
+	  </p>
+	<% when 'update_description' %>
+	  <p>
+	    <%= f_builder.text_field :misc_data, value: @proposal.misc_data,
+				placeholder: "Write a new description for the group...", class: :standard_text_area %>
+	  </p>
 	<% when 'update_name' %>
 	  <p>
 	    <%= f_builder.text_field :misc_data, value: @proposal.misc_data,

@@ -52,7 +52,7 @@ module UsersHelper
   end
 
   def user_mentioned word
-    User.find_by_name(word.slice(word.index("@")+1..word.size)) if word.include? "@"
+     word.include?("@") and User.find_by_name(word.slice(word.index("@")+1..word.size))
   end
 
   def own_item? item
