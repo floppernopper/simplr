@@ -8,3 +8,5 @@
   <%= link_to "Unsupport #{item.up_votes.size.to_s}", unfor_path(token: item.unique_token, unfor: true), method: :delete,
     remote: true, class: link_class, id: link_id %>
 <% end %>
+
+<%= render "app/link_sound.js", link_id: link_id, sound: :post_interface_sound %>

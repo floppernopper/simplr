@@ -43,18 +43,25 @@ class Proposal < ActiveRecord::Base
       case action.to_sym
       when :revision
         Note.notify :proposal_revised, self.unique_token, (self.user ? self.user : self.anon_token)
+        # creates new obj dup as reivision is only an intermediary phase to the next version
+        # what happens to ratified revision motion?
         new_version = self.proposal.dup
         new_version.assign_attributes({
           requires_revision: false,
           action: self.revised_action,
           version: self.version,
           title: self.title,
-          body: self.body
+          body: self.body,
+          # to stay in group if present
+          group_id: self.group_id
+          # needs imgs as well, with img model
         })
         if new_version.save
+          # sets values to finish revision
           self.proposal.update(
-            # old version now belongs to revision
+            # old version now ties back to new one
             proposal_id: new_version.id,
+            # officially revised
             revised: true
           )
         end

@@ -1,5 +1,3 @@
-<!-- proposals -->
-
 <% if @group.present? %>
   <%= render "app/lineage", line: { group: @group, proposal: @proposal } %>
 <% end %>
@@ -35,11 +33,7 @@
     </div>
   <% end %>
 
-  <i id="new_vote_cast_anchor"></i>
-
-  <% for vote in @votes.reverse %>
-    <%= render "votes/card", vote: vote if vote.body.present? %>
-  <% end %>
+  <%= render "votes/feed", votes: @votes %>
 
 <% elsif @show_revisions %>
 	<% for revision in @revisions %>

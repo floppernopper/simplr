@@ -1,8 +1,8 @@
 // proposals
 
-<% if @up_vote %>  
+<% if @up_vote %>
   var proposal_id = <%= @proposal.id %>;
-  
+
   function new_up_vote_form() {
     var up_vote_link = $("#for_proposal_link_" + proposal_id);
     var down_vote_link = $("#block_proposal_link_" + proposal_id);
@@ -10,19 +10,21 @@
     var up_form = $("#new_up_vote_form_" + proposal_id);
     var down_form = $("#new_down_vote_form_" + proposal_id);
     var comment_form = $("#new_comment_form_" + proposal_id);
-    
+
     if (!up_form.length) {
       form_anchor.after("<%=j render 'votes/new_up_vote' %>");
     }
-    
+
     if (down_form.length) {
       down_form.remove();
     }
-    
+
     if (comment_form.length) {
       comment_form.remove();
     }
   }
-  
+
   new_up_vote_form();
+
+  window.navigator.vibrate(1);
 <% end %>

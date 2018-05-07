@@ -169,12 +169,16 @@ class ProposalsController < ApplicationController
     when :add_locale, :meetup
       @proposal.misc_data = request.remote_ip.to_s
     when :revision
+      old_proposal = Proposal.find params[:proposal_id]
       @proposal.action = "revision"
       # revision belongs to motion that it's revising
-      @proposal.proposal_id = params[:proposal_id]
+      @proposal.proposal_id = old_proposal.id
+      # also in the same group if present
+      @proposal.group_id = old_proposal.group_id
+      # still keeps original or updated action in different field
       @proposal.revised_action = params[:revised_action]
       # where versioning happens, gets blocked proposals version + 1, when a revision
-      @proposal.version = Proposal.find(params[:proposal_id]).version.to_i + 1
+      @proposal.version = old_proposal.version.to_i + 1
     when :grant_title
       grant = {title: nil, days_alive: nil}
       grant[:title] = params[:title]

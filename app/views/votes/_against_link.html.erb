@@ -8,3 +8,5 @@
   <%= link_to "Unblock #{item.down_votes.size.to_s}", unblock_path(token: item.unique_token), method: :delete,
     remote: true, class: link_class, id: link_id %>
 <% end %>
+
+<%= render "app/link_sound.js", link_id: link_id, sound: :post_interface_sound %>
