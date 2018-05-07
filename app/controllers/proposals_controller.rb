@@ -112,12 +112,11 @@ class ProposalsController < ApplicationController
 
       @old_versions = @proposal.old_versions
 
+      @show_proposal_sub_type = :votes
       if params[:revisions] and @proposal.requires_revision
-        @show_revisions = true
-      elsif params[:comments] or @votes.empty?
-        @show_comments = true
-      else
-        @show_votes = true
+        @show_proposal_sub_type = :revisions
+      elsif params[:comments] or (@votes.empty? and @comments.present?)
+        @show_proposal_sub_type = :comments
       end
 
       @proposal.evaluate
