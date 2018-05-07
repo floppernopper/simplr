@@ -4,7 +4,7 @@ link_class << " unseen_note_message" if @dark and not note.seen %>
 
 <% message = namify_note_message(note); \
 action = note.action.to_sym; case action %>
-<% when :post_comment, :also_commented, :post_like, :post_whoa, :post_love, :post_zen, :post_share, :post_views %>
+<% when :post_comment, :also_commented, :post_like, :post_whoa, :post_love, :post_zen, :post_share, :post_views, :user_mention %>
   <% post = Post.find_by_id note.item_id %>
   <% if post %>
     <%= link_to message, show_post_path(post.unique_token), class: link_class %>

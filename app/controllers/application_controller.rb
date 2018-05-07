@@ -7,9 +7,8 @@ class ApplicationController < ActionController::Base
     :page_size, :paginate, :reset_page, :char_codes, :char_bits, :settings, :dev?, :anrcho?, :invited?,
     :seen?, :seent, :get_site_title, :record_last_visit, :probably_human, :god?, :goddess?, :currently_kristin?,
     :forrest_only_club?, :invited_to_forrest_only_club?, :in_dev?, :is_gatekeeper?, :page_turning, :testing_score?,
-    :unique_element_token, :returning_user?, :stale_content?,
-    :returning_user_with_stale_content?, :featured_content,
-    :low_energy?
+    :unique_element_token, :returning_user?, :stale_content?, :user_mentioned?, :low_energy?,
+    :returning_user_with_stale_content?, :featured_content
 
   include SimpleCaptcha::ControllerHelpers
 
@@ -21,6 +20,18 @@ class ApplicationController < ActionController::Base
 
   # bots go to 404 for all pages
   before_action :bots_to_404
+
+  def user_mentioned? item
+    if item.respond_to? :body and item.body.present?
+      for word in item.body.split(" ")
+        if word.include?("@")
+          user = User.find_by_name(word.slice(word.index("@")+1..word.size))
+          return user if user
+        end
+      end
+    end
+    nil
+  end
 
   def low_energy?
     false # cookies[:low_energy].present? or in_dev?

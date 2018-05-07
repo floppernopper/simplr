@@ -179,6 +179,10 @@ class PostsController < ApplicationController
         end
         # extracts any hashtags along with their position in the text
         Tag.extract @post
+        # checks for user mention and notifys mentioned user
+        if user_mentioned? @post
+          Note.notify :user_mention, @post, user_mentioned?(@post), (current_user ? current_user : anon_token)
+        end
         # prepares vars for ajax create.js
         #@successfully_created = true
         #@post_just_created = @post
