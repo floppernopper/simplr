@@ -259,9 +259,6 @@ class ConnectionsController < ApplicationController
 
   def set_item
     @user = User.find_by_id params[:user_id]
-    unless @user
-      puts "\n\n\n\ STOP n\n\n\n\n\n"
-    end
     @group = Group.find_by_id params[:group_id]
     @connection = Connection.find_by_id params[:id] unless @user or @group
   end
