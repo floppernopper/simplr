@@ -209,6 +209,7 @@ Rails.application.routes.draw do
   get 'motions/load_section_links', to: 'proposals#load_section_links'
   post 'motions/create', to: 'proposals#create', as: 'create_proposal'
   get 'make_a_motion', to: 'proposals#add_form', as: 'add_proposal_form'
+  get 'motions/:token/add_photoset', to: 'proposals#add_photoset', as: 'add_proposal_photoset'
   # only because of spam business, capitalistic bullshit that keeps popping up....
   delete 'fucking_destroy_proposal/:token', to: 'proposals#destroy', as: 'destroy_proposal'
 

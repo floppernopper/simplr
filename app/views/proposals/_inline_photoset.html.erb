@@ -1,0 +1,5 @@
+<% for picture in proposal.pictures.to_a[1..-1] %>
+  <%= link_to show_proposal_path(proposal.unique_token) do %>
+    <%= image_tag picture.image, class: :standard_post_image %>
+  <% end %>
+<% end %>

@@ -11,6 +11,8 @@ class Proposal < ActiveRecord::Base
   has_many :views, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  accepts_nested_attributes_for :pictures
+
   before_create :gen_unique_token
   before_save :spam_filter
   validates_presence_of :body

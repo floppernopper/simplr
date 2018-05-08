@@ -8,10 +8,11 @@ class Picture < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   def move_up
+    item = post ? post : (proposal ? proposal : nil)
     ensure_order
     new_order = order - 1
     # get the image above this one being moved down
-    img_above = post.pictures.find_by_order new_order
+    img_above = item.pictures.find_by_order new_order
     # moves the img above down
     img_above.update order: order
     # updates with new position
@@ -19,10 +20,11 @@ class Picture < ActiveRecord::Base
   end
 
   def move_down
+    item = post ? post : (proposal ? proposal : nil)
     ensure_order
     new_order = order + 1
     # get the image below this one being moved up
-    img_below = post.pictures.find_by_order new_order
+    img_below = item.pictures.find_by_order new_order
     # moves the img below up
     img_below.update order: order
     # updates with new position
@@ -31,9 +33,10 @@ class Picture < ActiveRecord::Base
 
   # updates all imgs in post with order
   def ensure_order
-    if post.pictures.size > 1
+    item = post ? post : (proposal ? proposal : nil)
+    if item.pictures.size > 1
       if order.nil?
-        i=0; for img in post.pictures
+        i=0; for img in item.pictures
           img.update order: i if img.order.nil?
           i += 1
         end
@@ -67,7 +70,11 @@ class Picture < ActiveRecord::Base
 
   # still has to account for order of pictures added in update to post
   def ensure_order_by_update
-    post = Post.find_by_id post_id
-    self.order = post.pictures.size if post
+    item = if post_id
+      Post.find_by_id post_id
+    elsif proposal_id
+      Proposal.find_by_id proposal_id
+    end
+    self.order = item.pictures.size if item
   end
 end

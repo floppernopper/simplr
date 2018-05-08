@@ -1,5 +1,5 @@
 class ProposalsController < ApplicationController
-  before_filter :set_proposal, only: [:old_versions, :show, :destroy]
+  before_filter :set_proposal, only: [:old_versions, :show, :destroy, :add_photoset]
   # turn off invite only for anrcho before_action :invite_only
   before_filter :bots_to_404
 
@@ -196,6 +196,6 @@ class ProposalsController < ApplicationController
   end
 
   def proposal_params
-    params[:proposal].permit(:title, :body, :action, :image, :misc_data, pictures_attributes: [:id, :post_id, :image])
+    params[:proposal].permit(:title, :body, :action, :image, :misc_data, pictures_attributes: [:id, :proposal_id, :image])
   end
 end

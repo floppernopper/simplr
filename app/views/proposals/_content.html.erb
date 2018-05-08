@@ -16,6 +16,31 @@
       <% end %>
     <% end %>
   </p>
+<% elsif proposal.pictures.present? %>
+  <p>
+    <% unless @proposal_shown %>
+      <%= link_to show_proposal_path(proposal.unique_token) do %>
+        <%= image_tag proposal.pictures.first.image, class: :standard_post_image %>
+      <% end %>
+      <% if proposal.pictures.to_a[1..-1].present? %>
+        <table id="mini_photoset_table_<%= proposal.id %>">
+          <tr>
+            <% for picture in proposal.pictures.to_a[1..-1] %>
+              <td>
+                <%= link_to add_proposal_photoset_path(proposal.unique_token), remote: true, title: "Click here to enlarge." do %>
+                  <%= image_tag picture.image, class: :my_groups_group_icon %>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        </table>
+      <% end %>
+    <% else %>
+      <% proposal.pictures.each do |picture| %>
+        <%= image_tag picture.image, class: :standard_post_image %>
+      <% end %>
+    <% end %>
+  </p>
 <% end %>
 
 <p class="standard_body <%= 'justified_body_text' if proposal.body.size > 150 %>">

@@ -5,10 +5,10 @@
 
 		<%= f.text_area :body, placeholder: "Make a motion...", class: :dark_text_area %>
 
-		<%= link_to add_proposal_image_path, remote: true, id: :add_image_icon_link, title: "Attach an image" do %>
+		<%= link_to add_proposal_image_path, remote: true, id: :add_video_icon_link, title: "Attach an image" do %>
 			<i class="fa fa-picture-o fa-2x dark_link"></i>
 		<% end %>
-		
+
 		<p id="hidden_file_field" hidden>
 			<%= f.file_field :pictures, multiple: true, name: "pictures[image][]" %>
 		</p>
