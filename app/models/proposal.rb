@@ -5,6 +5,7 @@ class Proposal < ActiveRecord::Base
 
   has_many :proposals, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :pictures, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :views, dependent: :destroy
@@ -130,7 +131,6 @@ class Proposal < ActiveRecord::Base
       update_description: "Update group description",
       update_social_structure: "Update group social structure",
       add_locale: "Set your locale as the groups",
-      update_social_structure: "Update group social structure",
       disband_early: "Disband, effective immediately",
       postpone_expiration: "Postpone expiration of the group",
       set_ratification_threshold: "Set ratification threshold to 25",

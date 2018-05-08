@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # groups
   get 'my_anon_groups', to: 'groups#my_anon_groups', as: 'my_anon_groups'
   get 'hide_featured_groups', to: 'groups#hide_featured_groups', as: 'hide_featured_groups'
-  get 'group/:token', to: 'groups#show', as: 'show_group'
+  get 'show_group/:token', to: 'groups#show', as: 'show_group'
   get 'load_more_group_posts/:token', to: 'groups#load_more_posts', as: 'load_more_group_posts'
 
   # users

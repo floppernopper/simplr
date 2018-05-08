@@ -76,7 +76,8 @@
   <%= render "posts/leave_page?.js" if false %>
 </div> <!-- reg post form end -->
 
-<% if current_user and (current_user.has_power?('anarchy') or cookies[:anrcho]) and not @editing %>
+<% if current_user and (current_user.has_power?('anarchy') or cookies[:anrcho] \
+    or (@group and @group.social_structure.eql?('consensus'))) and not @editing %>
   <%= link_to add_proposal_form_path(group_id: @group ? @group.id : nil), remote: true, title: "Make a motion",
     class: "dark_link bottom_left_link", id: :add_proposal_form_link do %>
     Make a motion...

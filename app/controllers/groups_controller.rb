@@ -50,6 +50,10 @@ class GroupsController < ApplicationController
 
   def show
     if @group
+      # extra security
+      if @requested_by_integer_id
+        redirect_to show_group_path @group.unique_token
+      end
       reset_page
       # solves loading error
       session[:page] = 1
@@ -161,12 +165,16 @@ class GroupsController < ApplicationController
   def set_group
     if params[:token]
       @group = Group.find_by_unique_token(params[:token])
+      @group ||= Group.find_by_name params[:token]
       @group ||= Group.find_by_id(params[:token])
     else
       @group = Group.find_by_id(params[:id])
+      @group ||= Group.find_by_name params[:id]
       @group ||= Group.find_by_unique_token(params[:id])
+      # for redirection to the more secure path
+      @requested_by_integer_id = true if @group
     end
-    redirect_to '/404' unless @group
+    redirect_to '/404' unless @group or params[:id].nil?
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

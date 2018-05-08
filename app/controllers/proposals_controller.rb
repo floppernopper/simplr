@@ -66,6 +66,14 @@ class ProposalsController < ApplicationController
 
     build_action
     if @proposal.save
+      if params[:pictures]
+        # builds photoset for motion
+        params[:pictures][:image].each do |image|
+          @proposal.pictures.create image: image
+        end
+        # adds order numbers to each picture in photoset if more than 1
+        @proposal.pictures.first.ensure_order if @proposal.pictures.present? and @proposal.pictures.size > 1
+      end
       Tag.extract @proposal
       if @proposal.proposal
         Note.notify :revision_submitted, @proposal.proposal.unique_token
@@ -188,6 +196,6 @@ class ProposalsController < ApplicationController
   end
 
   def proposal_params
-    params[:proposal].permit(:title, :body, :action, :image, :misc_data)
+    params[:proposal].permit(:title, :body, :action, :image, :misc_data, pictures_attributes: [:id, :post_id, :image])
   end
 end

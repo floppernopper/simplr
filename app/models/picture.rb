@@ -1,4 +1,5 @@
 class Picture < ActiveRecord::Base
+  belongs_to :proposal
   belongs_to :product
   belongs_to :post
 
