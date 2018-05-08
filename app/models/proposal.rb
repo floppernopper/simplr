@@ -15,6 +15,7 @@ class Proposal < ActiveRecord::Base
 
   before_create :gen_unique_token
   before_save :spam_filter
+  before_update :not_voted_on
   validates_presence_of :body
 
   scope :main, -> { where requires_revision: [nil, false] }
@@ -222,6 +223,10 @@ class Proposal < ActiveRecord::Base
     return versions
   end
 
+  def able_to_edit?
+    self.votes.empty?
+  end
+
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
   end
@@ -275,9 +280,15 @@ class Proposal < ActiveRecord::Base
 
   private
 
+  def not_voted_on
+    if votes.present?
+      errors.add(:proposal, "cannot be voted on.")
+    end
+  end
+
   def spam_filter
     if self.is_spam?
-      errors.add(:post, "cannot be spam")
+      errors.add(:proposal, "cannot be spam")
     end
   end
 

@@ -1,0 +1,7 @@
+var link = $("#proposal_menu_link_<%= @proposal.id %>");
+link.after("<%=j render "proposals/mini_menu", proposal: @proposal %>");
+
+link.after("<%=j render "proposals/close_menu_link", proposal: @proposal %>");
+link.remove();
+
+window.navigator.vibrate(1);

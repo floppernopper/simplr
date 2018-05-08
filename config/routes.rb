@@ -210,8 +210,11 @@ Rails.application.routes.draw do
   post 'motions/create', to: 'proposals#create', as: 'create_proposal'
   get 'make_a_motion', to: 'proposals#add_form', as: 'add_proposal_form'
   get 'motions/:token/add_photoset', to: 'proposals#add_photoset', as: 'add_proposal_photoset'
-  # only because of spam business, capitalistic bullshit that keeps popping up....
-  delete 'fucking_destroy_proposal/:token', to: 'proposals#destroy', as: 'destroy_proposal'
+  delete 'destroy_proposal/:token', to: 'proposals#destroy', as: 'destroy_proposal'
+  put 'motions/:token/update', to: 'proposals#update', as: 'update_proposal'
+  get 'motions/:token/edit', to: 'proposals#edit', as: 'edit_proposal'
+  get 'motions/:token/open_menu', to: 'proposals#open_menu', as: 'open_proposal_menu'
+  get 'motions/:token/close_menu', to: 'proposals#close_menu', as: 'close_proposal_menu'
 
   # votes
   get 'vote/:token', to: 'votes#show', as: 'show_vote'

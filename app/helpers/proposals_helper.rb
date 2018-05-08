@@ -3,12 +3,10 @@ module ProposalsHelper
     actions = []; for action in [proposal.revised_action, proposal.action]
       actions << "#{action}".gsub("_", " ").capitalize if action
     end
-
     label = ""; for action in actions
       label << action
       label << " · " if actions.size.even? and not action.eql? 'Revision'
     end
-
     label
   end
 

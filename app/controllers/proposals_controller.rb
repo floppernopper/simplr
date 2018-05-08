@@ -1,5 +1,6 @@
 class ProposalsController < ApplicationController
-  before_filter :set_proposal, only: [:old_versions, :show, :destroy, :add_photoset]
+  before_filter :set_proposal, only: [:old_versions, :show, :edit, :update, :destroy, :open_menu, :close_menu, :add_photoset]
+  before_filter :unable_to_edit, only: [:edit, :update]
   # turn off invite only for anrcho before_action :invite_only
   before_filter :bots_to_404
 
@@ -33,18 +34,32 @@ class ProposalsController < ApplicationController
     @anrcho = true
     cookies[:anrcho] = true
     @proposal = Proposal.new
-#    if current_user
-#      # if user had visited social_maya via anrcho
-#      cookies.delete(:auth_token)
-#    end
-    # for use in development
-    # cookies.permanent[:at_anrcho] ||= true.to_s
     build_feed :main
-    # grants Power of Anarchy
+    # grants Power of Anarchy, maybe should be easier to obtain or not even necessary
     if current_user and not current_user.has_power? 'anarchy'
       treasure = current_user.treasures.new power: 'anarchy'
       # can now make motions and proposals from homepage
       treasure.save
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @proposal.update(proposal_params)
+      if params[:pictures]
+        params[:pictures][:image].each do |image|
+          @proposal.pictures.create image: image
+        end
+        # adds order numbers to each picture in photoset if more than 1 now
+        @proposal.pictures.first.ensure_order if @proposal.pictures.present? and @proposal.pictures.size > 1
+      end
+      Tag.extract @proposal
+      redirect_to edit_proposal_path(@proposal.unique_token), notice: "Successfully updated motion."
+    else
+      flash.now[:notice] = "Could not successfully update motion."
+      render :edit
     end
   end
 
@@ -150,6 +165,10 @@ class ProposalsController < ApplicationController
   end
 
   private
+
+  def unable_to_edit
+    redirect_to '/404' unless @proposal.able_to_edit?
+  end
 
   def bots_to_404
     redirect_to '/404' if request.bot?

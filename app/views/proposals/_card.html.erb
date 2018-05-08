@@ -1,6 +1,19 @@
 <div class="card standard_content_card" id="proposal_card_<%= proposal.id %>">
 	<div class="card_corner_cut_out"></div>
-  <%= render "proposals/time_ago", item: proposal %>
+
+
+	<table class="top_right_link">
+		<tr>
+			<td>
+				<%= render "app/time_ago", item: proposal %>
+			</td>
+			<% if proposal.able_to_edit? and (own_item? proposal or dev?) %>
+				<td>
+					<%= render "proposals/open_menu_link", proposal: proposal %>
+				</td>
+			<% end %>
+		</tr>
+	</table>
 
   <% if proposal.group %>
     <% group_name = if proposal.group.name.size > 15 then proposal.group.name[0..9] + "..." else proposal.group.name end %>

@@ -1,0 +1,8 @@
+<div class="post_mini_menu" id="proposal_mini_menu_<%= proposal.id %>">
+  <% if proposal.able_to_edit? and (own_item? proposal or dev?) %>
+    <%= link_to 'Edit', edit_proposal_path(proposal.unique_token), class: :post_mini_menu_link %>
+    <%= link_to "Delete", destroy_proposal_path(token: @proposal.unique_token, ajax_req: true),
+      method: :delete, remote: true, class: :post_mini_menu_link,
+      data: { confirm: "Are you sure you want to permanently delete this motion?" } %>
+  <% end %>
+</div>
