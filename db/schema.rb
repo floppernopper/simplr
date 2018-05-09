@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508173126) do
+ActiveRecord::Schema.define(version: 20180509201840) do
 
   create_table "arts", force: :cascade do |t|
     t.integer  "user_id"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20180508173126) do
     t.integer  "bot_id"
     t.string   "page"
     t.string   "parent_tokens"
+    t.integer  "group_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -510,6 +511,7 @@ ActiveRecord::Schema.define(version: 20180508173126) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
+    t.integer  "bot_id"
   end
 
   create_table "wiki_versions", force: :cascade do |t|

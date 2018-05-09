@@ -90,6 +90,9 @@ class Proposal < ActiveRecord::Base
         self.group.update body: self.misc_data
       when :update_social_structure
         self.group.update social_structure: self.misc_data
+      when :create_bot
+        bot = self.group.bots.new
+        bot.save
       end
     # global proposals
     else
@@ -139,6 +142,7 @@ class Proposal < ActiveRecord::Base
       set_ratification_threshold: "Set ratification threshold to 25",
       update_manifesto: "Update group manifesto",
       limit_views: "Expire at view limit of 3",
+      create_bot: "Create a voter bot",
       grant_title: "Grant title",
       debate: "Debate" }
   end

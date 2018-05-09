@@ -1,14 +1,17 @@
 class Bot < ActiveRecord::Base
+  belongs_to :group
   belongs_to :user
   belongs_to :bot
+
   has_many :bots, dependent: :destroy
   has_many :bot_tasks, dependent: :destroy
   has_many :comments, dependent: :destroy
-  
+  has_many :votes, dependent: :destroy
+
   before_create :gen_uniqueness
 
   mount_uploader :image, ImageUploader
-  
+
   def self.manifest_bots tasks=[], items={}
     for task in tasks
       # initializes some bots standing idle for task
@@ -57,7 +60,7 @@ class Bot < ActiveRecord::Base
       end
     end
   end
-  
+
   # returns pool of bots for task on page
   def self.for_task_on_page task_name, page
     on_page = []
@@ -69,7 +72,7 @@ class Bot < ActiveRecord::Base
     end
     return on_page
   end
-  
+
   def self.idle_for_task task_name
     idle = []
     for bot in Bot.all
@@ -80,7 +83,7 @@ class Bot < ActiveRecord::Base
     end
     return idle
   end
-  
+
   # to determine parent compatibility
   def determine_compatibility bot
     compatibility = { compatible: false }
@@ -108,7 +111,7 @@ class Bot < ActiveRecord::Base
     end
     return compatibility
   end
-  
+
   def old?
     # old if older than 3/4's of population
     younger = Bot.where("created_at > '#{self.created_at}'").size
@@ -118,7 +121,7 @@ class Bot < ActiveRecord::Base
       false
     end
   end
-  
+
   def related? other_bot
     related = false
     [:children, :parents, :siblings].each do |sym|
@@ -128,7 +131,7 @@ class Bot < ActiveRecord::Base
     end
     return related
   end
-  
+
   def children
     _children = []
     for child in Bot.where.not(parent_tokens: nil)
@@ -136,7 +139,7 @@ class Bot < ActiveRecord::Base
     end
     return _children
   end
-  
+
   def parents
     _parents = []
     for bot in Bot.all
@@ -144,7 +147,7 @@ class Bot < ActiveRecord::Base
     end
     return _parents
   end
-  
+
   def siblings
     _siblings = []
     for parent in self.parents
@@ -156,7 +159,7 @@ class Bot < ActiveRecord::Base
     end
     return _siblings
   end
-  
+
   def mates
     _mates = []
     for child in self.children
@@ -168,26 +171,27 @@ class Bot < ActiveRecord::Base
     end
     return _mates
   end
-  
+
   def gender
     self.unique_token.scan(/\d+/).count
   end
-  
+
   private
-    def gen_uniqueness
-      gen_unique_token
-      gen_unique_bot_name
+
+  def gen_uniqueness
+    gen_unique_token
+    gen_unique_bot_name
+  end
+
+  # sets a generic bot name for bot unless named by user
+  def gen_unique_bot_name
+    unless self.name.present?
+      name = $name_generator.next_name
+      self.name = "#{name}_" + self.unique_token
     end
-    
-    # sets a generic bot name for bot unless named by user
-    def gen_unique_bot_name
-      unless self.name.present?
-        name = $name_generator.next_name
-        self.name = "#{name}_" + self.unique_token
-      end
-    end
-    
-    def gen_unique_token
-      self.unique_token = SecureRandom.urlsafe_base64
-    end
+  end
+
+  def gen_unique_token
+    self.unique_token = SecureRandom.urlsafe_base64
+  end
 end
