@@ -1,6 +1,6 @@
 class ProposalsController < ApplicationController
   before_filter :set_proposal, only: [:old_versions, :show, :edit, :update, :destroy, :open_menu, :close_menu, :add_photoset]
-  before_filter :unable_to_edit, only: [:edit, :update]
+  before_filter :unable_to_edit, only: [:edit, :update, :destroy]
   # turn off invite only for anrcho before_action :invite_only
   before_filter :bots_to_404
 
@@ -167,7 +167,7 @@ class ProposalsController < ApplicationController
   private
 
   def unable_to_edit
-    redirect_to '/404' unless @proposal.able_to_edit?
+    redirect_to '/404' unless @proposal.able_to_edit? or dev?
   end
 
   def bots_to_404
