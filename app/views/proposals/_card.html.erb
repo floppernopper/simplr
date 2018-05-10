@@ -51,9 +51,9 @@
 	  <div id="proposal_card_spacer"></div>
 	  <div align="center">
 	    <%= render "proposals/content", proposal: proposal %>
-		  <!-- anchor for inserting new comment form -->
-		  <div id="new_form_anchor_<%= proposal.id %>"></div>
 	  </div>
+		<!-- anchor for inserting new comment form -->
+		<div id="proposal_comments_anchor_<%= proposal.id %>"></div>
 
 	  <table class="bottom_left_link">
 	      <tr>

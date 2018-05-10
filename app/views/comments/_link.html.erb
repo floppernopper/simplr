@@ -1,6 +1,9 @@
 <!-- for proposal comments -->
-<% comment_link_path = (@commenting or @proposal_shown) ? show_proposal_path(proposal.unique_token) \
-  : new_proposal_comment_path(proposal) %>
-<% remote = comment_link_path.eql?(show_proposal_path(proposal.unique_token)) ? false : true %>
+<% comment_link_path = (@commenting or @proposal_shown) \
+  ? show_proposal_path(proposal.unique_token, comments: true) \
+  : toggle_comments_path(id: proposal.unique_token, proposal: true) %>
+
+<% remote = comment_link_path.eql?(show_proposal_path(proposal.unique_token, comments: true)) ? false : true %>
+
 <%= link_to "Comment#{' ' + proposal.comments.size.to_s unless proposal.comments.size.zero?}",
   comment_link_path, remote: remote, id: "new_comment_link_#{proposal.id}", class: :standard_post_link %>

@@ -1,9 +1,12 @@
-<div class="mini_comment_form" id="mini_comment_form_<%= @post.id %>">
+<div class="mini_comment_form" id="mini_comment_form_<%= @item.id %>">
   <%= form_for(@comment, remote: true) do |f| %>
-    <%= hidden_field_tag :post_id, @post.id if @post %>
+    <%= hidden_field_tag :proposal_id, @item.id if @item.is_a? Proposal %>
+    <%= hidden_field_tag :post_id, @item.id if @item.is_a? Post %>
     <%= hidden_field_tag :ajax_req, true %>
     <%= hidden_field_tag :mini_form, true %>
+
     <%= f.text_field :body, placeholder: "Leave a comment...", class: "mini_form_field" %>
+
     <button type="submit" name="commit">
       <i class="fa fa-comment"></i>
     </button>

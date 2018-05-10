@@ -90,6 +90,8 @@ class ProposalsController < ApplicationController
         @proposal.pictures.first.ensure_order if @proposal.pictures.present? and @proposal.pictures.size > 1
       end
       Tag.extract @proposal
+      # checks for users mention and notifys each mentioned user
+      user_mentioned? @proposal
       if @proposal.proposal
         Note.notify :revision_submitted, @proposal.proposal.unique_token
         redirect_to show_proposal_path(token: @proposal.proposal.unique_token, revisions: true)

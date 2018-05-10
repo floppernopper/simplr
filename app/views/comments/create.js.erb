@@ -10,16 +10,11 @@
 
     $("#comment_form_card").before("<%=j render 'card', comment: @comment_just_created %>");
   <% end %>
-
-  $("#post_interface_sound")[0].currentTime = 0;
-  $("#post_interface_sound")[0].play();
 <% elsif @proposal %>
-  var item_id = <%= @proposal.id %>;
-  var comment_form = $("#new_comment_form_" + item_id);
-  var comment_link = $("#new_comment_link_" + item_id);
-  var comment_link_anchor = $("#proposal_comments_link_anchor_" + item_id);
-
-  comment_form.remove();
-  comment_link.remove();
-  comment_link_anchor.after("<%=j render 'comments/link', proposal: @proposal %>");
+  $("#mini_comments_container_<%= @proposal.id %>").remove();
+  $("#proposal_comments_anchor_<%= @proposal.id %>").after("<%=j render 'comments/mini_index' %>");
 <% end %>
+
+$("#post_interface_sound")[0].currentTime = 0;
+$("#post_interface_sound")[0].play();
+window.navigator.vibrate(1);
