@@ -5,5 +5,9 @@
 
 <% remote = comment_link_path.eql?(show_proposal_path(proposal.unique_token, comments: true)) ? false : true %>
 
+<% link_id = "proposal_comments_link_#{proposal.id}" %>
+
 <%= link_to "Comment#{' ' + proposal.comments.size.to_s unless proposal.comments.size.zero?}",
-  comment_link_path, remote: remote, id: "new_comment_link_#{proposal.id}", class: :standard_post_link %>
+  comment_link_path, remote: remote, id: "new_comment_link_#{proposal.id}", class: :standard_post_link, id: link_id %>
+
+<%= render "app/link_sound.js", link_id: link_id, sound: :post_interface_sound %>
