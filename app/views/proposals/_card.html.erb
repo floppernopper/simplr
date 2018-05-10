@@ -1,91 +1,91 @@
-<div class="card standard_content_card" id="proposal_card_<%= proposal.id %>">
-	<div class="card_corner_cut_out"></div>
-
-
-	<table class="top_right_link">
-		<tr>
-			<td>
-				<%= render "app/time_ago", item: proposal %>
-			</td>
-			<% if proposal.able_to_edit? and (own_item? proposal or dev?) %>
+<% if proposal.group.nil? or group_auth proposal.group or group_member_auth proposal.group or own_item? proposal \
+	or (visible_to_anons? proposal.group and not proposal.group.hidden) %>
+	<div class="card standard_content_card" id="proposal_card_<%= proposal.id %>">
+		<div class="card_corner_cut_out"></div>
+		<table class="top_right_link">
+			<tr>
 				<td>
-					<%= render "proposals/open_menu_link", proposal: proposal %>
+					<%= render "app/time_ago", item: proposal %>
 				</td>
-			<% end %>
-		</tr>
-	</table>
+				<% if proposal.able_to_edit? and (own_item? proposal or dev?) %>
+					<td>
+						<%= render "proposals/open_menu_link", proposal: proposal %>
+					</td>
+				<% end %>
+			</tr>
+		</table>
 
-  <% if proposal.group %>
-    <% group_name = if proposal.group.name.size > 15 then proposal.group.name[0..9] + "..." else proposal.group.name end %>
-    <span class="posted_label">
-      made a motion in <%= link_to group_name, proposal.group, class: :posted_link,
-        title: "Group (#{proposal.group.name})" %>
-    </span>
-  <% end %>
+	  <% if proposal.group %>
+	    <% group_name = if proposal.group.name.size > 15 then proposal.group.name[0..9] + "..." else proposal.group.name end %>
+	    <span class="posted_label">
+	      made a motion in <%= link_to group_name, proposal.group, class: :posted_link,
+	        title: "Group (#{proposal.group.name})" %>
+	    </span>
+	  <% end %>
 
-	<table class="bottom_right_link">
-		<tr>
-			<td>
-			  <!-- shows type of proposal to be motioned -->
-			  <%= render "proposals/action_type", proposal: proposal %>
-			</td>
-		  <% if proposal.ratified %>
+		<table class="bottom_right_link">
+			<tr>
 				<td>
-					·
+				  <!-- shows type of proposal to be motioned -->
+				  <%= render "proposals/action_type", proposal: proposal %>
 				</td>
-				<td>
-			    <%= link_to 'Ratified <i class="fa fa-check"></i>'.html_safe,
-			      show_proposal_path(proposal.unique_token), class: "standard_post_link ratified_link_yay" %>
+			  <% if proposal.ratified %>
+					<td>
+						·
+					</td>
+					<td>
+				    <%= link_to 'Ratified <i class="fa fa-check"></i>'.html_safe,
+				      show_proposal_path(proposal.unique_token), class: "standard_post_link ratified_link_yay" %>
 
-				</td>
-		  <% end %>
-		</tr>
-	</table>
+					</td>
+			  <% end %>
+			</tr>
+		</table>
 
-  <!-- to be triggered when user casts the ending vote -->
-  <div id="ratification_glimmer_anchor_<%= proposal.id %>"></div>
-  <%= render "proposals/ratification_glimmer", proposal: proposal if proposal.ratified %>
-  <%= render "users/avatar_card_link", token: proposal.anon_token, user: proposal.user %>
+	  <!-- to be triggered when user casts the ending vote -->
+	  <div id="ratification_glimmer_anchor_<%= proposal.id %>"></div>
+	  <%= render "proposals/ratification_glimmer", proposal: proposal if proposal.ratified %>
+	  <%= render "users/avatar_card_link", token: proposal.anon_token, user: proposal.user %>
 
-  <%= render "proposals/history_icon_link", proposal: proposal %>
-  <div id="proposal_card_spacer"></div>
-  <div align="center">
-    <%= render "proposals/content", proposal: proposal %>
-	  <!-- anchor for inserting new comment form -->
-	  <div id="new_form_anchor_<%= proposal.id %>"></div>
-  </div>
+	  <%= render "proposals/history_icon_link", proposal: proposal %>
+	  <div id="proposal_card_spacer"></div>
+	  <div align="center">
+	    <%= render "proposals/content", proposal: proposal %>
+		  <!-- anchor for inserting new comment form -->
+		  <div id="new_form_anchor_<%= proposal.id %>"></div>
+	  </div>
 
-  <table class="bottom_left_link">
-      <tr>
-        <td>
-          <span id="for_proposal_link_anchor_<%= proposal.id %>"></span>
-          <%= render "votes/for_link", item: proposal %>
-        </td>
-        <td>
-          ·
-        </td>
-        <td>
-          <span id="block_proposal_link_anchor_<%= proposal.id %>"></span>
-          <%= render "votes/against_link", item: proposal %>
-        </td>
-        <td>
-          ·
-        </td>
-        <td>
-          <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
-          <%= render "likes/link", item: proposal %>
-        </td>
-        <td>
-          ·
-        </td>
-        <td>
-    		  <div id="proposal_comments_link_anchor_<%= proposal.id %>"></div>
-    		  <%= render "comments/link", proposal: proposal %>
-        </td>
-    </table>
+	  <table class="bottom_left_link">
+	      <tr>
+	        <td>
+	          <span id="for_proposal_link_anchor_<%= proposal.id %>"></span>
+	          <%= render "votes/for_link", item: proposal %>
+	        </td>
+	        <td>
+	          ·
+	        </td>
+	        <td>
+	          <span id="block_proposal_link_anchor_<%= proposal.id %>"></span>
+	          <%= render "votes/against_link", item: proposal %>
+	        </td>
+	        <td>
+	          ·
+	        </td>
+	        <td>
+	          <span id="like_proposal_link_anchor_<%= proposal.id %>"></span>
+	          <%= render "likes/link", item: proposal %>
+	        </td>
+	        <td>
+	          ·
+	        </td>
+	        <td>
+	    		  <div id="proposal_comments_link_anchor_<%= proposal.id %>"></div>
+	    		  <%= render "comments/link", proposal: proposal %>
+	        </td>
+	    </table>
+	</div>
 
-</div>
-
-<script>
-  <%= render "app/fader.js", target: "proposal_card", target_id: proposal.id, background: true, slow: true %>
-</script>
+	<script>
+	  <%= render "app/fader.js", target: "proposal_card", target_id: proposal.id, background: true, slow: true %>
+	</script>
+<% end %>

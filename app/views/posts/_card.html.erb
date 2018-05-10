@@ -1,6 +1,6 @@
-<% if (visible_to_anons? post.group or post.group.nil? or group_auth post.group or group_member_auth post.group \
-  or (current_user and post.user and current_user.following? post.user) or @featured_content) \
-  and not ((post.hidden or (post.user and post.user.hidden)) and not own_item? post) %>
+<% if (post.group.nil? or group_auth post.group or group_member_auth post.group or (visible_to_anons? post.group \
+  and not post.group.hidden) or own_item? post) and not ((post.hidden or (post.user and post.user.hidden)) \
+  and not own_item? post) %>
 
   <% unless low_energy? %>
     <div class="card standard_content_card <%= (post.hidden and (!own_item?(post) or god?)) ? ' blur' : '' %>"
@@ -202,6 +202,6 @@
       </script>
     <% end %>
   <% else %>
-    
+
   <% end %>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509201840) do
+ActiveRecord::Schema.define(version: 20180509215913) do
 
   create_table "arts", force: :cascade do |t|
     t.integer  "user_id"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20180509201840) do
     t.string   "page"
     t.string   "parent_tokens"
     t.integer  "group_id"
+    t.string   "misc_data"
+    t.binary   "blob_data"
   end
 
   create_table "carts", force: :cascade do |t|

@@ -163,7 +163,7 @@ class UsersController < ApplicationController
   end
 
   def all_user_posts
-    @posts = @user.posts + @user.proposals.globals.main
+    @posts = @user.posts + @user.proposals.main
     @posts.sort_by! { |p| p.created_at }.reverse!
     @posts_size = @posts.size
   end

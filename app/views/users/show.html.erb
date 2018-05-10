@@ -50,7 +50,7 @@
   <%= audio_tag "music/progress.mp3", id: "creator_music" %>
 <% end %>
 
-<% unless ENV['RAILS_ENV'].eql? "development" or @user.eql? current_user and god? %>
+<% unless ENV['RAILS_ENV'].eql? "development" or god? %>
   <script>
     $("#creator_music")[0].currentTime = 0;
     $("#creator_music")[0].play();
