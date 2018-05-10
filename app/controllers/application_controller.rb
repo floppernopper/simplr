@@ -32,8 +32,10 @@ class ApplicationController < ActionController::Base
               :user_mention
             when "Comment"
               :user_mention_comment
+            when "Proposal"
+              :user_mention_proposal
             end
-            Note.notify msg, item, user, (current_user ? current_user : anon_token)
+            Note.notify msg, (item.is_a?(Proposal) ? item.unique_token : item), user, (current_user ? current_user : anon_token)
           end
         end
       end

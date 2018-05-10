@@ -50,13 +50,14 @@ action = note.action.to_sym; case action %>
 <% when :hype_received %>
   <%= link_to message, show_treasure_path(token: note.item_token), class: link_class %>
 <!-- Proposal notifications -->
-<% when :ratified, :proposal_up_voted, :proposal_down_voted, :proposal_revised, :proposal_comment, :proposal_like %>
-  <%= link_to note.message, show_proposal_path(note.item_token), class: link_class if note.item_token %>
+<% when :ratified, :proposal_up_voted, :proposal_down_voted, :proposal_revised,
+  :proposal_comment, :proposal_like, :user_mention_proposal %>
+  <%= link_to message, show_proposal_path(note.item_token), class: link_class if note.item_token %>
 <% when :proposal_blocked, :revision_submitted %>
-  <%= link_to note.message, show_proposal_path(token: note.item_token, revisions: true), class: link_class %>
+  <%= link_to message, show_proposal_path(token: note.item_token, revisions: true), class: link_class %>
 <% when :vote_verified, :vote_like, :vote_comment, :vote_reversed %>
-  <%= link_to note.message, show_vote_path(token: note.item_token), class: link_class %>
+  <%= link_to message, show_vote_path(token: note.item_token), class: link_class %>
 <!-- Game notifications -->
 <% when :game_challenge, :your_turn_in_game %>
-  <%= link_to note.message, show_game_path(token: note.item_token), class: link_class %>
+  <%= link_to message, show_game_path(token: note.item_token), class: link_class %>
 <% end %>

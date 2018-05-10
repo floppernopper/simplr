@@ -33,6 +33,7 @@ class Note < ActiveRecord::Base
       also_commented: "Someone also commented on this post.",
       user_mention: "Someone mentioned you in a post.",
       user_mention_comment: "Someone mentioned you in a comment.",
+      user_mention_proposal: "Someone mentioned you in a proposal.",
       user_follow: "Someone started following you.",
       message_received: "You've received a message.",
       group_invite: "You've been invited to a group.",
