@@ -20,7 +20,7 @@
 		<%= render "proposals/action_fields", f_builder: f %>
 
     <% if current_user and current_user.my_groups.present? and not @group %>
-      <%= link_to add_proposal_group_id_path, remote: true, id: :add_group_id_icon_link, title: "Post to a group" do %>
+      <%= link_to add_proposal_group_id_path, remote: true, id: :add_image_icon_link, title: "Post to a group" do %>
         <i class="fa fa-cubes fa-2x dark_link"></i>
       <% end %>
       <p id="hidden_group_id_field" hidden align="center">
