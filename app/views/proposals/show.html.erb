@@ -19,34 +19,38 @@
 <%= render "votes/voter_links", label: "Supporters", votes: @up_votes %>
 <%= render "votes/voter_links", label: "Blockers", votes: @down_votes %>
 
-
-
-  <% if @show_proposal_sub_type.eql? :revisions %>
-  	<% for revision in @revisions %>
-  		<%= render "proposals/card", proposal: revision %>
-  	<% end %>
-  	<% unless @proposal.revised %>
-  	  <%= render "proposals/new_revision" %>
-  	<% end %>
-  <% elsif @show_proposal_sub_type.eql? :comments %>
-  	<% for comment in @comments %>
-  		<%= render "comments/card", comment: comment %>
-  	<% end %>
-  	<%= render "comments/form" %>
-  <% else %>
-    <%= render "votes/confirm_humanity" %>
-    <% if current_user and @votes.where(user_id: current_user.id, body: "", verified: nil).present? %>
-      <% blank_vote = @votes.find_by_user_id(current_user.id) %>
-      <div class="dark_card" id="update_vote_card" align="center">
-        <p class="dark_link">
-          Would you like to update your vote to include some text? This allows for votes to be later reviewed and verified by a peer.
-        </p>
-        <%= render "votes/form", vote: blank_vote %>
-      </div>
+<% if @show_proposal_sub_type.eql? :revisions %>
+	<% for revision in @revisions %>
+		<%= render "proposals/card", proposal: revision %>
+	<% end %>
+	<% unless @proposal.revised %>
+	  <%= render "proposals/new_revision" %>
+	<% end %>
+<% elsif @show_proposal_sub_type.eql? :comments %>
+  <% if @votes.empty? and not own_item? @proposal %>
+    <%= standard_dark_card do %>
+      <p class="dark_txt">
+        Be the first to vote on this motion by clicking Support or Block above.
+      </p>
     <% end %>
-    <%= render "votes/feed", votes: @votes %>
   <% end %>
-
+	<% for comment in @comments %>
+		<%= render "comments/card", comment: comment %>
+	<% end %>
+	<%= render "comments/form" %>
+<% else %>
+  <%= render "votes/confirm_humanity" %>
+  <% if current_user and @votes.where(user_id: current_user.id, body: "", verified: nil).present? %>
+    <% blank_vote = @votes.find_by_user_id(current_user.id) %>
+    <div class="dark_card" id="update_vote_card" align="center">
+      <p class="dark_link">
+        Would you like to update your vote to include some text? This allows for votes to be later reviewed and verified by a peer.
+      </p>
+      <%= render "votes/form", vote: blank_vote %>
+    </div>
+  <% end %>
+  <%= render "votes/feed", votes: @votes %>
+<% end %>
 
 <% if god? %>
   <div class="dark_card" align="center">

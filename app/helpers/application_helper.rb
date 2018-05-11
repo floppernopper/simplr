@@ -1,4 +1,11 @@
 module ApplicationHelper
+  def standard_dark_card &block
+    str = '<div class="dark_card" align="center">'
+    str << capture(&block)
+    str << '</div>'
+    raw str
+  end
+
   def get_site_ico
     if anrcho?
       "anrcho"
@@ -16,7 +23,7 @@ module ApplicationHelper
       end
     end
   end
-  
+
   def justified_body item
     'justified_body_text' if (item.is_a?(Message) ? decrypt_message(item) : item.body).size > 125
   end
