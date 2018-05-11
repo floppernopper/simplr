@@ -216,6 +216,9 @@ Rails.application.routes.draw do
   get 'motions/:token/open_menu', to: 'proposals#open_menu', as: 'open_proposal_menu'
   get 'motions/:token/close_menu', to: 'proposals#close_menu', as: 'close_proposal_menu'
 
+  # anrcho
+  get 'hide_anrcho_info', to: 'proposals#hide_anrcho_info', as: 'hide_anrcho_info'
+
   # votes
   get 'vote/:token', to: 'votes#show', as: 'show_vote'
   get 'for/:token', to: 'votes#new_up_vote', as: 'new_up_vote'

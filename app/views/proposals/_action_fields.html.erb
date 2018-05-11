@@ -18,7 +18,8 @@
 	<% when 'update_social_structure' %>
 	  <p>
 	    <%= f_builder.select :misc_data,
-				options_for_select(group_structure_options, @proposal.group.social_structure), class: :standard_text_field %>
+				options_for_select(group_structure_options, @proposal.group.social_structure),
+				class: :standard_text_field if @group %>
 	  </p>
 	<% when 'update_description' %>
 	  <p>

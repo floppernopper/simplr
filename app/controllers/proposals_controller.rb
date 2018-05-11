@@ -16,6 +16,10 @@ class ProposalsController < ApplicationController
   def tutorial
   end
 
+  def hide_anrcho_info
+    cookies.permanent[:hide_anrcho_info] = true
+  end
+
   def old_versions
     @old_versions = @proposal.old_versions
   end

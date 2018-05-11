@@ -5,12 +5,17 @@
     <%= render "proposals/infinite_scroll.js" %>
   </script>
 
-  <div class="dark_card" align="center">
-    <p class="justified_body_text">
-      Every post on Anrcho is in the form of a motion or proposal. Each motion can be voted for or against. It only takes one vote against the motion to be verified by a peer and effectively block the motion, moving it to a section for revision until a new version is agreed upon, where it can then return to the voting stage. This is called model of consensus voting, which ensures that all voices involved in a decision are heard and accounted for.
-    </p>
-    <%= link_to fa_icon("question-circle", "More on how the site works"), tutorial_path, class: :white_link %>
-  </div>
+  <% unless cookies[:hide_anrcho_info] %>
+    <div class="dark_card" id="anrcho_info_card" align="center">
+      <p class="justified_body_text dark_link">
+        Every post on Anrcho is in the form of a motion or proposal. Each motion can be voted for or against. It only takes one vote against the motion to be verified by a peer and effectively block the motion, moving it to a section for revision until a new version is agreed upon, where it can then return to the voting stage. This is called model of consensus voting, which ensures that all voices involved in a decision are heard and accounted for.
+      </p>
+      <%= link_to fa_icon("question-circle", "More on how the site works"), tutorial_path, class: :dark_link %>
+      <%= link_to '<i class="fa fa-times"></i>'.html_safe, hide_anrcho_info_path,
+        remote: true, class: "top_right_link dark_link", id: :hide_anrcho_info_link %>
+      <%= render "app/link_sound.js", link_id: :hide_anrcho_info_link, sound: :post_interface_sound %>
+    </div>
+  <% end %>
 
   <div class="dark_card">
     <%= render "proposals/new" %>
