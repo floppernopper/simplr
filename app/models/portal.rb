@@ -1,14 +1,25 @@
 class Portal < ActiveRecord::Base
   belongs_to :user
-  
+
   before_create :gen_unique_token, :initialize_portal
   before_destroy :destroy_dependent_portals
-  
+
   DEFAULT_REMAINING_USES = 5
-  
+
   scope :loners, -> { where cluster: nil, cluster_id: nil }
   scope :clusters, -> { where cluster: true }
-  
+
+  def self.to_anrcho user
+    anrcho_portals = user.portals.where to_anrcho: true
+    if anrcho_portals.present?
+      return anrcho_portals.last
+    else
+      portal = user.portals.new to_anrcho: true
+      return portal if portal.save
+    end
+    nil
+  end
+
   def _cluster
     if self.cluster_id
       Portal.where(cluster: true).find_by_id self.cluster_id
@@ -16,7 +27,7 @@ class Portal < ActiveRecord::Base
       nil
     end
   end
-  
+
   def portals
     if self.cluster
       Portal.where cluster_id: self.id
@@ -24,13 +35,13 @@ class Portal < ActiveRecord::Base
       nil
     end
   end
-  
+
   def self.expiration_date
     1.week.from_now.to_datetime
   end
-    
+
   private
-  
+
   def destroy_dependent_portals
     if self.cluster
       for portal in self.portals
@@ -38,7 +49,7 @@ class Portal < ActiveRecord::Base
       end
     end
   end
-  
+
   # defaults to 5 uses and expires a week from now
   def initialize_portal
     self.expires_at ||= Portal.expiration_date

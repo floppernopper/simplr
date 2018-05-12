@@ -1,7 +1,18 @@
 class PortalsController < ApplicationController
-  before_action :invite_only, except: [:show, :enter]
+  before_action :invite_only, except: [:show, :enter, :to_anrcho]
   before_action :dev_only, only: [:index, :destroy, :destroy_all, :update, :disseminator]
-  before_action :set_portal, only: [:copy_link, :edit, :show, :enter, :update, :destroy]
+  before_action :set_portal, only: [:copy_link, :edit, :show, :update, :destroy]
+  before_action :set_portal_securely, only: [:enter, :to_anrcho]
+
+  # enables secure transition from maya to anrcho
+  def to_anrcho
+    if @portal and @portal.to_anrcho
+      @user = @portal.user; @portal.destroy; cookies.permanent[:auth_token] = @user.auth_token
+      redirect_to proposals_path, notice: "Successfully decrypted account from Social Maya..." if current_user
+    else
+      redirect_to '/404'
+    end
+  end
 
   def disseminator
     @portal = Portal.loners.sort_by{|p| p.remaining_uses}.last
@@ -138,6 +149,12 @@ class PortalsController < ApplicationController
   end
 
   private
+
+  # integer id is too easy to guess
+  def set_portal_securely
+    @portal = Portal.find_by_unique_token(params[:token])
+    redirect_to '/404' unless @portal
+  end
 
   def set_portal
     if params[:token]

@@ -77,9 +77,23 @@
 </div> <!-- reg post form end -->
 
 <% if current_user and (current_user.has_power?('anarchy') or cookies[:anrcho] \
-    or (@group and @group.social_structure.eql?('consensus'))) and not @editing %>
-  <%= link_to add_proposal_form_path(group_id: @group ? @group.id : nil), remote: true, title: "Make a motion",
-    class: "dark_link bottom_left_link", id: :add_proposal_form_link do %>
-    Make a motion...
-  <% end %>
+  or (@group and @group.social_structure.eql?('consensus'))) and not @editing %>
+  <table class="bottom_left_link dark_txt">
+    <tr>
+      <td>
+        <%= link_to add_proposal_form_path(group_id: @group ? @group.id : nil),
+          remote: true, title: "Make a motion", class: "dark_link standard_post_link" do %>
+          Make a motion
+        <% end %>
+      </td>
+      <% unless anrcho? %>
+        <td>
+          ·
+        </td>
+        <td>
+          <%= link_to "Go to Anrcho", to_anrcho_portal_url, class: "dark_link standard_post_link" %>
+        </td>
+      <% end %>
+    </tr>
+  </table>
 <% end %>

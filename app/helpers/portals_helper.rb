@@ -5,6 +5,13 @@ module PortalsHelper
     User.where(gatekeeper: true).last.eql? user
   end
 
+  def to_anrcho_portal_url
+    url = root_url.gsub 'http', 'https'
+    url.gsub! 'socialmaya', 'anrcho' if url.include? 'socialmaya'; url.slice!(-1)
+    url += portal_to_anrcho_path(Portal.to_anrcho(current_user).unique_token) if current_user
+    return url
+  end
+
   def portal_qr_code link
     return RQRCode::QRCode.new link, size: 5, level: :h
   end

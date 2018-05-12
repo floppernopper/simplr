@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509215913) do
+ActiveRecord::Schema.define(version: 20180511225036) do
 
   create_table "arts", force: :cascade do |t|
     t.integer  "user_id"
@@ -268,6 +268,7 @@ ActiveRecord::Schema.define(version: 20180509215913) do
     t.boolean  "goddess"
     t.boolean  "god"
     t.boolean  "expired"
+    t.boolean  "to_anrcho"
   end
 
   create_table "posts", force: :cascade do |t|
