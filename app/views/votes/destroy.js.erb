@@ -2,19 +2,22 @@ function destroy_vote() {
   var for_link = $("#<%= "for_proposal_link_#{@proposal.id}" %>");
   var against_link = $("#<%= "block_proposal_link_#{@proposal.id}" %>");
   var abstain_link = $("#<%= "abstain_proposal_link_#{@proposal.id}" %>");
+  var vote_dropdown_link = $("#vote_dropdown_proposal_link_" + proposal_id);
 
   var for_anchor = $("#<%= "for_proposal_link_anchor_#{@proposal.id}" %>");
   var against_anchor = $("#<%= "block_proposal_link_anchor_#{@proposal.id}" %>");
   var abstain_anchor = $("#<%= "abstain_proposal_link_anchor_#{@proposal.id}" %>");
+  var vote_dropdown_link_anchor = $("#vote_dropdown_proposal_link_anchor_" + proposal_id);
 
   for_link.remove();
   against_link.remove();
   abstain_link.remove();
+  vote_dropdown_link.remove();
 
   for_anchor.after("<%=j render "votes/for_link", item: @proposal %>");
   against_anchor.after("<%=j render "votes/against_link", item: @proposal %>");
   abstain_anchor.after("<%=j render "votes/abstain_link", item: @proposal %>");
-
+  vote_dropdown_link_anchor.after("<%=j render 'votes/dropdown_link', item: @proposal %>");
 
   // when removing vote from Proposal Show page
   var votes_stream = $("#votes_stream");

@@ -2,4 +2,7 @@ if (!vote_dropdown_proposal_<%= @proposal.id %>_shown) {
   $("#vote_dropdown_proposal_table_anchor_<%= @proposal.id %>")
     .after("<%=j render 'votes/dropdown_table', proposal: @proposal %>");
   var vote_dropdown_proposal_<%= @proposal.id %>_shown = true;
+} else {
+  $("#vote_dropdown_proposal_table_<%= @proposal.id %>").remove();
+  var vote_dropdown_proposal_<%= @proposal.id %>_shown = false;
 }

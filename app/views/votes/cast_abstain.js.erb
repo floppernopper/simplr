@@ -3,11 +3,19 @@
 
 function remove_abstain_form() {
   var vote_dropdown_table = $("#vote_dropdown_proposal_table_" + proposal_id);
+  var vote_dropdown_link = $("#vote_dropdown_proposal_link_" + proposal_id);
+  var vote_dropdown_link_anchor = $("#vote_dropdown_proposal_link_anchor_" + proposal_id);
   var new_abstain_form = $("#new_abstain_form_" + proposal_id);
-  new_abstain_form.remove(); vote_dropdown_table.remove();
+
+  new_abstain_form.remove();
+  vote_dropdown_table.remove();
+  vote_dropdown_link.remove();
+
+  vote_dropdown_link_anchor.after("<%=j render 'votes/dropdown_link', item: @proposal %>");
 }
 
 remove_abstain_form();
+var vote_dropdown_proposal_<%= @proposal.id %>_shown = false;
 
 <% if @vote_cast_successful %>
   $("#new_vote_cast_anchor").after("<%=j render 'votes/card', vote: @abstain if @abstain.body.present? %>");
