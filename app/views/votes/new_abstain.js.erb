@@ -1,25 +1,25 @@
 // proposals
 
-<% if @down_vote %>
+<% if @abstain %>
   var proposal_id = <%= @proposal.id %>;
 
-  function new_down_vote_form() {
+  function new_abstain_form() {
     var form_anchor = $("#vote_dropdown_proposal_table_anchor_" + proposal_id);
     var up_form = $("#new_up_vote_form_" + proposal_id);
     var down_form = $("#new_down_vote_form_" + proposal_id);
     var abstain_form = $("#new_abstain_form_" + proposal_id);
     var comment_form = $("#new_comment_form_" + proposal_id);
 
-    if (!down_form.length) {
-      form_anchor.after("<%=j render 'votes/new_down_vote' %>");
+    if (!abstain_form.length) {
+      form_anchor.after("<%=j render 'votes/new_abstain' %>");
+    }
+
+    if (down_form.length) {
+      down_form.remove();
     }
 
     if (up_form.length) {
       up_form.remove();
-    }
-
-    if (abstain_form.length) {
-      abstain_form.remove();
     }
 
     if (comment_form.length) {
@@ -27,7 +27,7 @@
     }
   }
 
-  new_down_vote_form();
+  new_abstain_form();
 
   window.navigator.vibrate(1);
 <% end %>

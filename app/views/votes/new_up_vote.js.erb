@@ -4,11 +4,10 @@
   var proposal_id = <%= @proposal.id %>;
 
   function new_up_vote_form() {
-    var up_vote_link = $("#for_proposal_link_" + proposal_id);
-    var down_vote_link = $("#block_proposal_link_" + proposal_id);
-    var form_anchor = $("#new_form_anchor_" + proposal_id);
+    var form_anchor = $("#vote_dropdown_proposal_table_anchor_" + proposal_id);
     var up_form = $("#new_up_vote_form_" + proposal_id);
     var down_form = $("#new_down_vote_form_" + proposal_id);
+    var abstain_form = $("#new_abstain_form_" + proposal_id);
     var comment_form = $("#new_comment_form_" + proposal_id);
 
     if (!up_form.length) {
@@ -17,6 +16,10 @@
 
     if (down_form.length) {
       down_form.remove();
+    }
+
+    if (abstain_form.length) {
+      abstain_form.remove();
     }
 
     if (comment_form.length) {

@@ -1,0 +1,21 @@
+<table class="vote_dropdown_proposal_table_<%= proposal.id %>">
+    <tr>
+    <td>
+      <span id="for_proposal_link_anchor_<%= proposal.id %>"></span>
+      <%= render "votes/for_link", item: proposal %>
+    </td>
+    <td>
+      ·
+    </td>
+    <td>
+      <span id="block_proposal_link_anchor_<%= proposal.id %>"></span>
+      <%= render "votes/against_link", item: proposal %>
+    </td>
+    <td>
+      ·
+    </td>
+    <td>
+      <span id="abstain_proposal_link_anchor_<%= proposal.id %>"></span>
+      <%= render "votes/abstain_link", item: proposal %>
+    </td>
+  </table>

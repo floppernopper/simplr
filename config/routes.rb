@@ -222,16 +222,27 @@ Rails.application.routes.draw do
 
   # votes
   get 'vote/:token', to: 'votes#show', as: 'show_vote'
+  # for votes of support
   get 'for/:token', to: 'votes#new_up_vote', as: 'new_up_vote'
   delete 'unfor/:token', to: 'votes#destroy', as: 'unfor'
+  # for votes against, to block
   get 'block/:token', to: 'votes#new_down_vote', as: 'new_down_vote'
   delete 'unblock/:token', to: 'votes#destroy', as: 'unblock'
+  # for abstaining, to explicitly not vote
+  get 'abstain/:token', to: 'votes#new_abstain', as: 'new_abstain_vote'
+  delete 'unabstain/:token', to: 'votes#destroy', as: 'unabstain'
+  # casting votes, for, against, and abstain
   post 'votes/cast_up_vote', to: 'votes#cast_up_vote', as: 'cast_up_vote'
   post 'votes/cast_down_vote', to: 'votes#cast_down_vote', as: 'cast_down_vote'
+  post 'votes/cast_abstain', to: 'votes#cast_abstain', as: 'cast_abstain'
+  # update (before verification), reverse, verify, mostly update paths
   put 'votes/:token/update', to: 'votes#update', as: 'update_vote'
   post 'reverse/:token', to: 'votes#reverse', as: 'reverse_vote'
   get 'verify/:token', to: 'votes#verify', as: 'verify_vote'
+  # captcha verification of humanity, to be able to anon verify votes
   post 'votes/confirm_humanity', as: 'confirm_humanity'
+  # reveals dropdown table/menu for voting on options on a motion
+  get 'vote_dropdown/:token', to: 'votes#dropdown', as: 'vote_dropdown'
 
   # templates for clients
   get 'lil_c', to: 'templates#lil_c', as: 'lil_c'

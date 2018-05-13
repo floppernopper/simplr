@@ -51,6 +51,9 @@
 	  <div id="proposal_card_spacer"></div>
 	  <div align="center">
 	    <%= render "proposals/content", proposal: proposal %>
+
+			<!-- anchor for vote option table -->
+			<div id="vote_dropdown_proposal_table_anchor_<%= proposal.id %>"></div>
 	  </div>
 		<!-- anchor for inserting new comment form -->
 		<div id="proposal_comments_anchor_<%= proposal.id %>"></div>
@@ -58,15 +61,8 @@
 	  <table class="bottom_left_link">
 	      <tr>
 	        <td>
-	          <span id="for_proposal_link_anchor_<%= proposal.id %>"></span>
-	          <%= render "votes/for_link", item: proposal %>
-	        </td>
-	        <td>
-	          ·
-	        </td>
-	        <td>
-	          <span id="block_proposal_link_anchor_<%= proposal.id %>"></span>
-	          <%= render "votes/against_link", item: proposal %>
+	          <span id="vote_dropdown_proposal_link_anchor_<%= proposal.id %>"></span>
+	          <%= render "votes/dropdown_link", item: proposal %>
 	        </td>
 	        <td>
 	          ·

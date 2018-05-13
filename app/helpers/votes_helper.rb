@@ -50,4 +50,13 @@ module VotesHelper
       down_votes.where(anon_token: anon_token).present?
     end
   end
+
+  def abstained_from_vote? proposal
+    abstains = proposal.abstains
+    if current_user
+      abstains.where(user_id: current_user.id).present?
+    else
+      abstains.where(anon_token: anon_token).present?
+    end
+  end
 end

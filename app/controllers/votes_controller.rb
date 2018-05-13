@@ -1,6 +1,9 @@
 class VotesController < ApplicationController
+  before_filter :set_vote, only: [:update, :reverse, :verify, :show]
+  before_filter :set_proposal, only: [:destroy, :new_up_vote, :new_down_vote, :new_abstain,
+      :cast_up_vote, :cast_down_vote, :cast_abstain, :dropdown]
+
   def update
-    @vote = Vote.find_by_unique_token params[:token]
     if @vote.update(vote_params)
       @vote_updated_successfully = true
       flash.now[:notice] = "Vote was successfully updated."
@@ -10,9 +13,10 @@ class VotesController < ApplicationController
   end
 
   def destroy
-    @proposal = Proposal.find_by_unique_token(params[:token])
     @votes = if params[:unfor]
       @proposal.up_votes
+    elsif params[:unabstain]
+      @proposal.abstains
     else
       @proposal.down_votes
     end
@@ -25,21 +29,24 @@ class VotesController < ApplicationController
   end
 
   def new_up_vote
-    @proposal = Proposal.find_by_unique_token(params[:token])
     if @proposal
       @up_vote = Vote.up_vote(@proposal, current_user, anon_token)
     end
   end
 
   def new_down_vote
-    @proposal = Proposal.find_by_unique_token(params[:token])
     if @proposal
       @down_vote = Vote.down_vote(@proposal, current_user, anon_token)
     end
   end
 
+  def new_abstain
+    if @proposal
+      @abstain = Vote.abstain(@proposal, current_user, anon_token)
+    end
+  end
+
   def cast_up_vote
-    @proposal = Proposal.find_by_unique_token(params[:token])
     @up_vote = Vote.up_vote(@proposal, current_user, anon_token, params[:body])
     Tag.extract @up_vote
     if @up_vote
@@ -50,7 +57,6 @@ class VotesController < ApplicationController
   end
 
   def cast_down_vote
-    @proposal = Proposal.find_by_unique_token(params[:token])
     @down_vote = Vote.down_vote(@proposal, current_user, anon_token, params[:body])
     Tag.extract @down_vote
     if @down_vote
@@ -60,8 +66,17 @@ class VotesController < ApplicationController
     end
   end
 
+  def cast_abstain
+    @abstain = Vote.abstain(@proposal, current_user, anon_token, params[:body])
+    Tag.extract @abstain
+    if @abstain
+      @vote_cast_successful = true
+      Note.notify :proposal_abstained, @proposal.unique_token, (@proposal.user ? @proposal.user : @proposal.anon_token),
+        (@abstain.user ? @abstain.user : @abstain.anon_token)
+    end
+  end
+
   def reverse
-    @vote = Vote.find_by_unique_token params[:token]
     if @vote.could_be_reversed? anon_token, current_user
       vote = @vote.votes.new flip_state: 'down', anon_token: anon_token
       vote.user_id = current_user.id if current_user; vote.save
@@ -83,7 +98,6 @@ class VotesController < ApplicationController
 
   def verify
     if cookies[:simple_captcha_validated].present? or current_user
-      @vote = Vote.find_by_unique_token params[:token]
       if @vote.verifiable? anon_token, current_user and not @vote.proposal.requires_revision
         @vote.update verified: true
         @vote.proposal.evaluate
@@ -103,12 +117,19 @@ class VotesController < ApplicationController
   end
 
   def show
-    @vote = Vote.find_by_unique_token params[:token]
     @comments = @vote.comments
     @comment = Comment.new
   end
 
   private
+
+  def set_vote
+    @vote = Vote.find_by_unique_token(params[:token])
+  end
+
+  def set_proposal
+    @proposal = Proposal.find_by_unique_token(params[:token])
+  end
 
   def vote_params
     params.require(:vote).permit(:body, :flip_state)

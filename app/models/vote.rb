@@ -46,6 +46,7 @@ class Vote < ActiveRecord::Base
     return _verifiable
   end
 
+  # really need to reduce this to one method or 3 calling on 1
   def self.up_vote obj, user, token, body=""
     unless (token and token.eql? obj.anon_token) or (user and user.id.eql? obj.user_id)
       vote = if token
@@ -81,6 +82,27 @@ class Vote < ActiveRecord::Base
       else
         vote.body = body if body.present?
         vote.flip_state = 'down'
+        vote.save
+      end
+      obj.evaluate
+    end
+    return vote
+  end
+
+  def self.abstain obj, user, token, body=""
+    unless (token and token.eql? obj.anon_token) or (user and user.id.eql? obj.user_id)
+      vote = if token
+        obj.votes.find_by_anon_token token
+      elsif user
+        obj.votes.find_by_user_id user.id
+      end
+      if not vote
+        vote = obj.votes.new flip_state: 'abstain', anon_token: token, body: body
+        vote.user_id = user.id if user
+        vote.save
+      else
+        vote.body = body if body.present?
+        vote.flip_state = 'abstain'
         vote.save
       end
       obj.evaluate
@@ -125,6 +147,10 @@ class Vote < ActiveRecord::Base
     self.flip_state.eql? 'down'
   end
 
+  def abstain?
+    self.flip_state.eql? 'abstain'
+  end
+
   private
 
   def ensure_not_verified
@@ -158,5 +184,9 @@ class Vote < ActiveRecord::Base
 
   def self.down_votes
     where flip_state: 'down'
+  end
+
+  def self.abstains
+    where flip_state: 'abstain'
   end
 end

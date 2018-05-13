@@ -199,6 +199,10 @@ class Proposal < ActiveRecord::Base
     self.votes.down_votes.where moot: [nil, false]
   end
 
+  def abstains
+    self.votes.abstains
+  end
+
   def seent current_token
     unless self.seen? current_token
       self.views.create token: current_token

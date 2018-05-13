@@ -1,0 +1,19 @@
+// proposal_id is actually declared/defined in new_abstain
+// and still accessible here from there
+
+function remove_abstain_form() {
+  var vote_dropdown_table = $("#vote_dropdown_proposal_table_" + proposal_id);
+  var new_abstain_form = $("#new_abstain_form_" + proposal_id);
+  new_abstain_form.remove(); vote_dropdown_table.remove();
+}
+
+remove_abstain_form();
+
+<% if @vote_cast_successful %>
+  $("#new_vote_cast_anchor").after("<%=j render 'votes/card', vote: @abstain if @abstain.body.present? %>");
+<% end %>
+
+// sound and haptic feedback
+$("#post_interface_sound")[0].currentTime = 0;
+$("#post_interface_sound")[0].play();
+window.navigator.vibrate(1);
