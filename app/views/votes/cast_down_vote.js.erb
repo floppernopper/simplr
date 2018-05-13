@@ -4,24 +4,20 @@
 // and still accessible here from there
 
 function remove_down_vote_form() {
-  var for_link = $("#<%= "for_proposal_link_#{@proposal.id}" %>");
-  var for_anchor = $("#<%= "for_proposal_link_anchor_#{@proposal.id}" %>");
-
-  var against_link = $("#<%= "block_proposal_link_#{@proposal.id}" %>");
-  var against_anchor = $("#<%= "block_proposal_link_anchor_#{@proposal.id}" %>");
-
+  var vote_dropdown_table = $("#vote_dropdown_proposal_table_" + proposal_id);
+  var vote_dropdown_link = $("#vote_dropdown_proposal_link_" + proposal_id);
+  var vote_dropdown_link_anchor = $("#vote_dropdown_proposal_link_anchor_" + proposal_id);
   var new_vote_form = $("#new_down_vote_form_" + proposal_id);
 
   new_vote_form.remove();
+  vote_dropdown_table.remove();
+  vote_dropdown_link.remove();
 
-  for_link.remove();
-  for_anchor.after("<%=j render "votes/for_link", item: @proposal %>");
-
-  against_link.remove();
-  against_anchor.after("<%=j render "votes/against_link", item: @proposal %>");
+  vote_dropdown_link_anchor.after("<%=j render 'votes/dropdown_link', item: @proposal %>");
 }
 
 remove_down_vote_form();
+var vote_dropdown_proposal_<%= @proposal.id %>_shown = false;
 
 <% if @vote_cast_successful %>
   $("#new_vote_cast_anchor").after("<%=j render 'votes/card', vote: @down_vote if @down_vote.body.present? %>");
