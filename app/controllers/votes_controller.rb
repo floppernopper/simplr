@@ -26,9 +26,6 @@ class VotesController < ApplicationController
       @votes.where(anon_token: anon_token).last
     end
     @vote.destroy if @vote
-    respond_to do |format|
-      format.js
-    end
   end
 
   def new_up_vote
