@@ -1,21 +1,21 @@
-<table id="vote_dropdown_proposal_table_<%= proposal.id %>">
-    <tr>
-    <td>
-      <span id="for_proposal_link_anchor_<%= proposal.id %>"></span>
-      <%= render "votes/for_link", item: proposal %>
-    </td>
-    <td>
-      ·
-    </td>
-    <td>
-      <span id="block_proposal_link_anchor_<%= proposal.id %>"></span>
-      <%= render "votes/against_link", item: proposal %>
-    </td>
-    <td>
-      ·
-    </td>
-    <td>
-      <span id="abstain_proposal_link_anchor_<%= proposal.id %>"></span>
-      <%= render "votes/abstain_link", item: proposal %>
-    </td>
-  </table>
+<div class="vote_dropdown_table" id="vote_dropdown_proposal_table_<%= proposal.id %>">
+  <div class="vote_dropdown_table_cell" id="vote_dropdown_table_for_proposal_<%= proposal.id %>">
+    <span id="for_proposal_link_anchor_<%= proposal.id %>"></span>
+    <%= render "votes/for_link", item: proposal %>
+  </div>
+  <div class="vote_dropdown_table_cell" id="vote_dropdown_table_against_proposal_<%= proposal.id %>">
+    <span id="block_proposal_link_anchor_<%= proposal.id %>"></span>
+    <%= render "votes/against_link", item: proposal %>
+  </div>
+  <div class="vote_dropdown_table_cell" id="vote_dropdown_table_abstain_proposal_<%= proposal.id %>">
+    <span id="abstain_proposal_link_anchor_<%= proposal.id %>"></span>
+    <%= render "votes/abstain_link", item: proposal %>
+  </div>
+</div>
+
+<script>
+  <% for section in ['for', 'against', 'abstain'] %>
+    <%= render 'app/fader.js', target: "vote_dropdown_table_#{section}_proposal_#{proposal.id}",
+      target_id: '', background: true, slow: true %>
+  <% end %>
+</script>

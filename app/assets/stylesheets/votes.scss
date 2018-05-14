@@ -2,8 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.vote_dropdown_table {
+  width: 50%;
+  height: 20px;
+  margin-bottom: 25px;
+}
+
+.vote_dropdown_table_cell {
+  width: 33.3333%;
+  height: 100%;
+  background: red;
+  float: left;
+}
+
 .new_vote_form {
   padding-bottom: 25px;
+}
+
+.new_vote_form_text_area {
+  margin-bottom: 5px;
 }
 
 .voted_on {

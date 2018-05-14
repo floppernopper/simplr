@@ -1,7 +1,8 @@
 <div id="new_up_vote_form_<%= @proposal.id %>" class="new_vote_form">
 	<%= form_tag cast_up_vote_path, method: :post, remote: true do |f| %>
 	  <%= hidden_field_tag :token, @proposal.unique_token %>
-		<%= text_area_tag :body, nil, placeholder: "Why do you support this proposal? (optional)", class: :dark_text_area %>
+		<%= text_area_tag :body, nil, placeholder: "Why do you support this proposal? (optional)",
+			class: "dark_text_area new_vote_form_text_area" %>
     <button type="submit" name="commit" class="dark_form_button vote_cast_btn_spacer">
       <b>Support <i class="fa fa-thumbs-o-up"></i></b>
     </button>

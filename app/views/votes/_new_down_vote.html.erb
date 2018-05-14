@@ -1,7 +1,8 @@
 <div id="new_down_vote_form_<%= @proposal.id %>" class="new_vote_form">
 	<%= form_tag cast_down_vote_path, method: :post, remote: true do |f| %>
 	  <%= hidden_field_tag :token, @proposal.unique_token %>
-		<%= text_area_tag :body, nil, placeholder: "Why are you blocking this proposal? (optional)", class: :dark_text_area %>
+		<%= text_area_tag :body, nil, placeholder: "Why are you blocking this proposal? (optional)",
+			class: "dark_text_area new_vote_form_text_area" %>
     <button type="submit" name="commit" class="dark_form_button">
       <b>Block <i class="fa fa-thumbs-o-down"></i></b>
     </button>
