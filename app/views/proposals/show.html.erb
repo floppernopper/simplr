@@ -18,6 +18,7 @@
 
 <%= render "votes/voter_links", label: "Supporters", votes: @up_votes %>
 <%= render "votes/voter_links", label: "Blockers", votes: @down_votes %>
+<%= render "votes/voter_links", label: "Abstains", votes: @abstains %>
 
 <% if @show_proposal_sub_type.eql? :revisions %>
 	<% for revision in @revisions %>
