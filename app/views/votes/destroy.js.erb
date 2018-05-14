@@ -1,13 +1,15 @@
+
+
 function destroy_vote() {
   var for_link = $("#<%= "for_proposal_link_#{@proposal.id}" %>");
   var against_link = $("#<%= "block_proposal_link_#{@proposal.id}" %>");
   var abstain_link = $("#<%= "abstain_proposal_link_#{@proposal.id}" %>");
-  var vote_dropdown_link = $("#vote_dropdown_proposal_link_" + proposal_id);
+  var vote_dropdown_link = $("#vote_dropdown_proposal_link_<%= @proposal.id %>");
 
   var for_anchor = $("#<%= "for_proposal_link_anchor_#{@proposal.id}" %>");
   var against_anchor = $("#<%= "block_proposal_link_anchor_#{@proposal.id}" %>");
   var abstain_anchor = $("#<%= "abstain_proposal_link_anchor_#{@proposal.id}" %>");
-  var vote_dropdown_link_anchor = $("#vote_dropdown_proposal_link_anchor_" + proposal_id);
+  var vote_dropdown_link_anchor = $("#vote_dropdown_proposal_link_anchor_<%= @proposal.id %>");
 
   for_link.remove();
   against_link.remove();
@@ -23,6 +25,8 @@ function destroy_vote() {
   var votes_stream = $("#votes_stream");
   votes_stream.after("<%=j render 'votes/feed', votes: @votes %>");
   votes_stream.remove();
+
+  window.navigator.vibrate(1);
 }
 
 destroy_vote();
