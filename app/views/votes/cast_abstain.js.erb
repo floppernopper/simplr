@@ -18,7 +18,9 @@ remove_abstain_form();
 var vote_dropdown_proposal_<%= @proposal.id %>_shown = false;
 
 <% if @vote_cast_successful %>
-  $("#new_vote_cast_anchor").after("<%=j render 'votes/card', vote: @abstain if @abstain.body.present? %>");
+  var votes = $("#votes_stream");
+  votes.after("<%=j render 'votes/feed', votes: @votes %>");
+  votes.remove();
 <% end %>
 
 // sound and haptic feedback

@@ -20,7 +20,9 @@ remove_new_vote_form();
 var vote_dropdown_proposal_<%= @proposal.id %>_shown = false;
 
 <% if @vote_cast_successful %>
-  $("#new_vote_cast_anchor").after("<%=j render 'votes/card', vote: @up_vote if @up_vote.body.present? %>");
+  var votes = $("#votes_stream");
+  votes.after("<%=j render 'votes/feed', votes: @votes %>");
+  votes.remove();
 <% end %>
 
 // sound and haptic feedback

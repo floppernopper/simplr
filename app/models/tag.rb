@@ -4,7 +4,7 @@ class Tag < ActiveRecord::Base
   belongs_to :comment
   belongs_to :message
   belongs_to :group
-  
+
   def self.trending
     _trending = []
     for tag in self.all
@@ -16,7 +16,7 @@ class Tag < ActiveRecord::Base
     # returns all trending, ascending by occurance
     return _trending.reverse
   end
-  
+
   def trending?
     matches = Tag.where tag: self.tag
     recent_matches = matches.select do |tag|
@@ -24,18 +24,20 @@ class Tag < ActiveRecord::Base
     end
     return (recent_matches.size > Tag.all.size / 10)
   end
-  
+
   def self.extract item
     text = item.body
-    text.split(' ').each do |word|
-      if word.include? '#' and word.size > 1
-        tag = item.tags.find_by_tag word
-        # creates any new tags found in text
-        if tag.nil?
-          item.tags.create(tag: word, index: text.index(word))
-        # repositions any tags moved in text
-        elsif not tag.index.eql? text.index(word)
-          tag.update index: text.index(word)
+    if text
+      text.split(' ').each do |word|
+        if word.include? '#' and word.size > 1
+          tag = item.tags.find_by_tag word
+          # creates any new tags found in text
+          if tag.nil?
+            item.tags.create(tag: word, index: text.index(word))
+          # repositions any tags moved in text
+          elsif not tag.index.eql? text.index(word)
+            tag.update index: text.index(word)
+          end
         end
       end
     end
@@ -46,7 +48,7 @@ class Tag < ActiveRecord::Base
       end
     end
   end
-  
+
   def self.add_from text, item
     text.split(' ').each do |tag|
       next unless tag.size > 1

@@ -1,5 +1,4 @@
 <div id="votes_stream">
-  <i id="new_vote_cast_anchor"></i>
   <% for vote in votes.reverse %>
     <%= render "votes/card", vote: vote if vote.body.present? %>
   <% end %>
