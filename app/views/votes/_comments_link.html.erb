@@ -8,6 +8,6 @@
 <% link_id = "vote_comments_link_#{vote.id}" %>
 
 <%= link_to "Comment#{' ' + vote.comments.size.to_s unless vote.comments.size.zero?}",
-  comment_link_path, remote: remote, id: "new_comment_link_#{vote.id}", class: "bottom_left_link dark_link", id: link_id %>
+  comment_link_path, remote: remote, id: "new_comment_link_#{vote.id}", class: "bottom_left_link", id: link_id %>
 
 <%= render "app/link_sound.js", link_id: link_id, sound: :post_interface_sound %>

@@ -119,6 +119,17 @@ class VotesController < ApplicationController
   def show
     @comments = @vote.comments
     @comment = Comment.new
+    seent @vote
+    # gets views, viewed by users other than current users
+    @views = if current_user
+      @vote.views.where.not user_id: current_user.id
+    else
+      @vote.views
+    end
+    # filters any views by the OP, of course they saw, they posted it
+    @views = @views.where.not(user_id: @vote.user_id) if @vote.user_id
+    # gets any likes for the motion
+    @likes = @vote.likes
   end
 
   private

@@ -5,6 +5,7 @@ class View < ActiveRecord::Base
   belongs_to :message
   belongs_to :comment
   belongs_to :proposal
+  belongs_to :vote
 
   before_create :set_locale
 
@@ -21,7 +22,7 @@ class View < ActiveRecord::Base
     widths = screen_sizes.map { |s| s[0] }
     heights = screen_sizes.map { |s| s[1] }
 
-    
+
   end
 
   # get different screen_sizes used by users

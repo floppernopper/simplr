@@ -6,9 +6,10 @@
 
 <%= render "votes/card", vote: @vote %>
 
+<%= render 'posts/liked_and_viewed_by' %>
+
 <% for comment in @comments %>
   <%= render "comments/card", comment: comment %>
 <% end %>
 
 <%= render "comments/form" %>
-

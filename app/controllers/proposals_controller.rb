@@ -121,6 +121,10 @@ class ProposalsController < ApplicationController
       @abstains = @proposal.abstains
       @votes = @proposal.votes
 
+      for vote in @votes
+        seent vote
+      end
+
       # gets all comments/discussion
       @comments = @proposal.comments
       @comment = Comment.new

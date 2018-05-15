@@ -1,7 +1,7 @@
 <% param_id = (item.class.to_s.downcase + "_id").to_sym %>
 <% link_id = "like_#{item.class.to_s.downcase}_link_#{item.id}" %>
 <% link_class = ((defined?(bottom_left) and bottom_left) ? :bottom_left_link : :standard_post_link) %>
-<% link_class = link_class.to_s << ' dark_link' if item.is_a? Vote %>
+<% link_class = link_class.to_s << ' dark_link' if item.is_a? Vote and false %>
 
 <% unless already_liked? item %>
   <%= link_to "Like#{(' ' + item._likes.size.to_s) unless item._likes.size.zero?}", like_path(param_id => item.id),
