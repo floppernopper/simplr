@@ -1,4 +1,4 @@
-<div id="mini_comments_container_<%= @item.id %>">
+<div id="mini_<%= @item.class.to_s.downcase %>_comments_container_<%= @item.id %>">
   <% for comment in @comments %>
     <%= render "comments/mini_card", comment: comment %>
   <% end %>

@@ -1,6 +1,6 @@
 <% if @post and @successfully_created %>
   <% if @from_mini_form %>
-    $("#mini_comments_container_<%= @post.id %>").remove();
+    $("#mini_post_comments_container_<%= @post.id %>").remove();
     $("#post_comments_anchor_<%= @post.id %>").after("<%=j render 'comments/mini_index' %>");
   <% else %>
     var form = $("#comment_form_card");
@@ -11,10 +11,10 @@
     $("#comment_form_card").before("<%=j render 'card', comment: @comment_just_created %>");
   <% end %>
 <% elsif @proposal %>
-  $("#mini_comments_container_<%= @proposal.id %>").remove();
+  $("#mini_proposal_comments_container_<%= @proposal.id %>").remove();
   $("#proposal_comments_anchor_<%= @proposal.id %>").after("<%=j render 'comments/mini_index' %>");
 <% elsif @vote %>
-  $("#mini_comments_container_<%= @vote.id %>").remove();
+  $("#mini_vote_comments_container_<%= @vote.id %>").remove();
   $("#vote_comments_anchor_<%= @vote.id %>").after("<%=j render 'comments/mini_index' %>");
 <% end %>
 
