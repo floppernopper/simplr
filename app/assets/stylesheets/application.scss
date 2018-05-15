@@ -93,6 +93,18 @@ textarea {
   background: red;
 }
 
+.top_right_lower_link {
+	@include corner_link;
+	right: $x_right_gap;
+	top: 7.5px;
+}
+
+.top_left_lower_link {
+	@include corner_link;
+	left: $x_left_gap;
+	top: 7.5px;
+}
+
 .top_right_link {
 	@include corner_link;
 	right: $x_right_gap;

@@ -1,4 +1,15 @@
 module VotesHelper
+  def label_to_vote_type label
+    case label
+    when 'Supporters'
+      'for'
+    when 'Blockers'
+      'against'
+    when 'Abstains'
+      'abstain'
+    end
+  end
+
   def vote_body_text_area_txt vote, new_flip_state=nil
     state = if vote.up?
       "up"

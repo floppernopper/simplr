@@ -2,6 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.voter_for_links_card_line {
+  border-top: 1px solid green;
+}
+
+.voter_against_links_card_line {
+  border-top: 1.5px solid red;
+}
+
+.voter_abstain_links_card_line {
+  border-top: 1.5px solid grey;
+}
+
 .vote_dropdown_table {
   width: 50%;
   height: 20px;
