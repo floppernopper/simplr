@@ -1,39 +1,46 @@
 <% if vote.present? and vote.body.present? %>
-  <div class="dark_card" id="vote_card_<%= vote.id %>" align="center">
-    <div class="card_corner_cut_out"></div>
-    <%= render "users/avatar_card_link", token: vote.anon_token, user: vote.user %>
-    <%= render "app/time_ago", item: vote %>
+  <div class="dark_card" id="vote_card_<%= vote.id %>">
+    <div align="center">
+      <div class="card_corner_cut_out"></div>
+      <%= render "users/avatar_card_link", token: vote.anon_token, user: vote.user %>
+      <%= render "app/time_ago", item: vote %>
 
-	  <p class="comment_body_text dark_txt" id="<%= 'justified_body_text' if vote.body.size > 150 %>">
-	    <%= render "app/body", item: vote %>
-	  </p>
+  	  <p class="comment_body_text dark_txt" id="<%= 'justified_body_text' if vote.body.size > 150 %>">
+  	    <%= render "app/body", item: vote %>
+  	  </p>
 
-    <% if humanity_confirmed? and vote.verifiable? anon_token, current_user \
-        and not vote.proposal.requires_revision and not vote.abstain?  %>
-      <p>
-        <%= link_to "Verify", verify_vote_path(vote.unique_token), class: :dark_link,
-          data: { confirm: "Are you sure you want to verify this vote?" } %>
-      </p>
-    <% end %>
+      <% if humanity_confirmed? and vote.verifiable? anon_token, current_user \
+          and not vote.proposal.requires_revision and not vote.abstain?  %>
+        <p>
+          <%= link_to "Verify", verify_vote_path(vote.unique_token), class: :dark_link,
+            data: { confirm: "Are you sure you want to verify this vote?" } %>
+        </p>
+      <% end %>
 
-    <% if vote_can_be_reversed? vote and not vote.abstain? %>
-      <p>
-        <%= link_to "Reverse", reverse_vote_path(vote.unique_token), method: :post, class: :dark_link,
-          data: { confirm: "Are you sure you want to reverse this vote?" } %>
-      </p>
-    <% end %>
+      <% if vote_can_be_reversed? vote and not vote.abstain? %>
+        <p>
+          <%= link_to "Reverse", reverse_vote_path(vote.unique_token), method: :post, class: :dark_link,
+            data: { confirm: "Are you sure you want to reverse this vote?" } %>
+        </p>
+      <% end %>
 
-    <% if vote.up? and vote.proposal.ratified %>
-      <%= link_to "Votes to reverse: #{vote.votes_to_reverse}",
-        show_vote_path(vote), class: :votes_to_reverse_label %>
-    <% elsif vote.down? and vote.proposal.requires_revision? %>
-      <%= link_to "Votes to reverse block: #{vote.votes_to_reverse}",
-        show_vote_path(vote), class: :votes_to_reverse_label %>
-    <% end %>
+      <% if vote.up? and vote.proposal.ratified %>
+        <%= link_to "Votes to reverse: #{vote.votes_to_reverse}",
+          show_vote_path(vote), class: :votes_to_reverse_label %>
+      <% elsif vote.down? and vote.proposal.requires_revision? %>
+        <%= link_to "Votes to reverse block: #{vote.votes_to_reverse}",
+          show_vote_path(vote), class: :votes_to_reverse_label %>
+      <% end %>
 
-	  <% if vote.verified %>
-	    <%= link_to 'Verified <i class="fa fa-check"></i>'.html_safe, show_vote_path(vote), class: "verified_label dark_link" %>
-	  <% end %>
+  	  <% if vote.verified %>
+  	    <%= link_to 'Verified <i class="fa fa-check"></i>'.html_safe, show_vote_path(vote), class: "verified_label dark_link" %>
+  	  <% end %>
+    </div>
+
+  	<!-- anchor for inserting new comment form -->
+  	<div id="vote_comments_anchor_<%= vote.id %>"></div>
+
+    <%= render "votes/comments_link", vote: vote %>
 
     <table class="bottom_right_link dark_txt">
       <tr>

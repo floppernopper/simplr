@@ -13,6 +13,11 @@ class Vote < ActiveRecord::Base
 
   before_update :ensure_not_verified
 
+  def identity
+    return user if user
+    return anon_token if anon_token
+  end
+
   def _likes
     self.likes.where love: nil, whoa: nil, zen: nil
   end

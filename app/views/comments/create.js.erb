@@ -13,6 +13,9 @@
 <% elsif @proposal %>
   $("#mini_comments_container_<%= @proposal.id %>").remove();
   $("#proposal_comments_anchor_<%= @proposal.id %>").after("<%=j render 'comments/mini_index' %>");
+<% elsif @vote %>
+  $("#mini_comments_container_<%= @vote.id %>").remove();
+  $("#vote_comments_anchor_<%= @vote.id %>").after("<%=j render 'comments/mini_index' %>");
 <% end %>
 
 $("#post_interface_sound")[0].currentTime = 0;

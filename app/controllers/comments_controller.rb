@@ -10,6 +10,8 @@ class CommentsController < ApplicationController
   def toggle_mini_index
     @item = if params[:proposal]
       Proposal.find_by_unique_token params[:id]
+    elsif params[:vote]
+      Vote.find_by_unique_token params[:id]
     else
       Post.find_by_id params[:id]
     end
@@ -101,8 +103,12 @@ class CommentsController < ApplicationController
           unless @proposal.anon_token.eql? anon_token
         redirect_to show_proposal_path @proposal.unique_token, comments: true unless params[:ajax_req]
       elsif @comment.vote
-        Note.notify :vote_comment, @comment.vote, @comment.vote.anon_token
-        redirect_to show_vote_path @comment.vote.unique_token
+        @vote = @item = @comment.vote
+        if @from_mini_form
+          @comments = @item.comments.last 5
+          @comment = Comment.new
+        end
+        Note.notify :vote_comment, @vote, @vote.identity, current_identity unless @vote.identity.eql? current_identity
       end
     else
       redirect_to :back

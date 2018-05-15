@@ -1,0 +1,13 @@
+<!-- for vote comments -->
+<% comment_link_path = (@commenting or @vote_shown) \
+  ? show_vote_path(vote.unique_token, comments: true) \
+  : toggle_comments_path(id: vote.unique_token, vote: true) %>
+
+<% remote = comment_link_path.eql?(show_vote_path(vote.unique_token)) ? false : true %>
+
+<% link_id = "vote_comments_link_#{vote.id}" %>
+
+<%= link_to "Comment#{' ' + vote.comments.size.to_s unless vote.comments.size.zero?}",
+  comment_link_path, remote: remote, id: "new_comment_link_#{vote.id}", class: "bottom_left_link dark_link", id: link_id %>
+
+<%= render "app/link_sound.js", link_id: link_id, sound: :post_interface_sound %>
