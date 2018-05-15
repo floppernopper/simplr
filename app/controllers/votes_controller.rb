@@ -30,24 +30,24 @@ class VotesController < ApplicationController
 
   def new_up_vote
     if @proposal
-      @up_vote = Vote.up_vote(@proposal, current_user, anon_token)
+      @up_vote = Vote._vote(@proposal, current_user, anon_token, nil, 'up')
     end
   end
 
   def new_down_vote
     if @proposal
-      @down_vote = Vote.down_vote(@proposal, current_user, anon_token)
+      @down_vote = Vote._vote(@proposal, current_user, anon_token, nil, 'down')
     end
   end
 
   def new_abstain
     if @proposal
-      @abstain = Vote.abstain(@proposal, current_user, anon_token)
+      @abstain = Vote._vote(@proposal, current_user, anon_token, nil, 'abstain')
     end
   end
 
   def cast_up_vote
-    @up_vote = Vote.up_vote(@proposal, current_user, anon_token, params[:body])
+    @up_vote = Vote._vote(@proposal, current_user, anon_token, params[:body], 'up')
     Tag.extract @up_vote
     if @up_vote
       @vote_cast_successful = true
@@ -57,7 +57,7 @@ class VotesController < ApplicationController
   end
 
   def cast_down_vote
-    @down_vote = Vote.down_vote(@proposal, current_user, anon_token, params[:body])
+    @down_vote = Vote._vote(@proposal, current_user, anon_token, params[:body], 'down')
     Tag.extract @down_vote
     if @down_vote
       @vote_cast_successful = true
@@ -67,7 +67,7 @@ class VotesController < ApplicationController
   end
 
   def cast_abstain
-    @abstain = Vote.abstain(@proposal, current_user, anon_token, params[:body])
+    @abstain = Vote._vote(@proposal, current_user, anon_token, params[:body], 'abstain')
     Tag.extract @abstain
     if @abstain
       @vote_cast_successful = true

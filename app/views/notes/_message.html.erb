@@ -56,7 +56,7 @@ action = note.action.to_sym; case action %>
 <% when :proposal_blocked, :revision_submitted %>
   <%= link_to message, show_proposal_path(token: note.item_token, revisions: true), class: link_class %>
 <% when :vote_verified, :vote_like, :vote_comment, :vote_reversed %>
-  <%= link_to message, show_vote_path(token: note.item_token), class: link_class %>
+  <%= link_to message, show_vote_path(token: note.item_token), class: link_class if note.item_token.present? %>
 <!-- Game notifications -->
 <% when :game_challenge, :your_turn_in_game %>
   <%= link_to message, show_game_path(token: note.item_token), class: link_class %>

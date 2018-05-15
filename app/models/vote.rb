@@ -53,7 +53,7 @@ class Vote < ActiveRecord::Base
   end
 
   # really need to reduce this to one method or 3 calling on 1
-  def self.up_vote obj, user, token, body=""
+  def self._vote obj, user, token, body="", flip_state=""
     unless (token and token.eql? obj.anon_token) or (user and user.id.eql? obj.user_id)
       vote = if token
         obj.votes.find_by_anon_token token
@@ -61,54 +61,12 @@ class Vote < ActiveRecord::Base
         obj.votes.find_by_user_id user.id
       end
       if not vote
-        vote = obj.votes.new flip_state: 'up', anon_token: token, body: body
+        vote = obj.votes.new flip_state: flip_state, anon_token: token, body: body
         vote.user_id = user.id if user
         vote.save
       else
         vote.body = body if body.present?
-        vote.flip_state = 'up'
-        vote.save
-      end
-      obj.evaluate
-    end
-    return vote
-  end
-
-  def self.down_vote obj, user, token, body=""
-    unless (token and token.eql? obj.anon_token) or (user and user.id.eql? obj.user_id)
-      vote = if token
-        obj.votes.find_by_anon_token token
-      elsif user
-        obj.votes.find_by_user_id user.id
-      end
-      if not vote
-        vote = obj.votes.new flip_state: 'down', anon_token: token, body: body
-        vote.user_id = user.id if user
-        vote.save
-      else
-        vote.body = body if body.present?
-        vote.flip_state = 'down'
-        vote.save
-      end
-      obj.evaluate
-    end
-    return vote
-  end
-
-  def self.abstain obj, user, token, body=""
-    unless (token and token.eql? obj.anon_token) or (user and user.id.eql? obj.user_id)
-      vote = if token
-        obj.votes.find_by_anon_token token
-      elsif user
-        obj.votes.find_by_user_id user.id
-      end
-      if not vote
-        vote = obj.votes.new flip_state: 'abstain', anon_token: token, body: body
-        vote.user_id = user.id if user
-        vote.save
-      else
-        vote.body = body if body.present?
-        vote.flip_state = 'abstain'
+        vote.flip_state = flip_state
         vote.save
       end
       obj.evaluate

@@ -25,6 +25,8 @@ module NotesHelper
         return note.message.gsub("Someone", User.find(note.sender_id).name)
       elsif note.sender_token.present?
         return note.message.gsub("Someone", "Someone anonymously")
+      else
+        return note.message
       end
     else
       return note.message
