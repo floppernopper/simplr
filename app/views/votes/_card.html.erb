@@ -1,10 +1,10 @@
 <% if vote.present? and vote.body.present? %>
-  <div class="card" id="vote_card_<%= vote.id %>" align="center">
+  <div class="dark_card" id="vote_card_<%= vote.id %>" align="center">
     <div class="card_corner_cut_out"></div>
     <%= render "users/avatar_card_link", token: vote.anon_token, user: vote.user %>
-    <%= render "votes/time_ago", vote: vote %>
+    <%= render "app/time_ago", item: vote %>
 
-	  <p class="comment_body_text" id="<%= 'justified_body_text' if vote.body.size > 150 %>">
+	  <p class="comment_body_text dark_txt" id="<%= 'justified_body_text' if vote.body.size > 150 %>">
 	    <%= render "app/body", item: vote %>
 	  </p>
 
@@ -35,7 +35,7 @@
 	    <%= link_to 'Verified <i class="fa fa-check"></i>'.html_safe, show_vote_path(vote), class: :verified_label %>
 	  <% end %>
 
-    <table class="bottom_right_link">
+    <table class="bottom_right_link dark_txt">
       <tr>
         <td>
           <strong style="color: <%= vote.up? ? 'green' : (vote.down? ? 'red' : (vote.abstain? ? 'grey' : '')) %>;">
