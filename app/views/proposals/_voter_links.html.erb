@@ -1,0 +1,5 @@
+<div id="voter_links_container">
+  <%= render "votes/voter_links", label: "Supporters", votes: @up_votes %>
+  <%= render "votes/voter_links", label: "Blockers", votes: @down_votes %>
+  <%= render "votes/voter_links", label: "Abstains", votes: @abstains %>
+</div>

@@ -20,6 +20,12 @@ remove_new_vote_form();
 var vote_dropdown_proposal_<%= @proposal.id %>_shown = false;
 
 <% if @vote_cast_successful %>
+  // resets voter links
+  var voter_links = $("#voter_links_container");
+  var voter_links_anchor = $("#voter_links_container_anchor");
+  voter_links_anchor.after("<%=j render 'proposals/voter_links' %>");
+  voter_links.remove();
+  // resets votes feed
   var votes = $("#votes_stream");
   votes.after("<%=j render 'votes/feed', votes: @votes %>");
   votes.remove();

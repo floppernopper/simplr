@@ -140,6 +140,9 @@ class VotesController < ApplicationController
 
   def set_proposal
     @proposal = Proposal.find_by_unique_token(params[:token])
+    @up_votes = @proposal.up_votes
+    @down_votes = @proposal.down_votes
+    @abstains = @proposal.abstains
     @votes = @proposal.votes
   end
 
