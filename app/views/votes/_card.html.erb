@@ -11,14 +11,14 @@
     <% if humanity_confirmed? and vote.verifiable? anon_token, current_user \
         and not vote.proposal.requires_revision and not vote.abstain?  %>
       <p>
-        <%= link_to "Verify", verify_vote_path(vote.unique_token),
+        <%= link_to "Verify", verify_vote_path(vote.unique_token), class: :dark_link,
           data: { confirm: "Are you sure you want to verify this vote?" } %>
       </p>
     <% end %>
 
     <% if vote_can_be_reversed? vote and not vote.abstain? %>
       <p>
-        <%= link_to "Reverse", reverse_vote_path(vote.unique_token), method: :post,
+        <%= link_to "Reverse", reverse_vote_path(vote.unique_token), method: :post, class: :dark_link,
           data: { confirm: "Are you sure you want to reverse this vote?" } %>
       </p>
     <% end %>
