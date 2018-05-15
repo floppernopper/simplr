@@ -94,21 +94,14 @@ class CommentsController < ApplicationController
           @comment = Comment.new
         end
       elsif @comment.proposal
-        @proposal = @item = @comment.proposal
-        if @from_mini_form
-          @comments = @item.comments.last 5
-          @comment = Comment.new
-        end
-        Note.notify :proposal_comment, @proposal.unique_token, @proposal.anon_token \
-          unless @proposal.anon_token.eql? anon_token
+        @proposal = @item = @comment.proposal; prepare_mini_form
+        Note.notify :proposal_comment, @proposal.unique_token, @proposal.identity \
+          unless @proposal.identity.eql? current_identity
         redirect_to show_proposal_path @proposal.unique_token, comments: true unless params[:ajax_req]
       elsif @comment.vote
-        @vote = @item = @comment.vote
-        if @from_mini_form
-          @comments = @item.comments.last 5
-          @comment = Comment.new
-        end
+        @vote = @item = @comment.vote; prepare_mini_form
         Note.notify :vote_comment, @vote, @vote.identity, current_identity unless @vote.identity.eql? current_identity
+        redirect_to show_vote_path @vote.unique_token unless @from_mini_form
       end
     else
       redirect_to :back
@@ -137,6 +130,13 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def prepare_mini_form
+    if @from_mini_form
+      @comments = @item.comments.last 5
+      @comment = Comment.new
+    end
+  end
 
   def dev_only
     redirect_to '/404' unless dev?

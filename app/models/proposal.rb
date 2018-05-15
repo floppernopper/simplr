@@ -231,6 +231,11 @@ class Proposal < ActiveRecord::Base
     return versions
   end
 
+  def identity
+    return user if user
+    return anon_token if anon_token
+  end
+
   def able_to_edit?
     self.votes.empty?
   end
