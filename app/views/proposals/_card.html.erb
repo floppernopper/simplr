@@ -29,10 +29,12 @@
 				  <!-- shows type of proposal to be motioned -->
 				  <%= render "proposals/action_type", proposal: proposal %>
 				</td>
-			  <% if proposal.ratified %>
+				<% if proposal.action.present? and proposal.ratified %>
 					<td>
 						·
 					</td>
+				<% end %>
+			  <% if proposal.ratified %>
 					<td>
 				    <%= link_to 'Ratified <i class="fa fa-check"></i>'.html_safe,
 				      show_proposal_path(proposal.unique_token), class: "standard_post_link ratified_link_yay" %>

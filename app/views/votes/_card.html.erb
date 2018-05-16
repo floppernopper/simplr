@@ -12,35 +12,46 @@
       <% if humanity_confirmed? and vote.verifiable? anon_token, current_user \
           and not vote.proposal.requires_revision and not vote.abstain?  %>
         <p>
-          <%= link_to "Verify", verify_vote_path(vote.unique_token),
+          <%= link_to "Verify", verify_vote_path(vote.unique_token), remote: true,
             data: { confirm: "Are you sure you want to verify this vote?" } %>
         </p>
       <% end %>
 
       <% if vote_can_be_reversed? vote and not vote.abstain? %>
         <p>
-          <%= link_to "Reverse", reverse_vote_path(vote.unique_token), method: :post,
-            data: { confirm: "Are you sure you want to reverse this vote?" } %>
+          <%= link_to "Reverse", reverse_vote_path(vote.unique_token), method: :post, remote: true,
+            data: { confirm: "Are you sure you want to reverse this vote?" }, id: "reverse_link_#{vote.id}" %>
+            <%= render "app/link_sound.js", link_id: "reverse_link_#{vote.id}", sound: :post_interface_sound %>
         </p>
       <% end %>
 
-      <% if vote.up? and vote.proposal.ratified %>
-        <%= link_to "Votes to reverse: #{vote.votes_to_reverse}",
-          show_vote_path(vote), class: :votes_to_reverse_label %>
-      <% elsif vote.down? and vote.proposal.requires_revision? %>
-        <%= link_to "Votes to reverse block: #{vote.votes_to_reverse}",
-          show_vote_path(vote), class: :votes_to_reverse_label %>
-      <% end %>
-
   	  <% if vote.verified %>
-  	    <%= link_to 'Verified <i class="fa fa-check"></i>'.html_safe, show_vote_path(vote), class: "verified_label" %>
+  	    <%= link_to 'Verified <i class="fa fa-check"></i>'.html_safe, show_vote_path(vote),
+          class: "verified_label", id: "verify_link_#{vote.id}" %>
+          <%= render "app/link_sound.js", link_id: "verify_link_#{vote.id}", sound: :post_interface_sound %>
   	  <% end %>
     </div>
 
   	<!-- anchor for inserting new comment form -->
   	<div id="vote_comments_anchor_<%= vote.id %>"></div>
 
-    <%= render "votes/comments_link", vote: vote %>
+
+    <table class="bottom_left_link">
+      <tr>
+        <td>
+          <%= render "votes/comments_link", vote: vote %>
+        </td>
+        <% if votes_to_reverse? vote %>
+          <td>
+            ·
+          </td>
+          <td>
+            <%= link_to "Votes to reverse#{votes_to_reverse?(vote)}: #{vote.votes_to_reverse}",
+              show_vote_path(vote), class: :standard_post_link %>
+          </td>
+        <% end %>
+      </tr>
+    </table>
 
     <table class="bottom_right_link">
       <tr>

@@ -1,0 +1,8 @@
+<% if @success %>
+  var vote_card = $("#vote_card_<%= @vote.id %>");
+
+  vote_card.after("<%=j render 'votes/card', vote: @vote %>");
+  vote_card.remove();
+
+  window.navigator.vibrate(1);
+<% end %>

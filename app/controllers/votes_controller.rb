@@ -91,9 +91,9 @@ class VotesController < ApplicationController
         Note.notify :vote_reversed, @vote.unique_token,
           (@vote.user ? @vote.user : @vote.anon_token),
           (current_user ? current_user : anon_token)
+        @success = true
       end
     end
-    redirect_to :back
   end
 
   def verify
@@ -104,9 +104,9 @@ class VotesController < ApplicationController
         Note.notify :vote_verified, @vote.unique_token,
           (@vote.user.nil? ? @vote.anon_token : @vote.user),
           (current_user ? current_user : anon_token)
+        @success = true
       end
     end
-    redirect_to :back
   end
 
   def confirm_humanity

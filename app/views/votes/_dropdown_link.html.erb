@@ -3,6 +3,6 @@
 
 <%= link_to '<i class="fa fa-chevron-down"></i>'.html_safe + " Vote#{(' ' + item.votes.size.to_s) \
   unless item.votes.size.zero?}", vote_dropdown_path(item.unique_token), remote: true, class: link_class,
-  style: (item.votes.present? ? "color:rgb(119,158,203);" : ''), id: link_id %>
+  style: (voted_on?(item) ? "color:rgb(119,158,203);" : ''), id: link_id %>
 
 <%= render "app/link_sound.js", link_id: link_id, sound: :post_interface_sound %>

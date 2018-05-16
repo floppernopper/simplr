@@ -30,6 +30,16 @@ module VotesHelper
     end
   end
 
+  def votes_to_reverse? vote
+    if vote.up? and vote.proposal.ratified
+      ''
+    elsif vote.down? and vote.proposal.requires_revision?
+      ' block'
+    else
+      nil
+    end
+  end
+
   def vote_can_be_reversed? vote
     humanity_confirmed? and vote.could_be_reversed? anon_token, current_user \
       and ((vote.up? and vote.proposal.ratified) or (vote.down? and vote.proposal.requires_revision?))
@@ -42,6 +52,10 @@ module VotesHelper
   def recently_up_voted? proposal
     vote = proposal.up_votes.find_by_anon_token(anon_token)
     return (up_voted? proposal and vote.created_at > 1.hour.ago)
+  end
+
+  def voted_on? proposal
+    up_voted? proposal or down_voted? proposal or abstained_from_vote? proposal
   end
 
   def up_voted? proposal

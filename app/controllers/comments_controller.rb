@@ -100,10 +100,8 @@ class CommentsController < ApplicationController
         redirect_to show_proposal_path @proposal.unique_token, comments: true unless params[:ajax_req]
       elsif @comment.vote
         @vote = @item = @comment.vote; prepare_mini_form
-
-        Note.notify :vote_comment, @vote.unique_token, @vote.identity,
-          current_identity unless @vote.identity.eql? current_identity
-
+        Note.notify :vote_comment, @vote.unique_token, @vote.identity, current_identity \
+          unless @vote.identity.eql? current_identity
         redirect_to show_vote_path @vote.unique_token unless @from_mini_form
       end
     else
