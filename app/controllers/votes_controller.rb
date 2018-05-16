@@ -79,7 +79,11 @@ class VotesController < ApplicationController
   def reverse
     if @vote.could_be_reversed? anon_token, current_user
       vote = @vote.votes.new flip_state: 'down', anon_token: anon_token
-      vote.user_id = current_user.id if current_user; vote.save
+      vote.user_id = current_user.id if current_user
+      if vote.save
+        # for ajax card replace
+        @success = true
+      end
       if @vote.votes_to_reverse <= 0
         if @vote.up?
           @vote.proposal.update ratified: false
@@ -91,7 +95,6 @@ class VotesController < ApplicationController
         Note.notify :vote_reversed, @vote.unique_token,
           (@vote.user ? @vote.user : @vote.anon_token),
           (current_user ? current_user : anon_token)
-        @success = true
       end
     end
   end

@@ -12,15 +12,13 @@
       <% if humanity_confirmed? and vote.verifiable? anon_token, current_user \
           and not vote.proposal.requires_revision and not vote.abstain?  %>
         <p>
-          <%= link_to "Verify", verify_vote_path(vote.unique_token), remote: true,
-            data: { confirm: "Are you sure you want to verify this vote?" } %>
+          <%= link_to "Verify", verify_vote_path(vote.unique_token), remote: true %>
         </p>
       <% end %>
 
       <% if vote_can_be_reversed? vote and not vote.abstain? %>
         <p>
-          <%= link_to "Reverse", reverse_vote_path(vote.unique_token), method: :post, remote: true,
-            data: { confirm: "Are you sure you want to reverse this vote?" }, id: "reverse_link_#{vote.id}" %>
+          <%= link_to "Reverse", reverse_vote_path(vote.unique_token), method: :post, remote: true, id: "reverse_link_#{vote.id}" %>
             <%= render "app/link_sound.js", link_id: "reverse_link_#{vote.id}", sound: :post_interface_sound %>
         </p>
       <% end %>
