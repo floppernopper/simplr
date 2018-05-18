@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
     if params[:game_token]
       redirect_to show_game_path params[:game_token]
     else
-      redirect_to root_url
+      redirect_to @user
     end
   end
 

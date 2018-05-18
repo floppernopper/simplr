@@ -220,6 +220,7 @@ Rails.application.routes.draw do
   # anrcho
   get 'hide_anrcho_info', to: 'proposals#hide_anrcho_info', as: 'hide_anrcho_info'
   get 'portal_to_anrcho/:token', to: 'portals#to_anrcho', as: 'portal_to_anrcho'
+  get 'mood_board', to: 'proposals#mood_board', as: 'mood_board'
 
   # votes
   get 'vote/:token', to: 'votes#show', as: 'show_vote'
