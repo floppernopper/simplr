@@ -309,7 +309,7 @@ class ApplicationController < ActionController::Base
   end
 
   def anrcho?
-    request.host.eql? "anrcho.com" or cookies[:at_anrcho].present?
+    request.host.eql? "anrcho.com" or cookies[:at_anrcho].present? or @anrcho
   end
 
   def forrest_only_club?
