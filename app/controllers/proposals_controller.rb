@@ -10,12 +10,6 @@ class ProposalsController < ApplicationController
     @post = if @group then @group.posts.new else Post.new end
   end
 
-  def contributors
-  end
-
-  def tutorial
-  end
-
   def hide_anrcho_info
     cookies.permanent[:hide_anrcho_info] = true
   end
@@ -26,12 +20,6 @@ class ProposalsController < ApplicationController
 
   def load_section_links
     @group = Group.find_by_token(params[:group_token])
-  end
-
-  def add_group_token
-  end
-
-  def add_image
   end
 
   def index
@@ -46,10 +34,7 @@ class ProposalsController < ApplicationController
       treasure.save
     end
   end
-
-  def edit
-  end
-
+  
   def update
     if @proposal.update(proposal_params)
       if params[:pictures]
