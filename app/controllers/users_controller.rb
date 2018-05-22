@@ -15,6 +15,10 @@ class UsersController < ApplicationController
     # updates to revert back to this profile pic
     if @picture.update reverted_back_to: true
       for pic in @user.profile_pictures
+
+        # not working because of self.img of user that is still in play
+        # could fix by removing from db altogether, updating all users to incorporate new profile pic model
+
         # undos all revert back tos from before
         if pic.is_a? Picture and pic.reverted_back_to and not pic.eql? @picture
           pic.update reverted_back_to: false
