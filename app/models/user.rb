@@ -156,6 +156,37 @@ class User < ActiveRecord::Base
     return _feed.reverse
   end
 
+  def old_profile_pictures
+    pics = []; for pic in profile_pictures
+      pics << pic unless pic.eql? current_profile_picture
+    end
+    pics
+  end
+
+  def current_profile_picture
+    # check for new img way
+    if pictures.present?
+      # if reverted back to old profile pic, return that
+      reverted = pictures.where reverted_back_to: true
+      if reverted.present?
+        return reverted.last
+      else
+        # else just return newest uploaded profile pic
+        return pictures.last
+      end
+    # return old img way
+    elsif image_url
+      return self
+    end
+    nil
+  end
+
+  def profile_pictures
+    pics = pictures.to_a
+    pics.unshift self if image_url
+    pics
+  end
+
   def profile_views
     View.where profile_id: id
   end

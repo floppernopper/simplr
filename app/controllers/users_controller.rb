@@ -1,8 +1,16 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :kristin, :edit, :update, :update_password, :destroy, :load_more_posts]
-  before_action :secure_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:show, :kristin, :edit, :update, :update_password,
+    :destroy, :load_more_posts, :toggle_old_profile_pics, :switch_back_to_old_profile_picture]
+  before_action :secure_user, only: [:edit, :update, :destroy, :switch_back_to_old_profile_picture]
   before_action :dev_only, only: [:index]
   before_action :invite_only
+
+  def toggle_old_profile_pics
+    @old_profile_pics = @user.profile_pictures
+  end
+
+  def switch_back_to_old_profile_picture
+  end
 
   def update_scrolling_avatar
     @post = Post.find_by_id params[:post_id]
@@ -113,7 +121,7 @@ class UsersController < ApplicationController
     if @user.update(user_params.except(:image))
       @user.pictures.create image: params[:user][:image]
       Tag.extract @user
-      redirect_to show_user_path(@user.unique_token), notice: "Profile/account updated successfully."
+      redirect_to :back, notice: "Profile/account updated successfully."
     else
       redirect_to :back, notice: "Unable to update profile/account... Error."
     end

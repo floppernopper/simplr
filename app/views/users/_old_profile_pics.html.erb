@@ -1,0 +1,10 @@
+<div id="old_profile_pics" hidden>
+  <% for pic in old_profile_pics %>
+    <%= link_to switch_back_to_old_profile_picture_path(id: pic.id, token: current_user.unique_token),
+      method: :put, remote: true do %>
+
+      <%= image_tag pic, style: "width:10%;" %>
+      
+    <% end %>
+  <% end %>
+</div>

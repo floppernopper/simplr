@@ -1,17 +1,23 @@
-<div class="dark_card">
+<div class="dark_card user_edit_form_card">
   <%= form_for @user, url: user_path(@user), method: :patch, :html => { :multipart => true, "data-ajax" => false } do |f| %>
 	  <div align="center">
-	    <% if (@user.god or @user.dev) or kristin? %>
-        <%= f.text_field :title, placeholder: "Change your title", class: "dark_text_field", id: :user_field_1 %>
-      <% end %>
-
-      <%= f.text_field :name, placeholder: "Change your name", class: "dark_text_field", id: :user_field_2 %>
+      <p>
+  	    <% if (@user.god or @user.dev) or kristin? %>
+          <%= f.text_field :title, placeholder: "Change your title", class: "dark_text_field", id: :user_field_1 %>
+        <% end %>
+        <%= f.text_field :name, placeholder: "Change your name", class: "dark_text_field", id: :user_field_2 %>
+      </p>
 
 		  <%= f.text_area :body, placeholder: "Describe yourself", class: "dark_text_area", id: :user_field_3 %>
 
 		  <p>
-		    <%= image_tag profile_picture(@user), style: "width:12.5%;margin-right:10px;" %> Avatar: <%= f.file_field :image, id: :user_field_4 %>
+		    <%= image_tag profile_picture(@user), style: "width:12.5%;margin-right:10px;" %>
+        Avatar: <%= f.file_field :image, id: :user_field_4 %>
 	    </p>
+
+      <%= render "users/old_profile_pics", old_profile_pics: @user.old_profile_pictures %>
+      <%= render "users/toggle_old_profile_pics_link", user: @user %>
+      <i id="old_profile_pics_anchor"></i>
 
       <% if god? %>
         <p>

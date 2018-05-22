@@ -8,6 +8,8 @@ class Picture < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  validates_presence_of :image
+
   def move_up
     item = post ? post : (proposal ? proposal : nil)
     ensure_order

@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.user_edit_form_card {
+  position: relative;
+}
+
+.edit_form_profile_picture {
+  position: relative;
+  top: 0.5px;
+  left: 7.5px;
+  width: 15%;
+}
+
 .scrolling_avatar {
   display: block;
   position: fixed;
