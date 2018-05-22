@@ -1,6 +1,6 @@
 <div class="dark_card" align="center">
   <%= render "app/time_ago", item: view, white_link: true %>
-  <% unless @user %>
+  <% if view.user and not @user %>
     <p>
       <%= link_to view.user.name + " (#{view.user.views.size})",
         user_views_index_path(view.user.unique_token), class: :white_link %>
