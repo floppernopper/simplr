@@ -1,7 +1,8 @@
-
-      <%= link_to toggle_old_profile_pics_path(user.unique_token), remote: true, id: :toggle_old_profile_pics_link do %>
-        <p class="dark_txt" id="toggle_old_profile_pics_txt">
-          Show old profile pictures...
-        </p>
-      <% end %>
-      <%= render "app/link_sound.js", link_id: :toggle_old_profile_pics_link, sound: :post_interface_sound %>
+<div id="toggle_old_profile_pics_link_container">  
+  <%= link_to toggle_old_profile_pics_path(user.unique_token), remote: true, id: :toggle_old_profile_pics_link do %>
+    <p class="dark_txt" id="toggle_old_profile_pics_txt">
+      Show old profile pictures...
+    </p>
+  <% end %>
+  <%= render "app/link_sound.js", link_id: :toggle_old_profile_pics_link, sound: :post_interface_sound %>
+</div>

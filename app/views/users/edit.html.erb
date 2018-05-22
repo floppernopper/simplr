@@ -11,13 +11,14 @@
 		  <%= f.text_area :body, placeholder: "Describe yourself", class: "dark_text_area", id: :user_field_3 %>
 
 		  <p>
-		    <%= image_tag profile_picture(@user), style: "width:12.5%;margin-right:10px;" %>
+        <%= render "users/edit_form_profile_pic", user: @user %>
         Avatar: <%= f.file_field :image, id: :user_field_4 %>
 	    </p>
 
-      <%= render "users/old_profile_pics", old_profile_pics: @user.old_profile_pictures %>
-      <%= render "users/toggle_old_profile_pics_link", user: @user %>
-      <i id="old_profile_pics_anchor"></i>
+      <% if @user.old_profile_pictures.present? %>
+        <%= render "users/old_profile_pics", old_profile_pics: @user.old_profile_pictures %>
+        <%= render "users/toggle_old_profile_pics_link", user: @user %>
+      <% end %>
 
       <% if god? %>
         <p>

@@ -1,0 +1,13 @@
+<% if @reverted %>
+  var toggle_link = $("#toggle_old_profile_pics_link_container");
+  var form_pic = $("#edit_form_profile_picture");
+  var old_pics = $("#old_profile_pics");
+
+  form_pic.after("<%=j render 'users/edit_form_profile_pic', user: @user %>");
+  form_pic.remove();
+
+  old_pics.after("<%=j render 'users/old_profile_pics', old_profile_pics: @user.old_profile_pictures %>");
+  old_pics.remove();
+
+  window.navigator.vibrate(1);
+<% end %>

@@ -10,6 +10,19 @@ class UsersController < ApplicationController
   end
 
   def switch_back_to_old_profile_picture
+    # gets old profile pic being reverted back to
+    @picture = Picture.find_by_id params[:id]
+    # updates to revert back to this profile pic
+    if @picture.update reverted_back_to: true
+      for pic in @user.profile_pictures
+        # undos all revert back tos from before
+        if @picture.reverted_back_to and not pic.eql? @picture
+          @picture.update reverted_back_to: false
+        end
+      end
+      # success for js
+      @reverted = true
+    end
   end
 
   def update_scrolling_avatar
