@@ -1,11 +1,14 @@
 <div class="dark_card" align="center">
   <%= render "app/time_ago", item: view, white_link: true %>
-  <% if view.user and not @user %>
-    <p>
+  <p>
+    <% if view.user and not @user %>
       <%= link_to view.user.name + " (#{view.user.views.size})",
         user_views_index_path(view.user.unique_token), class: :white_link %>
-    </p>
-  <% end %>
+    <% elsif view.anon_token %>
+      <%= link_to view.anon_token + " (#{View.where(anon_token: view.anon_token).size})",
+        anon_views_index_path(view.anon_token), class: :white_link %>
+    <% end %>
+  </p>
   <p>
     <%= link_to view.ip_address, views_path(ip: view.ip_address), class: :white_link %>
   </p>
@@ -13,7 +16,7 @@
     <%= view.locale %>
   </p>
   <p>
-    Times viewed from: <%= view.user.views.select { |i| i.locale.eql? view.locale }.size %>
+    Times viewed from: <%= (view.user ? view.user.views : View.where(anon_token: view.anon_token)).select { |i| i.locale.eql? view.locale }.size %>
   </p>
   <p>
     <%= view.created_at.strftime("%d %b. %Y, %H:%M:%S") %>
@@ -62,7 +65,8 @@
     </p>
   <% elsif view.profile_id %>
     <p>
-      <%= link_to "User profile #{User.find(view.profile_id).name}", user_path(view.user_id), class: :white_link  %>
+      <%= link_to "User profile #{User.find(view.profile_id).name}",
+        (view.user_id ? user_path(view.user_id) : search_path(query: view.anon_token)), class: :white_link  %>
     </p>
   <% elsif view.proposal_id %>
     <p>

@@ -30,6 +30,9 @@ class ViewsController < ApplicationController
     get_most_viewed_locale
   end
 
+  def anon_index
+  end
+
   def click_index
     @user = User.find_by_unique_token params[:token]
     @clicks = @user.views.clicks.reverse
