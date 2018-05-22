@@ -21,7 +21,7 @@
             <%= render "users/anon_avatar", token: vote.anon_token, user: vote.user %>
           <% elsif vote.user and vote.user.image %>
             <%= link_to user_path(vote.user), title: "#{vote.user.name}" do %>
-              <%= image_tag vote.user.image, class: :user_avatar_image %>
+              <%= image_tag profile_picture(vote.user), class: :user_avatar_image %>
             <% end %>
           <% end %>
         </div>
