@@ -1,7 +1,11 @@
 <% if @reverted %>
   var toggle_link = $("#toggle_old_profile_pics_link_container");
+  var current_avatar = $("#current_avatar_nav_container");
   var form_pic = $("#edit_form_profile_picture");
   var old_pics = $("#old_profile_pics");
+
+  current_avatar.after("<%=j render 'users/current_avatar' %>");
+  current_avatar.remove();
 
   form_pic.after("<%=j render 'users/edit_form_profile_pic', user: @user %>");
   form_pic.remove();

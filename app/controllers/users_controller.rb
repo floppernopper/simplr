@@ -5,10 +5,6 @@ class UsersController < ApplicationController
   before_action :dev_only, only: [:index]
   before_action :invite_only
 
-  def toggle_old_profile_pics
-    @old_profile_pics = @user.profile_pictures
-  end
-
   def switch_back_to_old_profile_picture
     # gets old profile pic being reverted back to
     @picture = Picture.find_by_id params[:id]

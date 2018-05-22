@@ -1,9 +1,11 @@
-<% if current_user and profile_picture(current_user) %>
-  <%= link_to user_path(current_user.unique_token), class: :current_token_link, title: "#{current_user.name}" do %>
-    <%= image_tag profile_picture(current_user), class: :avatar_container %>
+<span id="current_avatar_nav_container">  
+  <% if current_user and profile_picture(current_user) %>
+    <%= link_to user_path(current_user.unique_token), class: :current_token_link, title: "#{current_user.name}" do %>
+      <%= image_tag profile_picture(current_user), class: :avatar_container %>
+    <% end %>
+  <% elsif current_user %>
+    <%= render "users/anon_avatar", user: current_user, position: :current_token_link %>
+  <% else %>
+    <%= render "users/anon_avatar", token: anon_token, position: :current_token_link %>
   <% end %>
-<% elsif current_user %>
-  <%= render "users/anon_avatar", user: current_user, position: :current_token_link %>
-<% else %>
-  <%= render "users/anon_avatar", token: anon_token, position: :current_token_link %>
-<% end %>
+</span>
