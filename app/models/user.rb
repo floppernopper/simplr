@@ -155,6 +155,10 @@ class User < ActiveRecord::Base
     return _feed.reverse
   end
 
+  def profile_views
+    View.where profile_id: id
+  end
+
   def following? other_user
     self.connections.where(other_user_id: other_user.id).present?
   end
