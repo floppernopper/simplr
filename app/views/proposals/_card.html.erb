@@ -21,6 +21,10 @@
 	      made a motion in <%= link_to group_name, proposal.group, class: :posted_link,
 	        title: "Group (#{proposal.group.name})" %>
 	    </span>
+		<% elsif not anrcho? %>
+			<span class="posted_label">
+	      made a motion in <%= link_to "Anrcho", to_anrcho_portal_url, class: :posted_link %>
+			</span>
 	  <% end %>
 
 		<table class="bottom_right_link">
