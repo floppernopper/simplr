@@ -16,8 +16,8 @@ class UsersController < ApplicationController
     if @picture.update reverted_back_to: true
       for pic in @user.profile_pictures
         # undos all revert back tos from before
-        if @picture.reverted_back_to and not pic.eql? @picture
-          @picture.update reverted_back_to: false
+        if pic.is_a? Picture and pic.reverted_back_to and not pic.eql? @picture
+          pic.update reverted_back_to: false
         end
       end
       # success for js
