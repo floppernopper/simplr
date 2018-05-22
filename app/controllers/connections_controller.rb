@@ -2,10 +2,10 @@ class ConnectionsController < ApplicationController
   before_action :set_item, only: [:new, :create, :update, :destroy,
     :members, :invites, :requests, :following, :followers, :steal_follower]
   before_action :invite_only, except: [:backdoor, :peace, :invite_only_message, :redeem_invite,
-      :new, :create, :members, :let_me_in]
+      :new, :create, :members, :let_me_in, :zen]
   before_action :invited_or_anrcho, only: [:new, :create, :members]
   before_action :user_access, only: [:invites, :followers]
-  before_action :dev_only, only: [:zen, :let_me_in] # zenful only for devs in production now
+  before_action :dev_only, only: [:let_me_in] # zenful only for devs in production now
 
   def index
     @user = User.find_by_unique_token params[:token]

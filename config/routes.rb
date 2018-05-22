@@ -86,7 +86,7 @@ Rails.application.routes.draw do
   get 'backdoor', to: 'connections#backdoor', as: 'backdoor'
   get 'peace', to: 'connections#peace', as: 'peace'
   #get 'zen', to: 'connections#zen', as: 'zen'
-  get 'zenful', to: 'connections#zen'
+  get 'zenful_namaste_om', to: 'connections#zen'
   get 'let_me_in', to: 'connections#let_me_in'
   get 'hide_stop_invited_music', to: 'connections#hide_stop_invited_music', as: 'hide_stop_invited_music'
 
