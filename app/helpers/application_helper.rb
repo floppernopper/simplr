@@ -6,6 +6,13 @@ module ApplicationHelper
     raw str
   end
 
+  def standard_card &block
+    str = '<div class="card" align="center">'
+    str << capture(&block)
+    str << '</div>'
+    raw str
+  end
+
   def get_site_ico
     if anrcho?
       "anrcho"

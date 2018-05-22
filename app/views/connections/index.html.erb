@@ -1,21 +1,32 @@
-<h2 class="standard_page_header">Following <i class="fa fa-users"></i></h2>
-
-<% for user in @following.last 5 %>
-  <%= render "users/card", user: user %>
+<% if @following.present? %>
+  <h2 class="standard_page_header">Following (<%= @following.size %>) <i class="fa fa-users"></i></h2>
+  <% for user in @following.last 5 %>
+    <%= render "users/card", user: user %>
+  <% end %>
 <% end %>
 
-</br>
-<h2 class="standard_page_header">Followers <i class="fa fa-users"></i></h2>
-
-<% for user in @followers.last 5 %>
-  <%= render "users/card", user: user %>
+<% if @followers.present? %>
+  </br>
+  <h2 class="standard_page_header">Followers (<%= @followers.size %>) <i class="fa fa-users"></i></h2>
+  <% for user in @followers.last 5 %>
+    <%= render "users/card", user: user %>
+  <% end %>
 <% end %>
 
-</br>
-<h2 class="standard_page_header">Groups <i class="fa fa-cubes"></i></h2>
+<% if @groups.present? %>
+  </br>
+  <h2 class="standard_page_header">Groups (<%= @groups.size %>) <i class="fa fa-cubes"></i></h2>
+  <% for group in @groups.last 5 %>
+    <%= render "groups/card", group: group %>
+  <% end %>
+<% end %>
 
-<% for group in @groups.last 5 %>
-  <%= render "groups/card", group: group %>
+<% if @views.present? %>
+  </br>
+  <h2 class="standard_page_header">Profile views (<%= @views.size %>) <i class="fa fa-eye"></i></h2>
+  <% for view in @views.reverse.first 5 %>
+    <%= render "views/reg_card", view: view %>
+  <% end %>
 <% end %>
 
 <% if @following.empty? %>
@@ -51,6 +62,18 @@
           search_path(query: "groups") %> to search for groups to join. Or start your own <%= link_to "here", my_groups_path %>.
       <% else %>
         This user isn't in any groups yet.
+      <% end %>
+    </p>
+  </div>
+<% end %>
+
+<% if @views.empty? %>
+  <div class="card">
+    <p align="center">
+      <% if current_user and current_user.eql? @user %>
+        Your profile hasn't been viewed by anyone yet.
+      <% else %>
+        This users profile hasn't been viewed yet.
       <% end %>
     </p>
   </div>

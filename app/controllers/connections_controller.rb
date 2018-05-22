@@ -12,6 +12,7 @@ class ConnectionsController < ApplicationController
     @following = @user.following
     @followers = @user.followers
     @groups = @user.my_groups
+    @views = @user.profile_views
   end
 
   def let_me_in

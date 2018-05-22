@@ -1,0 +1,8 @@
+<%= standard_card do %>
+  <%= render "app/time_ago", item: view %>
+  <%= link_to view.user do %>
+    <p>
+      Viewed by <%= view.user ? view.user.name : view.anon_token %>
+    </p>
+  <% end %>
+<% end %>
