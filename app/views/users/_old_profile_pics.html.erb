@@ -1,11 +1,10 @@
 <div id="old_profile_pics" hidden>
-  <% i=0; for pic in old_profile_pics %>
+  <% for pic in old_profile_pics %>
     <%= link_to switch_back_to_old_profile_picture_path(id: pic.id, token: current_user.unique_token),
-      method: :put, remote: true, id: "old_profile_pic_#{i}" do %>
+      method: :put, remote: true, class: :switch_profile_pic_link do %>
       <%= image_tag pic.image, style: "width:10%;" %>
     <% end %>
 
-    <%= render "app/link_sound.js", link_id: "old_profile_pic_#{i}", sound: :post_interface_sound %>
-    <% i+=1 %>
+    <%= render "app/link_sound.js", link_id: :switch_profile_pic_link, sound: :post_interface_sound, _class: true %>
   <% end %>
 </div>

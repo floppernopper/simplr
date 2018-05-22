@@ -2,6 +2,7 @@
   var toggle_link = $("#toggle_old_profile_pics_link_container");
   var current_avatar = $("#current_avatar_nav_container");
   var form_pic = $("#edit_form_profile_picture");
+  var universal_anchor = $("#universal_anchor");
   var old_pics = $("#old_profile_pics");
 
   current_avatar.after("<%=j render 'users/current_avatar' %>");
@@ -12,6 +13,10 @@
 
   old_pics.after("<%=j render 'users/old_profile_pics', old_profile_pics: @user.old_profile_pictures %>");
   old_pics.remove();
+
+  if (!$("#universal_notice_card").length) {
+    universal_anchor.after("<%=j render 'app/universal_notice', message: 'Avatar successfully changed...' %>");
+  }
 
   window.navigator.vibrate(1);
 <% end %>

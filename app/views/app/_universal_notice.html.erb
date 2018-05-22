@@ -1,0 +1,9 @@
+<div class="dark_card" id="universal_notice_card" align="center">
+  <p class="dark_txt" id="universal_notice_card_txt">
+    <b><%= message %></b>
+  </p>
+</div>
+
+<script>
+  <%= render "app/fader.js", target: 'universal_notice_card_txt', target_id: '', slow: true %>
+</script>
