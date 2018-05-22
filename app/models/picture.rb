@@ -2,6 +2,7 @@ class Picture < ActiveRecord::Base
   belongs_to :proposal
   belongs_to :product
   belongs_to :post
+  belongs_to :user
 
   before_create :ensure_order_by_update
 

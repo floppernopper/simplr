@@ -36,14 +36,14 @@
   <% end %>
 
   <div align="center">
-    <% if user.image.url %>
+    <% if profile_picture user %>
       <% if @user_shown %>
         <%= link_to (user.kristin? ? leo_path : geolocation_path), remote: !user.kristin? do %>
-          <%= image_tag user.image, class: :profile_picture %>
+          <%= image_tag profile_picture(user), class: :profile_picture %>
         <% end %>
       <% else %>
         <%= link_to user do %>
-          <%= image_tag user.image, class: :profile_picture %>
+          <%= image_tag profile_picture(user), class: :profile_picture %>
         <% end %>
       <% end %>
     <% end %>

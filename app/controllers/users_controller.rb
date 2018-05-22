@@ -110,7 +110,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
+    if @user.update(user_params.except(:image))
+      @user.pictures.create image: params[:user][:image]
       Tag.extract @user
       redirect_to show_user_path(@user.unique_token), notice: "Profile/account updated successfully."
     else

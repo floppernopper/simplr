@@ -1,4 +1,22 @@
 module UsersHelper
+  def profile_picture user
+    # check for new img way
+    if user.pictures.present?
+      # if reverted back to old profile pic, return that
+      reverted = user.pictures.where reverted_back_to: true
+      if reverted.present?
+        return reverted.last.image
+      else
+        # else just return newest uploaded profile pic
+        return user.pictures.last.image
+      end
+    # return old img way
+    elsif user.image_url
+      return user.image
+    end
+    nil
+  end
+
   def kristin? user=nil
     @user = user if user
     if @user.id.eql? 34

@@ -10,7 +10,7 @@
 		  <%= f.text_area :body, placeholder: "Describe yourself", class: "dark_text_area", id: :user_field_3 %>
 
 		  <p>
-		    Avatar: <%= f.file_field :image, id: :user_field_4 %>
+		    <%= image_tag profile_picture(@user), style: "width:12.5%;margin-right:10px;" %> Avatar: <%= f.file_field :image, id: :user_field_4 %>
 	    </p>
 
       <% if god? %>

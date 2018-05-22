@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :settings, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :pictures, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :bots, dependent: :destroy
