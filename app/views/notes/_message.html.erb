@@ -21,8 +21,8 @@ action = note.action.to_sym; case action %>
   <% end %>
 <% when :comment_like, :comment_reply, :user_mention_comment %>
   <%= link_to message, comment_path(note.item_id), class: link_class %>
-<% when :user_like %>
-  <%= link_to message, user_path(item.item_id), class: link_class %>
+<% when :user_like, :profile_view %>
+  <%= link_to message, user_path(note.item_id), class: link_class %>
 <% when :like_like %>
   <% post = Like.find(note.item_id).post if Like.find_by_id note.item_id %>
   <% like = get_like_like note %>

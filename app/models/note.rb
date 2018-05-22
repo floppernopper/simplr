@@ -13,9 +13,10 @@ class Note < ActiveRecord::Base
       # if one of the users is signed up / registered
       user_id: (receiver.is_a?(String) ? nil : (receiver.nil? ? nil : receiver.id)),
       sender_id: (sender.is_a?(String) ? nil : (sender.nil? ? nil : sender.id)),
+      
       # if one of the users is anonymous / not signed up
-      anon_token: (receiver.is_a?(String) ? receiver : ((item and !item.is_a?(String) \
-        and item.anon_token.present?) ? item.anon_token : nil)),
+      anon_token: (receiver.is_a?(String) ? receiver : ((item and !item.is_a?(String) and item.respond_to?(:anon_token) and item.anon_token.present?) ? item.anon_token : nil)),
+
       sender_token: (sender.is_a?(String) ? sender : nil)
     )
   end
@@ -28,6 +29,7 @@ class Note < ActiveRecord::Base
       post_zen: "Someone said your post was very zen.",
       post_share: "Someone shared your post.",
       post_views: "People are seeing your post.",
+      profile_view: "Someone viewed your profile.",
       comment_like: "Someone liked your comment.",
       comment_reply: "Someone replied to your comment.",
       also_commented: "Someone also commented on this post.",
@@ -51,6 +53,7 @@ class Note < ActiveRecord::Base
       proposal_revised: "Your proposal has been revised.",
       proposal_comment: "Someone commented on your proposal.",
       proposal_like: "Someone liked your proposal.",
+      proposal_views: "People are seeing your motion.",
       vote_verified: "Someone verified your vote.",
       vote_reversed: "Someone reversed your vote.",
       vote_comment: "Someone commented on your vote.",

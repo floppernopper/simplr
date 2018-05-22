@@ -182,12 +182,21 @@ class ApplicationController < ActionController::Base
       view = item.views.where(user_id: current_user.id).last
       view.update score_count: view.score_count.to_i + 1
     end
-    # notify users of more than a few views they've received on a post, every week
-    if item.is_a? Post and item.user and item.views.where.not(user_id: item.user.id)
-                                                   .where('created_at >= ?', 1.week.ago)
-                                                   .where(anon_token: nil).size >= 5
-      Note.notify :post_views, item, item.user \
-        unless item.user.notes.where(action: "post_views").where('created_at >= ?', 1.week.ago).present?
+
+    # also notify for profile views after a certain point or even each view
+    if current_user and item.is_a? User and not item.eql? current_user
+      Note.notify :profile_view, item, item, current_user
+    end
+
+
+    for model in [Post, Proposal]
+      # notify users of more than a few views they've received on a post, every week
+      if item.is_a? model and item.user and item.views.where.not(user_id: item.user.id)
+                                                     .where('created_at >= ?', 1.week.ago)
+                                                     .where(anon_token: nil).size >= 5
+        Note.notify "#{model.to_s.downcase}_views".to_sym, item, item.user, current_identity \
+          unless item.user.notes.where(action: "#{model.to_s.downcase}_views").where('created_at >= ?', 1.week.ago).present?
+      end
     end
   end
 
