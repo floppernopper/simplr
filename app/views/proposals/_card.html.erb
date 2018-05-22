@@ -25,6 +25,10 @@
 			<span class="posted_label">
 	      made a motion in <%= link_to "Anrcho", to_anrcho_portal_url, class: :posted_link %>
 			</span>
+		<% elsif anrcho? %>
+			<span class="posted_label">
+	      made a global <%= link_to "motion", show_proposal_path(proposal.unique_token), class: :posted_link %>.
+			</span>
 	  <% end %>
 
 		<table class="bottom_right_link">
