@@ -52,20 +52,18 @@ class User < ActiveRecord::Base
         end
 
         # divide n, take off first, put back together, check for name, and repeat
-        n.split(" ")[1,-1].join
+        n_split = name.split(" ")
+        # first loop starts from beginning and goes forward
+        n_split.size.times do |i|
+        
+          n_joined = n_split[i,-1].map {|i| i << " "}.join
 
-        n_split = n.split(" ")
-
-        n_split.size.times |n|
-          # use map to append " " spaces to each, then join
-          #n_split.join
+          # checks if name found yet
+          n = find_by_name n_joined
+          
+          # returns if found
+          return n if n
         end
-
-        # checks if name found yet
-        n = find_by_name name
-
-        # returns if found
-        return n if n
 
         # inserts spaces back in place unless on first word in name
         name << " " unless t.eql? text.split(" ").first
