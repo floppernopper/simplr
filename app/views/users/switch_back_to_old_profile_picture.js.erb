@@ -5,15 +5,23 @@
   var universal_anchor = $("#universal_anchor");
   var old_pics = $("#old_profile_pics");
 
+  // changes actual avatar in the top right corner of screen
   current_avatar.after("<%=j render 'users/current_avatar' %>");
   current_avatar.remove();
 
+  // the avatar located within the form, that shows current avatar
   form_pic.after("<%=j render 'users/edit_form_profile_pic', user: @user %>");
   form_pic.remove();
 
+  // list of old profile pics, updates with new set, removes old set
   old_pics.after("<%=j render 'users/old_profile_pics', old_profile_pics: @user.old_profile_pictures %>");
   old_pics.remove();
 
+  // reveals old pics so they don't disappear after change
+  var old_pics = $("#old_profile_pics");
+  old_pics.toggle();
+
+  // only shows the success message once
   if (!$("#universal_notice_card").length) {
     universal_anchor.after("<%=j render 'app/universal_notice', message: 'Avatar successfully changed...' %>");
   }

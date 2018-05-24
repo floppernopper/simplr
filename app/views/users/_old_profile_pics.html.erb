@@ -1,7 +1,7 @@
 <div id="old_profile_pics" hidden>
   <% for pic in old_profile_pics %>
-    <%= link_to switch_back_to_old_profile_picture_path(id: pic.id, token: current_user.unique_token),
-      method: :put, remote: true, class: :switch_profile_pic_link do %>
+    <%= link_to switch_back_to_old_profile_picture_path(id: pic.id, token: current_user.unique_token,
+        user_img: pic.is_a?(User)), method: :put, remote: true, class: :switch_profile_pic_link do %>
       <%= image_tag pic.image, style: "width:10%;" %>
     <% end %>
 

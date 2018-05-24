@@ -15,7 +15,7 @@
 
 <%= link_to link_path, title: (user.present? ? user.name : token),
   class: "#{defined?(position) ? position : nil}", id: "#{defined?(id) ? id : nil}" do %>
-  <div class="avatar_container">
+  <div class="avatar_container<%= defined?(inline) ? ' inline_avatar_container' : '' %>">
 	  <% num = 0; for char in chars %>
 		  <div class="avatar_pixel" id="avatar_pixel_<%= num.to_s + '_' + clean_token + '_' + unique_name %>"
 		    style="background:rgb(<%= awesome_colors(char, chars)[:string] %>);"></div>

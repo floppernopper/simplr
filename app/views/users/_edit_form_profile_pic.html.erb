@@ -1,5 +1,9 @@
 <span id="edit_form_profile_picture">
-  <%= link_to user do %>
-    <%= image_tag profile_picture(user), style: "width:12.5%;margin-right:10px;" %>
+  <% if user.current_profile_picture %>
+    <%= link_to user do %>
+      <%= image_tag profile_picture(user), style: "width:12.5%;margin-right:10px;" %>
+    <% end %>
+  <% else %>
+    <%= render "users/anon_avatar", user: user, inline: true %>
   <% end %>
 </span>

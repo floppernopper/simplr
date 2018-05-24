@@ -131,6 +131,12 @@
 	height: 25px;
 }
 
+.inline_avatar_container {
+  display: inline-block;
+  margin-right: 7.5px;
+  margin-bottom: -5px;
+}
+
 .avatar_spins {
   animation: avatar_spin 10s infinite alternate;
 }

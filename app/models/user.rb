@@ -187,6 +187,17 @@ class User < ActiveRecord::Base
     pics
   end
 
+  def dup_profile_pic_made?
+    if image_url and pictures.present?
+      pic_name = image_url.split("/").last
+      for pic in pictures
+        this_pic_name = pic.image_url.split("/").last
+        return true if this_pic_name.eql? pic_name
+      end
+    end
+    nil
+  end
+
   def profile_views
     View.where profile_id: id
   end

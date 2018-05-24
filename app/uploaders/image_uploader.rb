@@ -1,6 +1,12 @@
 # encoding: utf-8
 
 class ImageUploader < CarrierWave::Uploader::Base
+  after :remove, :clear_uploader
+
+  def clear_uploader
+    @file = @filename = @original_filename = @cache_id = @version = @storage = nil
+    model.send(:write_attribute, mounted_as, nil)
+  end
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
@@ -15,9 +21,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
-  
+
   process :fix_exif_rotation
-  
+
   def fix_exif_rotation
    manipulate! do |image|
      image = image.auto_orient
