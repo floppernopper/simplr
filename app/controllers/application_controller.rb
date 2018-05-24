@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   def user_mentioned? item
     if item.respond_to? :body and item.body.present?
       for word in item.body.split(" ")
-        if word.include?("@")
+        if word.include?("@") or User.spaced_name_has_at? item.body
           user = User.find_by_name(word.slice(word.index("@")+1..word.size))
           if user
             msg = case item.class.to_s

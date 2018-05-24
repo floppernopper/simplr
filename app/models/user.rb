@@ -36,6 +36,26 @@ class User < ActiveRecord::Base
   scope :featured, -> { where featured: true }
   scope :forrest_only, -> { where forrest_only: true }
 
+  # finds @ mention for user with name including spaces
+  def self.spaced_name_has_at? text
+    # divides text by spaces
+    # searches for user by name with first in array, then second, and so on successfully until or if user's found
+    if text.include? "@"
+      text = text.split " "
+      name = ""; for t in text
+        # only removes @ for first word
+        if t.eql? text.split(" ").first
+          name << t.slice t.index("@")+1..t.size
+        else
+          name << t
+        end
+
+
+
+      end
+    end
+  end
+
   def my_cart
     Cart.initialize self if cart.nil? or not cart.product_token_list.present?
     return cart
