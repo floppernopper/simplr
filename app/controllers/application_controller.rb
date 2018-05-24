@@ -25,7 +25,8 @@ class ApplicationController < ActionController::Base
     if item.respond_to? :body and item.body.present?
       for word in item.body.split(" ")
         if word.include?("@") or User.spaced_name_has_at? item.body
-          user = User.find_by_name(word.slice(word.index("@")+1..word.size))
+          user = User.spaced_name_has_at?(item.body)[:user]
+          user ||= User.find_by_name(word.slice(word.index("@")+1..word.size))
           if user
             msg = case item.class.to_s
             when "Post"

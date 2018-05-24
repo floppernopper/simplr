@@ -40,17 +40,19 @@ class User < ActiveRecord::Base
   def self.spaced_name_has_at? text
     if text.include? "@"
       text = text.split " "
-      name = ""; started = false; for t in text
+      name = ""; started = false; len = 0; for t in text
         # only removes @ for first word containing @
         if t.include? "@"
           name << t.slice(t.index("@")+1..t.size)
           started = true
+          len += 1
         # otherwise only inserts word with prepended space
         elsif started
           name << " " + t
+          len += 1
         end
-        n = find_by_name name
-        return n if n
+        u = find_by_name name
+        return { user: u, len: len } if u
       end
     end
     # returns nil if name never found
