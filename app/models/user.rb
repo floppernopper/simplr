@@ -38,39 +38,23 @@ class User < ActiveRecord::Base
 
   # finds @ mention for user with name including spaces
   def self.spaced_name_has_at? text
-    # divides text by spaces
-    # searches for user by name with first in array, then second, and so on successfully until or if user's found
     if text.include? "@"
       text = text.split " "
-      name = ""; for t in text
+      name = ""; started = false; for t in text
         # only removes @ for first word containing @
         if t.include? "@"
           name << t.slice(t.index("@")+1..t.size)
-        # otherwise only inserts word
-        else
-          name << t
+          started = true
+        # otherwise only inserts word with prepended space
+        elsif started
+          name << " " + t
         end
-
-        # divide n, take off first, put back together, check for name, and repeat
-        n_split = name.split(" ")
-        # first loop starts from beginning and goes forward
-        n_split.size.times do |i|
-        
-          n_joined = n_split[i,-1].map {|i| i << " "}.join
-
-          # checks if name found yet
-          n = find_by_name n_joined
-          
-          # returns if found
-          return n if n
-        end
-
-        # inserts spaces back in place unless on first word in name
-        name << " " unless t.eql? text.split(" ").first
+        n = find_by_name name
+        return n if n
       end
     end
     # returns nil if name never found
-    name
+    nil
   end
 
   def my_cart
