@@ -1,10 +1,11 @@
 module UsersHelper
   # duplicates old profile pic with picture model, deletes image_url if already duped and present
   def profile_pic_init user
+    # removes image_url/original img if present and already duped
     if user.dup_profile_pic_made?
       user.remove_image!
       user.save
-      puts "\n\n\n SUTF \n\n\n"
+    # creates dup of profile image using picture model 
     elsif user.image_url
       pic = user.pictures.new image: user.image
       pic.save
