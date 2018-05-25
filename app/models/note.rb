@@ -13,7 +13,7 @@ class Note < ActiveRecord::Base
       # if one of the users is signed up / registered
       user_id: (receiver.is_a?(String) ? nil : (receiver.nil? ? nil : receiver.id)),
       sender_id: (sender.is_a?(String) ? nil : (sender.nil? ? nil : sender.id)),
-      
+
       # if one of the users is anonymous / not signed up
       anon_token: (receiver.is_a?(String) ? receiver : ((item and !item.is_a?(String) and item.respond_to?(:anon_token) and item.anon_token.present?) ? item.anon_token : nil)),
 
@@ -62,6 +62,33 @@ class Note < ActiveRecord::Base
       game_challenge: "Someone challenged you to a game.",
       your_turn_in_game: "It's your turn!" }
     return _actions[action.to_sym]
+  end
+
+  def item
+    if item_id or item_token
+      case action.to_sym
+      when :post_like, :post_whoa, :post_love, :post_zen, :post_share, :post_views, :user_mention, :post_comment
+        Post.find_by_id item_id
+      when :profile_view, :user_follow, :user_like
+        User.find_by_id item_id
+      when :comment_like, :comment_reply, :also_commented, :user_mention_comment
+        Comment.find_by_id item_id
+      when :message_received
+        Connection.find_by_id item_id
+      when :group_invite, :group_request, :group_request_accepted
+        Group.find_by_id item_id
+      when :hype_received
+        Treasire.find_by_unique_token item_token
+      when :like_like
+        Like.find_by_id item_id
+      when :ratified, :proposal_up_voted, :proposal_down_voted, :proposal_blocked, :revision_submitted, :proposal_revised, :proposal_comment, :proposal_like, :proposal_views, :user_mention_proposal
+        Proposal.find_by_unique_token item_token
+      when :vote_verified, :vote_reversed, :vote_comment, :vote_like
+        Vote.find_by_unique_token item_token
+      when :game_challenge, :your_turn_in_game
+        Game.find_by_id item_token
+      end
+    end
   end
 
   private

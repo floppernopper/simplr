@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show]
   before_action :invite_only
-  
+
   def currently_typing
     @folder = Message.folders.find_by_id params[:folder_id]
     @user = User.find_by_id params[:user_id]
@@ -87,7 +87,7 @@ class MessagesController < ApplicationController
     if @message.save and @folder
       Tag.extract @message
       seent @message
-        # notifications turned off for now
+        # notifications turned off for now ... why turned off? too many notes probably
 #      for member in @folder.members
 #        next if member.user.eql? current_user
 #        Note.notify :message_received, @folder, member.user, current_user
@@ -114,16 +114,16 @@ class MessagesController < ApplicationController
     unless @instant_messages.empty?
       @instant_messages = @messages.last(10)
     end
-    
+
     actively_typing_members = @folder.members.where.not last_typing_at: nil, user_id: current_user.id
-    
+
     if actively_typing_members.present?
       member = actively_typing_members.sort_by { |m| m.last_typing_at }.last
       if member.last_typing_at >= 30.second.ago
         @actively_typing_member = member
       end
     end
-    
+
   end
 
   def index
@@ -140,7 +140,7 @@ class MessagesController < ApplicationController
   end
 
   private
-  
+
   def extract_users user_names="", users=[]
     # splits user names by comma and space (", ")
     # needs to also account for any extra white space
