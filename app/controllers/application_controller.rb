@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
             when "Proposal"
               :user_mention_proposal
             end
-            Note.notify msg, (item.is_a?(Proposal) ? item.unique_token : item), user, (current_user ? current_user : anon_token)
+            Note.notify msg, (item.is_a?(Proposal) ? item.unique_token : item), user, current_identity unless current_identity.eql? user
           end
         end
       end

@@ -1,16 +1,17 @@
 <!-- replace any newline escapes with breakline -->
 <% item_body = item.body.gsub "\n", "<br/> " %>
 
-<% if (user_mention = User.spaced_name_has_at?(item_body)) and true %>
-	<% u_mentioned = user_mention[:user]; u_len = user_mention[:len]; times_skipped = 0 %>
-<% end %>
+<% user_mention = User.spaced_name_has_at? item_body %>
+<% u_mentioned = user_mention[:user]; u_len = user_mention[:len]; times_skipped = 0 %>
 
 <% for word in item_body.split(" ") %>
-	<% if true and user_mention and word.include? "@" and times_skipped.zero? %>
-		<%= link_to user_mention[:user].name, user_mention[:user], style: (@folder ? "color:white;" : nil) %>
-		<% times_skipped += 1; next if times_skipped < user_mention[:len]  %>
-	<% elsif true and user_mention and times_skipped < user_mention[:len] %>
+	<% if u_mentioned and word.include? "@" and times_skipped.zero? %>
+		<%= link_to u_mentioned.name, u_mentioned, style: (@folder ? "color:white;" : nil) %>
+		<% times_skipped += 1; mention_started = true; next if times_skipped < user_mention[:len]  %>
+	<% elsif u_mentioned and times_skipped < user_mention[:len] and mention_started %>
 		<% times_skipped += 1; next %>
+	<% elsif mention_started and times_skipped >= user_mention[:len] %>
+		
 	<% end %>
 
 	<% unless word.include? "#" and word.size > 1 %>

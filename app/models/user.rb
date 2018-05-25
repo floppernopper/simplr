@@ -52,11 +52,10 @@ class User < ActiveRecord::Base
           len += 1
         end
         u = find_by_name name
-        return { user: u, len: len } if u
+        break if u
       end
     end
-    # returns nil if name never found
-    nil
+    return { user: u, len: len }
   end
 
   def my_cart
