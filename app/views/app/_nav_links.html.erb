@@ -64,7 +64,7 @@
 
 <%= link_to fa_icon("paint-brush", "Arts"), arts_path, class: :standard_nav_menu_link unless current_user %>
 
-<%= link_to fa_icon("users", "Anrcho"), proposals_path,
+<%= link_to fa_icon("users", "Anrcho"), to_anrcho_portal_url,
   class: :standard_nav_menu_link, id: :power_nav_menu_link unless @anrcho or Rails.env.development? %>
 
 <%= link_to fa_icon("globe", "Contributors"), contributors_path, class: :standard_nav_menu_link,
