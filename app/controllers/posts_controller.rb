@@ -150,6 +150,7 @@ class PostsController < ApplicationController
     end
     @post = Post.new(post_params)
     @group = Group.find_by_id params[:group_id]
+    @from_profile = params[:from_profile]
     # check to see if user is a member of group if ones selected
     @post.group_id = @group.id if current_user and @group and \
       (current_user.my_groups.include? @group or @group.user.eql? current_user)
@@ -185,9 +186,9 @@ class PostsController < ApplicationController
         #@successfully_created = true
         #@post_just_created = @post
         #@post = Post.new
-        format.html { redirect_to (@post.group.present? ? @post.group : root_url) }
+        format.html { redirect_to (@post.group.present? ? @post.group : (@from_profile ? @post.user : root_url)) }
       else
-        format.html { redirect_to root_url }
+        format.html { redirect_to (@from_profile ? @user : root_url) }
       end
     end
   end

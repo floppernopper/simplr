@@ -2,6 +2,7 @@
   <%= form_for(@post, id: :post_form) do |f| %>
     <div align="center">
       <%= hidden_field_tag :group_id, @group.id if @group %>
+      <%= hidden_field_tag :from_profile, true if current_user and current_user.eql? @user %>
       <%= hidden_field_tag :un_invited, true if @invite_only_page %>
 
 	    <script><%= render 'posts/group_select_change.js' %></script>

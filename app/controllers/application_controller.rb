@@ -25,9 +25,9 @@ class ApplicationController < ActionController::Base
     if item.respond_to? :body and item.body.present?
       for word in item.body.split(" ")
         if word.include?("@") or User.spaced_name_has_at? item.body
-          user = User.spaced_name_has_at?(item.body)[:user]
-          user ||= User.find_by_name(word.slice(word.index("@")+1..word.size))
-          if user
+          user = user_spaced = User.spaced_name_has_at?(item.body)[:user]
+          user ||= User.find_by_name(word.slice(word.index("@")+1..word.size)) if word.include? "@"
+          if user or user_spaced
             msg = case item.class.to_s
             when "Post"
               :user_mention
@@ -36,7 +36,9 @@ class ApplicationController < ActionController::Base
             when "Proposal"
               :user_mention_proposal
             end
-            Note.notify msg, (item.is_a?(Proposal) ? item.unique_token : item), user, current_identity unless current_identity.eql? user
+            Note.notify msg, (item.is_a?(Proposal) ? item.unique_token : item),
+              user, current_identity unless current_identity.eql? user
+            break if user_spaced
           end
         end
       end

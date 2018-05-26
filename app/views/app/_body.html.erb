@@ -11,7 +11,7 @@
 	<% elsif u_mentioned and times_skipped < user_mention[:len] and mention_started %>
 		<% times_skipped += 1; next %>
 	<% elsif mention_started and times_skipped >= user_mention[:len] %>
-		
+		<!-- need to find a way to here to reset for next multi space mention  -->
 	<% end %>
 
 	<% unless word.include? "#" and word.size > 1 %>
