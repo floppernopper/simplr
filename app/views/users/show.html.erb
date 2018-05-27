@@ -3,8 +3,8 @@
 <% if @user.following.present? or @user.followers.present? or @user.my_groups.present? %>
   <%= link_to connections_index_path do %>
     <div class="dark_card" align="center">
-      <p class="dark_link">
-        Following (<%= @user.following.size %>), followers (<%= @user.followers.size %>), posts (<%= @posts.size %>), views (<%= @views.size %>), groups (<%= @user.my_groups.size %>)
+      <p class="dark_link" style="width:80%;">
+        Following (<%= @user.following.size %>), followers (<%= @user.followers.size %>), posts (<%= @posts.size %>), views (<%= @views.size %>), and groups (<%= @user.my_groups.size %>)
       </p>
     </div>
   <% end %>

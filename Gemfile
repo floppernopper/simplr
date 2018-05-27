@@ -145,6 +145,15 @@ group :development do
   # image recognition
   #gem 'tensorflow'
 
+  # This gem makes Spring watch the filesystem for changes using Listen rather than by polling the filesystem. On larger projects this means spring will be more responsive, more accurate and use less cpu on local filesystems.
+  #gem 'spring-watcher-listen'
+
+  # redis, non relational db
+  gem 'redis'
+  gem 'redis-namespace'
+  gem 'redis-rails'
+  gem 'redis-rack-cache'
+
   # optimizing
   gem 'ruby-prof'
   #gem 'rack-mini-profiler', require: false
@@ -160,6 +169,9 @@ group :development do
   gem 'rubocop'
   # necessary debugging tools
   gem 'rspec'
+
+  # seed data, lorim ipsum and star wars options, and a bunch more https://github.com/stympy/faker
+  gem 'faker'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
