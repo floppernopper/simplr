@@ -12,4 +12,4 @@ Rails.application.config.assets.version = '1.0'
 
 require 'semantic-ui-sass'
 
-Rails.application.config.assets.precompile += %w( uikit_style.scss )
+Rails.application.config.assets.precompile += %w( uikit_style.scss semantic_ui_style.scss purecss_style.scss )

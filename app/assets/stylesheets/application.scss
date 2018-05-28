@@ -11,7 +11,11 @@
  * file per style scope.
  *
  *= require_tree .
+
  *= stub "uikit_style"
+ *= stub "purecss_style"
+ *= stub "semantic_ui_style"
+
  *= require_self
  *= require pushy-buttons.min.css
  *= require rpg-awesome.min.css
