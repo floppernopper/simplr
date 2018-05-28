@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require bindWithDelay
 //= require scrollView
 //= require jquery.remotipart
@@ -22,3 +21,7 @@
 //= require processing.min.js
 //= require parallax.min.js
 //= require jquery.paroller.min.js
+//= require_tree .
+// Loads all Semantic javascripts
+// require semantic-ui
+//= require uikit

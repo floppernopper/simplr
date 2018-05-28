@@ -11,13 +11,20 @@
  * file per style scope.
  *
  *= require_tree .
+ *= stub "uikit_style"
  *= require_self
  *= require pushy-buttons.min.css
  *= require rpg-awesome.min.css
+
  */
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+//$import-google-fonts: false;
+//@import "semantic-ui";
+//@import 'purecss';
+
 
 $x_right_gap: 5px;
 $x_left_gap: 5px;

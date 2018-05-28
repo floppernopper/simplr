@@ -12,6 +12,11 @@ gem 'money-rails'
 # gem 'paypal-sdk-rest'
 # gem 'bitcoin_payable'
 
+# UI/UX front end frameworks
+gem 'semantic-ui-sass'
+gem 'purecss-sass'
+gem "uikit-sass-rails"
+
 # SEO
 gem 'meta-tags'
 

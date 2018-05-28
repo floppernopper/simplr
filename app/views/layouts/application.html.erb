@@ -22,11 +22,11 @@
     <meta name="msapplication-navbutton-color" content="#000000">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
-
   </head>
   <body>
-    <%= render "app/header" if (invited? or anrcho? or @arts) and not (@cluster_flier_page or @forrest_web_co or @down) %>
+    <%= render "app/header" if (invited? or anrcho? or @arts) and not (@cluster_flier_page or \
+        @forrest_web_co or @down or @templating) %>
     <%= yield %>
-    <%= render "app/footer" unless @down or @cluster_flier_page %>
+    <%= render "app/footer" unless @down or @cluster_flier_page or @templating %>
   </body>
 </html>

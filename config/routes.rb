@@ -4,6 +4,14 @@ Rails.application.routes.draw do
   resources :orders
   resources :games
   resources :reviews
+
+  # templates for clients
+  get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
+  get 'co', to: 'templates#index', as: 'forrest_web_co'
+  get 'semantic_ui', to: 'templates#semantic_ui', as: 'semantic_ui'
+  get 'purecss', to: 'templates#purecss', as: 'purecss'
+  get 'uikit', to: 'templates#uikit', as: 'uikit'
+
   # wikis
   get 'book', to: 'wikis#index', as: 'book'
   get 'wikis/add_image', as: 'add_wiki_image'
@@ -249,10 +257,6 @@ Rails.application.routes.draw do
   post 'votes/confirm_humanity', as: 'confirm_humanity'
   # reveals dropdown table/menu for voting on options on a motion
   get 'vote_dropdown/:token', to: 'votes#dropdown', as: 'vote_dropdown'
-
-  # templates for clients
-  get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
-  get 'co', to: 'templates#index', as: 'forrest_web_co'
 
   # online store/ecommerce
   get 'show_product/:token', to: 'products#show', as: 'show_product'
