@@ -5,6 +5,7 @@ class TreasuresController < ApplicationController
   before_action :kristin_and_forrest_only, only: [:kristins_crescent, :leo]
 
   def leo
+    @templating = true
   end
 
   def kristins_crescent

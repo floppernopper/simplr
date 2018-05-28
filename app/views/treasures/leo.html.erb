@@ -1,12 +1,32 @@
-</br>
-<div class="vertical_spacing"></div>
+<%= stylesheet_link_tag 'semantic_ui_style' %>
 
-<div align="center">
-  <%= image_tag "leo/leo.png", style: "width:75%;" %>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+<div class="ui container vertical center aligned" align="center" id="leo">
+  <%= image_tag "leo/leo.png", class: :leo_img, style: "width:75%;" %>
 </div>
 
-<% unless settings[:bg_fader_on] or (@user_shown and settings(@user)[:profile_bg_fader_on]) %>
+<script>
+  $("body").click(function() {
+    $('.leo_img')
+      .transition('horizontal flip')
+    ;
+  });
+
+
+  <%= render "app/fader.js", target: 'leo', target_id: '', background: true, slow: true %>
+</script>
+
+<style>
+  html, body {
+    background: black;
+  }
+
+</style>
+
   <script>
-    <%= render "app/bg_fader.js" %>
   </script>
-<% end %>
