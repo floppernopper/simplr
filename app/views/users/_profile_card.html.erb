@@ -51,7 +51,7 @@
     <p>
       <%= link_to user.name, user, class: :user_name_link %>
       <% if user.body.present? %>
-        <%= render "app/body", item: user %> <%= link_to '<i class="ai leo" id="kristins_leo_sign"></i>'.html_safe leo_path if @kristin %>
+        <%= render "app/body", item: user %> <%= link_to '<i class="ai leo" id="kristins_leo_sign"></i>'.html_safe, leo_path if @kristin %>
       <% end %>
       <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_user_path(user) if this_user_current? \
         or (dev? and not user.dev) or god? %>
