@@ -12,7 +12,7 @@
     </div>
   <% elsif @found_love %>
     <script>
-      <%= render "app/fader.js", target: 'power_of_love_text', target_id: '' %>
+      <%= render "app/fader.js", target: 'power_of_love_text', target_id: '', love: true, slow: true %>
     </script>
     <div class="dark_card" align="center">
       <p class="justified_body" id="power_of_love_text">
