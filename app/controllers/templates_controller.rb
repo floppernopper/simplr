@@ -1,6 +1,6 @@
 class TemplatesController < ApplicationController
-  before_action :set_templating, only: [:semantic_ui, :uikit, :purecss]
-  
+  before_action :set_templating, only: [:semantic_ui, :uikit, :purecss, :sample_blog]
+
   def lil_c
     @lil_c = true
   end

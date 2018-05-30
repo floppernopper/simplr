@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
   get 'co', to: 'templates#index', as: 'forrest_web_co'
   get 'semantic_ui', to: 'templates#semantic_ui', as: 'semantic_ui'
+  get 'sample_blog', to: 'templates#sample_blog', as: 'sample_blog'
   get 'purecss', to: 'templates#purecss', as: 'purecss'
   get 'uikit', to: 'templates#uikit', as: 'uikit'
 
