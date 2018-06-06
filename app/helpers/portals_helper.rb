@@ -7,7 +7,7 @@ module PortalsHelper
 
   def to_anrcho_portal_url
     url = root_url; url.gsub 'http', 'https' unless in_dev?
-    url.gsub! 'socialmaya', 'anrcho' if url.include? 'socialmaya'; url.slice!(-1)
+    url.gsub! 'socialmaya', 'anrcho' if url.include?('socialmaya') and @anrcho_is_up; url.slice!(-1)
     url += portal_to_anrcho_path(Portal.to_anrcho(current_user).unique_token) if current_user
     return url
   end
