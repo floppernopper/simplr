@@ -25,7 +25,7 @@
         </script>
         <%= link_to 'H Y P E <i class="fa fa-bolt"></i>'.html_safe, hype_path(user),
           method: :post, id: "hype_link_#{user.id}" %>
-      <% elsif current_user.has_power?('hype_love_others') or current_user.id.eql? 1 and love_hypeable? user %>
+      <% elsif current_user.has_power?('hype_love_others') or current_user.id.eql? 1 and love_hypeable? user and currently_kristin? or god? %>
         <%= " | " %>
         <script>
           <%= render "app/fader.js", target: "hype_love_link", target_id: user.id, love: true, fast: true %>
