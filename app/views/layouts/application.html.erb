@@ -25,7 +25,7 @@
   </head>
   <body>
     <%= render "app/header" if (invited? or anrcho? or @arts) and not (@cluster_flier_page or \
-        @forrest_web_co or @down or @templating) %>
+        @forrest_web_co or @down or @templating or @hype_love) %>
     <%= yield %>
     <%= render "app/footer" unless @down or @cluster_flier_page or @templating %>
   </body>

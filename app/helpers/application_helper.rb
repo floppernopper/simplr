@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def standard_dark_card &block
-    str = '<div class="dark_card" align="center">'
+  def standard_dark_card id='', &block
+    str = "<div class=\"dark_card\" id=\"#{id}\" align=\"center\">"
     str << capture(&block)
     str << '</div>'
     raw str

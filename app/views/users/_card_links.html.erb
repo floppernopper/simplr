@@ -17,16 +17,24 @@
       <%= link_to 'Message <i class="fa fa-envelope"></i>'.html_safe,
         create_message_folder_path(user_id: user), method: :post %>
     <% end %>
-    <% if current_user.has_power?('discover') and \
-      (current_user.has_power?('hype_others') or current_user.id.eql? 1) and hypeable? user %>
-      <%= " | " %>
-      <script>
-        <%= render "app/fader.js", target: "hype_link", target_id: user.id %>
-      </script>
-      <%= link_to 'H Y P E <i class="fa fa-bolt"></i>'.html_safe, hype_path(user),
-        method: :post, id: "hype_link_#{user.id}" %>
+    <% if current_user.has_power? 'discover' %>
+      <% if current_user.has_power?('hype_others') or current_user.id.eql? 1 and hypeable? user %>
+        <%= " | " %>
+        <script>
+          <%= render "app/fader.js", target: "hype_link", target_id: user.id %>
+        </script>
+        <%= link_to 'H Y P E <i class="fa fa-bolt"></i>'.html_safe, hype_path(user),
+          method: :post, id: "hype_link_#{user.id}" %>
+      <% elsif current_user.has_power?('hype_love_others') or current_user.id.eql? 1 and love_hypeable? user %>
+        <%= " | " %>
+        <script>
+          <%= render "app/fader.js", target: "hype_love_link", target_id: user.id, love: true, fast: true %>
+        </script>
+        <%= link_to 'L O V E <i class="fa fa-bolt"></i>'.html_safe, hype_love_path(user.unique_token),
+          method: :post, id: "hype_love_link_#{user.id}" %>
+      <% end %>
     <% end %>
   </div>
-  
+
   <%= audio_tag "interface/interface_9.mp3", id: "user_interface_sound" %>
 <% end %>

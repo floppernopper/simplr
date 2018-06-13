@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get 'add_treasure_option', to: 'treasures#add_option', as: 'add_treasure_option'
   get 'users/:user_id/powers', to: 'treasures#powers', as: 'powers'
   post 'users/:user_id/hype', to: 'treasures#hype', as: 'hype'
+  post 'hype_love/:token', to: 'treasures#hype_love', as: 'hype_love'
   get 'kanye', to: 'treasures#kanye', as: 'kanye'
   get 'poem', to: 'treasures#poem', as: 'poem'
   get 'kristin', to: 'users#kristin', as: 'kristin'

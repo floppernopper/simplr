@@ -3,24 +3,24 @@ class Treasure < ActiveRecord::Base
   belongs_to :group
   belongs_to :secret
   belongs_to :treasure
-  
+
   has_many :secrets
   has_many :treasures
   has_many :game_pieces
-  
+
   before_create :gen_unique_token, :gen_unique_name, :random_xp, :random_power
   validate :one_discovery, :unique_name, on: :create
 
   mount_uploader :image, ImageUploader
-  
+
   def self.special_loop
     the_special = :special
   end
-  
+
   def giver
     User.find_by_id(self.giver_id)
   end
-  
+
   def self.random user=nil
     _treasure = nil
     # only gets parent treasures
@@ -45,16 +45,17 @@ class Treasure < ActiveRecord::Base
     end
     return _treasure
   end
-  
+
   def looted_by? user
     true if self.name.present? and user.treasures.find_by_name self.name
   end
-  
+
   def self.powers
     { # Discover: access to hidden treasure system, to xp leveling from treasure or general
       # Discover is never returned as random
       discover: 'Discover secrets',
       hype_others: 'Hype up other users',
+      hype_love_others: 'Send love to other users',
       anarchy: 'Make motions or proposals',
       see_views: "See who's viewing posts",
       like_likes: "Like that someone liked something",
@@ -69,16 +70,17 @@ class Treasure < ActiveRecord::Base
       steal_followers: 'Steal other peoples followers',
       shutdown: 'Shutdown entire website, alter homepage' }
   end
-  
+
   def self.types
     { portal: 'Portal - leads to another treasure',
       maze: 'Maze - choose between two or more',
       game: 'Game - Play and win to receive a prize',
       prize: 'Prize - rewarded with power or high XP',
       kanye: 'Kanye - nothing but text (dead end)',
-      hype: 'Hype - A nugget of pure positivity' }
+      hype: 'Hype - A nugget of pure positivity',
+      hype_love: 'Love - The gift of love' }
   end
-  
+
   private
     # unique names but doesn't interfere with looting
     def unique_name
@@ -89,7 +91,7 @@ class Treasure < ActiveRecord::Base
         end
       end
     end
-    
+
     # prevents duplicate discover treasures from being created
     def one_discovery
       if self.user_id and self.power.eql? 'discover'
@@ -99,7 +101,7 @@ class Treasure < ActiveRecord::Base
         end
       end
     end
-    
+
     def random_power
       unless self.power.present?
         powers = Treasure.powers.keys
@@ -115,7 +117,7 @@ class Treasure < ActiveRecord::Base
         self.power ||= powers[0].to_s
       end
     end
-    
+
     def random_xp
       if self.xp.nil?
         xp_amounts = Fibonacci.seq 5..17
@@ -132,14 +134,14 @@ class Treasure < ActiveRecord::Base
         self.xp = -53
       end
     end
-    
+
     # sets a generic placeholder name unless named by user
     def gen_unique_name
       unless self.name.present?
         self.name = "generic_#{SecureRandom.urlsafe_base64}"
       end
     end
-    
+
     def gen_unique_token
       self.unique_token = SecureRandom.urlsafe_base64
     end

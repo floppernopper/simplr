@@ -3,6 +3,8 @@
     <%= render "treasures/div_game", treasure: @treasure %>
   <% elsif @treasure.treasure_type.eql? 'hype' %>
     <%= render "treasures/hype_screen" %>
+  <% elsif @treasure.treasure_type.eql? 'hype_love' %>
+    <%= render "treasures/hype_love" %>
   <% else %>
     <%= link_to loot_treasure_path(@treasure.unique_token),
       method: :post, remote: true, title: "#{@treasure.name}" do %>

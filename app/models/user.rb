@@ -76,6 +76,10 @@ class User < ActiveRecord::Base
     self.id.eql? 34
   end
 
+  def self.kristin
+    self.find_by_id 34
+  end
+
   # optional arg to check if power present AND not expired
   def has_power? power, not_expired=nil
     treasure = self.treasures.find_by_power power

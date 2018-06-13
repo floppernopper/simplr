@@ -42,6 +42,7 @@ class Note < ActiveRecord::Base
       group_request: "Someone requested to join a group.",
       group_request_accepted: "You're request to join a group was accepted.",
       hype_received: "Someone sent you some H Y P E",
+      hype_love_received: "Someone sent you some L O V E",
       user_like: "Someone liked your profile.",
       like_like: "Someone liked your like.",
       # proposal notification actions
@@ -77,7 +78,7 @@ class Note < ActiveRecord::Base
         Connection.find_by_id item_id
       when :group_invite, :group_request, :group_request_accepted
         Group.find_by_id item_id
-      when :hype_received
+      when :hype_received, :hype_love_received
         Treasire.find_by_unique_token item_token
       when :like_like
         Like.find_by_id item_id

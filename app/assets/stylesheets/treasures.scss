@@ -27,6 +27,15 @@
   width: 25px;
 }
 
+.hype_love_img {
+  transition: all .4s ease-in-out;
+  position: relative;
+  max-width: 550px;
+  margin: 0 auto;
+  margin-bottom: 12.5px;
+  width: 94.5%;
+}
+
 .bottom_right_icon {
   position: absolute;
   bottom: 5px;
@@ -194,7 +203,7 @@
 
 #crescent_moon {
   animation: crescent_pulse 7.5s infinite alternate;
-  
+
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -205,7 +214,7 @@
 
 #kristins_crescent_label {
   animation: kristins_crescent_label_pulse 7.5s infinite alternate;
-  
+
   font-size: 12px;
   font-weight: bold;
 }

@@ -1,0 +1,17 @@
+<%= render "arts/bands", reds: true, slow: true %>
+
+<div class="vertical_spacer"></div>
+
+<% if currently_kristin? %>
+    <%= image_tag 'kristin_card_3.png', class: :hype_love_img %>
+  </br></br>
+<% end %>
+
+<div class="love_message_card love_message_card_glow" id="i_love_you_card" align="center">
+  <p id="i_love_you_txt">
+    I love you <%= current_user.name %>!
+  </p>
+  <p id="i_love_you_from">
+    - <%= @treasure.giver.name %>
+  </p>
+</div>

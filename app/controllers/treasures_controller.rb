@@ -2,7 +2,7 @@ class TreasuresController < ApplicationController
   before_action :hidden_treasure, except: [:kanye, :kopimi, :show, :sandbox, :templates,
                                            :zodiac, :philosophy, :kristins_crescent, :leo]
 
-  before_action :kristin_and_forrest_only, only: [:kristins_crescent, :leo]
+  before_action :kristin_and_forrest_only, only: [:kristins_crescent, :leo, :hype_love]
 
   def leo
     @templating = true
@@ -116,6 +116,17 @@ class TreasuresController < ApplicationController
     redirect_to :back
   end
 
+  # hype other users
+  def hype_love
+    @user = User.find_by_unique_token params[:token]
+    love_nugget = Treasure.new treasure_type: :hype_love, power: :hype_love_others,
+      user_id: @user.id, giver_id: current_user.id
+    if love_nugget.save
+      Note.notify :hype_love_received, love_nugget.unique_token, @user, current_user
+    end
+    redirect_to :back
+  end
+
   def powers
     @powers = current_user.active_powers.reverse
   end
@@ -179,7 +190,10 @@ class TreasuresController < ApplicationController
 
   def show
     @treasure = Treasure.find_by_unique_token(params[:token])
+
     redirect_to '/404' if @treasure.nil?
+
+    @hype_love = @treasure.treasure_type.eql? 'hype_love'
   end
 
   private
