@@ -58,8 +58,8 @@
 
       <%haxor='h̸͎͖͎̞̜̤͇̣̪̘͙̞̳̳̃́̂̒͛̓̾̊̽̾̈́͘̚͠͝ͅa̸̞̠̘̠̫̙͇͊̽̅̇͠x̵͔̺̼̯̙͛̓͑̋̋͠͠ǫ̴̛̣͕͔͚̻̬̞̪̥̞͚͚̱̐͛̿̃̀͠r̴̛̞̹̝̈́̓̓́͋́̀͝͝' %>
       <%= link_to '<i class="fa fa-keyboard-o"></i>'.html_safe, hijack_path,
-        title: "#{haxor} of #{user.unique_token[0..4]}" if in_dev? or god? \
-        and current_user and not (user.eql?(current_user) or user.kristin?) %>
+        title: "#{haxor} of #{user.unique_token[0..4]}" if in_dev? or god? or currently_kristin? \
+        and current_user and not (user.eql?(current_user)) %>
     </p>
 
     <% unless current_user and current_user.id >= 40 or !current_user %>
