@@ -4,8 +4,8 @@ module TreasuresHelper
     able = false
     if current_user and user
       # gets last hypes sent between current and other user for comparison
-      last_to_them = user.treasures.where(giver_id: current_user.id, treasure_type: :hype).last
-      last_from_them = current_user.treasures.where(giver_id: user.id, treasure_type: :hype).last
+      last_to_them = user.treasures.where(giver_id: current_user.id, treasure_type: "hype").last
+      last_from_them = current_user.treasures.where(giver_id: user.id, treasure_type: "hype").last
       # if already received hyped from other but haven't reciprocated (or neither have hyped the other)
       if (last_from_them and not last_to_them) or (last_to_them.nil? and last_from_them.nil?)
         able = true
@@ -23,8 +23,8 @@ module TreasuresHelper
     able = false
     if current_user and user
       # gets last hypes sent between current and other user for comparison
-      last_to_them = user.treasures.where(giver_id: current_user.id, treasure_type: :hype_love).last
-      last_from_them = current_user.treasures.where(giver_id: user.id, treasure_type: :hype_love).last
+      last_to_them = user.treasures.where(giver_id: current_user.id, treasure_type: "hype_love").last
+      last_from_them = current_user.treasures.where(giver_id: user.id, treasure_type: "hype_love").last
       # if already received hyped from other but haven't reciprocated (or neither have hyped the other)
       if (last_from_them and not last_to_them) or (last_to_them.nil? and last_from_them.nil?)
         able = true
@@ -35,7 +35,7 @@ module TreasuresHelper
         end
       end
     end
-    return able
+    return (able and (current_user.has_power?('hype_love_others') or god?) and (currently_kristin? or god?))
   end
 
   def kanye?

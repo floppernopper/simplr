@@ -82,67 +82,71 @@ class Treasure < ActiveRecord::Base
   end
 
   private
-    # unique names but doesn't interfere with looting
-    def unique_name
-      if self.user_id.nil? and self.name.present?
-        _treasure = Treasure.find_by_name self.name
-        if _treasure
-          errors.add :unique_name, "Name must be unique"
+
+  # unique names but doesn't interfere with looting
+  def unique_name
+    if self.user_id.nil? and self.name.present?
+      _treasure = Treasure.find_by_name self.name
+      if _treasure
+        errors.add :unique_name, "Name must be unique"
+      end
+    end
+  end
+
+  # prevents duplicate discover treasures from being created
+  def one_discovery
+    if self.user_id and self.power.eql? 'discover'
+      user = User.find_by_id(self.user_id)
+      if user and user.treasures.find_by_power self.power
+        errors.add :one_discovery, "Discover only once"
+      end
+    end
+  end
+
+  def random_power
+    unless self.power.present?
+      powers = Treasure.powers.keys
+      # never return discover as random
+      powers.delete_if {|p| p.eql? 'discover'}
+      i=1; for power in powers
+        if rand(0..i).zero?
+          self.power = power.to_s
+          break
         end
+        i+=1
       end
+      self.power ||= powers[0].to_s
     end
+  end
 
-    # prevents duplicate discover treasures from being created
-    def one_discovery
-      if self.user_id and self.power.eql? 'discover'
-        user = User.find_by_id(self.user_id)
-        if user and user.treasures.find_by_power self.power
-          errors.add :one_discovery, "Discover only once"
+  def random_xp
+    if self.xp.nil?
+      xp_amounts = Fibonacci.seq 5..17
+      i=1; for xp in xp_amounts
+        if rand(0..i).zero?
+          self.xp = xp
+          break
         end
+        i+=1
       end
+      self.xp ||= xp_amounts[0]
     end
+    if self.treasure_type.eql? 'kanye'
+      self.xp = -53
+    end
+  end
 
-    def random_power
-      unless self.power.present?
-        powers = Treasure.powers.keys
-        # never return discover as random
-        powers.delete_if {|p| p.eql? 'discover'}
-        i=1; for power in powers
-          if rand(0..i).zero?
-            self.power = power.to_s
-            break
-          end
-          i+=1
-        end
-        self.power ||= powers[0].to_s
-      end
+  # sets a generic placeholder name unless named by user
+  def gen_unique_name
+    unless self.name.present?
+      self.name = "generic_#{SecureRandom.urlsafe_base64}"
     end
+  end
 
-    def random_xp
-      if self.xp.nil?
-        xp_amounts = Fibonacci.seq 5..17
-        i=1; for xp in xp_amounts
-          if rand(0..i).zero?
-            self.xp = xp
-            break
-          end
-          i+=1
-        end
-        self.xp ||= xp_amounts[0]
-      end
-      if self.treasure_type.eql? 'kanye'
-        self.xp = -53
-      end
-    end
-
-    # sets a generic placeholder name unless named by user
-    def gen_unique_name
-      unless self.name.present?
-        self.name = "generic_#{SecureRandom.urlsafe_base64}"
-      end
-    end
-
-    def gen_unique_token
-      self.unique_token = SecureRandom.urlsafe_base64
-    end
+  def gen_unique_token
+    begin
+      self.unique_token = $name_generator.next_name[0..5].downcase
+      self.unique_token << "_" + SecureRandom.urlsafe_base64.split('').sample(2).join.downcase.gsub("_", "").gsub("-", "")
+    end while Treasure.exists? unique_token: self.unique_token
+  end
 end
