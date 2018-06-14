@@ -188,7 +188,7 @@ class ApplicationController < ActionController::Base
 
     # also notify for profile views after a certain point or even each view
     if current_user and item.is_a? User and not item.eql? current_user
-      Note.notify :profile_view, item, item, current_user
+      Note.notify :profile_view, current_user, item, current_user
     end
 
 

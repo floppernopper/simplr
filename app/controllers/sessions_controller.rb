@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def dev_login
     cookies.permanent[:auth_token] = User.first.auth_token
-    redirect_to root_url
+    redirect_to User.first
   end
 
   def hijack
