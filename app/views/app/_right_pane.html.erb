@@ -1,4 +1,4 @@
-<% if (Rails.env.development? and current_user) or (god? and current_user) %>
+<% if current_user %>
   <div class="right_pane">
     <% unless my_active_groups.empty? and Tag.trending.empty? %>
       <div class="right_pane_sub">
@@ -26,17 +26,19 @@
       </div>
     <% end %>
 
-    <div class="right_pane_sub">
-      <div class="side_pane_label right_pane_label">Notes</div>
-      <% for note in current_notes.last(5).reverse %>
+    <% unless current_notes.empty? %>
+      <div class="right_pane_sub">
+        <div class="side_pane_label right_pane_label">Notes</div>
+        <% for note in current_notes.last(5).reverse %>
+          <div class="notes_side_pane_message">
+            <%= render "notes/message", note: note, dark: true %>
+          </div>
+        <% end %>
         <div class="notes_side_pane_message">
-          <%= render "notes/message", note: note, dark: true %>
+          <%= link_to "See all", notes_path, class: :dark_link %>
         </div>
-      <% end %>
-      <div class="notes_side_pane_message">
-        <%= link_to "See all", notes_path, class: :dark_link %>
+        </br>
       </div>
-      </br>
-    </div>
+    <% end %>
   </div>
 <% end %>
