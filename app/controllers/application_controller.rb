@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   before_action :forrest_web_co_to_forrest_web_co, except: [:index]
 
   # bots go to 404 for all pages
-  before_action :bots_to_404
+  before_action :bots_to_404, except: [:index]
 
   def user_mentioned? item
     if item.respond_to? :body and item.body.present?
