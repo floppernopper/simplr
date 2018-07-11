@@ -5,8 +5,8 @@
 
     <% unless low_energy? or @templating %>
       <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true unless @cluster_flier_page %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <% end %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
     <%= csrf_meta_tags %>
 
