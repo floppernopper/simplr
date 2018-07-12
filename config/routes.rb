@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # templates for clients
   get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
   get 'co', to: 'templates#index', as: 'forrest_web_co'
+  get 'keep_it_on_pointe', to: 'templates#on_point', as: 'on_point'
   get 'semantic_ui', to: 'templates#semantic_ui', as: 'semantic_ui'
   get 'sample_blog', to: 'templates#sample_blog', as: 'sample_blog'
   get 'purecss', to: 'templates#purecss', as: 'purecss'
