@@ -14,8 +14,10 @@ module ApplicationHelper
   end
 
   def get_site_ico
-    if anrcho? or @on_point
+    if anrcho?
       "anrcho"
+    elsif @on_point
+      "dance"
     elsif request.host.eql? "forrestonlyclub.com"
       "foc"
     elsif request.host.eql? "forrestwilkins.com"
