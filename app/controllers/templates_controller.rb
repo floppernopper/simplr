@@ -1,6 +1,10 @@
 class TemplatesController < ApplicationController
   before_action :set_templating, only: [:semantic_ui, :uikit, :purecss, :sample_blog, :on_point]
 
+  def on_point
+    @on_point = true
+  end
+
   def lil_c
     @lil_c = true
   end
