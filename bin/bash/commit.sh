@@ -1,6 +1,10 @@
 #!/bin/sh
 
-echo "\nCommitting...\n"
+echo "\n"
+
+echo Committing...|lolcat -a -d 50
+
+echo "\n"
 
 git add -A
 
