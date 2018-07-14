@@ -133,6 +133,8 @@ class ApplicationController < ActionController::Base
       'Anrcho'
     elsif request.original_url.include? '/store'
       'Store'
+    elsif request.original_url.include? '/keep_it_on_pointe'
+      'Keep It On Pointe'
     else
       case request.host
       when 'forrestwebco.com'
