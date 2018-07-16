@@ -299,6 +299,7 @@ Rails.application.routes.draw do
   get 'infinite_teal_void', to: 'arts#void', as: 'void'
   get 'art_sign_up', to: 'arts#sign_up', as: 'art_sign_up'
   get 'clicks', to: 'arts#clicks', as: 'clicks'
+  get 'fib', to: 'arts#fib', as: 'chuck_fib'
 
   resources :proposals do
     resources :comments
