@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'co', to: 'templates#index', as: 'forrest_web_co'
   get 'keep_it_on_pointe', to: 'templates#on_point', as: 'on_point'
   get 'calendar', to: 'templates#calendar', as: 'on_point_calendar'
+  get 'pricing', to: 'templates#pricing', as: 'on_point_pricing'
   get 'semantic_ui', to: 'templates#semantic_ui', as: 'semantic_ui'
   get 'sample_blog', to: 'templates#sample_blog', as: 'sample_blog'
   get 'purecss', to: 'templates#purecss', as: 'purecss'

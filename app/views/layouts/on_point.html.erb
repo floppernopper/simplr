@@ -59,11 +59,11 @@
     <!-- Following Menu -->
     <div class="ui large top fixed hidden menu">
       <div class="ui container">
-        <a class="active item">Home</a>
+        <%= link_to "Home", on_point_path, class: "active item" %>
         <a class="item">About</a>
         <a class="item">Schedule</a>
-        <a class="item">Calendar</a>
-        <a class="item">Pricing</a>
+        <%= link_to "Calendar", on_point_calendar_path, class: :item %>
+        <%= link_to "Pricing", on_point_pricing_path, class: :item %>
         <div class="right menu">
           <div class="item">
             <a class="ui button">Sign in</a>
@@ -81,7 +81,7 @@
       <a class="item">About</a>
       <a class="item">Schedule</a>
       <%= link_to "Calendar", on_point_calendar_path, class: :item %>
-      <a class="item">Pricing</a>
+        <%= link_to "Pricing", on_point_pricing_path, class: :item %>
       <a class="item">Sign in</a>
       <a class="item">Register</a>
     </div>
@@ -96,10 +96,11 @@
             <a class="toc item">
               <i class="sidebar icon"></i>
             </a>
-            <a class="active item">Home</a>
+            <%= link_to "Home", on_point_path, class: "active item" %>
             <a class="item">About</a>
             <a class="item">Schedule</a>
-            <a class="item">Calendar</a>
+            <%= link_to "Calendar", on_point_calendar_path, class: :item %>
+            <%= link_to "Pricing", on_point_pricing_path, class: :item %>
           </div>
         </div>
 
