@@ -1,5 +1,9 @@
 class TemplatesController < ApplicationController
-  before_action :set_templating, only: [:semantic_ui, :uikit, :purecss, :sample_blog, :on_point, :on_point_kristin]
+  before_action :set_templating, only: [:semantic_ui, :uikit, :purecss, :sample_blog, :on_point, :on_point_kristin, :calendar]
+
+  def calendar
+    @on_point = true
+  end
 
   def on_point
     @on_point = true
