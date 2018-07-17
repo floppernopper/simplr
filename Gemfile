@@ -12,6 +12,9 @@ gem 'money-rails'
 # gem 'paypal-sdk-rest'
 # gem 'bitcoin_payable'
 
+# time and scheduling
+gem 'simple_calendar'
+
 # UI/UX front end frameworks
 gem 'semantic-ui-sass'
 gem 'purecss-sass'
