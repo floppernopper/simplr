@@ -1,0 +1,21 @@
+## What to install
+
+Ruby - https://www.ruby-lang.org/en/downloads/
+
+Then run:
+  gem install rails
+  gem install bundle
+  
+ImageMagick - https://www.imagemagick.org/script/download.php
+
+GitHub desktop app - https://desktop.github.com/
+
+git (better) - https://git-scm.com/download/win
+
+Website repo - https://github.com/ethanwilkins/simplr
+
+CD into repo and run:
+  bundle install --without production
+  rake db:setup
+  rake db:migrate
+  rails s
