@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180522102714) do
+ActiveRecord::Schema.define(version: 20180719161203) do
 
   create_table "arts", force: :cascade do |t|
     t.integer  "user_id"
@@ -113,6 +113,16 @@ ActiveRecord::Schema.define(version: 20180522102714) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.index ["job_id"], name: "index_crono_jobs_on_job_id", unique: true
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "image"
+    t.integer  "user_id"
+    t.datetime "start_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "game_pieces", force: :cascade do |t|

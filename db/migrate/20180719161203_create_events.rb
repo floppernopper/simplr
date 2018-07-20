@@ -6,7 +6,7 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.string :image
       t.integer :user_id
       
-      t.start_date :datetime
+      t.datetime :start_date
       t.timestamps
     end
   end
