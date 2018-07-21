@@ -13,10 +13,11 @@ class ApplicationController < ActionController::Base
   include SimpleCaptcha::ControllerHelpers
 
   # redirects to proposals index for anrcho.com
-  before_action :anrcho_to_proposals, except: [:index, :on_point, :pricing, :calendar, :semantic_ui, :uikit, :purecss, :sample_blog]
+  before_action :anrcho_to_proposals, except: [:index]
 
   # redirects to forrest_web_co
-  before_action :forrest_web_co_to_forrest_web_co, except: [:index]
+  before_action :forrest_web_co_to_forrest_web_co, except: [:index, :on_point, :pricing, :calendar,
+    :semantic_ui, :uikit, :purecss, :sample_blog]
 
   # bots go to 404 for all pages
   before_action :bots_to_404, except: [:index]
