@@ -28,22 +28,24 @@
   </p>
 </div>
 
-<%= standard_dark_card do %>
-  <p>
-    Sample starter templates:
-  </p>
-  <p>
-    <%= link_to "Sample Blog", sample_blog_path, class: :white_link %>
-  </p>
-  <p>
-    <%= link_to "Semantic UI", semantic_ui_path, class: :white_link %>
-  </p>
-  <p>
-    <%= link_to "Pure CSS", purecss_path, class: :white_link %>
-  </p>
-  <p>
-    <%= link_to "UIkit", uikit_path, class: :white_link %>
-  </p>
+<%= standard_dark_card(nil, :left) do %>
+  <div class="fwc_sample_templates_container">
+    <p>
+      <b>Sample starter templates:</b>
+    </p>
+    <p>
+      <%= link_to "Sample Blog", sample_blog_path, class: :white_link %>
+    </p>
+    <p>
+      <%= link_to "Semantic UI", semantic_ui_path, class: :white_link %>
+    </p>
+    <p>
+      <%= link_to "Pure CSS", purecss_path, class: :white_link %>
+    </p>
+    <p>
+      <%= link_to "UIkit", uikit_path, class: :white_link %>
+    </p>
+  </div>
 <% end %>
 
 <% unless Rails.env.development? %>
