@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get 'sample_blog', to: 'templates#sample_blog', as: 'sample_blog'
   get 'purecss', to: 'templates#purecss', as: 'purecss'
   get 'uikit', to: 'templates#uikit', as: 'uikit'
+  
+  # for testing and learning purposes
+  get 'example_stuff', to: 'templates#example_stuff', as: 'example_stuff'
 
   # wikis
   get 'book', to: 'wikis#index', as: 'book'

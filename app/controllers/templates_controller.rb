@@ -1,6 +1,6 @@
 class TemplatesController < ApplicationController
   before_action :set_templating, only: [:semantic_ui, :uikit, :purecss, :sample_blog]
-  before_action :set_on_point, only: [:calendar, :on_point, :pricing, :admin]
+  before_action :set_on_point, only: [:calendar, :on_point, :pricing, :admin, :example_stuff]
   
   layout :resolve_layout
 
@@ -16,7 +16,7 @@ class TemplatesController < ApplicationController
   
   def resolve_layout
     case action_name.to_sym
-    when :on_point, :calendar, :pricing, :admin
+    when :on_point, :calendar, :pricing, :admin, :example_stuff
       "on_point"
     else
       "application"

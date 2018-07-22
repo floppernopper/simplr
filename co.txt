@@ -1,0 +1,22 @@
+Need bank account for business
+
+find out actual name of licensed business
+
+Need solid way to accept credit card number to be paid
+
+Need a standard customer contract
+
+Lowball price would be closer to 700 for a simple landing page
+
+Monthly fee for maintenance, server cost
+
+formulate cost
+
+Have down pat:
+  landing page
+  integration with google business
+  relational db
+  social media integration
+  SEO
+  server admin, maintenance
+  
