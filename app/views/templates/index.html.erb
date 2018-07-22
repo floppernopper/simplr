@@ -54,8 +54,10 @@
   </div>
 <% end %>
 
-<%= standard_dark_card do %>
-  <%= image_tag "forrest_web_co/ad.png", class: :standard_image %>
+<% if in_dev? %>
+  <%= standard_dark_card do %>
+    <%= image_tag "forrest_web_co/ad.png", class: :standard_image %>
+  <% end %>
 <% end %>
 
 <% unless Rails.env.development? %>
