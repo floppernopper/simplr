@@ -98,7 +98,7 @@ gem 'nokogiri'
 
 # google search
 gem 'google-search'
-gem 'google-api-client'
+gem 'google-api-client', require: 'google/apis/calendar_v3'
 gem 'google_custom_search_api'
 
 # for scraping wikipedia

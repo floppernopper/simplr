@@ -16,6 +16,11 @@ Rails.application.routes.draw do
   get 'purecss', to: 'templates#purecss', as: 'purecss'
   get 'uikit', to: 'templates#uikit', as: 'uikit'
   
+  # google calendar api auth routing for On Point
+  get 'redirect', to: 'templates#redirect', as: 'redirect'
+  get 'callback', to: 'templates#callback', as: 'callback'
+  
+  
   # for testing and learning purposes
   get 'example_stuff', to: 'templates#example_stuff', as: 'example_stuff'
 
