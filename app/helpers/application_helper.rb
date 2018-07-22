@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def standard_dark_card id='', alignment='', &block
+  def standard_dark_card id='', alignment='center', &block
     str = "<div class=\"dark_card\" id=\"#{id}\" align=\"#{alignment.to_sym}\">"
     str << capture(&block)
     str << '</div>'

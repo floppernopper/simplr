@@ -31,7 +31,7 @@
 <%= standard_dark_card(nil, :left) do %>
   <div class="fwc_sample_templates_container">
     <p>
-      <b>Sample starter templates:</b>
+      <b>Example starter templates:</b>
     </p>
     <p>
       <%= link_to "Sample Blog", sample_blog_path, class: :white_link %>
@@ -54,11 +54,24 @@
   </div>
 <% end %>
 
-<% unless Rails.env.development? %>
+<% unless Rails.env.development? and false %>
+  <%= standard_dark_card('stop_music_card') do %>
+    <p>
+      <%= link_to "Click here to stop the music...", 'javascript:;', class: :white_link, id: :stop_music_link %>
+    </p>
+  <% end %>
+  
   <%= audio_tag "music/future_business.mp3", id: "business_music" %>
 
   <script>
+  
     $("#business_music")[0].currentTime = 0;
     $("#business_music")[0].play();
+    
+    $("#stop_music_link").click(function() {
+      $("#business_music")[0].pause();
+      $("#business_music")[0].currentTime = 0;
+      $("#stop_music_card").fadeOut();
+    });
   </script>
 <% end %>
