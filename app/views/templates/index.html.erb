@@ -54,7 +54,7 @@
   </div>
 <% end %>
 
-<% unless Rails.env.development? and false %>
+<% unless Rails.env.development? %>
   <%= standard_dark_card('stop_music_card') do %>
     <p>
       <%= link_to "Click here to stop the music...", 'javascript:;', class: :white_link, id: :stop_music_link %>
