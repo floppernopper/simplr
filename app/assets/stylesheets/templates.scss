@@ -71,7 +71,7 @@
 
 .fwc_sample_templates_img_container {
   position: absolute;
-  top: 80px;
+  top: 37.5px;
   right: 35px;
   width: 35%;
 }
@@ -130,5 +130,15 @@
   100% {
     color: black;
     text-shadow: 0.1px 0.1px 0.1px rgb(70, 173, 212);
+  }
+}
+
+// for mobile
+@media screen and (max-width: 450px) {
+  .fwc_sample_templates_img_container {
+    position: absolute;
+    top: 80px;
+    right: 35px;
+    width: 35%;
   }
 }

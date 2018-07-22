@@ -54,6 +54,10 @@
   </div>
 <% end %>
 
+<%= standard_dark_card do %>
+  <%= image_tag "forrest_web_co/ad.png", class: :standard_image %>
+<% end %>
+
 <% unless Rails.env.development? %>
   <%= standard_dark_card('stop_music_card') do %>
     <p>
