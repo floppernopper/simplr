@@ -39,7 +39,7 @@ class TemplatesController < ApplicationController
       authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
       token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
       scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
-      redirect_uri: callback_path
+      redirect_uri: callback_url
     }
   end
   
