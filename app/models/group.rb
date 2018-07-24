@@ -100,6 +100,11 @@ class Group < ActiveRecord::Base
     self.connections.requests
   end
 
+  def folder
+    # gets connection obj thats tied to self, contains all messages in group chat
+    true
+  end
+
   private
 
   def gen_uniqueness

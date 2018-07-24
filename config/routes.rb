@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'hide_featured_groups', to: 'groups#hide_featured_groups', as: 'hide_featured_groups'
   get 'show_group/:token', to: 'groups#show', as: 'show_group'
   get 'load_more_group_posts/:token', to: 'groups#load_more_posts', as: 'load_more_group_posts'
+  get 'g/:name', to: 'groups#show', as: 'show_group_by_name'
 
   # users
   get 'hide_featured_users', to: 'users#hide_featured_users', as: 'hide_featured_users'

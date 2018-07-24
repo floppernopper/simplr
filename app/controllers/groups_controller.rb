@@ -167,6 +167,8 @@ class GroupsController < ApplicationController
       @group = Group.find_by_unique_token(params[:token])
       @group ||= Group.find_by_name params[:token]
       @group ||= Group.find_by_id(params[:token])
+    elsif params[:name] and not request.bot?
+      @group = Group.find_by_name(params[:name])
     else
       @group = Group.find_by_id(params[:id])
       @group ||= Group.find_by_name params[:id]

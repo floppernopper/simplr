@@ -46,13 +46,31 @@
       <%= link_to "UIkit", uikit_path, class: :white_link %>
     </p>
   </div>
-  
+
   <div class="fwc_sample_templates_img_container">
-    <%= image_tag "forrest_web_co/fw.png", class: :fwc_sample_templates_img %>
-    <%= image_tag "forrest_web_co/blog.png", class: :fwc_sample_templates_img %>
-    <%= image_tag "forrest_web_co/fw_1.png", class: :fwc_sample_templates_img %>
+    <% for i in ['fw', 'blog', 'fw_1'] %>
+      <%= standard_dark_card do %>
+        <%= image_tag "forrest_web_co/#{i}.png", class: :fwc_sample_templates_img %>
+      <% end %>
+    <% end %>
   </div>
 <% end %>
+
+<div class="fwc_sample_templates_img_cascade" hidden>
+  <% for i in ['fw_1', 'fw', 'blog',] %>
+    <%= standard_dark_card do %>
+      <%= image_tag "forrest_web_co/#{i}.png", class: :standard_image %>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+  var img_container = $(".fwc_sample_templates_img_container");
+  img_container.click(function() {
+    // small image container fades out of view for cascade of larger versions
+    img_container.fadeOut(); $(".fwc_sample_templates_img_cascade").fadeIn();
+  });
+</script>
 
 <% if in_dev? %>
   <%= standard_dark_card do %>
@@ -66,14 +84,14 @@
       <%= link_to "Click here to stop the music...", 'javascript:;', class: :white_link, id: :stop_music_link %>
     </p>
   <% end %>
-  
+
   <%= audio_tag "music/future_business.mp3", id: "business_music" %>
 
   <script>
-  
+
     $("#business_music")[0].currentTime = 0;
     $("#business_music")[0].play();
-    
+
     $("#stop_music_link").click(function() {
       $("#business_music")[0].pause();
       $("#business_music")[0].currentTime = 0;

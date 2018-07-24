@@ -1,6 +1,7 @@
 var post_card = $("#post_card_<%= @post.id %>");
 
 post_card.toggleClass("blur");
+post_card.toggleClass("post_blurred");
 
 $("#post_mini_menu_<%= @post.id %>").remove();
 

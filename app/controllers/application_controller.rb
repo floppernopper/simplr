@@ -364,6 +364,10 @@ class ApplicationController < ActionController::Base
     current_user and current_user.id.eql? 34
   end
 
+  def currently_auth?
+    current_user
+  end
+
   def current_user
     @current_user ||= User.find_by_auth_token(cookies[:auth_token]) if cookies[:auth_token]
   end
