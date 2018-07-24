@@ -57,23 +57,11 @@
 <% end %>
 
 <div class="fwc_sample_templates_img_cascade" hidden>
-  <% for i in ['fw', 'blog', 'fw_1'] %>
+  <% for i in ['fw_1', 'fw', 'blog',] %>
     <%= standard_dark_card do %>
       <%= image_tag "forrest_web_co/#{i}.png", class: :standard_image %>
     <% end %>
   <% end %>
-</div>
-
-<div class="fwc_sample_templates_img_cascade" hidden>
-  <div class="dark_card">
-    <%= image_tag "forrest_web_co/fw.png", class: :standard_image %>
-  </div>
-  <div class="dark_card">
-  <%= image_tag "forrest_web_co/blog.png", class: :standard_image %>
-  </div>
-  <div class="dark_card">
-  <%= image_tag "forrest_web_co/fw_1.png", class: :standard_image %>
-  </div>
 </div>
 
 <script>
