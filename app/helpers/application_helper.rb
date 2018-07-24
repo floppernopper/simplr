@@ -20,7 +20,7 @@ module ApplicationHelper
       "dance"
     elsif request.host.eql? "forrestonlyclub.com"
       "foc"
-    elsif request.host.eql? "forrestwilkins.com" or request.host.eql? "forrestwebco.com" or dev?
+    elsif request.host.eql? "forrestwilkins.com" or request.host.eql? "forrestwebco.com" or dev? or (invited? and not current_user)
       "cube"
     elsif request.original_url.include? "/store"
       "store_2"

@@ -1,6 +1,6 @@
 function typing_listening() {
   var timeout;
-  
+
   $("#instant_message_text_area").on('keypress', function(){
     if (timeout) {
       clearTimeout(timeout);
@@ -8,10 +8,10 @@ function typing_listening() {
     }
     timeout = setTimeout(sendCall, 1000);
   });
-  
+
   function sendCall() {
     clearTimeout(timeout);
-    
+
 	  $.ajax({
 		  type: "PUT",
 		  url: "/messages/currently_typing",
