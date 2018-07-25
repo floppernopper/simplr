@@ -25,3 +25,5 @@
 // Loads all Semantic javascripts
 //= require semantic-ui
 //= require uikit
+//= require moment 
+//= require fullcalendar

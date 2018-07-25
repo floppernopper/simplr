@@ -8,5 +8,12 @@
       <div class="row">
         <%= link_to "Google Auth", redirect_path %>
       </div>
+      <div class="row">
+        <ul>
+          <% @calendar_list.items.each do |calendar| %>
+            <li><%= calendar.summary %> (<%= link_to calendar.id, calendar_events_path(calendar.id) %>)</li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>

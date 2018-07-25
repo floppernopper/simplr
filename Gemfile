@@ -15,6 +15,8 @@ gem 'money-rails'
 # time and scheduling
 gem 'simple_calendar'
 gem 'google_calendar'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 # UI/UX front end frameworks
 gem 'semantic-ui-sass'

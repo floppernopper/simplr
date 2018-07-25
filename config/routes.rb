@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get 'lil_c', to: 'templates#lil_c', as: 'lil_c'
   get 'co', to: 'templates#index', as: 'forrest_web_co'
   get 'keep_it_on_pointe', to: 'templates#on_point', as: 'on_point'
-  get 'calendar', to: 'templates#calendar', as: 'on_point_calendar'
   get 'pricing', to: 'templates#pricing', as: 'on_point_pricing'
   get 'semantic_ui', to: 'templates#semantic_ui', as: 'semantic_ui'
   get 'sample_blog', to: 'templates#sample_blog', as: 'sample_blog'
@@ -17,8 +16,11 @@ Rails.application.routes.draw do
   get 'uikit', to: 'templates#uikit', as: 'uikit'
   
   # google calendar api auth routing for On Point
+  get 'calendar', to: 'templates#calendar', as: 'on_point_calendar'
   get 'redirect', to: 'templates#redirect', as: 'redirect'
   get 'callback', to: 'templates#callback', as: 'callback'
+  # has regex for calendar_id containing a .com at the end
+  get 'calendar_events/:calendar_id', to: 'templates#events', as: 'calendar_events', calendar_id: /[^\/]+/
   
   
   # for testing and learning purposes

@@ -1,6 +1,6 @@
 class TemplatesController < ApplicationController
   before_action :set_templating, only: [:semantic_ui, :uikit, :purecss, :sample_blog]
-  before_action :set_on_point, only: [:calendar, :on_point, :pricing, :admin, :example_stuff]
+  before_action :set_on_point, only: [:calendar, :events, :on_point, :pricing, :admin, :example_stuff]
   
   layout :resolve_layout
 
@@ -10,6 +10,28 @@ class TemplatesController < ApplicationController
 
   def semantic_ui
     @semantic_ui = @forrest_web_co = true
+  end
+  
+  def events
+    client = Signet::OAuth2::Client.new(client_options)
+    client.update!(session[:authorization])
+
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+
+    @event_list = service.list_events(params[:calendar_id])
+    
+    @calendar_id = params[:calendar_id]
+  end
+  
+  def calendar
+    client = Signet::OAuth2::Client.new(client_options)
+    client.update!(session[:authorization])
+
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+
+    @calendar_list = service.list_calendar_lists
   end
   
   # authenticate with google
@@ -45,7 +67,7 @@ class TemplatesController < ApplicationController
   
   def resolve_layout
     case action_name.to_sym
-    when :on_point, :calendar, :pricing, :admin, :example_stuff
+    when :on_point, :calendar, :events, :pricing, :admin, :example_stuff
       "on_point"
     else
       "application"
