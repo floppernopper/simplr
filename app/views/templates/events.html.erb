@@ -6,10 +6,17 @@
           <li><%= event.summary %> (<%= event.id %>)</li>
         <% end %>
       </ul>
+      <%= form_tag new_calendar_event_path do %>
+        <%= submit_tag 'Add event' %>
+      <% end %>
     </div>
-    
+
     <div class="row">
       <div id='calendar'></div>
+    </div>
+
+    <div class="row">
+      <iframe src="https://calendar.google.com/calendar/embed?src=en.usa%23holiday%40group.v.calendar.google.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 </div>
@@ -23,13 +30,14 @@
         center: 'title',
         right: 'month,listYear'
       },
-    
-      
-      events: {
       googleCalendarApiKey: '<%= ENV['GOOGLE_CALENDAR_CLIENT_ID'] %>',
+      events: {
         googleCalendarId: '<%= @calendar_id %>',
         className: 'gcal-event'
-      }
+      },
+    selectable: true,
+    selectHelper: true,
+    editable: false  
     });
   });
 

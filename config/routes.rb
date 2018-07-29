@@ -14,15 +14,17 @@ Rails.application.routes.draw do
   get 'sample_blog', to: 'templates#sample_blog', as: 'sample_blog'
   get 'purecss', to: 'templates#purecss', as: 'purecss'
   get 'uikit', to: 'templates#uikit', as: 'uikit'
-  
+
   # google calendar api auth routing for On Point
   get 'calendar', to: 'templates#calendar', as: 'on_point_calendar'
   get 'redirect', to: 'templates#redirect', as: 'redirect'
   get 'callback', to: 'templates#callback', as: 'callback'
   # has regex for calendar_id containing a .com at the end
   get 'calendar_events/:calendar_id', to: 'templates#events', as: 'calendar_events', calendar_id: /[^\/]+/
-  
-  
+  # has regex for calendar_id containing a .com at the end
+  post 'new_calendar_event/:calendar_id', to: 'templates#new_event', as: 'new_calendar_event', calendar_id: /[^\/]+/
+
+
   # for testing and learning purposes
   get 'example_stuff', to: 'templates#example_stuff', as: 'example_stuff'
 
